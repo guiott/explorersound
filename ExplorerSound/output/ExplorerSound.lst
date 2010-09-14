@@ -354,8 +354,8 @@ FILE: .\boot.asm
                                         (0294)  ENDIF
                                         (0295) ENDIF ; 3.3 Volt Operation
                                         (0296) 
-0081: 55 F8 00 MOV   [TmrFlag+205],0x0  (0297)     mov  [bSSC_KEY1],  0           ; Lock out Flash and Supervisiory operations
-0084: 55 F9 00 MOV   [TmrFlag+206],0x0  (0298)     mov  [bSSC_KEYSP], 0
+0081: 55 F8 00 MOV   [TmrFlag+203],0x0  (0297)     mov  [bSSC_KEY1],  0           ; Lock out Flash and Supervisiory operations
+0084: 55 F9 00 MOV   [TmrFlag+204],0x0  (0298)     mov  [bSSC_KEYSP], 0
                                         (0299) 
                                         (0300)     ;---------------------------------------
                                         (0301)     ; Initialize Crystal Oscillator and PLL
@@ -4382,7 +4382,7 @@ FILE: lib\hb_tmrint.asm
                                         (0068)    ;   NOTE: interrupt service routines must preserve
                                         (0069)    ;   the values of the A and X CPU registers.
                                         (0070)    
-07F8: 7D 0E A8 LJMP  _HB_Tmr_ISR_C      (0071) 	ljmp _HB_Tmr_ISR_C  ; jump to the ISR written in C in mainc.c
+07F8: 7D 0E BE LJMP  _HB_Tmr_ISR_C      (0071) 	ljmp _HB_Tmr_ISR_C  ; jump to the ISR written in C in mainc.c
                                         (0072) 	
                                         (0073)    ;---------------------------------------------------
                                         (0074)    ; Insert your custom code above this banner
@@ -7164,7 +7164,7 @@ FILE: D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\main.c
 (0002) ** Project:      ExplorerSound
 (0003) ** Author:    Guido Ottaviani-->guido@guiott.com<--
 (0004) ** Description: 
-(0005) ** version 0.2
+(0005) ** version 0.3   15-09-2010
 (0006) **
 (0007) ** Detailed descriptions are on file "Notes.txt" 
 (0008) **
@@ -7199,55 +7199,56 @@ FILE: D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\main.c
 (0037) int PotValue;
 (0038) int MesValue[3];
 (0039) unsigned int i;
-(0040) char str[7];
-(0041) BOOL TmrFlag = 0;
-(0042) 
-(0043) void main(void)
+(0040) unsigned int Tmr1;
+(0041) char str[7];
+(0042) BOOL TmrFlag = 0;
+(0043) 
+(0044) void main(void)
 _main:
   PortNum              --> X+1
   PortIndx             --> X+0
     0C29: 10       PUSH  X
     0C2A: 4F       MOV   X,SP
     0C2B: 38 04    ADD   SP,0x4
-(0044) {
-(0045) 	BYTE PortNum[3];
-(0046) 	BYTE PortIndx = 0;
+(0045) {
+(0046) 	BYTE PortNum[3];
+(0047) 	BYTE PortIndx = 0;
     0C2D: 56 00 00 MOV   [X+0],0x0
-(0047) 	
-(0048) 	BlocksInit();
-    0C30: 92 14    CALL  _BlocksInit
-(0049) 	
-(0050) 	M8C_EnableGInt ;               // Turn on interrupts 
+(0048) 	
+(0049) 	BlocksInit();
+    0C30: 92 2A    CALL  _BlocksInit
+(0050) 	
+(0051) 	M8C_EnableGInt ;               // Turn on interrupts 
     0C32: 71 01    OR    F,0x1
-(0051) 	
-(0052)  	LED_2_On();
+(0052) 	
+(0053)  	LED_2_On();
     0C34: 10       PUSH  X
     0C35: 7C 06 2E LCALL 0x062E
     0C38: 20       POP   X
-(0053) 	PortNum[0] = AMUX4_mic_PORT0_1;
+(0054) 	PortNum[0] = AMUX4_mic_PORT0_1;
     0C39: 56 01 00 MOV   [X+1],0x0
-(0054) 	PortNum[1] = AMUX4_mic_PORT0_3;
+(0055) 	PortNum[1] = AMUX4_mic_PORT0_3;
     0C3C: 56 02 01 MOV   [X+2],0x1
-(0055) 	PortNum[2] = AMUX4_mic_PORT0_7;
+(0056) 	PortNum[2] = AMUX4_mic_PORT0_7;
     0C3F: 56 03 03 MOV   [X+3],0x3
-(0056) 	
-(0057) 	LedTest();
-    0C42: 92 A6    CALL  _LedTest
-    0C44: 80 9B    JMP   0x0CE0
-(0058) 	
-(0059) 	// Main loop=============================================================
-(0060) 	while (1)
-(0061) 	{
-(0062) 		if(ADCINCVR_pot_fIsDataAvailable() != 0)// Wait for data to be ready
+(0057) 	
+(0058) 	LedTest();
+    0C42: 92 C4    CALL  _LedTest
+    0C44: 80 B1    JMP   0x0CF6
+(0059) 	
+(0060) 	// Main loop=============================================================
+(0061) 	while (1)
+(0062) 	{
+(0063) 		if(ADCINCVR_pot_fIsDataAvailable() != 0)// Wait for data to be ready
     0C46: 10       PUSH  X
     0C47: 7C 0A 6D LCALL 0x0A6D
     0C4A: 62 D0 00 MOV   REG[0xD0],0x0
     0C4D: 20       POP   X
     0C4E: 39 00    CMP   A,0x0
     0C50: A0 1E    JZ    0x0C6F
-(0063)         {   
-(0064) 			// Get Data, Clear data ready flag, in the range 0-1800
-(0065) 			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
+(0064)         {   
+(0065) 			// Get Data, Clear data ready flag, in the range 0-1800
+(0066) 			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
     0C52: 10       PUSH  X
     0C53: 7C 0A 75 LCALL 0x0A75
     0C56: 62 D0 00 MOV   REG[0xD0],0x0
@@ -7255,24 +7256,24 @@ _main:
     0C5B: 20       POP   X
     0C5C: 01 84    ADD   A,0x84
     0C5E: 62 D0 00 MOV   REG[0xD0],0x0
-    0C61: 53 28    MOV   [PotValue+1],A
+    0C61: 53 2C    MOV   [PotValue+1],A
     0C63: 62 D0 00 MOV   REG[0xD0],0x0
     0C66: 51 20    MOV   A,[__r0]
     0C68: 09 03    ADC   A,0x3
     0C6A: 62 D0 00 MOV   REG[0xD0],0x0
-    0C6D: 53 27    MOV   [PotValue],A
-(0066) 		}
-(0067)         
-(0068) 		if(ADCINCVR_mes_fIsDataAvailable() != 0)// Wait for data to be ready
+    0C6D: 53 2B    MOV   [PotValue],A
+(0067) 		}
+(0068)         
+(0069) 		if(ADCINCVR_mes_fIsDataAvailable() != 0)// Wait for data to be ready
     0C6F: 10       PUSH  X
     0C70: 7C 0B B2 LCALL 0x0BB2
     0C73: 62 D0 00 MOV   REG[0xD0],0x0
     0C76: 20       POP   X
     0C77: 39 00    CMP   A,0x0
     0C79: A0 3F    JZ    0x0CB9
-(0069)         {   
-(0070) 			// Get Data, Clear data ready flag
-(0071) 			MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag(); 
+(0070)         {   
+(0071) 			// Get Data, Clear data ready flag
+(0072) 			MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag(); 
     0C7B: 10       PUSH  X
     0C7C: 7C 0B BA LCALL 0x0BBA
     0C7F: 62 D0 00 MOV   REG[0xD0],0x0
@@ -7292,516 +7293,537 @@ _main:
     0C9E: 3F 1D    MVI   [__r3],A
     0CA0: 51 1F    MOV   A,[__r1]
     0CA2: 3F 1D    MVI   [__r3],A
-(0072) 														  
-(0073) 			PortIndx++; // next mux port
+(0073) 														  
+(0074) 			PortIndx++; // next mux port
     0CA4: 77 00    INC   [X+0]
-(0074) 			if (PortIndx <3)
+(0075) 			if (PortIndx <3)
     0CA6: 3D 00 03 CMP   [X+0],0x3
     0CA9: D0 0F    JNC   0x0CB9
-(0075) 			{
-(0076) 				AMUX4_mic_InputSelect(PortIndx);
+(0076) 			{
+(0077) 				AMUX4_mic_InputSelect(PortIndx);
     0CAB: 10       PUSH  X
     0CAC: 52 00    MOV   A,[X+0]
     0CAE: 7C 09 60 LCALL 0x0960
     0CB1: 20       POP   X
-(0077) 				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
+(0078) 				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
     0CB2: 10       PUSH  X
     0CB3: 50 01    MOV   A,0x1
     0CB5: 7C 0B 6D LCALL 0x0B6D
     0CB8: 20       POP   X
-(0078) 			}
-(0079) 		}
-(0080) 		
-(0081) 		if (TmrFlag) // every 10ms
+(0079) 			}
+(0080) 		}
+(0081) 		
+(0082) 		if (TmrFlag) // every 10ms
     0CB9: 62 D0 00 MOV   REG[0xD0],0x0
-    0CBC: 3C 2B 00 CMP   [TmrFlag],0x0
-    0CBF: A0 20    JZ    0x0CE0
-(0082) 		{
-(0083) 			TmrFlag = 0;
-    0CC1: 55 2B 00 MOV   [TmrFlag],0x0
-(0084) 			PortIndx= 0;
+    0CBC: 3C 2D 00 CMP   [TmrFlag],0x0
+    0CBF: A0 1E    JZ    0x0CDE
+(0083) 		{
+(0084) 			TmrFlag = 0;
+    0CC1: 55 2D 00 MOV   [TmrFlag],0x0
+(0085) 			PortIndx= 0;
     0CC4: 56 00 00 MOV   [X+0],0x0
-(0085) 			UartTxValues();
-    0CC7: 90 B4    CALL  _UartTxValues
 (0086) 				
 (0087) 			AMUX4_mic_InputSelect(PortIndx); 
-    0CC9: 10       PUSH  X
-    0CCA: 52 00    MOV   A,[X+0]
-    0CCC: 7C 09 60 LCALL 0x0960
-    0CCF: 20       POP   X
+    0CC7: 10       PUSH  X
+    0CC8: 52 00    MOV   A,[X+0]
+    0CCA: 7C 09 60 LCALL 0x0960
+    0CCD: 20       POP   X
 (0088) 			ADCINCVR_mes_GetSamples(1);    // Start ADC to read 1 sample
-    0CD0: 10       PUSH  X
-    0CD1: 50 01    MOV   A,0x1
-    0CD3: 7C 0B 6D LCALL 0x0B6D
-    0CD6: 20       POP   X
+    0CCE: 10       PUSH  X
+    0CCF: 50 01    MOV   A,0x1
+    0CD1: 7C 0B 6D LCALL 0x0B6D
+    0CD4: 20       POP   X
 (0089) 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample 
-    0CD7: 10       PUSH  X
-    0CD8: 50 01    MOV   A,0x1
-    0CDA: 7C 0A 28 LCALL 0x0A28
-    0CDD: 20       POP   X
+    0CD5: 10       PUSH  X
+    0CD6: 50 01    MOV   A,0x1
+    0CD8: 7C 0A 28 LCALL 0x0A28
+    0CDB: 20       POP   X
 (0090) 			
 (0091) 			DigitalOut();
-    0CDE: 90 07    CALL  _DigitalOut
+    0CDC: 90 1F    CALL  _DigitalOut
 (0092) 		}
-(0093) 	}// ========================================================== Main loop 
-    0CE0: 8F 65    JMP   0x0C46
-    0CE2: 38 FC    ADD   SP,0xFC
-    0CE4: 20       POP   X
-    0CE5: 8F FF    JMP   0x0CE5
-(0094) }
-(0095) 
-(0096) // Functions ***************************************************************
-(0097) void DigitalOut(void)
-(0098) {// Controls the outputs according to pot setting point
-(0099) 	DIGITAL_OUT_Off();
+(0093) 		
+(0094) 		if (Tmr1) // every 100ms
+    0CDE: 62 D0 00 MOV   REG[0xD0],0x0
+    0CE1: 3C 27 00 CMP   [Tmr1],0x0
+    0CE4: B0 06    JNZ   0x0CEB
+    0CE6: 3C 28 00 CMP   [Tmr1+1],0x0
+    0CE9: A0 0C    JZ    0x0CF6
+(0095) 		{
+(0096) 			Tmr1 = 0;
+    0CEB: 62 D0 00 MOV   REG[0xD0],0x0
+    0CEE: 55 28 00 MOV   [Tmr1+1],0x0
+    0CF1: 55 27 00 MOV   [Tmr1],0x0
+(0097) 			UartTxValues();
+    0CF4: 90 9D    CALL  _UartTxValues
+(0098) 		}
+(0099) 	}// ========================================================== Main loop 
+    0CF6: 8F 4F    JMP   0x0C46
+    0CF8: 38 FC    ADD   SP,0xFC
+    0CFA: 20       POP   X
+    0CFB: 8F FF    JMP   0x0CFB
+(0100) }
+(0101) 
+(0102) // Functions ***************************************************************
+(0103) void DigitalOut(void)
+(0104) {// Controls the outputs according to pot setting point
+(0105) 	DIGITAL_OUT_Off();
 _DigitalOut:
-    0CE7: 10       PUSH  X
-    0CE8: 7C 08 60 LCALL 0x0860
-    0CEB: 20       POP   X
-(0100) 	if (MesValue[0]>PotValue)
-    0CEC: 62 D0 00 MOV   REG[0xD0],0x0
-    0CEF: 51 28    MOV   A,[PotValue+1]
-    0CF1: 62 D0 00 MOV   REG[0xD0],0x0
-    0CF4: 12 22    SUB   A,[MesValue+1]
-    0CF6: 51 21    MOV   A,[MesValue]
-    0CF8: 31 80    XOR   A,0x80
-    0CFA: 62 D0 00 MOV   REG[0xD0],0x0
-    0CFD: 53 1C    MOV   [__rX],A
-    0CFF: 62 D0 00 MOV   REG[0xD0],0x0
-    0D02: 51 27    MOV   A,[PotValue]
-    0D04: 31 80    XOR   A,0x80
-    0D06: 62 D0 00 MOV   REG[0xD0],0x0
-    0D09: 1A 1C    SBB   A,[__rX]
-    0D0B: D0 0B    JNC   0x0D17
-(0101) 	{
-(0102) 		DIGITAL_OUT_On();
-    0D0D: 10       PUSH  X
-    0D0E: 7C 08 5C LCALL 0x085C
-(0103) 		LED_1_On();
-    0D11: 7C 06 6B LCALL 0x066B
-    0D14: 20       POP   X
-(0104) 	}
-    0D15: 80 06    JMP   0x0D1C
-(0105) 	else
-(0106) 	{
-(0107) 		LED_1_Off();
-    0D17: 10       PUSH  X
-    0D18: 7C 06 6F LCALL 0x066F
-    0D1B: 20       POP   X
-(0108) 	}
-(0109) 		
-(0110) 	if (MesValue[1]>PotValue)
+    0CFD: 10       PUSH  X
+    0CFE: 7C 08 60 LCALL 0x0860
+    0D01: 20       POP   X
+(0106) 	if (MesValue[0]>PotValue)
+    0D02: 62 D0 00 MOV   REG[0xD0],0x0
+    0D05: 51 2C    MOV   A,[PotValue+1]
+    0D07: 62 D0 00 MOV   REG[0xD0],0x0
+    0D0A: 12 22    SUB   A,[MesValue+1]
+    0D0C: 51 21    MOV   A,[MesValue]
+    0D0E: 31 80    XOR   A,0x80
+    0D10: 62 D0 00 MOV   REG[0xD0],0x0
+    0D13: 53 1C    MOV   [__rX],A
+    0D15: 62 D0 00 MOV   REG[0xD0],0x0
+    0D18: 51 2B    MOV   A,[PotValue]
+    0D1A: 31 80    XOR   A,0x80
     0D1C: 62 D0 00 MOV   REG[0xD0],0x0
-    0D1F: 51 28    MOV   A,[PotValue+1]
-    0D21: 62 D0 00 MOV   REG[0xD0],0x0
-    0D24: 12 24    SUB   A,[MesValue+3]
-    0D26: 51 23    MOV   A,[MesValue+2]
-    0D28: 31 80    XOR   A,0x80
-    0D2A: 62 D0 00 MOV   REG[0xD0],0x0
-    0D2D: 53 1C    MOV   [__rX],A
-    0D2F: 62 D0 00 MOV   REG[0xD0],0x0
-    0D32: 51 27    MOV   A,[PotValue]
-    0D34: 31 80    XOR   A,0x80
-    0D36: 62 D0 00 MOV   REG[0xD0],0x0
-    0D39: 1A 1C    SBB   A,[__rX]
-    0D3B: D0 0B    JNC   0x0D47
-(0111) 	{
-(0112) 		DIGITAL_OUT_On();
-    0D3D: 10       PUSH  X
-    0D3E: 7C 08 5C LCALL 0x085C
-(0113) 		LED_2_On();
-    0D41: 7C 06 2E LCALL 0x062E
-    0D44: 20       POP   X
+    0D1F: 1A 1C    SBB   A,[__rX]
+    0D21: D0 0B    JNC   0x0D2D
+(0107) 	{
+(0108) 		DIGITAL_OUT_On();
+    0D23: 10       PUSH  X
+    0D24: 7C 08 5C LCALL 0x085C
+(0109) 		LED_1_On();
+    0D27: 7C 06 6B LCALL 0x066B
+    0D2A: 20       POP   X
+(0110) 	}
+    0D2B: 80 06    JMP   0x0D32
+(0111) 	else
+(0112) 	{
+(0113) 		LED_1_Off();
+    0D2D: 10       PUSH  X
+    0D2E: 7C 06 6F LCALL 0x066F
+    0D31: 20       POP   X
 (0114) 	}
-    0D45: 80 06    JMP   0x0D4C
-(0115) 	else
-(0116) 	{
-(0117) 		LED_2_Off();
-    0D47: 10       PUSH  X
-    0D48: 7C 06 32 LCALL 0x0632
-    0D4B: 20       POP   X
-(0118) 	}
-(0119) 	
-(0120) 	if (MesValue[2]>PotValue)
+(0115) 		
+(0116) 	if (MesValue[1]>PotValue)
+    0D32: 62 D0 00 MOV   REG[0xD0],0x0
+    0D35: 51 2C    MOV   A,[PotValue+1]
+    0D37: 62 D0 00 MOV   REG[0xD0],0x0
+    0D3A: 12 24    SUB   A,[MesValue+3]
+    0D3C: 51 23    MOV   A,[MesValue+2]
+    0D3E: 31 80    XOR   A,0x80
+    0D40: 62 D0 00 MOV   REG[0xD0],0x0
+    0D43: 53 1C    MOV   [__rX],A
+    0D45: 62 D0 00 MOV   REG[0xD0],0x0
+    0D48: 51 2B    MOV   A,[PotValue]
+    0D4A: 31 80    XOR   A,0x80
     0D4C: 62 D0 00 MOV   REG[0xD0],0x0
-    0D4F: 51 28    MOV   A,[PotValue+1]
-    0D51: 62 D0 00 MOV   REG[0xD0],0x0
-    0D54: 12 26    SUB   A,[MesValue+5]
-    0D56: 51 25    MOV   A,[MesValue+4]
-    0D58: 31 80    XOR   A,0x80
-    0D5A: 62 D0 00 MOV   REG[0xD0],0x0
-    0D5D: 53 1C    MOV   [__rX],A
-    0D5F: 62 D0 00 MOV   REG[0xD0],0x0
-    0D62: 51 27    MOV   A,[PotValue]
-    0D64: 31 80    XOR   A,0x80
-    0D66: 62 D0 00 MOV   REG[0xD0],0x0
-    0D69: 1A 1C    SBB   A,[__rX]
-    0D6B: D0 0B    JNC   0x0D77
-(0121) 	{
-(0122) 		DIGITAL_OUT_On();
-    0D6D: 10       PUSH  X
-    0D6E: 7C 08 5C LCALL 0x085C
-(0123) 		LED_3_On();
-    0D71: 7C 05 F1 LCALL 0x05F1
-    0D74: 20       POP   X
+    0D4F: 1A 1C    SBB   A,[__rX]
+    0D51: D0 0B    JNC   0x0D5D
+(0117) 	{
+(0118) 		DIGITAL_OUT_On();
+    0D53: 10       PUSH  X
+    0D54: 7C 08 5C LCALL 0x085C
+(0119) 		LED_2_On();
+    0D57: 7C 06 2E LCALL 0x062E
+    0D5A: 20       POP   X
+(0120) 	}
+    0D5B: 80 06    JMP   0x0D62
+(0121) 	else
+(0122) 	{
+(0123) 		LED_2_Off();
+    0D5D: 10       PUSH  X
+    0D5E: 7C 06 32 LCALL 0x0632
+    0D61: 20       POP   X
 (0124) 	}
-    0D75: 80 06    JMP   0x0D7C
-(0125) 	else
-(0126) 	{
-(0127) 		LED_3_Off();
-    0D77: 10       PUSH  X
-    0D78: 7C 05 F5 LCALL 0x05F5
-    0D7B: 20       POP   X
-(0128) 	}
-    0D7C: 7F       RET   
-(0129) }
-(0130) 
-(0131) void UartTxValues(void)
-(0132) {// Transmit via UART the analog values read from various inputs
-(0133) 	TX8_CPutString("\n\rPot Value = ");
+(0125) 	
+(0126) 	if (MesValue[2]>PotValue)
+    0D62: 62 D0 00 MOV   REG[0xD0],0x0
+    0D65: 51 2C    MOV   A,[PotValue+1]
+    0D67: 62 D0 00 MOV   REG[0xD0],0x0
+    0D6A: 12 26    SUB   A,[MesValue+5]
+    0D6C: 51 25    MOV   A,[MesValue+4]
+    0D6E: 31 80    XOR   A,0x80
+    0D70: 62 D0 00 MOV   REG[0xD0],0x0
+    0D73: 53 1C    MOV   [__rX],A
+    0D75: 62 D0 00 MOV   REG[0xD0],0x0
+    0D78: 51 2B    MOV   A,[PotValue]
+    0D7A: 31 80    XOR   A,0x80
+    0D7C: 62 D0 00 MOV   REG[0xD0],0x0
+    0D7F: 1A 1C    SBB   A,[__rX]
+    0D81: D0 0B    JNC   0x0D8D
+(0127) 	{
+(0128) 		DIGITAL_OUT_On();
+    0D83: 10       PUSH  X
+    0D84: 7C 08 5C LCALL 0x085C
+(0129) 		LED_3_On();
+    0D87: 7C 05 F1 LCALL 0x05F1
+    0D8A: 20       POP   X
+(0130) 	}
+    0D8B: 80 06    JMP   0x0D92
+(0131) 	else
+(0132) 	{
+(0133) 		LED_3_Off();
+    0D8D: 10       PUSH  X
+    0D8E: 7C 05 F5 LCALL 0x05F5
+    0D91: 20       POP   X
+(0134) 	}
+    0D92: 7F       RET   
+(0135) }
+(0136) 
+(0137) void UartTxValues(void)
+(0138) {/* Transmit via UART the analog values read from various inputs.
+(0139) 	Usefull for debugging purposes, it could be converted in a
+(0140) 	command string using the same protocol used for dsNav if
+(0141) 	needed to output sound level values via serial comm
+(0142) */
+(0143) 	TX8_CPutString("\n\rPot Value = ");
 _UartTxValues:
-    0D7D: 10       PUSH  X
-    0D7E: 50 01    MOV   A,0x1
-    0D80: 08       PUSH  A
-    0D81: 50 C8    MOV   A,0xC8
-    0D83: 5C       MOV   X,A
-    0D84: 18       POP   A
-    0D85: 7C 05 16 LCALL 0x0516
-    0D88: 20       POP   X
-(0134) 	itoa(str, PotValue,10);
-    0D89: 50 00    MOV   A,0x0
-    0D8B: 08       PUSH  A
-    0D8C: 50 0A    MOV   A,0xA
-    0D8E: 08       PUSH  A
-    0D8F: 62 D0 00 MOV   REG[0xD0],0x0
-    0D92: 51 27    MOV   A,[PotValue]
-    0D94: 08       PUSH  A
-    0D95: 51 28    MOV   A,[PotValue+1]
-    0D97: 08       PUSH  A
-    0D98: 50 00    MOV   A,0x0
-    0D9A: 08       PUSH  A
-    0D9B: 50 13    MOV   A,0x13
-    0D9D: 08       PUSH  A
-    0D9E: 7C 0F 90 LCALL _itoa
-    0DA1: 38 FA    ADD   SP,0xFA
-(0135) 	TX8_PutString(str);
-    0DA3: 10       PUSH  X
-    0DA4: 50 00    MOV   A,0x0
-    0DA6: 08       PUSH  A
-    0DA7: 50 13    MOV   A,0x13
-    0DA9: 5C       MOV   X,A
-    0DAA: 18       POP   A
-    0DAB: 7C 04 B4 LCALL 0x04B4
-    0DAE: 20       POP   X
-(0136) 	TX8_CPutString("    Mes Value: 1 = ");
-    0DAF: 10       PUSH  X
-    0DB0: 50 01    MOV   A,0x1
-    0DB2: 08       PUSH  A
-    0DB3: 50 B4    MOV   A,0xB4
-    0DB5: 5C       MOV   X,A
-    0DB6: 18       POP   A
-    0DB7: 7C 05 16 LCALL 0x0516
-    0DBA: 20       POP   X
-(0137) 	itoa(str, MesValue[0],10);
-    0DBB: 50 00    MOV   A,0x0
-    0DBD: 08       PUSH  A
-    0DBE: 50 0A    MOV   A,0xA
-    0DC0: 08       PUSH  A
-    0DC1: 62 D0 00 MOV   REG[0xD0],0x0
-    0DC4: 51 21    MOV   A,[MesValue]
-    0DC6: 08       PUSH  A
-    0DC7: 51 22    MOV   A,[MesValue+1]
-    0DC9: 08       PUSH  A
-    0DCA: 50 00    MOV   A,0x0
-    0DCC: 08       PUSH  A
-    0DCD: 50 13    MOV   A,0x13
-    0DCF: 08       PUSH  A
-    0DD0: 7C 0F 90 LCALL _itoa
-    0DD3: 38 FA    ADD   SP,0xFA
-(0138) 	TX8_PutString(str);
-    0DD5: 10       PUSH  X
-    0DD6: 50 00    MOV   A,0x0
-    0DD8: 08       PUSH  A
-    0DD9: 50 13    MOV   A,0x13
-    0DDB: 5C       MOV   X,A
-    0DDC: 18       POP   A
-    0DDD: 7C 04 B4 LCALL 0x04B4
-    0DE0: 20       POP   X
-(0139) 	TX8_CPutString("  -  2 = ");
-    0DE1: 10       PUSH  X
-    0DE2: 50 01    MOV   A,0x1
-    0DE4: 08       PUSH  A
-    0DE5: 50 AA    MOV   A,0xAA
-    0DE7: 5C       MOV   X,A
-    0DE8: 18       POP   A
-    0DE9: 7C 05 16 LCALL 0x0516
-    0DEC: 20       POP   X
-(0140) 	itoa(str, MesValue[1],10);
-    0DED: 50 00    MOV   A,0x0
-    0DEF: 08       PUSH  A
-    0DF0: 50 0A    MOV   A,0xA
-    0DF2: 08       PUSH  A
-    0DF3: 62 D0 00 MOV   REG[0xD0],0x0
-    0DF6: 51 23    MOV   A,[MesValue+2]
-    0DF8: 08       PUSH  A
-    0DF9: 51 24    MOV   A,[MesValue+3]
-    0DFB: 08       PUSH  A
-    0DFC: 50 00    MOV   A,0x0
-    0DFE: 08       PUSH  A
-    0DFF: 50 13    MOV   A,0x13
-    0E01: 08       PUSH  A
-    0E02: 7C 0F 90 LCALL _itoa
-    0E05: 38 FA    ADD   SP,0xFA
-(0141) 	TX8_PutString(str);
-    0E07: 10       PUSH  X
-    0E08: 50 00    MOV   A,0x0
-    0E0A: 08       PUSH  A
-    0E0B: 50 13    MOV   A,0x13
-    0E0D: 5C       MOV   X,A
-    0E0E: 18       POP   A
-    0E0F: 7C 04 B4 LCALL 0x04B4
-    0E12: 20       POP   X
-(0142) 	TX8_CPutString("  -  3 = ");
-    0E13: 10       PUSH  X
-    0E14: 50 01    MOV   A,0x1
-    0E16: 08       PUSH  A
-    0E17: 50 A0    MOV   A,0xA0
-    0E19: 5C       MOV   X,A
-    0E1A: 18       POP   A
-    0E1B: 7C 05 16 LCALL 0x0516
-    0E1E: 20       POP   X
-(0143) 	itoa(str, MesValue[2],10);
-    0E1F: 50 00    MOV   A,0x0
-    0E21: 08       PUSH  A
-    0E22: 50 0A    MOV   A,0xA
-    0E24: 08       PUSH  A
-    0E25: 62 D0 00 MOV   REG[0xD0],0x0
-    0E28: 51 25    MOV   A,[MesValue+4]
-    0E2A: 08       PUSH  A
-    0E2B: 51 26    MOV   A,[MesValue+5]
-    0E2D: 08       PUSH  A
-    0E2E: 50 00    MOV   A,0x0
-    0E30: 08       PUSH  A
-    0E31: 50 13    MOV   A,0x13
-    0E33: 08       PUSH  A
-    0E34: 7C 0F 90 LCALL _itoa
-    0E37: 38 FA    ADD   SP,0xFA
-(0144) 	TX8_PutString(str);
-    0E39: 10       PUSH  X
-    0E3A: 50 00    MOV   A,0x0
-    0E3C: 08       PUSH  A
-    0E3D: 50 13    MOV   A,0x13
-    0E3F: 5C       MOV   X,A
-    0E40: 18       POP   A
-    0E41: 7C 04 B4 LCALL 0x04B4
-    0E44: 20       POP   X
-    0E45: 7F       RET   
-(0145) }
-(0146) 	
-(0147) void BlocksInit(void)
-(0148) {// Analog and digital blocks inizialization
-(0149) 	ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);	
+    0D93: 10       PUSH  X
+    0D94: 50 01    MOV   A,0x1
+    0D96: 08       PUSH  A
+    0D97: 50 C8    MOV   A,0xC8
+    0D99: 5C       MOV   X,A
+    0D9A: 18       POP   A
+    0D9B: 7C 05 16 LCALL 0x0516
+    0D9E: 20       POP   X
+(0144) 	itoa(str, PotValue,10);
+    0D9F: 50 00    MOV   A,0x0
+    0DA1: 08       PUSH  A
+    0DA2: 50 0A    MOV   A,0xA
+    0DA4: 08       PUSH  A
+    0DA5: 62 D0 00 MOV   REG[0xD0],0x0
+    0DA8: 51 2B    MOV   A,[PotValue]
+    0DAA: 08       PUSH  A
+    0DAB: 51 2C    MOV   A,[PotValue+1]
+    0DAD: 08       PUSH  A
+    0DAE: 50 00    MOV   A,0x0
+    0DB0: 08       PUSH  A
+    0DB1: 50 13    MOV   A,0x13
+    0DB3: 08       PUSH  A
+    0DB4: 7C 0F AE LCALL _itoa
+    0DB7: 38 FA    ADD   SP,0xFA
+(0145) 	TX8_PutString(str);
+    0DB9: 10       PUSH  X
+    0DBA: 50 00    MOV   A,0x0
+    0DBC: 08       PUSH  A
+    0DBD: 50 13    MOV   A,0x13
+    0DBF: 5C       MOV   X,A
+    0DC0: 18       POP   A
+    0DC1: 7C 04 B4 LCALL 0x04B4
+    0DC4: 20       POP   X
+(0146) 	TX8_CPutString("    Mes Value: 1 = ");
+    0DC5: 10       PUSH  X
+    0DC6: 50 01    MOV   A,0x1
+    0DC8: 08       PUSH  A
+    0DC9: 50 B4    MOV   A,0xB4
+    0DCB: 5C       MOV   X,A
+    0DCC: 18       POP   A
+    0DCD: 7C 05 16 LCALL 0x0516
+    0DD0: 20       POP   X
+(0147) 	itoa(str, MesValue[0],10);
+    0DD1: 50 00    MOV   A,0x0
+    0DD3: 08       PUSH  A
+    0DD4: 50 0A    MOV   A,0xA
+    0DD6: 08       PUSH  A
+    0DD7: 62 D0 00 MOV   REG[0xD0],0x0
+    0DDA: 51 21    MOV   A,[MesValue]
+    0DDC: 08       PUSH  A
+    0DDD: 51 22    MOV   A,[MesValue+1]
+    0DDF: 08       PUSH  A
+    0DE0: 50 00    MOV   A,0x0
+    0DE2: 08       PUSH  A
+    0DE3: 50 13    MOV   A,0x13
+    0DE5: 08       PUSH  A
+    0DE6: 7C 0F AE LCALL _itoa
+    0DE9: 38 FA    ADD   SP,0xFA
+(0148) 	TX8_PutString(str);
+    0DEB: 10       PUSH  X
+    0DEC: 50 00    MOV   A,0x0
+    0DEE: 08       PUSH  A
+    0DEF: 50 13    MOV   A,0x13
+    0DF1: 5C       MOV   X,A
+    0DF2: 18       POP   A
+    0DF3: 7C 04 B4 LCALL 0x04B4
+    0DF6: 20       POP   X
+(0149) 	TX8_CPutString("  -  2 = ");
+    0DF7: 10       PUSH  X
+    0DF8: 50 01    MOV   A,0x1
+    0DFA: 08       PUSH  A
+    0DFB: 50 AA    MOV   A,0xAA
+    0DFD: 5C       MOV   X,A
+    0DFE: 18       POP   A
+    0DFF: 7C 05 16 LCALL 0x0516
+    0E02: 20       POP   X
+(0150) 	itoa(str, MesValue[1],10);
+    0E03: 50 00    MOV   A,0x0
+    0E05: 08       PUSH  A
+    0E06: 50 0A    MOV   A,0xA
+    0E08: 08       PUSH  A
+    0E09: 62 D0 00 MOV   REG[0xD0],0x0
+    0E0C: 51 23    MOV   A,[MesValue+2]
+    0E0E: 08       PUSH  A
+    0E0F: 51 24    MOV   A,[MesValue+3]
+    0E11: 08       PUSH  A
+    0E12: 50 00    MOV   A,0x0
+    0E14: 08       PUSH  A
+    0E15: 50 13    MOV   A,0x13
+    0E17: 08       PUSH  A
+    0E18: 7C 0F AE LCALL _itoa
+    0E1B: 38 FA    ADD   SP,0xFA
+(0151) 	TX8_PutString(str);
+    0E1D: 10       PUSH  X
+    0E1E: 50 00    MOV   A,0x0
+    0E20: 08       PUSH  A
+    0E21: 50 13    MOV   A,0x13
+    0E23: 5C       MOV   X,A
+    0E24: 18       POP   A
+    0E25: 7C 04 B4 LCALL 0x04B4
+    0E28: 20       POP   X
+(0152) 	TX8_CPutString("  -  3 = ");
+    0E29: 10       PUSH  X
+    0E2A: 50 01    MOV   A,0x1
+    0E2C: 08       PUSH  A
+    0E2D: 50 A0    MOV   A,0xA0
+    0E2F: 5C       MOV   X,A
+    0E30: 18       POP   A
+    0E31: 7C 05 16 LCALL 0x0516
+    0E34: 20       POP   X
+(0153) 	itoa(str, MesValue[2],10);
+    0E35: 50 00    MOV   A,0x0
+    0E37: 08       PUSH  A
+    0E38: 50 0A    MOV   A,0xA
+    0E3A: 08       PUSH  A
+    0E3B: 62 D0 00 MOV   REG[0xD0],0x0
+    0E3E: 51 25    MOV   A,[MesValue+4]
+    0E40: 08       PUSH  A
+    0E41: 51 26    MOV   A,[MesValue+5]
+    0E43: 08       PUSH  A
+    0E44: 50 00    MOV   A,0x0
+    0E46: 08       PUSH  A
+    0E47: 50 13    MOV   A,0x13
+    0E49: 08       PUSH  A
+    0E4A: 7C 0F AE LCALL _itoa
+    0E4D: 38 FA    ADD   SP,0xFA
+(0154) 	TX8_PutString(str);
+    0E4F: 10       PUSH  X
+    0E50: 50 00    MOV   A,0x0
+    0E52: 08       PUSH  A
+    0E53: 50 13    MOV   A,0x13
+    0E55: 5C       MOV   X,A
+    0E56: 18       POP   A
+    0E57: 7C 04 B4 LCALL 0x04B4
+    0E5A: 20       POP   X
+    0E5B: 7F       RET   
+(0155) }
+(0156) 	
+(0157) void BlocksInit(void)
+(0158) {// Analog and digital blocks inizialization
+(0159) 	ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);	
 _BlocksInit:
-    0E46: 10       PUSH  X
-    0E47: 50 03    MOV   A,0x3
-    0E49: 7C 0A 04 LCALL 0x0A04
-    0E4C: 20       POP   X
-(0150) 	ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
-    0E4D: 10       PUSH  X
-    0E4E: 50 03    MOV   A,0x3
-    0E50: 7C 0B 49 LCALL 0x0B49
-(0151) 	AMUX4_mic_Start();
-    0E53: 7C 09 7B LCALL 0x097B
-    0E56: 20       POP   X
-(0152) 	BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
-    0E57: 10       PUSH  X
-    0E58: 50 03    MOV   A,0x3
-    0E5A: 7C 08 99 LCALL 0x0899
-(0153) 	I2CHW_Start();
-    0E5D: 7C 06 A8 LCALL 0x06A8
-    0E60: 20       POP   X
-(0154) 	PGA_out_Start(PGA_out_HIGHPOWER);
-    0E61: 10       PUSH  X
-    0E62: 50 03    MOV   A,0x3
-    0E64: 7C 05 B1 LCALL 0x05B1
-    0E67: 20       POP   X
-(0155) 	PGA_pre_Start(PGA_pre_HIGHPOWER); 
-    0E68: 10       PUSH  X
-    0E69: 50 03    MOV   A,0x3
-    0E6B: 7C 05 71 LCALL 0x0571
-    0E6E: 20       POP   X
-(0156) 	RefMux_1_Start(RefMux_1_HIGHPOWER);
-    0E6F: 10       PUSH  X
-    0E70: 50 03    MOV   A,0x3
-    0E72: 7C 05 49 LCALL 0x0549
-    0E75: 20       POP   X
-(0157)     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);
-    0E76: 10       PUSH  X
-    0E77: 50 03    MOV   A,0x3
-    0E79: 7C 05 31 LCALL 0x0531
-(0158) 	LED_1_Start();
-    0E7C: 7C 06 6F LCALL 0x066F
-(0159) 	LED_2_Start();
-    0E7F: 7C 06 32 LCALL 0x0632
-(0160) 	LED_3_Start();
-    0E82: 7C 05 F5 LCALL 0x05F5
-(0161) 	DIGITAL_OUT_Start();  
-    0E85: 7C 08 60 LCALL 0x0860
-(0162) 	
-(0163) 	TX8_EnableInt();
-    0E88: 7C 04 59 LCALL 0x0459
+    0E5C: 10       PUSH  X
+    0E5D: 50 03    MOV   A,0x3
+    0E5F: 7C 0A 04 LCALL 0x0A04
+    0E62: 20       POP   X
+(0160) 	ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
+    0E63: 10       PUSH  X
+    0E64: 50 03    MOV   A,0x3
+    0E66: 7C 0B 49 LCALL 0x0B49
+(0161) 	AMUX4_mic_Start();
+    0E69: 7C 09 7B LCALL 0x097B
+    0E6C: 20       POP   X
+(0162) 	BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
+    0E6D: 10       PUSH  X
+    0E6E: 50 03    MOV   A,0x3
+    0E70: 7C 08 99 LCALL 0x0899
+(0163) 	I2CHW_Start();
+    0E73: 7C 06 A8 LCALL 0x06A8
+    0E76: 20       POP   X
+(0164) 	PGA_out_Start(PGA_out_HIGHPOWER);
+    0E77: 10       PUSH  X
+    0E78: 50 03    MOV   A,0x3
+    0E7A: 7C 05 B1 LCALL 0x05B1
+    0E7D: 20       POP   X
+(0165) 	PGA_pre_Start(PGA_pre_HIGHPOWER); 
+    0E7E: 10       PUSH  X
+    0E7F: 50 03    MOV   A,0x3
+    0E81: 7C 05 71 LCALL 0x0571
+    0E84: 20       POP   X
+(0166) 	RefMux_1_Start(RefMux_1_HIGHPOWER);
+    0E85: 10       PUSH  X
+    0E86: 50 03    MOV   A,0x3
+    0E88: 7C 05 49 LCALL 0x0549
     0E8B: 20       POP   X
-(0164) 	TX8_Start(TX8_PARITY_NONE);
+(0167)     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);
     0E8C: 10       PUSH  X
-    0E8D: 50 00    MOV   A,0x0
-    0E8F: 7C 04 73 LCALL 0x0473
-    0E92: 20       POP   X
-(0165) 	
-(0166) 	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
-    0E93: 10       PUSH  X
-    0E94: 50 00    MOV   A,0x0
-    0E96: 7C 09 60 LCALL 0x0960
-    0E99: 20       POP   X
-(0167) 	PGA_pre_SetGain(PGA_pre_G1_00);
-    0E9A: 10       PUSH  X
-    0E9B: 50 F8    MOV   A,0xF8
-    0E9D: 7C 05 83 LCALL 0x0583
-(0168) 	
-(0169)     HB_Tmr_EnableInt();  
-    0EA0: 7C 07 FC LCALL 0x07FC
-(0170) 	HB_Tmr_Start();  	
-    0EA3: 7C 08 04 LCALL 0x0804
-    0EA6: 20       POP   X
-    0EA7: 7F       RET   
-(0171) }
+    0E8D: 50 03    MOV   A,0x3
+    0E8F: 7C 05 31 LCALL 0x0531
+(0168) 	LED_1_Start();
+    0E92: 7C 06 6F LCALL 0x066F
+(0169) 	LED_2_Start();
+    0E95: 7C 06 32 LCALL 0x0632
+(0170) 	LED_3_Start();
+    0E98: 7C 05 F5 LCALL 0x05F5
+(0171) 	DIGITAL_OUT_Start();  
+    0E9B: 7C 08 60 LCALL 0x0860
 (0172) 	
-(0173) void HB_Tmr_ISR_C(void)
-(0174) {// Base clock for all of the timings in the program
+(0173) 	TX8_EnableInt();
+    0E9E: 7C 04 59 LCALL 0x0459
+    0EA1: 20       POP   X
+(0174) 	TX8_Start(TX8_PARITY_NONE);
+    0EA2: 10       PUSH  X
+    0EA3: 50 00    MOV   A,0x0
+    0EA5: 7C 04 73 LCALL 0x0473
+    0EA8: 20       POP   X
+(0175) 	
+(0176) 	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
+    0EA9: 10       PUSH  X
+    0EAA: 50 00    MOV   A,0x0
+    0EAC: 7C 09 60 LCALL 0x0960
+    0EAF: 20       POP   X
+(0177) 	PGA_pre_SetGain(PGA_pre_G1_00);
+    0EB0: 10       PUSH  X
+    0EB1: 50 F8    MOV   A,0xF8
+    0EB3: 7C 05 83 LCALL 0x0583
+(0178) 	
+(0179)     HB_Tmr_EnableInt();  
+    0EB6: 7C 07 FC LCALL 0x07FC
+(0180) 	HB_Tmr_Start();  	
+    0EB9: 7C 08 04 LCALL 0x0804
+    0EBC: 20       POP   X
+    0EBD: 7F       RET   
+(0181) }
+(0182) 	
+(0183) void HB_Tmr_ISR_C(void)
+(0184) {// Base clock for all of the timings in the program
 _HB_Tmr_ISR_C:
-    0EA8: 71 C0    OR    F,0xC0
-    0EAA: 08       PUSH  A
-    0EAB: 5D D0    MOV   A,REG[0xD0]
-    0EAD: 08       PUSH  A
-(0175) 	TmrFlag = 1;
-    0EAE: 62 D0 00 MOV   REG[0xD0],0x0
-    0EB1: 55 2B 01 MOV   [TmrFlag],0x1
-    0EB4: 18       POP   A
-    0EB5: 60 D0    MOV   REG[0xD0],A
-    0EB7: 18       POP   A
-    0EB8: 7E       RETI  
-(0176) }
-(0177) 
-(0178) void DelayMs(int Ms)
-(0179) {
+    0EBE: 71 C0    OR    F,0xC0
+    0EC0: 08       PUSH  A
+    0EC1: 5D D0    MOV   A,REG[0xD0]
+    0EC3: 08       PUSH  A
+(0185) 	TmrFlag = 1;
+    0EC4: 62 D0 00 MOV   REG[0xD0],0x0
+    0EC7: 55 2D 01 MOV   [TmrFlag],0x1
+(0186) 	Tmr1++;
+    0ECA: 62 D0 00 MOV   REG[0xD0],0x0
+    0ECD: 76 28    INC   [Tmr1+1]
+    0ECF: 0E 27 00 ADC   [Tmr1],0x0
+    0ED2: 18       POP   A
+    0ED3: 60 D0    MOV   REG[0xD0],A
+    0ED5: 18       POP   A
+    0ED6: 7E       RETI  
+(0187) }
+(0188) 
+(0189) void DelayMs(int Ms)
+(0190) {
 _DelayMs:
   i                    --> X+0
   Ms                   --> X-5
-    0EB9: 10       PUSH  X
-    0EBA: 4F       MOV   X,SP
-    0EBB: 38 02    ADD   SP,0x2
-(0180) 	int i;
-(0181) 	for (i=0; i<Ms; i++)
-    0EBD: 56 01 00 MOV   [X+1],0x0
-    0EC0: 56 00 00 MOV   [X+0],0x0
-    0EC3: 80 0D    JMP   0x0ED1
-(0182) 	{
-(0183) 		Delay50uTimes(20);
-    0EC5: 10       PUSH  X
-    0EC6: 50 14    MOV   A,0x14
-    0EC8: 7C 0C 07 LCALL Delay50uTimes|__text_start|_Delay50uTimes
-    0ECB: 20       POP   X
-(0184) 	}
-    0ECC: 77 01    INC   [X+1]
-    0ECE: 0F 00 00 ADC   [X+0],0x0
-    0ED1: 52 01    MOV   A,[X+1]
-    0ED3: 13 FC    SUB   A,[X-4]
-    0ED5: 52 FB    MOV   A,[X-5]
-    0ED7: 31 80    XOR   A,0x80
-    0ED9: 62 D0 00 MOV   REG[0xD0],0x0
-    0EDC: 53 1C    MOV   [__rX],A
-    0EDE: 52 00    MOV   A,[X+0]
-    0EE0: 31 80    XOR   A,0x80
-    0EE2: 1A 1C    SBB   A,[__rX]
-    0EE4: CF E0    JC    0x0EC5
-    0EE6: 38 FE    ADD   SP,0xFE
-    0EE8: 20       POP   X
-    0EE9: 7F       RET   
-(0185) }
-(0186) 
-(0187) void LedTest(void)
-(0188) {
+    0ED7: 10       PUSH  X
+    0ED8: 4F       MOV   X,SP
+    0ED9: 38 02    ADD   SP,0x2
+(0191) 	int i;
+(0192) 	for (i=0; i<Ms; i++)
+    0EDB: 56 01 00 MOV   [X+1],0x0
+    0EDE: 56 00 00 MOV   [X+0],0x0
+    0EE1: 80 0D    JMP   0x0EEF
+(0193) 	{
+(0194) 		Delay50uTimes(20);
+    0EE3: 10       PUSH  X
+    0EE4: 50 14    MOV   A,0x14
+    0EE6: 7C 0C 07 LCALL Delay50uTimes|__text_start|_Delay50uTimes
+    0EE9: 20       POP   X
+(0195) 	}
+    0EEA: 77 01    INC   [X+1]
+    0EEC: 0F 00 00 ADC   [X+0],0x0
+    0EEF: 52 01    MOV   A,[X+1]
+    0EF1: 13 FC    SUB   A,[X-4]
+    0EF3: 52 FB    MOV   A,[X-5]
+    0EF5: 31 80    XOR   A,0x80
+    0EF7: 62 D0 00 MOV   REG[0xD0],0x0
+    0EFA: 53 1C    MOV   [__rX],A
+    0EFC: 52 00    MOV   A,[X+0]
+    0EFE: 31 80    XOR   A,0x80
+    0F00: 1A 1C    SBB   A,[__rX]
+    0F02: CF E0    JC    0x0EE3
+    0F04: 38 FE    ADD   SP,0xFE
+    0F06: 20       POP   X
+    0F07: 7F       RET   
+(0196) }
+(0197) 
+(0198) void LedTest(void)
+(0199) {
 _LedTest:
   i                    --> X+0
-    0EEA: 10       PUSH  X
-    0EEB: 4F       MOV   X,SP
-    0EEC: 38 02    ADD   SP,0x2
-(0189) 	int i;
-(0190) 	LED_1_Off();
-    0EEE: 10       PUSH  X
-    0EEF: 7C 06 6F LCALL 0x066F
-(0191) 	LED_2_Off();
-    0EF2: 7C 06 32 LCALL 0x0632
-(0192) 	LED_3_Off();
-    0EF5: 7C 05 F5 LCALL 0x05F5
-    0EF8: 20       POP   X
-(0193) 	
-(0194) 	for (i=0; i<3; i++)
-    0EF9: 56 01 00 MOV   [X+1],0x0
-    0EFC: 56 00 00 MOV   [X+0],0x0
-(0195) 	{
-(0196) 		LED_1_On();
-    0EFF: 10       PUSH  X
-    0F00: 7C 06 6B LCALL 0x066B
-    0F03: 20       POP   X
-(0197) 		DelayMs(500);
-    0F04: 50 01    MOV   A,0x1
-    0F06: 08       PUSH  A
-    0F07: 50 F4    MOV   A,0xF4
-    0F09: 08       PUSH  A
-    0F0A: 9F AD    CALL  _DelayMs
-    0F0C: 38 FE    ADD   SP,0xFE
-(0198) 		LED_1_Off();
-    0F0E: 10       PUSH  X
-    0F0F: 7C 06 6F LCALL 0x066F
-(0199) 		LED_2_On();
-    0F12: 7C 06 2E LCALL 0x062E
-    0F15: 20       POP   X
-(0200) 		DelayMs(500);
-    0F16: 50 01    MOV   A,0x1
-    0F18: 08       PUSH  A
-    0F19: 50 F4    MOV   A,0xF4
-    0F1B: 08       PUSH  A
-    0F1C: 9F 9B    CALL  _DelayMs
-    0F1E: 38 FE    ADD   SP,0xFE
-(0201) 		LED_2_Off();
-    0F20: 10       PUSH  X
-    0F21: 7C 06 32 LCALL 0x0632
-(0202) 		LED_3_On();
-    0F24: 7C 05 F1 LCALL 0x05F1
-    0F27: 20       POP   X
-(0203) 		DelayMs(500);
-    0F28: 50 01    MOV   A,0x1
-    0F2A: 08       PUSH  A
-    0F2B: 50 F4    MOV   A,0xF4
-    0F2D: 08       PUSH  A
-    0F2E: 9F 89    CALL  _DelayMs
-    0F30: 38 FE    ADD   SP,0xFE
-(0204) 		LED_3_Off();
-    0F32: 10       PUSH  X
-    0F33: 7C 05 F5 LCALL 0x05F5
-    0F36: 20       POP   X
-(0205) 	}
-    0F37: 77 01    INC   [X+1]
-    0F39: 0F 00 00 ADC   [X+0],0x0
-    0F3C: 52 01    MOV   A,[X+1]
-    0F3E: 11 03    SUB   A,0x3
-    0F40: 52 00    MOV   A,[X+0]
-    0F42: 31 80    XOR   A,0x80
-    0F44: 19 80    SBB   A,0x80
-    0F46: CF B8    JC    0x0EFF
-    0F48: 38 FE    ADD   SP,0xFE
-    0F4A: 20       POP   X
-(0206) }
+    0F08: 10       PUSH  X
+    0F09: 4F       MOV   X,SP
+    0F0A: 38 02    ADD   SP,0x2
+(0200) 	int i;
+(0201) 	LED_1_Off();
+    0F0C: 10       PUSH  X
+    0F0D: 7C 06 6F LCALL 0x066F
+(0202) 	LED_2_Off();
+    0F10: 7C 06 32 LCALL 0x0632
+(0203) 	LED_3_Off();
+    0F13: 7C 05 F5 LCALL 0x05F5
+    0F16: 20       POP   X
+(0204) 	
+(0205) 	for (i=0; i<3; i++)
+    0F17: 56 01 00 MOV   [X+1],0x0
+    0F1A: 56 00 00 MOV   [X+0],0x0
+(0206) 	{
+(0207) 		LED_1_On();
+    0F1D: 10       PUSH  X
+    0F1E: 7C 06 6B LCALL 0x066B
+    0F21: 20       POP   X
+(0208) 		DelayMs(500);
+    0F22: 50 01    MOV   A,0x1
+    0F24: 08       PUSH  A
+    0F25: 50 F4    MOV   A,0xF4
+    0F27: 08       PUSH  A
+    0F28: 9F AD    CALL  _DelayMs
+    0F2A: 38 FE    ADD   SP,0xFE
+(0209) 		LED_1_Off();
+    0F2C: 10       PUSH  X
+    0F2D: 7C 06 6F LCALL 0x066F
+(0210) 		LED_2_On();
+    0F30: 7C 06 2E LCALL 0x062E
+    0F33: 20       POP   X
+(0211) 		DelayMs(500);
+    0F34: 50 01    MOV   A,0x1
+    0F36: 08       PUSH  A
+    0F37: 50 F4    MOV   A,0xF4
+    0F39: 08       PUSH  A
+    0F3A: 9F 9B    CALL  _DelayMs
+    0F3C: 38 FE    ADD   SP,0xFE
+(0212) 		LED_2_Off();
+    0F3E: 10       PUSH  X
+    0F3F: 7C 06 32 LCALL 0x0632
+(0213) 		LED_3_On();
+    0F42: 7C 05 F1 LCALL 0x05F1
+    0F45: 20       POP   X
+(0214) 		DelayMs(500);
+    0F46: 50 01    MOV   A,0x1
+    0F48: 08       PUSH  A
+    0F49: 50 F4    MOV   A,0xF4
+    0F4B: 08       PUSH  A
+    0F4C: 9F 89    CALL  _DelayMs
+    0F4E: 38 FE    ADD   SP,0xFE
+(0215) 		LED_3_Off();
+    0F50: 10       PUSH  X
+    0F51: 7C 05 F5 LCALL 0x05F5
+    0F54: 20       POP   X
+(0216) 	}
+    0F55: 77 01    INC   [X+1]
+    0F57: 0F 00 00 ADC   [X+0],0x0
+    0F5A: 52 01    MOV   A,[X+1]
+    0F5C: 11 03    SUB   A,0x3
+    0F5E: 52 00    MOV   A,[X+0]
+    0F60: 31 80    XOR   A,0x80
+    0F62: 19 80    SBB   A,0x80
+    0F64: CF B8    JC    0x0F1D
+    0F66: 38 FE    ADD   SP,0xFE
+    0F68: 20       POP   X
+(0217) }
 FILE: <library>
 --------------------------------------------------------------------------------
 

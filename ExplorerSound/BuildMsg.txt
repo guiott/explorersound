@@ -1,3 +1,44 @@
 Starting MAKE...
+creating project.mk 
+lib/adcincvr_mes.asm
+lib/adcincvr_mesint.asm
+lib/adcincvr_pot.asm
+lib/adcincvr_potint.asm
+lib/amux4_mic.asm
+lib/bpf4_4khz.asm
+lib/digital_out.asm
+lib/hb_tmr.asm
+lib/hb_tmrint.asm
+lib/i2chwcommon.asm
+lib/i2chwint.asm
+lib/i2chwrsrcinits.asm
+lib/led_1.asm
+lib/led_2.asm
+lib/led_3.asm
+lib/pga_out.asm
+lib/pga_pre.asm
+CAUTION lib/psocconfig.asm is older than PSoCConfig.xml or missing
+CAUTION you may need to generate source in PSoC Designer
+lib/psocconfig.asm
+lib/psocconfigtbl.asm
+lib/refmux_1.asm
+lib/scblock_inbuff.asm
+lib/tx8.asm
+lib/tx8plus.asm
+./boot.asm
+./delay.asm
+./main.c
+Linking..
+LMM info: area 'InterruptRAM' uses 19 bytes in SRAM bank 0
+LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
+LMM info: area 'virtual_registers' uses 7 bytes in SRAM page 0
+LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
+  ROM 13% full. 4071 out of 32768 bytes used (does not include absolute areas).
+  RAM 3% full. 46 bytes used (does not include stack usage).
+idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 14:16:22
+ExplorerSound - 0 error(s) 0 warning(s) 01:11:07
