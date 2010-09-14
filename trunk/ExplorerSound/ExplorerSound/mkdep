@@ -1,0 +1,16 @@
+-a -f project.dep -p./lib/obj/ -o.o -- -IC:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include -I./lib -IC:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1 -- 
+lib/adcincvr_mes.asm   
+lib/adcincvr_mesint.asm   
+lib/adcincvr_pot.asm   
+lib/adcincvr_potint.asm   
+lib/amux4_mic.asm   
+lib/bpf4_4khz.asm   
+lib/i2chwcommon.asm   
+lib/i2chwint.asm   
+lib/i2chwrsrcinits.asm   
+lib/pga_out.asm   
+lib/pga_pre.asm   
+lib/psocconfig.asm   
+lib/psocconfigtbl.asm   
+lib/refmux_1.asm   
+lib/scblock_inbuff.asm 

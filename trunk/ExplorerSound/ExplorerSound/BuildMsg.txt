@@ -1,0 +1,27 @@
+Starting MAKE...
+creating project.mk 
+lib/adcincvr_mes.asm
+lib/adcincvr_mesint.asm
+lib/adcincvr_pot.asm
+lib/adcincvr_potint.asm
+lib/amux4_mic.asm
+lib/bpf4_4khz.asm
+lib/i2chwcommon.asm
+lib/i2chwint.asm
+lib/i2chwrsrcinits.asm
+lib/pga_out.asm
+lib/pga_pre.asm
+lib/psocconfig.asm
+lib/psocconfigtbl.asm
+lib/refmux_1.asm
+lib/scblock_inbuff.asm
+./boot.asm
+./main.c
+Linking..
+LMM info: area 'InterruptRAM' uses 18 bytes in SRAM bank 0
+LMM info: area 'virtual_registers' uses 2 bytes in SRAM page 0
+  ROM 7% full. 2082 out of 32768 bytes used (does not include absolute areas).
+  RAM 2% full. 20 bytes used (does not include stack usage).
+idata dump at output/ExplorerSound.idata
+ 
+ExplorerSound - 0 error(s) 0 warning(s) 19:22:55

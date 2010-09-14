@@ -1,0 +1,12 @@
+# DO NOT DELETE
+./obj/boot.o : \
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8ssc.inc\
+   C:\DOCUME~1\ADMINI~1\Desktop\PSOCPR~1\EXPLOR~1\EXPLOR~1\EXPLOR~1\lib\GLOBAL~1.INC\
+   C:\DOCUME~1\ADMINI~1\Desktop\PSOCPR~1\EXPLOR~1\EXPLOR~1\EXPLOR~1\memory.inc
+./obj/main.o :  ./lib/ADCINC~1.H ./lib/ADCINC~2.H ./lib/AMUX4_~1.H\
+   ./lib/BPF4_4~1.H ./lib/I2CHWC~1.H ./lib/I2CHWS~1.H ./lib/PGA_out.h\
+   ./lib/PGA_pre.h ./lib/PSoCAPI.h ./lib/RefMux_1.h ./lib/SCBLOC~1.H\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/M8C.h\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8C.h\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.h
