@@ -1,0 +1,96 @@
+ 0000                   cpu LMM
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile C:\DOCUME~1\ADMINI~1\Desktop\PSOCPR~1\EXPLOR~1\EXPLOR~1\EXPLOR~1\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 10
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 12
+ 0000           ;     //****************** Blocks Init
+ 0000           ;       ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);
+ 0000 10                push X
+ 0001 5003              mov A,3
+ 0003 7C0000            xcall _ADCINCVR_pot_Start
+ 0006 20                pop X
+ 0007                   .dbline 13
+ 0007           ;       ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
+ 0007 10                push X
+ 0008 5003              mov A,3
+ 000A 7C0000            xcall _ADCINCVR_mes_Start
+ 000D                   .dbline 14
+ 000D           ;       AMUX4_mic_Start();
+ 000D 7C0000            xcall _AMUX4_mic_Start
+ 0010 20                pop X
+ 0011                   .dbline 15
+ 0011           ;       BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
+ 0011 10                push X
+ 0012 5003              mov A,3
+ 0014 7C0000            xcall _BPF4_4KHz_Start
+ 0017                   .dbline 16
+ 0017           ;       I2CHW_Start();
+ 0017 7C0000            xcall _I2CHW_Start
+ 001A 20                pop X
+ 001B                   .dbline 17
+ 001B           ;       PGA_out_Start(PGA_out_HIGHPOWER);
+ 001B 10                push X
+ 001C 5003              mov A,3
+ 001E 7C0000            xcall _PGA_out_Start
+ 0021 20                pop X
+ 0022                   .dbline 18
+ 0022           ;       PGA_pre_Start(PGA_pre_HIGHPOWER); 
+ 0022 10                push X
+ 0023 5003              mov A,3
+ 0025 7C0000            xcall _PGA_pre_Start
+ 0028 20                pop X
+ 0029                   .dbline 19
+ 0029           ;       PGA_pre_SetGain(PGA_pre_G1_00);
+ 0029 10                push X
+ 002A 50F8              mov A,-8
+ 002C 7C0000            xcall _PGA_pre_SetGain
+ 002F 20                pop X
+ 0030                   .dbline 20
+ 0030           ;       RefMux_1_Start(RefMux_1_HIGHPOWER);
+ 0030 10                push X
+ 0031 5003              mov A,3
+ 0033 7C0000            xcall _RefMux_1_Start
+ 0036 20                pop X
+ 0037                   .dbline 21
+ 0037           ;     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);   
+ 0037 10                push X
+ 0038 5003              mov A,3
+ 003A 7C0000            xcall _SCBLOCK_inbuff_Start
+ 003D 20                pop X
+ 003E                   .dbline 22
+ 003E           ;       AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
+ 003E 10                push X
+ 003F 5000              mov A,0
+ 0041 7C0000            xcall _AMUX4_mic_InputSelect
+ 0044 20                pop X
+ 0045           L2:
+ 0045                   .dbline 24
+ 0045           ;       while (1)
+ 0045           ;       {
+ 0045                   .dbline 26
+ 0045           ;       
+ 0045           ;       }
+ 0045           L3:
+ 0045                   .dbline 23
+ 0045 8FFF              xjmp L2
+ 0047           X0:
+ 0047                   .dbline -2
+ 0047           L1:
+ 0047                   .dbline 0 ; func end
+ 0047 8FFF              jmp .
+ 0049                   .dbend
