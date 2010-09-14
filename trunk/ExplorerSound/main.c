@@ -2,7 +2,7 @@
 ** Project:      ExplorerSound
 ** Author:    Guido Ottaviani-->guido@guiott.com<--
 ** Description: 
-** version 0.2   14-09-2010
+** version 0.3   15-09-2010
 **
 ** Detailed descriptions are on file "Notes.txt" 
 **
