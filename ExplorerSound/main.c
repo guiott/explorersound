@@ -68,7 +68,7 @@ void main(void)
 			if (PotValue >= 1200 && PotValue < 1400)	GainIndx[1][0] = 6;
 			if (PotValue >= 1400)	GainIndx[1][0] = 7;
 			
-			PGA_pre_SetGain(GF[GainIndx[1][0]]);
+			PGA_pre_SetGain(GF[GainIndx[1][0]][0]);
 			// ??????????????????DEBUG ????????????????
 		}
         
@@ -159,7 +159,7 @@ void UartTxValues(void)
 	itoa(str, MesValue[2],10);
 	TX8_PutString(str);
 	TX8_CPutString("  Gain = ");
-	itoa(str, GF[GainIndx[1][0]], 10);
+	itoa(str, GF[GainIndx[1][0]][1], 10);
 	TX8_PutString(str);	
 }
 	
