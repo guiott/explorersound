@@ -1,11 +1,11 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Sun Sep 26 23:14:38 2010
+Date:         Mon Sep 27 23:47:16 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 14% full. 4426 out of 32768 bytes used (does not include absolute areas).
-  RAM 4% full. 60 bytes used (does not include stack usage).
+  ROM 14% full. 4434 out of 32768 bytes used (does not include absolute areas).
+  RAM 4% full. 68 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -295,7 +295,7 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0C11   06D9 =   1753. bytes (rel,con,rom)
+                            text   0C11   06E1 =   1761. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
@@ -306,17 +306,17 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0C1F  _Delay50u
        0C1F  Delay50u
        0C33  _main
-       0E16  _DigitalOut
-       0EAC  _UartTxValues
-       0FBF  _BlocksInit
-       1021  _HB_Tmr_ISR_C
-       103A  _DelayMs
-       106B  _LedTest
-       10CD  __divmodu_16X16_16
-       10D8  __i_div16_block_util
-       1111  _itoa
-       12EA  __text_end
-       1308  __xidata_end
+       0E1A  _DigitalOut
+       0EB0  _UartTxValues
+       0FC7  _BlocksInit
+       1029  _HB_Tmr_ISR_C
+       1042  _DelayMs
+       1073  _LedTest
+       10D5  __divmodu_16X16_16
+       10E0  __i_div16_block_util
+       1119  _itoa
+       12F2  __text_end
+       1318  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -373,33 +373,33 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   001B   0007 =      7. bytes (rel,con,ram)
+               virtual_registers   0023   0007 =      7. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       001B  __rZ
-       001C  __rY
-       001D  __rX
-       001E  __r3
-       001F  __r2
-       0020  __r1
-       0021  __r0
+       0023  __rZ
+       0024  __rY
+       0025  __rX
+       0026  __r3
+       0027  __r2
+       0028  __r1
+       0029  __r0
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            data   0000   0022 =     34. bytes (rel,con,ram)
+                            data   0000   002A =     42. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
        0000  __data_start
        0013  _GF
-       0022  _str
-       0029  _GainIndx
-       002F  _MesValue
-       0035  _Tmr1
-       0037  _PotValue
-       0039  _i
-       003B  _TmrFlag
+       002A  _str
+       0031  _GainIndx
+       0037  _MesValue
+       003D  _Tmr1
+       003F  _PotValue
+       0041  _i
+       0043  _TmrFlag
 
 Files Linked      [ module(s) ]
 
@@ -417,6 +417,6 @@ Area Definitions
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x1b
+-Bvirtual_registers	allocated at: 0x23
 -Bexplorersound_RAM	allocated at: 0
 
