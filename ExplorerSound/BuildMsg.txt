@@ -17,8 +17,6 @@ lib/led_2.asm
 lib/led_3.asm
 lib/pga_out.asm
 lib/pga_pre.asm
-CAUTION lib/psocconfig.asm is older than PSoCConfig.xml or missing
-CAUTION you may need to generate source in PSoC Designer
 lib/psocconfig.asm
 lib/psocconfigtbl.asm
 lib/refmux_1.asm
@@ -30,15 +28,17 @@ lib/tx8plus.asm
 ./main.c
 Linking..
 LMM info: area 'InterruptRAM' uses 19 bytes in SRAM bank 0
-LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 8 bytes allocated in SRAM page 0
 LMM info: area 'virtual_registers' uses 7 bytes in SRAM page 0
+LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
-  ROM 13% full. 4071 out of 32768 bytes used (does not include absolute areas).
-  RAM 3% full. 46 bytes used (does not include stack usage).
+  ROM 14% full. 4426 out of 32768 bytes used (does not include absolute areas).
+  RAM 4% full. 60 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 01:11:07
+ExplorerSound - 0 error(s) 0 warning(s) 23:14:38

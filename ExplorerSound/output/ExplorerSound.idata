@@ -1,4 +1,10 @@
-flash 1187 SRAM   13:
+flash 12EA SRAM   13:
+ <size at next line>   0 F8 78 38 18  8 1C  C
+  [size:] 8 bytes
+flash 12F5 SRAM   22:
  00 7 bytes
-flash 118B SRAM   21:
+flash 12F9 SRAM   29:
+ <size at next line>   4  4  4  4  4  4
+  [size:] 6 bytes
+flash 1302 SRAM   2F:
  00 13 bytes

@@ -906,10 +906,10 @@
  0066 7800              db              78h, 00h                ;PGA_out_GAIN_CR3(ACB02CR3)
  0068           ;  Instance name PGA_pre, User Module PGA
  0068           ;       Instance name PGA_pre, Block Name GAIN(ACB00)
- 0068 714D              db              71h, 4dh                ;PGA_pre_GAIN_CR0(ACB00CR0)
+ 0068 710D              db              71h, 0dh                ;PGA_pre_GAIN_CR0(ACB00CR0)
  006A 72A1              db              72h, a1h                ;PGA_pre_GAIN_CR1(ACB00CR1)
  006C 7320              db              73h, 20h                ;PGA_pre_GAIN_CR2(ACB00CR2)
- 006E 7000              db              70h, 00h                ;PGA_pre_GAIN_CR3(ACB00CR3)
+ 006E 7001              db              70h, 01h                ;PGA_pre_GAIN_CR3(ACB00CR3)
  0070           ;  Instance name RefMux_1, User Module RefMux
  0070           ;       Instance name RefMux_1, Block Name REFMUX(ACB03)
  0070 7D01              db              7dh, 01h                ;RefMux_1_REFMUX_CR0(ACB03CR0)
@@ -1034,7 +1034,7 @@
  010B 6100              db              61h, 00h                ; AnalogClockSelect1 register (CLK_CR1)
  010D 6900              db              69h, 00h                ; AnalogClockSelect2 register (CLK_CR2)
  010F 6005              db              60h, 05h                ; AnalogColumnClockSelect register (CLK_CR0)
- 0111 6235              db              62h, 35h                ; AnalogIOControl_0 register (ABF_CR0)
+ 0111 623D              db              62h, 3dh                ; AnalogIOControl_0 register (ABF_CR0)
  0113 6733              db              67h, 33h                ; AnalogLUTControl0 register (ALT_CR0)
  0115 6833              db              68h, 33h                ; AnalogLUTControl1 register (ALT_CR1)
  0117 6300              db              63h, 00h                ; AnalogModulatorControl_0 register (AMD_CR0)
