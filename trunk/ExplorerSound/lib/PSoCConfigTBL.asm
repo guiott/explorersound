@@ -87,10 +87,10 @@ LoadConfigTBL_explorersound_Bank0:
 	db		78h, 00h		;PGA_out_GAIN_CR3(ACB02CR3)
 ;  Instance name PGA_pre, User Module PGA
 ;       Instance name PGA_pre, Block Name GAIN(ACB00)
-	db		71h, 4dh		;PGA_pre_GAIN_CR0(ACB00CR0)
+	db		71h, 0dh		;PGA_pre_GAIN_CR0(ACB00CR0)
 	db		72h, a1h		;PGA_pre_GAIN_CR1(ACB00CR1)
 	db		73h, 20h		;PGA_pre_GAIN_CR2(ACB00CR2)
-	db		70h, 00h		;PGA_pre_GAIN_CR3(ACB00CR3)
+	db		70h, 01h		;PGA_pre_GAIN_CR3(ACB00CR3)
 ;  Instance name RefMux_1, User Module RefMux
 ;       Instance name RefMux_1, Block Name REFMUX(ACB03)
 	db		7dh, 01h		;RefMux_1_REFMUX_CR0(ACB03CR0)
@@ -215,7 +215,7 @@ LoadConfigTBL_explorersound_Bank1:
 	db		61h, 00h		; AnalogClockSelect1 register (CLK_CR1)
 	db		69h, 00h		; AnalogClockSelect2 register (CLK_CR2)
 	db		60h, 05h		; AnalogColumnClockSelect register (CLK_CR0)
-	db		62h, 35h		; AnalogIOControl_0 register (ABF_CR0)
+	db		62h, 3dh		; AnalogIOControl_0 register (ABF_CR0)
 	db		67h, 33h		; AnalogLUTControl0 register (ALT_CR0)
 	db		68h, 33h		; AnalogLUTControl1 register (ALT_CR1)
 	db		63h, 00h		; AnalogModulatorControl_0 register (AMD_CR0)

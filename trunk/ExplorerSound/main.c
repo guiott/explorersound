@@ -29,17 +29,10 @@ guido@guiott.com
 #include <stdlib.h>
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include "prototypes.h"
-
+#include "definitions.h"
 #include "delay.h"
 
 #pragma interrupt_handler HB_Tmr_ISR_C // int handler for program clock
-
-int PotValue;
-int MesValue[3];
-unsigned int i;
-unsigned int Tmr1;
-char str[7];
-BOOL TmrFlag = 0;
 
 void main(void)
 {
@@ -64,6 +57,19 @@ void main(void)
         {   
 			// Get Data, Clear data ready flag, in the range 0-1800
 			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
+			
+			// ??????????????? DEBUG ??????????????
+			if (PotValue < 200)	GainIndx[1][0] = 0;
+			if (PotValue >= 200 && PotValue < 400)	GainIndx[1][0] = 1;
+			if (PotValue >= 400 && PotValue < 600)	GainIndx[1][0] = 2;
+			if (PotValue >= 600 && PotValue < 800)	GainIndx[1][0] = 3;
+			if (PotValue >= 800 && PotValue < 1000)	GainIndx[1][0] = 4;
+			if (PotValue >= 1000 && PotValue < 1200)	GainIndx[1][0] = 5;
+			if (PotValue >= 1200 && PotValue < 1400)	GainIndx[1][0] = 6;
+			if (PotValue >= 1400)	GainIndx[1][0] = 7;
+			
+			PGA_pre_SetGain(GF[GainIndx[1][0]]);
+			// ??????????????????DEBUG ????????????????
 		}
         
 		if(ADCINCVR_mes_fIsDataAvailable() != 0)// Wait for data to be ready
@@ -74,7 +80,7 @@ void main(void)
 			PortIndx++; // next mux port
 			if (PortIndx <3)
 			{
-				AMUX4_mic_InputSelect(PortIndx);
+			//	AMUX4_mic_InputSelect(PortIndx); ????????????????????????????????????
 				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
 			}
 		}
@@ -84,7 +90,7 @@ void main(void)
 			TmrFlag = 0;
 			PortIndx= 0;
 				
-			AMUX4_mic_InputSelect(PortIndx); 
+		//	AMUX4_mic_InputSelect(PortIndx); ???????????????????????????????????????????
 			ADCINCVR_mes_GetSamples(1);    // Start ADC to read 1 sample
 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample 
 			
@@ -152,6 +158,9 @@ void UartTxValues(void)
 	TX8_CPutString("  -  3 = ");
 	itoa(str, MesValue[2],10);
 	TX8_PutString(str);
+	TX8_CPutString("  Gain = ");
+	itoa(str, GF[GainIndx[1][0]], 10);
+	TX8_PutString(str);	
 }
 	
 void BlocksInit(void)
@@ -174,7 +183,7 @@ void BlocksInit(void)
 	TX8_Start(TX8_PARITY_NONE);
 	
 	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
-	PGA_pre_SetGain(PGA_pre_G1_00);
+	PGA_pre_SetGain(PGA_pre_G48_0);
 	
     HB_Tmr_EnableInt();  
 	HB_Tmr_Start();  	
