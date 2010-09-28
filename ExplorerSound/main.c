@@ -106,6 +106,7 @@ void main(void)
 }
 
 // Functions ***************************************************************
+
 void DigitalOut(void)
 {// Controls the outputs according to pot setting point
 	DIGITAL_OUT_Off();
@@ -183,7 +184,9 @@ void BlocksInit(void)
 	TX8_Start(TX8_PARITY_NONE);
 	
 	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
-	PGA_pre_SetGain(PGA_pre_G48_0);
+
+	PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
+	PGA_out_SetGain(GF[GainIndx[0][1]][0]);
 	
     HB_Tmr_EnableInt();  
 	HB_Tmr_Start();  	

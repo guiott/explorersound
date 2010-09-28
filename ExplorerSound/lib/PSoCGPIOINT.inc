@@ -10,16 +10,6 @@ AGND_IntCtrl_0_ADDR:	equ	102h
 AGND_IntCtrl_1_ADDR:	equ	103h
 AGND_IntEn_ADDR:	equ	1h
 AGND_MASK:	equ	4h
-; AnalogOutBuf_0 address and mask equates
-AnalogOutBuf_0_Data_ADDR:	equ	0h
-AnalogOutBuf_0_DriveMode_0_ADDR:	equ	100h
-AnalogOutBuf_0_DriveMode_1_ADDR:	equ	101h
-AnalogOutBuf_0_DriveMode_2_ADDR:	equ	3h
-AnalogOutBuf_0_GlobalSelect_ADDR:	equ	2h
-AnalogOutBuf_0_IntCtrl_0_ADDR:	equ	102h
-AnalogOutBuf_0_IntCtrl_1_ADDR:	equ	103h
-AnalogOutBuf_0_IntEn_ADDR:	equ	1h
-AnalogOutBuf_0_MASK:	equ	8h
 ; AnalogOutBuf_2 address and mask equates
 AnalogOutBuf_2_Data_ADDR:	equ	0h
 AnalogOutBuf_2_DriveMode_0_ADDR:	equ	100h

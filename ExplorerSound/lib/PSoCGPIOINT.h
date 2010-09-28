@@ -20,24 +20,6 @@ BYTE			AGND_IntCtrl_1_ADDR;
 #pragma	ioport	AGND_IntEn_ADDR:	0x1
 BYTE			AGND_IntEn_ADDR;
 #define AGND_MASK 0x4
-// AnalogOutBuf_0 address and mask defines
-#pragma	ioport	AnalogOutBuf_0_Data_ADDR:	0x0
-BYTE			AnalogOutBuf_0_Data_ADDR;
-#pragma	ioport	AnalogOutBuf_0_DriveMode_0_ADDR:	0x100
-BYTE			AnalogOutBuf_0_DriveMode_0_ADDR;
-#pragma	ioport	AnalogOutBuf_0_DriveMode_1_ADDR:	0x101
-BYTE			AnalogOutBuf_0_DriveMode_1_ADDR;
-#pragma	ioport	AnalogOutBuf_0_DriveMode_2_ADDR:	0x3
-BYTE			AnalogOutBuf_0_DriveMode_2_ADDR;
-#pragma	ioport	AnalogOutBuf_0_GlobalSelect_ADDR:	0x2
-BYTE			AnalogOutBuf_0_GlobalSelect_ADDR;
-#pragma	ioport	AnalogOutBuf_0_IntCtrl_0_ADDR:	0x102
-BYTE			AnalogOutBuf_0_IntCtrl_0_ADDR;
-#pragma	ioport	AnalogOutBuf_0_IntCtrl_1_ADDR:	0x103
-BYTE			AnalogOutBuf_0_IntCtrl_1_ADDR;
-#pragma	ioport	AnalogOutBuf_0_IntEn_ADDR:	0x1
-BYTE			AnalogOutBuf_0_IntEn_ADDR;
-#define AnalogOutBuf_0_MASK 0x8
 // AnalogOutBuf_2 address and mask defines
 #pragma	ioport	AnalogOutBuf_2_Data_ADDR:	0x0
 BYTE			AnalogOutBuf_2_Data_ADDR;

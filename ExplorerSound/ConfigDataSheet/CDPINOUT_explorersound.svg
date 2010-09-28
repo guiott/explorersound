@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20000303 Stylable//EN" "http://www.w3.org/TR/2000/03/WD-SVG-20000303/DTD/ svg-20000303-stylable.dtd">
 
-<svg zoomAndPan="magnify" xmlns:xmlns="http://www.w3.org/2000/svg-20000303-stylable" font-family="Helvetica" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1056 1025">
+<svg zoomAndPan="magnify" xmlns:xmlns="http://www.w3.org/2000/svg-20000303-stylable" font-family="Helvetica" preserveAspectRatio="xMinYMin meet" viewBox=" 0 0 430 600">
   
 
 
@@ -582,6 +582,46 @@
   <text startOffset="0" style=" font-weight:bold; font-size:12; fill:#000000;  text-anchor: middle" y="245" x="200">
     CY8C29466-24PVXI PDIP
   </text>
+  <text startOffset="0" style=" font-weight:normal; font-size:10; fill:#000000" y="418" x="225">
+    Std CPU
+  </text>
+  <path stroke-width="2" stroke="black" fill="lightskyblue" d="M 180 400 l 40 0l 0 20l -40 0l 0 -20" />
+  <text startOffset="0" style=" font-weight:normal; font-size:10; fill:#000000" y="438" x="225">
+    Global In
+  </text>
+  <path stroke-width="2" stroke="black" fill="lightpink" d="M 180 420 l 40 0l 0 20l -40 0l 0 -20" />
+  <text startOffset="0" style=" font-weight:normal; font-size:10; fill:#000000" y="458" x="225">
+    Global Out
+  </text>
+  <path stroke-width="2" stroke="black" fill="indianred" d="M 180 440 l 40 0l 0 20l -40 0l 0 -20" />
+  <text startOffset="0" style=" font-weight:normal; font-size:10; fill:#000000" y="478" x="225">
+    Analog In
+  </text>
+  <path stroke-width="2" stroke="black" fill="palegreen" d="M 180 460 l 40 0l 0 20l -40 0l 0 -20" />
+  <text startOffset="0" style=" font-weight:normal; font-size:10; fill:#000000" y="498" x="225">
+    Analog Out
+  </text>
+  <path stroke-width="2" stroke="black" fill="seagreen" d="M 180 480 l 40 0l 0 20l -40 0l 0 -20" />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_1" d="M 100	100 m 0 10 l -20 0 l 0 10 l 20 0 " />
+  <text startOffset="0" style=" font-size:10; fill:#000000" y="120" x="110">
+    1 P0[7]
+  </text>
+  <text startOffset="0" id="PINDIPLAYNAME_Port_0_7" text-anchor="end" style=" font-size:10; fill:#000000" y="120" x="70">
+    Port_0_7
+  </text>
+  <path style="fill:seagreen;stroke-width:2;stroke:black;" id="PO_2" d="M 100	100 m 0 30 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_3" d="M 100	100 m 0 50 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:palegreen;stroke-width:2;stroke:black;" id="PO_4" d="M 100	100 m 0 70 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_5" d="M 100	100 m 0 90 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_6" d="M 100	100 m 0 110 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:palegreen;stroke-width:2;stroke:black;" id="PO_7" d="M 100	100 m 0 130 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:palegreen;stroke-width:2;stroke:black;" id="PO_8" d="M 100	100 m 0 150 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:white;stroke-width:2;stroke:black;" id="PO_9" d="M 100	100 m 0 170 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_10" d="M 100	100 m 0 190 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_11" d="M 100	100 m 0 210 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_12" d="M 100	100 m 0 230 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:lightskyblue;stroke-width:2;stroke:black;" id="PO_13" d="M 100	100 m 0 250 l -20 0 l 0 10 l 20 0 " />
+  <path style="fill:white;stroke-width:2;stroke:black;" id="PO_14" d="M 100	100 m 0 270 l -20 0 l 0 10 l 20 0 " />
   <text startOffset="0" style=" font-size:10; fill:#000000" y="140" x="110">
     2 P0[5]
   </text>
@@ -758,4 +798,13 @@
   <text startOffset="0" id="PINDIPLAYNAME_" text-anchor="start" style=" font-size:10; fill:#000000" y="120" x="324">
     
   </text>
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
+  <rect height="0" width="0" />
 </svg>
