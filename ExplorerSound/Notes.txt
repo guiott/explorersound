@@ -4,7 +4,7 @@ The PGA_pre output is internally routed to BPF4_4KHz band pass filter to filter 
 The output of BPF4_4KHz goes to AnalogBus 1 and out to Port_0_5
 Port_0_5 pin is internally connected also to AInMux_2 and routed to PGA_out for the final amplification.
 PGA_out output is connected to AnalogOutBuf_2 and routed to Port_0_4. The filtered signal is therefore available on Port_0_4.
-Port_0_4 is connect to Port_2_2 through a Schottky diode and an RC low-pass filter in order to rectify the 4KHz signal. 
+Port_0_4 is connect to Port_2_2 through a Schottky diode and a Capacitor in order to rectify the 4KHz signal. 
 The DC signal out of the rectification circuit on Port_2_2 is routed to ADCINVR_mes to measure via SW the level of the input 4KHz signal.
 The ADCINCVR_pot is used to read a pot, in order to manually (and optionally) set a threshold for the trigger part of the circuit.
 Both ADCINCVR_ According to the formulas in the datasheet, performs a full measure in 1.7ms with a 4.8MHz clock (VC1) and 1 bit resolution
