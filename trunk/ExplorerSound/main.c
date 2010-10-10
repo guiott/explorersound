@@ -76,9 +76,9 @@ void main(void)
         {   
 			// Get Data, Clear data ready flag
 			MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag(); 
+			MesValueSum[PortIndx][0]+= MesValue[PortIndx]; // Cumulate readings
+			MesValueSum[PortIndx][1]++; // count how many readings
 			
-			
-			// ??????????????????????????????????? fare media valori in 100ms
 						// ??????????????????????????????????? fare AGC
 														  
 			PortIndx++; // next mux port
@@ -103,8 +103,14 @@ void main(void)
 		
 		if (Tmr1) // every 100ms
 		{
-					// ??????????????????????????????????? fare media valori in 100ms
 			Tmr1 = 0;
+			// compute mean value
+			for (i=0; i<3; i++)
+			{
+				MesValueM[i]=MesValueSum[i][0]/MesValueSum[i][1];
+				MesValueSum[i][0]=0;
+				MesValueSum[i][1]=0;
+			}
 			UartTxValues();
 		}
 	}// ========================================================== Main loop 
@@ -156,13 +162,13 @@ void UartTxValues(void)
 	itoa(str, PotValue,10);
 	TX8_PutString(str);
 	TX8_CPutString("    Mes Value: 1 = ");
-	itoa(str, MesValue[0],10);
+	itoa(str, MesValueM[0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
-	itoa(str, MesValue[1],10);
+	itoa(str, MesValueM[1],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  3 = ");
-	itoa(str, MesValue[2],10);
+	itoa(str, MesValueM[2],10);
 	TX8_PutString(str);
 	TX8_CPutString("  Gain = ");
 	itoa(str, GF[GainIndx[1][0]][1], 10);
