@@ -1,5 +1,9 @@
 int PotValue;		// ADC value read from potentiometer
 int MesValue[3];	// ADC values read from three input
+// First column: Cumulation of single measures to compute mean value
+// Second column: count of values cumulated
+long MesValueSum[3][2] = {0, 0, 0, 0, 0, 0};
+int MesValueM[3]; // mean value
 unsigned int i;
 unsigned int Tmr1;
 BOOL TmrFlag = 0;
