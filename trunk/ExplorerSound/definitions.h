@@ -11,7 +11,7 @@ BYTE str[7];		// for TX procedures
 
 // Automatic Gain Control 
 // first parameter: register value
-// secod parameter: gain factor
+// second parameter: gain factor
 BYTE GF[8][2]= {0x00, 0, 
 				0xF8, 1, 
 				0x78, 2, 
