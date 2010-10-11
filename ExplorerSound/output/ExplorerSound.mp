@@ -1,11 +1,11 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Mon Sep 27 23:47:16 2010
+Date:         Mon Oct 11 09:49:10 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 14% full. 4434 out of 32768 bytes used (does not include absolute areas).
-  RAM 4% full. 68 bytes used (does not include stack usage).
+  ROM 16% full. 5198 out of 32768 bytes used (does not include absolute areas).
+  RAM 6% full. 106 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -295,28 +295,31 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0C11   06E1 =   1761. bytes (rel,con,rom)
+                            text   0C11   09DD =   2525. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0C11  Delay50uTimes
-       0C11  __text_start
        0C11  _Delay50uTimes
+       0C11  __text_start
+       0C11  Delay50uTimes
        0C17  Delay50u_Table
        0C1F  _Delay50u
        0C1F  Delay50u
        0C33  _main
-       0E1A  _DigitalOut
-       0EB0  _UartTxValues
-       0FC7  _BlocksInit
-       1029  _HB_Tmr_ISR_C
-       1042  _DelayMs
-       1073  _LedTest
-       10D5  __divmodu_16X16_16
-       10E0  __i_div16_block_util
-       1119  _itoa
-       12F2  __text_end
-       1318  __xidata_end
+       1021  _DigitalOut
+       10B7  _UartTxValues
+       11CE  _BlocksInit
+       126D  _HB_Tmr_ISR_C
+       1286  _DelayMs
+       12B7  _LedTest
+       1319  __divmod_32X32_32
+       1356  __divmodu_16X16_16
+       1361  __i_div16_block_util
+       139A  __i_div32_block_util
+       13FD  __i_div32_not_util
+       1415  _itoa
+       15EE  __text_end
+       1616  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -373,33 +376,43 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   0023   0007 =      7. bytes (rel,con,ram)
+               virtual_registers   003B   000F =     15. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0023  __rZ
-       0024  __rY
-       0025  __rX
-       0026  __r3
-       0027  __r2
-       0028  __r1
-       0029  __r0
+       003B  __rZ
+       003C  __rY
+       003D  __rX
+       003E  __r11
+       003F  __r10
+       0040  __r9
+       0041  __r8
+       0042  __r7
+       0043  __r6
+       0044  __r5
+       0045  __r4
+       0046  __r3
+       0047  __r2
+       0048  __r1
+       0049  __r0
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            data   0000   002A =     42. bytes (rel,con,ram)
+                            data   0000   0048 =     72. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
        0000  __data_start
-       0013  _GF
-       002A  _str
-       0031  _GainIndx
-       0037  _MesValue
-       003D  _Tmr1
-       003F  _PotValue
-       0041  _i
-       0043  _TmrFlag
+       0013  _MesValueSum
+       002B  _GF
+       004A  _str
+       0051  _MesValueM
+       0057  _GainIndx
+       005D  _MesValue
+       0063  _Tmr1
+       0065  _i
+       0067  _PotValue
+       0069  _TmrFlag
 
 Files Linked      [ module(s) ]
 
@@ -409,14 +422,15 @@ Files Linked      [ module(s) ]
 <library>	[ tx8.asm, scblock_inbuff.asm, refmux_1.asm, psocconfigtbl.asm, psocconfig.asm, pga_pre.asm, pga_out.asm ]
 [ led_3.asm, led_2.asm, led_1.asm, i2chwrsrcinits.asm, i2chwint.asm, hb_tmrint.asm, hb_tmr.asm ]
 [ digital_out.asm, bpf4_4khz.asm, amux4_mic.asm, adcincvr_potint.asm, adcincvr_pot.asm, adcincvr_mesint.asm ]
-[ adcincvr_mes.asm, rZ.asm, rY.asm, rX.asm, r3.asm, r2.asm, r1.asm, r0.asm, divmodu_16x16_16_util.asm ]
-[ i_div16_block_util.asm, itoa.s ]
+[ adcincvr_mes.asm, rZ.asm, rY.asm, rX.asm, r11.asm, r10.asm, r9.asm, r8.asm, r7.asm, r6.asm, r5.asm, r4.asm ]
+[ r3.asm, r2.asm, r1.asm, r0.asm, divmod_32x32_32_util.asm, divmodu_16x16_16_util.asm, i_div16_block_util.asm ]
+[ i_div32_block_util.asm, i_div32_not_util.asm, itoa.s ]
 
 Area Definitions
 
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x23
+-Bvirtual_registers	allocated at: 0x3b
 -Bexplorersound_RAM	allocated at: 0
 

@@ -1077,7 +1077,7 @@
  0000           ;
  0000           ; register initial values
  0000           ;
- 003D           ANALOG_IO_CONTROL:		equ 3dh	;Analog IO Control register (ABF_CR)
+ 0035           ANALOG_IO_CONTROL:		equ 35h	;Analog IO Control register (ABF_CR)
  0000           PORT_0_GLOBAL_SELECT:	equ 0h	;Port 0 global select register (PRT0GS)
  0000           PORT_0_DRIVE_0:			equ 0h	;Port 0 drive mode 0 register (PRT0DM0)
  00FF           PORT_0_DRIVE_1:			equ ffh	;Port 0 drive mode 1 register (PRT0DM1)

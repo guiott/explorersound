@@ -3,9 +3,8 @@
   <APP_EDITOR_SETTINGS>
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\boot.asm" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\output\ExplorerSound.mp" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" ACTIVE="true" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\definitions.h" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />
