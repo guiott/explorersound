@@ -19,3 +19,13 @@ The 16 bit heart beat timer HB_Tmr is the base clock for all of the timings in t
 its timing is: VC2 = VC1 / 15 = SysClk / 5 / 15 =  24MHz / 5 / 15 = 320KHz
 	Timer Period = (1/VC2) * (PeriodRegister + 1) = 0.000003125 * (3199 + 1) = 10ms
 For each 10ms timer cycle are executed 1 pot measure and 3 mes measures, each of this one last for 1.7ms for a total time of 5.1ms
+The readings are cumulated at every 10 ms cycle and averaged every 10 cycles (100 ms) and sent via UART
+the amplification chain is:
+
+MesValueIn -> |GfPre| -> MesValuePre -> |GfOut| -> MesValueOut
+
+MesValueOut = ADC reading														// [1]
+MesValuePre = MesValue[i][1] = MesValueOut / GfOut								// [2] used for intermediate calculi and for AGC procedure, where i = PortIndx
+MesValueIn	= MesValue[i][0] = MesValuePre / GfPre = MesValue[i][1] / GfPre		// used for intermediate calculi and for AGC procedure, where i = PortIndx
+for (k = 0 to n) {MesValueSum[i][j] += MesValue[i][0]}							// Temporary cumulation  to compute average value
+MesValueM[i] = MesValueSum[i] / n												// actual averaged value

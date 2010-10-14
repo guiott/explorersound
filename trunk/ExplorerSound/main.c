@@ -57,25 +57,19 @@ void main(void)
         {   
 			// Get Data, Clear data ready flag, in the range 0-1800
 			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
-			
-			// ??????????????? DEBUG ??????????????
-			if (PotValue < 200)	GainIndx[1][0] = 0;
-			if (PotValue >= 200 && PotValue < 400)	GainIndx[1][0] = 1;
-			if (PotValue >= 400 && PotValue < 600)	GainIndx[1][0] = 2;
-			if (PotValue >= 600 && PotValue < 800)	GainIndx[1][0] = 3;
-			if (PotValue >= 800 && PotValue < 1000)	GainIndx[1][0] = 4;
-			if (PotValue >= 1000 && PotValue < 1200)	GainIndx[1][0] = 5;
-			if (PotValue >= 1200 && PotValue < 1400)	GainIndx[1][0] = 6;
-			if (PotValue >= 1400)	GainIndx[1][0] = 7;
-			
-			PGA_pre_SetGain(GF[GainIndx[1][0]][0]);
-			// ??????????????????DEBUG ????????????????
 		}
         
 		if(ADCINCVR_mes_fIsDataAvailable() != 0)// Wait for data to be ready
         {   
 			// Get Data, Clear data ready flag
-			MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag(); 
+			
+			MesValueOut = ADCINCVR_mes_iGetDataClearFlag(); // [1]
+			
+			MesValue[PortIndx][1] = MesValueOut >> GF[5][2]= {0xF8, 1,; // [2]
+			
+			GF[GainIndx[1][0]][1]   MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag() GainIndx[3][2]=   {3, 3
+			
+			
 			MesValueSum[PortIndx][0]+= MesValue[PortIndx]; // Cumulate readings
 			MesValueSum[PortIndx][1]++; // count how many readings occurred
 			
