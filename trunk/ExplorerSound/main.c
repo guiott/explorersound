@@ -64,21 +64,20 @@ void main(void)
 			// Get Data, Clear data ready flag
 			
 			MesValueOut = ADCINCVR_mes_iGetDataClearFlag(); // [1]
-			
-			MesValue[PortIndx][1] = MesValueOut >> GF[5][2]= {0xF8, 1,; // [2]
-			
-			GF[GainIndx[1][0]][1]   MesValue[PortIndx] = ADCINCVR_mes_iGetDataClearFlag() GainIndx[3][2]=   {3, 3
-			
-			
-			MesValueSum[PortIndx][0]+= MesValue[PortIndx]; // Cumulate readings
-			MesValueSum[PortIndx][1]++; // count how many readings occurred
+			MesValue[PortIndx][1] = MesValueOut >> GainIndx[PortIndx][1]; 			// [2][4]
+			MesValue[PortIndx][0] = MesValue[PortIndx][1] >> GainIndx[PortIndx][0]; // [3][4]			
 			
 						// ??????????????????????????????????? fare AGC
+						
+						// impostare guadagno GainIndx dopo AGC e PGA amplification
+						
+			MesValueSum[PortIndx][0]+= MesValue[PortIndx][0]; // Cumulate readings
+			MesValueSum[PortIndx][1]++; // count how many readings occurred
 														  
 			PortIndx++; // next mux port
 			if (PortIndx <3)
 			{
-			//	AMUX4_mic_InputSelect(PortIndx); ???????????????????????????????????? togliere commento per ripristinare ciclo input
+				AMUX4_mic_InputSelect(PortIndx);
 				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
 			}
 		}
@@ -88,23 +87,22 @@ void main(void)
 			TmrFlag = 0;
 			PortIndx= 0;
 				
-		//	AMUX4_mic_InputSelect(PortIndx); ??????????????????????????????????????????? togliere commento per ripristinare ciclo input
+			AMUX4_mic_InputSelect(PortIndx);
 			ADCINCVR_mes_GetSamples(1);    // Start ADC to read 1 sample
 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample 
-			
-			DigitalOut();
 		}
 		
 		if (Tmr1) // every 100ms
 		{
 			Tmr1 = 0;
-			// compute mean value
+			// compute average value
 			for (i=0; i<3; i++)
 			{
 				MesValueM[i]=MesValueSum[i][0]/MesValueSum[i][1];
 				MesValueSum[i][0]=0;
 				MesValueSum[i][1]=0;
 			}
+			DigitalOut();
 			UartTxValues();
 		}
 	}// ========================================================== Main loop 
@@ -115,7 +113,7 @@ void main(void)
 void DigitalOut(void)
 {// Controls the outputs according to pot setting point
 	DIGITAL_OUT_Off();
-	if (MesValue[0]>PotValue)
+	if (MesValueM[0]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_1_On();
@@ -125,7 +123,7 @@ void DigitalOut(void)
 		LED_1_Off();
 	}
 		
-	if (MesValue[1]>PotValue)
+	if (MesValueM[1]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_2_On();
@@ -135,7 +133,7 @@ void DigitalOut(void)
 		LED_2_Off();
 	}
 	
-	if (MesValue[2]>PotValue)
+	if (MesValueM[2]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_3_On();
@@ -164,8 +162,23 @@ void UartTxValues(void)
 	TX8_CPutString("  -  3 = ");
 	itoa(str, MesValueM[2],10);
 	TX8_PutString(str);
-	TX8_CPutString("  Gain = ");
+	TX8_CPutString("  Gain Pre: 1 = ");
+	itoa(str, GF[GainIndx[0][0]][1], 10);
+	TX8_PutString(str);
+	TX8_CPutString("  -  2 = ");
 	itoa(str, GF[GainIndx[1][0]][1], 10);
+	TX8_PutString(str);	
+	TX8_CPutString("  -  3 = ");
+	itoa(str, GF[GainIndx[2][0]][1], 10);
+	TX8_PutString(str);	
+	TX8_CPutString("  Gain Out: 1 = ");
+	itoa(str, GF[GainIndx[0][1]][1], 10);
+	TX8_PutString(str);
+	TX8_CPutString("  -  2 = ");
+	itoa(str, GF[GainIndx[1][1]][1], 10);
+	TX8_PutString(str);	
+	TX8_CPutString("  -  3 = ");
+	itoa(str, GF[GainIndx[2][1]][1], 10);
 	TX8_PutString(str);	
 }
 	
