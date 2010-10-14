@@ -1,5 +1,6 @@
 Starting MAKE...
 creating project.mk 
+C:\PROGRA~1\Cypress\Common\CYPRES~3\tools\make: *** Warning: File `C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc' has modification time in the future (2010-10-14 23:33:12 > 2010-10-14 23:33:10)
 lib/adcincvr_mes.asm
 lib/adcincvr_mesint.asm
 lib/adcincvr_pot.asm
@@ -29,18 +30,19 @@ lib/tx8plus.asm
 Linking..
 LMM info: area 'InterruptRAM' uses 19 bytes in SRAM bank 0
 LMM info: area 'data' item of 24 bytes allocated in SRAM page 0
-LMM info: area 'data' item of 16 bytes allocated in SRAM page 0
 LMM info: area 'virtual_registers' uses 15 bytes in SRAM page 0
+LMM info: area 'data' item of 12 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 10 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
-LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
-  ROM 16% full. 5198 out of 32768 bytes used (does not include absolute areas).
-  RAM 6% full. 106 bytes used (does not include stack usage).
+  ROM 17% full. 5500 out of 32768 bytes used (does not include absolute areas).
+  RAM 7% full. 108 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 10:06:46
+ExplorerSound - 0 error(s) 1 warning(s) 23:33:15

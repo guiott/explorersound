@@ -1,325 +1,325 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Thu Oct 14 10:06:45 2010
+Date:         Thu Oct 14 23:33:15 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 16% full. 5198 out of 32768 bytes used (does not include absolute areas).
-  RAM 6% full. 106 bytes used (does not include stack usage).
+  ROM 17% full. 5500 out of 32768 bytes used (does not include absolute areas).
+  RAM 7% full. 108 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                             lit   01A0   025C =    604. bytes (rel,con,rom)
+                             lit   01A0   0274 =    628. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01E1  LoadConfigTBL_explorersound_Bank0
-       02B6  LoadConfigTBL_explorersound_Bank1
-       0311  LoadConfigTBL_explorersound_Ordered
-       03FC  __lit_end
+       01F9  LoadConfigTBL_explorersound_Bank0
+       02CE  LoadConfigTBL_explorersound_Bank1
+       0329  LoadConfigTBL_explorersound_Ordered
+       0414  __lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                        func_lit   03FC   0002 =      2. bytes (rel,con,rom)
+                        func_lit   0414   0002 =      2. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       03FC  __func_lit_start
-       03FE  __func_lit_end
+       0414  __func_lit_start
+       0416  __func_lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     psoc_config   03FE   0065 =    101. bytes (rel,con,rom)
+                     psoc_config   0416   0065 =    101. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       03FE  _LoadConfigInit
-       03FE  LoadConfigInit
-       0408  _LoadConfig_explorersound
-       0408  LoadConfig_explorersound
-       0463  __psoc_config_end
+       0416  _LoadConfigInit
+       0416  LoadConfigInit
+       0420  _LoadConfig_explorersound
+       0420  LoadConfig_explorersound
+       047B  __psoc_config_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     UserModules   0463   07AE =   1966. bytes (rel,con,rom)
+                     UserModules   047B   07AE =   1966. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0463  _TX8_EnableInt
-       0463  TX8_EnableInt
-       0467  TX8_DisableInt
-       0467  _TX8_DisableInt
-       046B  _TX8_SetTxIntMode
-       046B  TX8_SetTxIntMode
-       047D  _TX8_Start
-       047D  TX8_Start
-       0482  _TX8_Stop
-       0482  TX8_Stop
-       0486  _TX8_SendData
-       0486  TX8_SendData
-       0489  TX8_bReadTxStatus
-       0489  bTX8_ReadTxStatus
-       0489  _bTX8_ReadTxStatus
-       0489  _TX8_bReadTxStatus
-       049C  TX8_PutSHexByte
-       049C  _TX8_PutSHexByte
-       04AF  TX8_PutSHexInt
-       04AF  _TX8_PutSHexInt
-       04B6  TX8_PutChar
-       04B6  _TX8_PutChar
-       04BE  _TX8_PutString
-       04BE  TX8_PutString
-       04D0  TX8_Write
-       04D0  _TX8_Write
-       04F8  _TX8_CWrite
-       04F8  TX8_CWrite
-       0520  TX8_CPutString
-       0520  _TX8_CPutString
-       0532  _TX8_PutCRLF
-       0532  TX8_PutCRLF
-       053B  SCBLOCK_inbuff_Start
-       053B  _SCBLOCK_inbuff_SetPower
-       053B  SCBLOCK_inbuff_SetPower
-       053B  _SCBLOCK_inbuff_Start
-       054F  _SCBLOCK_inbuff_Stop
-       054F  SCBLOCK_inbuff_Stop
-       0553  _RefMux_1_SetPower
-       0553  _RefMux_1_Start
-       0553  RefMux_1_Start
-       0553  RefMux_1_SetPower
-       0565  RefMux_1_Stop
-       0565  _RefMux_1_Stop
-       0569  _RefMux_1_RefSelect
-       0569  RefMux_1_RefSelect
-       057B  PGA_pre_SetPower
-       057B  _PGA_pre_SetPower
-       057B  PGA_pre_Start
-       057B  _PGA_pre_Start
-       058D  _PGA_pre_SetGain
-       058D  PGA_pre_SetGain
-       05B7  PGA_pre_Stop
-       05B7  _PGA_pre_Stop
-       05BB  PGA_out_Start
-       05BB  _PGA_out_Start
-       05BB  PGA_out_SetPower
-       05BB  _PGA_out_SetPower
-       05CD  PGA_out_SetGain
-       05CD  _PGA_out_SetGain
-       05F7  _PGA_out_Stop
-       05F7  PGA_out_Stop
-       05FB  _LED_3_On
-       05FB  LED_3_On
-       05FF  _LED_3_Start
-       05FF  LED_3_Stop
-       05FF  LED_3_Off
-       05FF  _LED_3_Off
-       05FF  _LED_3_Stop
-       05FF  LED_3_Start
-       0601  LED_3_Switch
-       0601  _LED_3_Switch
-       0619  _LED_3_Invert
-       0619  LED_3_Invert
-       0628  _LED_3_GetState
-       0628  LED_3_GetState
-       0638  _LED_2_On
-       0638  LED_2_On
-       063C  _LED_2_Stop
-       063C  _LED_2_Start
-       063C  LED_2_Off
-       063C  LED_2_Start
-       063C  _LED_2_Off
-       063C  LED_2_Stop
-       063E  LED_2_Switch
-       063E  _LED_2_Switch
-       0656  _LED_2_Invert
-       0656  LED_2_Invert
-       0665  LED_2_GetState
-       0665  _LED_2_GetState
-       0675  _LED_1_On
-       0675  LED_1_On
-       0679  LED_1_Start
-       0679  _LED_1_Stop
-       0679  LED_1_Stop
-       0679  _LED_1_Off
-       0679  LED_1_Off
-       0679  _LED_1_Start
-       067B  _LED_1_Switch
-       067B  LED_1_Switch
-       0693  _LED_1_Invert
-       0693  LED_1_Invert
-       06A2  LED_1_GetState
-       06A2  _LED_1_GetState
-       06B2  I2CHW_Start
-       06B2  _I2CHW_Start
-       06B3  I2CHW_ResumeInt
-       06B3  _I2CHW_ResumeInt
-       06B6  _I2CHW_EnableInt
-       06B6  I2CHW_EnableInt
-       06C2  _I2CHW_ClearInt
-       06C2  I2CHW_ClearInt
-       06CB  I2CHW_EnableMstr
-       06CB  _I2CHW_EnableMstr
-       06DB  I2CHW_EnableSlave
-       06DB  _I2CHW_EnableSlave
-       06DF  _I2CHW_Stop
-       06DF  I2CHW_DisableInt
-       06DF  _I2CHW_DisableInt
-       06DF  I2CHW_Stop
-       06E3  _I2CHW_DisableSlave
-       06E3  I2CHW_DisableSlave
-       06E7  _I2CHW_DisableMstr
-       06E7  I2CHW_DisableMstr
-       06EB  I2CHW_Poll
-       06EB  _I2CHW_Poll
-       06EC  _I2CHW_ISR
-       0802  _HB_Tmr_ISR
-       0806  HB_Tmr_EnableInt
-       0806  _HB_Tmr_EnableInt
-       080A  _HB_Tmr_DisableInt
-       080A  HB_Tmr_DisableInt
-       080E  _HB_Tmr_Start
-       080E  HB_Tmr_Start
-       0812  HB_Tmr_Stop
-       0812  _HB_Tmr_Stop
-       0816  HB_Tmr_WritePeriod
-       0816  _HB_Tmr_WritePeriod
-       081C  HB_Tmr_WriteCompareValue
-       081C  _HB_Tmr_WriteCompareValue
-       0822  _wHB_Tmr_ReadCompareValue
-       0822  _HB_Tmr_wReadCompareValue
-       0822  wHB_Tmr_ReadCompareValue
-       0822  HB_Tmr_wReadCompareValue
-       0828  _HB_Tmr_wReadTimerSaveCV
-       0828  _wHB_Tmr_ReadTimerSaveCV
-       0828  HB_Tmr_wReadTimerSaveCV
-       0828  wHB_Tmr_ReadTimerSaveCV
-       0828  _wHB_Tmr_ReadCounter
-       0828  wHB_Tmr_ReadCounter
-       085E  _HB_Tmr_wReadTimer
-       085E  _wHB_Tmr_ReadTimer
-       085E  HB_Tmr_wReadTimer
-       085E  wHB_Tmr_ReadTimer
-       085E  _wHB_Tmr_CaptureCounter
-       085E  wHB_Tmr_CaptureCounter
-       0866  DIGITAL_OUT_On
-       0866  _DIGITAL_OUT_On
-       086A  _DIGITAL_OUT_Off
-       086A  _DIGITAL_OUT_Start
-       086A  DIGITAL_OUT_Off
-       086A  DIGITAL_OUT_Stop
-       086A  _DIGITAL_OUT_Stop
-       086A  DIGITAL_OUT_Start
-       086C  _DIGITAL_OUT_Switch
-       086C  DIGITAL_OUT_Switch
-       0884  _DIGITAL_OUT_Invert
-       0884  DIGITAL_OUT_Invert
-       0893  DIGITAL_OUT_GetState
-       0893  _DIGITAL_OUT_GetState
-       08A3  BPF4_4KHz_Start
-       08A3  _BPF4_4KHz_SetPower
-       08A3  BPF4_4KHz_SetPower
-       08A3  _BPF4_4KHz_Start
-       08CD  BPF4_4KHz_Stop
-       08CD  _BPF4_4KHz_Stop
-       08DA  _BPF4_4KHz_SetC1L
-       08DA  BPF4_4KHz_SetC1L
-       08EC  BPF4_4KHz_SetC2L
-       08EC  _BPF4_4KHz_SetC2L
-       08FE  BPF4_4KHz_SetC3L
-       08FE  _BPF4_4KHz_SetC3L
-       0910  BPF4_4KHz_SetC4L
-       0910  _BPF4_4KHz_SetC4L
-       0922  _BPF4_4KHz_SetC1H
-       0922  BPF4_4KHz_SetC1H
-       0934  _BPF4_4KHz_SetC2H
-       0934  BPF4_4KHz_SetC2H
-       0946  _BPF4_4KHz_SetC3H
-       0946  BPF4_4KHz_SetC3H
-       0958  _BPF4_4KHz_SetC4H
-       0958  BPF4_4KHz_SetC4H
-       096A  AMUX4_mic_InputSelect
-       096A  _AMUX4_mic_InputSelect
-       0985  AMUX4_mic_Start
-       0985  _AMUX4_mic_Start
-       0986  AMUX4_mic_Stop
-       0986  _AMUX4_mic_Stop
-       0995  _ADCINCVR_pot_CNT_ISR
-       0998  _ADCINCVR_pot_PWM16_ISR
-       0A0E  ADCINCVR_pot_SetPower
-       0A0E  _ADCINCVR_pot_SetPower
-       0A0E  ADCINCVR_pot_Start
-       0A0E  _ADCINCVR_pot_Start
-       0A2E  _ADCINCVR_pot_Stop
-       0A2E  ADCINCVR_pot_Stop
-       0A32  _ADCINCVR_pot_GetSamples
-       0A32  ADCINCVR_pot_GetSamples
-       0A62  ADCINCVR_pot_StopAD
-       0A62  _ADCINCVR_pot_StopAD
-       0A77  _ADCINCVR_pot_fIsDataAvailable
-       0A77  ADCINCVR_pot_fIsDataAvailable
-       0A77  ADCINCVR_pot_fIsData
-       0A77  _ADCINCVR_pot_fIsData
-       0A7F  _ADCINCVR_pot_iGetDataClearFlag
-       0A7F  ADCINCVR_pot_iGetDataClearFlag
-       0A8A  _ADCINCVR_pot_iGetData
-       0A8A  ADCINCVR_pot_iGetData
-       0A92  _ADCINCVR_pot_ClearFlag
-       0A92  ADCINCVR_pot_ClearFlag
-       0A99  _ADCINCVR_pot_SetResolution
-       0A99  ADCINCVR_pot_SetResolution
-       0ADA  _ADCINCVR_mes_CNT_ISR
-       0ADD  _ADCINCVR_mes_PWM16_ISR
-       0B53  _ADCINCVR_mes_Start
-       0B53  ADCINCVR_mes_Start
-       0B53  ADCINCVR_mes_SetPower
-       0B53  _ADCINCVR_mes_SetPower
-       0B73  _ADCINCVR_mes_Stop
-       0B73  ADCINCVR_mes_Stop
-       0B77  ADCINCVR_mes_GetSamples
-       0B77  _ADCINCVR_mes_GetSamples
-       0BA7  ADCINCVR_mes_StopAD
-       0BA7  _ADCINCVR_mes_StopAD
-       0BBC  ADCINCVR_mes_fIsData
-       0BBC  _ADCINCVR_mes_fIsData
-       0BBC  _ADCINCVR_mes_fIsDataAvailable
-       0BBC  ADCINCVR_mes_fIsDataAvailable
-       0BC4  ADCINCVR_mes_iGetDataClearFlag
-       0BC4  _ADCINCVR_mes_iGetDataClearFlag
-       0BCF  _ADCINCVR_mes_iGetData
-       0BCF  ADCINCVR_mes_iGetData
-       0BD7  _ADCINCVR_mes_ClearFlag
-       0BD7  ADCINCVR_mes_ClearFlag
-       0BDE  _ADCINCVR_mes_SetResolution
-       0BDE  ADCINCVR_mes_SetResolution
-       0C11  __UserModules_end
+       047B  _TX8_EnableInt
+       047B  TX8_EnableInt
+       047F  TX8_DisableInt
+       047F  _TX8_DisableInt
+       0483  _TX8_SetTxIntMode
+       0483  TX8_SetTxIntMode
+       0495  _TX8_Start
+       0495  TX8_Start
+       049A  _TX8_Stop
+       049A  TX8_Stop
+       049E  _TX8_SendData
+       049E  TX8_SendData
+       04A1  TX8_bReadTxStatus
+       04A1  bTX8_ReadTxStatus
+       04A1  _bTX8_ReadTxStatus
+       04A1  _TX8_bReadTxStatus
+       04B4  TX8_PutSHexByte
+       04B4  _TX8_PutSHexByte
+       04C7  TX8_PutSHexInt
+       04C7  _TX8_PutSHexInt
+       04CE  TX8_PutChar
+       04CE  _TX8_PutChar
+       04D6  _TX8_PutString
+       04D6  TX8_PutString
+       04E8  TX8_Write
+       04E8  _TX8_Write
+       0510  _TX8_CWrite
+       0510  TX8_CWrite
+       0538  TX8_CPutString
+       0538  _TX8_CPutString
+       054A  _TX8_PutCRLF
+       054A  TX8_PutCRLF
+       0553  SCBLOCK_inbuff_Start
+       0553  _SCBLOCK_inbuff_SetPower
+       0553  SCBLOCK_inbuff_SetPower
+       0553  _SCBLOCK_inbuff_Start
+       0567  _SCBLOCK_inbuff_Stop
+       0567  SCBLOCK_inbuff_Stop
+       056B  _RefMux_1_SetPower
+       056B  _RefMux_1_Start
+       056B  RefMux_1_Start
+       056B  RefMux_1_SetPower
+       057D  RefMux_1_Stop
+       057D  _RefMux_1_Stop
+       0581  _RefMux_1_RefSelect
+       0581  RefMux_1_RefSelect
+       0593  PGA_pre_SetPower
+       0593  _PGA_pre_SetPower
+       0593  PGA_pre_Start
+       0593  _PGA_pre_Start
+       05A5  _PGA_pre_SetGain
+       05A5  PGA_pre_SetGain
+       05CF  PGA_pre_Stop
+       05CF  _PGA_pre_Stop
+       05D3  PGA_out_Start
+       05D3  _PGA_out_Start
+       05D3  PGA_out_SetPower
+       05D3  _PGA_out_SetPower
+       05E5  PGA_out_SetGain
+       05E5  _PGA_out_SetGain
+       060F  _PGA_out_Stop
+       060F  PGA_out_Stop
+       0613  _LED_3_On
+       0613  LED_3_On
+       0617  _LED_3_Start
+       0617  LED_3_Stop
+       0617  LED_3_Off
+       0617  _LED_3_Off
+       0617  _LED_3_Stop
+       0617  LED_3_Start
+       0619  LED_3_Switch
+       0619  _LED_3_Switch
+       0631  _LED_3_Invert
+       0631  LED_3_Invert
+       0640  _LED_3_GetState
+       0640  LED_3_GetState
+       0650  _LED_2_On
+       0650  LED_2_On
+       0654  _LED_2_Stop
+       0654  _LED_2_Start
+       0654  LED_2_Off
+       0654  LED_2_Start
+       0654  _LED_2_Off
+       0654  LED_2_Stop
+       0656  LED_2_Switch
+       0656  _LED_2_Switch
+       066E  _LED_2_Invert
+       066E  LED_2_Invert
+       067D  LED_2_GetState
+       067D  _LED_2_GetState
+       068D  _LED_1_On
+       068D  LED_1_On
+       0691  LED_1_Start
+       0691  _LED_1_Stop
+       0691  LED_1_Stop
+       0691  _LED_1_Off
+       0691  LED_1_Off
+       0691  _LED_1_Start
+       0693  _LED_1_Switch
+       0693  LED_1_Switch
+       06AB  _LED_1_Invert
+       06AB  LED_1_Invert
+       06BA  LED_1_GetState
+       06BA  _LED_1_GetState
+       06CA  I2CHW_Start
+       06CA  _I2CHW_Start
+       06CB  I2CHW_ResumeInt
+       06CB  _I2CHW_ResumeInt
+       06CE  _I2CHW_EnableInt
+       06CE  I2CHW_EnableInt
+       06DA  _I2CHW_ClearInt
+       06DA  I2CHW_ClearInt
+       06E3  I2CHW_EnableMstr
+       06E3  _I2CHW_EnableMstr
+       06F3  I2CHW_EnableSlave
+       06F3  _I2CHW_EnableSlave
+       06F7  _I2CHW_Stop
+       06F7  I2CHW_DisableInt
+       06F7  _I2CHW_DisableInt
+       06F7  I2CHW_Stop
+       06FB  _I2CHW_DisableSlave
+       06FB  I2CHW_DisableSlave
+       06FF  _I2CHW_DisableMstr
+       06FF  I2CHW_DisableMstr
+       0703  I2CHW_Poll
+       0703  _I2CHW_Poll
+       0704  _I2CHW_ISR
+       081A  _HB_Tmr_ISR
+       081E  HB_Tmr_EnableInt
+       081E  _HB_Tmr_EnableInt
+       0822  _HB_Tmr_DisableInt
+       0822  HB_Tmr_DisableInt
+       0826  _HB_Tmr_Start
+       0826  HB_Tmr_Start
+       082A  HB_Tmr_Stop
+       082A  _HB_Tmr_Stop
+       082E  HB_Tmr_WritePeriod
+       082E  _HB_Tmr_WritePeriod
+       0834  HB_Tmr_WriteCompareValue
+       0834  _HB_Tmr_WriteCompareValue
+       083A  _wHB_Tmr_ReadCompareValue
+       083A  _HB_Tmr_wReadCompareValue
+       083A  wHB_Tmr_ReadCompareValue
+       083A  HB_Tmr_wReadCompareValue
+       0840  _HB_Tmr_wReadTimerSaveCV
+       0840  _wHB_Tmr_ReadTimerSaveCV
+       0840  HB_Tmr_wReadTimerSaveCV
+       0840  wHB_Tmr_ReadTimerSaveCV
+       0840  _wHB_Tmr_ReadCounter
+       0840  wHB_Tmr_ReadCounter
+       0876  _HB_Tmr_wReadTimer
+       0876  _wHB_Tmr_ReadTimer
+       0876  HB_Tmr_wReadTimer
+       0876  wHB_Tmr_ReadTimer
+       0876  _wHB_Tmr_CaptureCounter
+       0876  wHB_Tmr_CaptureCounter
+       087E  DIGITAL_OUT_On
+       087E  _DIGITAL_OUT_On
+       0882  _DIGITAL_OUT_Off
+       0882  _DIGITAL_OUT_Start
+       0882  DIGITAL_OUT_Off
+       0882  DIGITAL_OUT_Stop
+       0882  _DIGITAL_OUT_Stop
+       0882  DIGITAL_OUT_Start
+       0884  _DIGITAL_OUT_Switch
+       0884  DIGITAL_OUT_Switch
+       089C  _DIGITAL_OUT_Invert
+       089C  DIGITAL_OUT_Invert
+       08AB  DIGITAL_OUT_GetState
+       08AB  _DIGITAL_OUT_GetState
+       08BB  BPF4_4KHz_Start
+       08BB  _BPF4_4KHz_SetPower
+       08BB  BPF4_4KHz_SetPower
+       08BB  _BPF4_4KHz_Start
+       08E5  BPF4_4KHz_Stop
+       08E5  _BPF4_4KHz_Stop
+       08F2  _BPF4_4KHz_SetC1L
+       08F2  BPF4_4KHz_SetC1L
+       0904  BPF4_4KHz_SetC2L
+       0904  _BPF4_4KHz_SetC2L
+       0916  BPF4_4KHz_SetC3L
+       0916  _BPF4_4KHz_SetC3L
+       0928  BPF4_4KHz_SetC4L
+       0928  _BPF4_4KHz_SetC4L
+       093A  _BPF4_4KHz_SetC1H
+       093A  BPF4_4KHz_SetC1H
+       094C  _BPF4_4KHz_SetC2H
+       094C  BPF4_4KHz_SetC2H
+       095E  _BPF4_4KHz_SetC3H
+       095E  BPF4_4KHz_SetC3H
+       0970  _BPF4_4KHz_SetC4H
+       0970  BPF4_4KHz_SetC4H
+       0982  AMUX4_mic_InputSelect
+       0982  _AMUX4_mic_InputSelect
+       099D  AMUX4_mic_Start
+       099D  _AMUX4_mic_Start
+       099E  AMUX4_mic_Stop
+       099E  _AMUX4_mic_Stop
+       09AD  _ADCINCVR_pot_CNT_ISR
+       09B0  _ADCINCVR_pot_PWM16_ISR
+       0A26  ADCINCVR_pot_SetPower
+       0A26  _ADCINCVR_pot_SetPower
+       0A26  ADCINCVR_pot_Start
+       0A26  _ADCINCVR_pot_Start
+       0A46  _ADCINCVR_pot_Stop
+       0A46  ADCINCVR_pot_Stop
+       0A4A  _ADCINCVR_pot_GetSamples
+       0A4A  ADCINCVR_pot_GetSamples
+       0A7A  ADCINCVR_pot_StopAD
+       0A7A  _ADCINCVR_pot_StopAD
+       0A8F  _ADCINCVR_pot_fIsDataAvailable
+       0A8F  ADCINCVR_pot_fIsDataAvailable
+       0A8F  ADCINCVR_pot_fIsData
+       0A8F  _ADCINCVR_pot_fIsData
+       0A97  _ADCINCVR_pot_iGetDataClearFlag
+       0A97  ADCINCVR_pot_iGetDataClearFlag
+       0AA2  _ADCINCVR_pot_iGetData
+       0AA2  ADCINCVR_pot_iGetData
+       0AAA  _ADCINCVR_pot_ClearFlag
+       0AAA  ADCINCVR_pot_ClearFlag
+       0AB1  _ADCINCVR_pot_SetResolution
+       0AB1  ADCINCVR_pot_SetResolution
+       0AF2  _ADCINCVR_mes_CNT_ISR
+       0AF5  _ADCINCVR_mes_PWM16_ISR
+       0B6B  _ADCINCVR_mes_Start
+       0B6B  ADCINCVR_mes_Start
+       0B6B  ADCINCVR_mes_SetPower
+       0B6B  _ADCINCVR_mes_SetPower
+       0B8B  _ADCINCVR_mes_Stop
+       0B8B  ADCINCVR_mes_Stop
+       0B8F  ADCINCVR_mes_GetSamples
+       0B8F  _ADCINCVR_mes_GetSamples
+       0BBF  ADCINCVR_mes_StopAD
+       0BBF  _ADCINCVR_mes_StopAD
+       0BD4  ADCINCVR_mes_fIsData
+       0BD4  _ADCINCVR_mes_fIsData
+       0BD4  _ADCINCVR_mes_fIsDataAvailable
+       0BD4  ADCINCVR_mes_fIsDataAvailable
+       0BDC  ADCINCVR_mes_iGetDataClearFlag
+       0BDC  _ADCINCVR_mes_iGetDataClearFlag
+       0BE7  _ADCINCVR_mes_iGetData
+       0BE7  ADCINCVR_mes_iGetData
+       0BEF  _ADCINCVR_mes_ClearFlag
+       0BEF  ADCINCVR_mes_ClearFlag
+       0BF6  _ADCINCVR_mes_SetResolution
+       0BF6  ADCINCVR_mes_SetResolution
+       0C29  __UserModules_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0C11   09DD =   2525. bytes (rel,con,rom)
+                            text   0C29   0AF3 =   2803. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0C11  _Delay50uTimes
-       0C11  __text_start
-       0C11  Delay50uTimes
-       0C17  Delay50u_Table
-       0C1F  _Delay50u
-       0C1F  Delay50u
-       0C33  _main
-       1021  _DigitalOut
-       10B7  _UartTxValues
-       11CE  _BlocksInit
-       126D  _HB_Tmr_ISR_C
-       1286  _DelayMs
-       12B7  _LedTest
-       1319  __divmod_32X32_32
-       1356  __divmodu_16X16_16
-       1361  __i_div16_block_util
-       139A  __i_div32_block_util
-       13FD  __i_div32_not_util
-       1415  _itoa
-       15EE  __text_end
-       1616  __xidata_end
+       0C29  _Delay50uTimes
+       0C29  __text_start
+       0C29  Delay50uTimes
+       0C2F  Delay50u_Table
+       0C37  _Delay50u
+       0C37  Delay50u
+       0C4B  _main
+       0FC9  _DigitalOut
+       105F  _UartTxValues
+       12FC  _BlocksInit
+       139B  _HB_Tmr_ISR_C
+       13B4  _DelayMs
+       13E5  _LedTest
+       1447  __divmod_32X32_32
+       1484  __divmodu_16X16_16
+       148F  __i_div16_block_util
+       14C8  __i_div32_block_util
+       152B  __i_div32_not_util
+       1543  _itoa
+       171C  __text_end
+       1744  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -376,43 +376,44 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   003B   000F =     15. bytes (rel,con,ram)
+               virtual_registers   002B   000F =     15. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       003B  __rZ
-       003C  __rY
-       003D  __rX
-       003E  __r11
-       003F  __r10
-       0040  __r9
-       0041  __r8
-       0042  __r7
-       0043  __r6
-       0044  __r5
-       0045  __r4
-       0046  __r3
-       0047  __r2
-       0048  __r1
-       0049  __r0
+       002B  __rZ
+       002C  __rY
+       002D  __rX
+       002E  __r11
+       002F  __r10
+       0030  __r9
+       0031  __r8
+       0032  __r7
+       0033  __r6
+       0034  __r5
+       0035  __r4
+       0036  __r3
+       0037  __r2
+       0038  __r1
+       0039  __r0
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            data   0000   0048 =     72. bytes (rel,con,ram)
+                            data   0000   004A =     74. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
        0000  __data_start
        0013  _MesValueSum
-       002B  _GF
-       004A  _str
-       0051  _MesValueM
-       0057  _GainIndx
-       005D  _MesValue
-       0063  _Tmr1
-       0065  _i
-       0067  _PotValue
-       0069  _TmrFlag
+       003A  _MesValue
+       0046  _GF
+       0050  _str
+       0057  _MesValueM
+       005D  _GainIndx
+       0063  _PotValue
+       0065  _Tmr1
+       0067  _i
+       0069  _MesValueOut
+       006B  _TmrFlag
 
 Files Linked      [ module(s) ]
 
@@ -431,6 +432,6 @@ Area Definitions
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x3b
+-Bvirtual_registers	allocated at: 0x2b
 -Bexplorersound_RAM	allocated at: 0
 

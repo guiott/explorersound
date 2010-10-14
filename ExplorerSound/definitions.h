@@ -1,5 +1,5 @@
 int PotValue;		// ADC value read from potentiometer
-Int MesValueOut;	// ADC values read after peak detector
+int MesValueOut;	// ADC values read after peak detector
 int MesValue[3][2];	// Signal levels at input (indx 0) and pre (indx 1)
 
 // First column: Cumulation of single measures to compute mean value
