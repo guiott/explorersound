@@ -7159,7 +7159,7 @@ FILE: .\delay.asm
                                         (0110)     RAM_EPILOGUE RAM_USE_CLASS_1
 0C32: 7F       RET                      (0111)     ret
 (0112) .ENDSECTION
-FILE: C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\main.c
+FILE: C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\main.c
 (0001) /* ////////////////////////////////////////////////////////////////////////////
 (0002) ** Project:      ExplorerSound
 (0003) ** Author:    Guido Ottaviani-->guido@guiott.com<--
@@ -7494,7 +7494,7 @@ _main:
     0E5B: 3F 48    MVI   [__r1],A
     0E5D: 51 42    MOV   A,[__r7]
     0E5F: 3F 48    MVI   [__r1],A
-(0080) 			MesValueSum[PortIndx][1]++; // count how many readings
+(0080) 			MesValueSum[PortIndx][1]++; // count how many readings occurred
     0E61: 52 00    MOV   A,[X+0]
     0E63: 53 48    MOV   [__r1],A
     0E65: 55 49 00 MOV   [__r0],0x0

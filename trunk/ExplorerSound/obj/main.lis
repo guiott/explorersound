@@ -11,19 +11,19 @@
  000C 00000000          .word 0,0
  0010 00000000          .word 0,0
  0014 00000000          .word 0,0
- 0018                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0018                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0018                   .dbsym e MesValueSum _MesValueSum A[24:3:2]L
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _TmrFlag::
  0000 00                .byte 0
  0001                   .dbsym e TmrFlag _TmrFlag c
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _GF::
  0000 0000              .byte 0,0
  0002 F801              .byte 248,1
@@ -35,19 +35,19 @@
  000E 0C30              .byte 12,48
  0010                   .dbsym e GF _GF A[16:8:2]c
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _GainIndx::
  0000 0303              .byte 3,3
  0002 0303              .byte 3,3
  0004 0303              .byte 3,3
  0006                   .dbsym e GainIndx _GainIndx A[6:3:2]c
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
                         .area text(rom, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\main.c
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\main.c
  0000                   .dbfunc e main _main fV
  0000           ;        PortNum -> X+1
  0000           ;       PortIndx -> X+0
@@ -447,7 +447,7 @@
  022A 5100              mov A,[__r7]
  022C 3F00              mvi [__r1],A
  022E                   .dbline 80
- 022E           ;                       MesValueSum[PortIndx][1]++; // count how many readings
+ 022E           ;                       MesValueSum[PortIndx][1]++; // count how many readings occurred
  022E 5200              mov A,[X+0]
  0230 5300              mov [__r1],A
  0232 550000            mov [__r0],0
@@ -1430,33 +1430,33 @@
  06E6                   .dbsym l i 0 I
  06E6                   .dbend
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\main.c
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\main.c
  0000           _str::
  0000 00000000000000    .byte 0,0,0,0,0,0,0
- 0007                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0007                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0007                   .dbsym e str _str A[7:7]c
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _Tmr1::
  0000 0000              .byte 0,0
  0002                   .dbsym e Tmr1 _Tmr1 i
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _i::
  0000 0000              .byte 0,0
  0002                   .dbsym e i _i i
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _MesValueM::
  0000 000000000000      .byte 0,0,0,0,0,0
  0006                   .dbsym e MesValueM _MesValueM A[6:3]I
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _MesValue::
  0000 000000000000      .byte 0,0,0,0,0,0
  0006                   .dbsym e MesValue _MesValue A[6:3]I
                         .area data(ram, con, rel)
- 0000                   .dbfile C:\PSOC_P~1\EXPLOR~1\EXPLOR~1\definitions.h
+ 0000                   .dbfile C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\definitions.h
  0000           _PotValue::
  0000 0000              .byte 0,0
  0002                   .dbsym e PotValue _PotValue I
