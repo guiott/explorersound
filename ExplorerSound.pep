@@ -3,7 +3,7 @@
   <APP_EDITOR_SETTINGS>
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" ACTIVE="true" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\definitions.h" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
