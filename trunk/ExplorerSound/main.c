@@ -67,9 +67,7 @@ void main(void)
 			MesValue[PortIndx][1] = MesValueOut >> GainIndx[PortIndx][1]; 			// [2][4]
 			MesValue[PortIndx][0] = MesValue[PortIndx][1] >> GainIndx[PortIndx][0]; // [3][4]			
 			
-						// ??????????????????????????????????? fare AGC
-						
-						// impostare guadagno GainIndx dopo AGC e PGA amplification
+			AGC();
 						
 			MesValueSum[PortIndx][0]+= MesValue[PortIndx][0]; // Cumulate readings
 			MesValueSum[PortIndx][1]++; // count how many readings occurred
@@ -109,6 +107,38 @@ void main(void)
 }
 
 // Functions ***************************************************************
+
+void AGC(void)
+{// [5]
+	BOOL Flag = 0;
+	
+	     if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN)// PGA_out
+	{
+		GainIndx[PortIndx][1]--;
+		Flag =1;
+	}
+	else if((MesValue[PortIndx][0] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN)// PGA_pre
+	{
+		GainIndx[PortIndx][0]--;
+		Flag =1;
+	}
+	else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX)// PGA_out
+	{
+		GainIndx[PortIndx][1]++;
+		Flag =1;
+	}
+	else if((MesValue[PortIndx][0] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX)// PGA_pre
+	{
+		GainIndx[PortIndx][0]++;
+		Flag =1;
+	}	
+	
+	if(Flag)
+	{// something changed, it's time to change gain of PGAs
+		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
+		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]);
+	}
+}
 
 void DigitalOut(void)
 {// Controls the outputs according to pot setting point
