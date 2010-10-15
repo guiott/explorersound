@@ -34,3 +34,18 @@ Software
 --		for (k = 0 to n) {MesValueSum[i][j] += MesValue[i][0]}	// Temporary cumulation  to compute average value
 --		MesValueM[i] = MesValueSum[i] / n						// actual averaged value
 --[4] 	GainIndx may be 0, 1, 2, 3, 4. Shifting right for this number means divide by 1, 2, 4, 8, 16, exactly the gain factor of the corresponding PGA
+
+-[5] Automatic Gain Control, limited in 1 to 16 range compared to 1/16 to 48 native range
+GainIndx[3][2] matrix stores the current index of Gain Factor (GF) for each input. Rows are for channels inputs and columns for PGA stage 
+0 = PGA Pre, 1 = PGA Out
+it is referred to GF[5][2] constants table 
+0xF8, 1, 
+0x78, 2, 
+0x38, 4, 
+0x18, 8, 
+0x08, 16
+
+E.g.: a value of 2 in the first row, first column of GainIndx matrix, means that the PGA_pre for the first input channel has a gain of 4 (second row of GF table) and it is set with the instruction:
+PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
+that means:
+PGA_pre_SetGain(0x38);

@@ -11,7 +11,7 @@ unsigned int Tmr1;
 BOOL TmrFlag = 0;
 BYTE str[7];		// for TX procedures
 
-// Automatic Gain Control, limited in 1 to 16 range
+// [5] Automatic Gain Control, limited in 1 to 16 range
 // first parameter: register value
 // second parameter: gain factor
 BYTE GF[5][2]= {0xF8, 1, 
@@ -26,3 +26,8 @@ BYTE GF[5][2]= {0xF8, 1,
 BYTE GainIndx[3][2]=   {3, 3, 
 						3, 3, 
 						3, 3};
+						
+#define V_MAX 700	// Upper threshold for AGC
+#define V_MIN 100	// Lower threshold for AGC
+#define I_MAX 4		// Upper limit for GainIndx 
+#define I_MIN 0		// Lower limit fo GainIndx
