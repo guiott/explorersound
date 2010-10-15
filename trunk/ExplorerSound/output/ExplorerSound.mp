@@ -1,10 +1,10 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Thu Oct 14 23:33:15 2010
+Date:         Fri Oct 15 21:05:53 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 17% full. 5500 out of 32768 bytes used (does not include absolute areas).
+  ROM 19% full. 6216 out of 32768 bytes used (does not include absolute areas).
   RAM 7% full. 108 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -295,31 +295,32 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0C29   0AF3 =   2803. bytes (rel,con,rom)
+                            text   0C29   0DBF =   3519. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
        0C29  _Delay50uTimes
-       0C29  __text_start
        0C29  Delay50uTimes
+       0C29  __text_start
        0C2F  Delay50u_Table
        0C37  _Delay50u
        0C37  Delay50u
        0C4B  _main
-       0FC9  _DigitalOut
-       105F  _UartTxValues
-       12FC  _BlocksInit
-       139B  _HB_Tmr_ISR_C
-       13B4  _DelayMs
-       13E5  _LedTest
-       1447  __divmod_32X32_32
-       1484  __divmodu_16X16_16
-       148F  __i_div16_block_util
-       14C8  __i_div32_block_util
-       152B  __i_div32_not_util
-       1543  _itoa
-       171C  __text_end
-       1744  __xidata_end
+       0FE3  _AGC
+       1295  _DigitalOut
+       132B  _UartTxValues
+       15C8  _BlocksInit
+       1667  _HB_Tmr_ISR_C
+       1680  _DelayMs
+       16B1  _LedTest
+       1713  __divmod_32X32_32
+       1750  __divmodu_16X16_16
+       175B  __i_div16_block_util
+       1794  __i_div32_block_util
+       17F7  __i_div32_not_util
+       180F  _itoa
+       19E8  __text_end
+       1A10  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
