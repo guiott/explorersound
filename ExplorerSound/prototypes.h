@@ -1,4 +1,4 @@
-void AGC(void);
+void AGC(BYTE PortIndx);
 void HB_Tmr(void);
 void BlocksInit(void);
 void UartTxValues(void);

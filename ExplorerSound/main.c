@@ -2,7 +2,7 @@
 ** Project:      ExplorerSound
 ** Author:    Guido Ottaviani-->guido@guiott.com<--
 ** Description: 
-** version 0.3   11-10-2010
+** version 0.3   15-10-2010
 **
 ** Detailed descriptions are on file "Notes.txt" 
 **
@@ -67,7 +67,7 @@ void main(void)
 			MesValue[PortIndx][1] = MesValueOut >> GainIndx[PortIndx][1]; 			// [2][4]
 			MesValue[PortIndx][0] = MesValue[PortIndx][1] >> GainIndx[PortIndx][0]; // [3][4]			
 			
-			AGC();
+			AGC(PortIndx);
 						
 			MesValueSum[PortIndx][0]+= MesValue[PortIndx][0]; // Cumulate readings
 			MesValueSum[PortIndx][1]++; // count how many readings occurred
@@ -108,36 +108,28 @@ void main(void)
 
 // Functions ***************************************************************
 
-void AGC(void)
+void AGC(BYTE PortIndx)
 {// [5]
-	BOOL Flag = 0;
-	
-	     if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN)// PGA_out
+	     if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN))// PGA_out
 	{
 		GainIndx[PortIndx][1]--;
-		Flag =1;
+		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[PortIndx][0] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN)// PGA_pre
+	else if((MesValue[PortIndx][0] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN))// PGA_pre
 	{
 		GainIndx[PortIndx][0]--;
-		Flag =1;
+		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
 	}
-	else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX)// PGA_out
+	else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX))// PGA_out
 	{
 		GainIndx[PortIndx][1]++;
-		Flag =1;
+		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[PortIndx][0] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX)// PGA_pre
+	else if((MesValue[PortIndx][0] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX))// PGA_pre
 	{
 		GainIndx[PortIndx][0]++;
-		Flag =1;
-	}	
-	
-	if(Flag)
-	{// something changed, it's time to change gain of PGAs
 		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
-		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]);
-	}
+	}	
 }
 
 void DigitalOut(void)
