@@ -64,8 +64,8 @@ void main(void)
 			// Get Data, Clear data ready flag
 			
 			MesValueOut = ADCINCVR_mes_iGetDataClearFlag(); // [1]
-			MesValue[PortIndx][1] = MesValueOut >> GainIndx[PortIndx][1]; 			// [2][4]
-			MesValue[PortIndx][0] = MesValue[PortIndx][1] >> GainIndx[PortIndx][0]; // [3][4]			
+			MesValue[PortIndx][1] = (MesValueOut) >> (GainIndx[PortIndx][1]); 			// [2][4]
+			MesValue[PortIndx][0] = (MesValue[PortIndx][1]) >> (GainIndx[PortIndx][0]); // [3][4]			
 			
 			AGC(PortIndx);
 						
@@ -75,7 +75,7 @@ void main(void)
 			PortIndx++; // next mux port
 			if (PortIndx <3)
 			{
-				AMUX4_mic_InputSelect(PortNum[PortIndx]);
+		//		AMUX4_mic_InputSelect(PortNum[PortIndx]);
 				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
 			}
 		}
@@ -85,14 +85,15 @@ void main(void)
 			TmrFlag = 0;
 			PortIndx= 0;
 				
-			AMUX4_mic_InputSelect(PortNum[PortIndx]);
+		//	AMUX4_mic_InputSelect(PortNum[PortIndx]);
 			ADCINCVR_mes_GetSamples(1);    // Start ADC to read 1 sample
 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample 
 		}
 		
-		if (Tmr1 >= 10) // every 100ms
+		if (Tmr1 > 10) // every 100ms
 		{
 			Tmr1 = 0;
+			UartTxValues();
 			// compute average value
 			for (i=0; i<3; i++)
 			{
@@ -101,7 +102,6 @@ void main(void)
 				MesValueSum[i][1]=0;
 			}
 			DigitalOut();
-			UartTxValues();
 		}
 	}// ========================================================== Main loop 
 }
@@ -110,22 +110,22 @@ void main(void)
 
 void AGC(BYTE Port)
 {// [5]
-	     if((MesValue[Port][1] > V_MAX) && (GainIndx[Port][1] > I_MIN))// PGA_out
+	     if((MesValueOut > V_MAX) && (GainIndx[Port][1] > I_MIN))// PGA_out
 	{
 		GainIndx[Port][1]--;
 		PGA_out_SetGain(GF[GainIndx[Port][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[Port][0] > V_MAX) && (GainIndx[Port][0] > I_MIN))// PGA_pre
+	else if((MesValue[Port][1] > V_MAX) && (GainIndx[Port][0] > I_MIN))// PGA_pre
 	{
 		GainIndx[Port][0]--;
 		PGA_pre_SetGain(GF[GainIndx[Port][0]][0]); // set gain on PGA
 	}
-	else if((MesValue[Port][1] < V_MIN) && (GainIndx[Port][1] < I_MAX))// PGA_out
+	else if((MesValueOut < V_MIN) && (GainIndx[Port][1] < I_MAX))// PGA_out
 	{
 		GainIndx[Port][1]++;
 		PGA_out_SetGain(GF[GainIndx[Port][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[Port][0] < V_MIN) && (GainIndx[Port][0] < I_MAX))// PGA_pre
+	else if((MesValue[Port][1] < V_MIN) && (GainIndx[Port][0] < I_MAX))// PGA_pre
 	{
 		GainIndx[Port][0]++;
 		PGA_pre_SetGain(GF[GainIndx[Port][0]][0]); // set gain on PGA
@@ -172,9 +172,13 @@ void UartTxValues(void)
 	command string using the same protocol used for dsNav if
 	needed to output sound level values via serial comm
 */
-	TX8_CPutString("\n\rPot Value = ");
+	TX8_CPutString("\n\r");
+	
+/*	TX8_CPutString("Pot Value = ");
 	itoa(str, PotValue,10);
 	TX8_PutString(str);
+*/
+
 	TX8_CPutString("    Mes Value: 1 = ");
 	itoa(str, MesValueM[0],10);
 	TX8_PutString(str);
@@ -204,10 +208,27 @@ void UartTxValues(void)
 	TX8_PutString(str);	
 	
 	
-	TX8_CPutString("  ----- = ");
+	TX8_CPutString("  --MesValueOut = ");
 	itoa(str, MesValueOut, 10);
 	TX8_PutString(str);	
+
+/*
+	TX8_CPutString("  --Pre = ");
+	itoa(str, MesValue[0][0], 10);
+	TX8_PutString(str);
 	
+	TX8_CPutString("  --Out = ");
+	itoa(str, MesValue[0][1], 10);
+	TX8_PutString(str);
+	
+	TX8_CPutString("  --Sum = ");
+	itoa(str, MesValueSum[0][0], 10);
+	TX8_PutString(str);
+	
+	TX8_CPutString("  --Count = ");
+	itoa(str, MesValueSum[0][1], 10);
+	TX8_PutString(str);
+*/
 }
 	
 void BlocksInit(void)
