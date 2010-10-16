@@ -40,8 +40,8 @@ LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
-  ROM 19% full. 6216 out of 32768 bytes used (does not include absolute areas).
+  ROM 20% full. 6323 out of 32768 bytes used (does not include absolute areas).
   RAM 7% full. 108 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 21:05:53
+ExplorerSound - 0 error(s) 0 warning(s) 00:38:50

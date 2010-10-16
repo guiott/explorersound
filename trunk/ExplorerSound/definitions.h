@@ -23,9 +23,9 @@ BYTE GF[5][2]= {0xF8, 1,
 // current index of Gain Factor (GF) for each input
 // first index: input channel
 // second index: 0 = PGA Pre, 1 = PGA Out
-BYTE GainIndx[3][2]=   {3, 3, 
-						3, 3, 
-						3, 3};
+BYTE GainIndx[3][2]=   {2, 2, 
+						2, 2, 
+						2, 2};
 						
 #define V_MAX 700	// Upper threshold for AGC
 #define V_MIN 100	// Lower threshold for AGC
