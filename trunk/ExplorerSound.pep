@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <PSOC_WND_PERSIST>
   <APP_EDITOR_SETTINGS>
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" ACTIVE="true" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound.cmx" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\main.c" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\definitions.h" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\Notes.txt" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />

@@ -27,7 +27,7 @@ BYTE GainIndx[3][2]=   {2, 2,
 						2, 2, 
 						2, 2};
 						
-#define V_MAX 700	// Upper threshold for AGC
+#define V_MAX 650	// Upper threshold for AGC
 #define V_MIN 100	// Lower threshold for AGC
 #define I_MAX 4		// Upper limit for GainIndx 
 #define I_MIN 0		// Lower limit fo GainIndx
