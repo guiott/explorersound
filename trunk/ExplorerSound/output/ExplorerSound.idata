@@ -1,14 +1,14 @@
-flash 19B2 SRAM   13:
+flash 1AAB SRAM   13:
  00 24 bytes
-flash 19B6 SRAM   3A:
+flash 1AAF SRAM   3A:
  00 12 bytes
-flash 19BA SRAM   46:
+flash 1AB3 SRAM   46:
  <size at next line>  F8  1 78  2 38  4 18  8  8 10
   [size:] 10 bytes
-flash 19C7 SRAM   50:
+flash 1AC0 SRAM   50:
  00 13 bytes
-flash 19CB SRAM   5D:
+flash 1AC4 SRAM   5D:
  <size at next line>   2  2  2  2  2  2
   [size:] 6 bytes
-flash 19D4 SRAM   63:
+flash 1ACD SRAM   63:
  00 9 bytes

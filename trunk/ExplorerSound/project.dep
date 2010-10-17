@@ -2,11 +2,11 @@
 ./obj/boot.o : \
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8ssc.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\lib\GLOBAL~1.INC\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\lib\GLOBAL~1.INC\
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./obj/delay.o : \
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./obj/main.o :  ./lib/ADCINC~1.H ./lib/ADCINC~2.H ./lib/AMUX4_~1.H\
    ./lib/BPF4_4~1.H ./lib/DIGITA~1.H ./lib/HB_Tmr.h ./lib/I2CHWC~1.H\
    ./lib/I2CHWS~1.H ./lib/LED_1.h ./lib/LED_2.h ./lib/LED_3.h\
@@ -18,72 +18,72 @@
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/_const.h\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/limits.h\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/stdlib.h\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\DEFINI~1.H\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\delay.h\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\PROTOT~1.H
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\DEFINI~1.H\
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\delay.h\
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\PROTOT~1.H
 ./lib/obj/adcincvr_mes.o :  ./lib/ADCINC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/adcincvr_mesint.o :  ./lib/ADCINC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/adcincvr_pot.o :  ./lib/ADCINC~2.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/adcincvr_potint.o :  ./lib/ADCINC~2.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/amux4_mic.o :  ./lib/AMUX4_~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/bpf4_4khz.o :  ./lib/BPF4_4~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/digital_out.o :  ./lib/DIGITA~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/hb_tmr.o :  ./lib/HB_Tmr.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/hb_tmrint.o :  ./lib/HB_Tmr.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/i2chwcommon.o :  ./lib/I2CHWC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/i2chwint.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWS~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/i2chwrsrcinits.o :  ./lib/I2CHWC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/led_1.o :  ./lib/LED_1.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/led_2.o :  ./lib/LED_2.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/led_3.o :  ./lib/LED_3.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/pga_out.o :  ./lib/PGA_out.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/pga_pre.o :  ./lib/PGA_pre.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/psocconfigtbl.o : \
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc
 ./lib/obj/refmux_1.o :  ./lib/RefMux_1.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/scblock_inbuff.o :  ./lib/SCBLOC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/tx8.o :  ./lib/TX8.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+   C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc
 ./lib/obj/tx8plus.o : 
