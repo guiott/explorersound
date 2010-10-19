@@ -1,6 +1,10 @@
 Project:      output/ExplorerSound
 Build Number: 0
+<<<<<<< .mine
+Date:         Tue Oct 19 23:23:35 2010
+=======
 Date:         Tue Oct 19 02:35:22 2010
+>>>>>>> .r41
 Compiler:     ICCM8C
 Version:      7.02.004
 
