@@ -1,6 +1,6 @@
 Starting MAKE...
 creating project.mk 
-C:\PROGRA~1\Cypress\Common\CYPRES~3\tools\make: *** Warning: File `C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc' has modification time in the future (2010-10-18 00:45:18 > 2010-10-18 00:45:16)
+C:\PROGRA~1\Cypress\Common\CYPRES~3\tools\make: *** Warning: File `C:\PSOC_P~1\EXPLOR~3\EXPLOR~1\memory.inc' has modification time in the future (2010-10-19 02:35:18 > 2010-10-19 02:35:16)
 lib/adcincvr_mes.asm
 lib/adcincvr_mesint.asm
 lib/adcincvr_pot.asm
@@ -45,4 +45,4 @@ LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
   RAM 7% full. 108 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 1 warning(s) 00:45:21
+ExplorerSound - 0 error(s) 1 warning(s) 02:35:22
