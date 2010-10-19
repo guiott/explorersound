@@ -4,6 +4,11 @@
 <<<<<<< .mine
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound.cmx" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\main.c" ACTIVE="true" />
+=======
+<<<<<<< .mine
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound.cmx" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\main.c" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\definitions.h" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\Notes.txt" />
@@ -12,6 +17,7 @@
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" />
     <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\Notes.txt" />
+>>>>>>> .r35
 >>>>>>> .r29
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
