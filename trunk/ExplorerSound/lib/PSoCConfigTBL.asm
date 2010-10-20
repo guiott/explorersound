@@ -81,13 +81,13 @@ LoadConfigTBL_explorersound_Bank0:
 ;  Instance name LED_3, User Module LED
 ;  Instance name PGA_out, User Module PGA
 ;       Instance name PGA_out, Block Name GAIN(ACB02)
-	db		79h, 3dh		;PGA_out_GAIN_CR0(ACB02CR0)
+	db		79h, 1dh		;PGA_out_GAIN_CR0(ACB02CR0)
 	db		7ah, a1h		;PGA_out_GAIN_CR1(ACB02CR1)
 	db		7bh, 20h		;PGA_out_GAIN_CR2(ACB02CR2)
 	db		78h, 00h		;PGA_out_GAIN_CR3(ACB02CR3)
 ;  Instance name PGA_pre, User Module PGA
 ;       Instance name PGA_pre, Block Name GAIN(ACB00)
-	db		71h, 3dh		;PGA_pre_GAIN_CR0(ACB00CR0)
+	db		71h, 4dh		;PGA_pre_GAIN_CR0(ACB00CR0)
 	db		72h, a1h		;PGA_pre_GAIN_CR1(ACB00CR1)
 	db		73h, 20h		;PGA_pre_GAIN_CR2(ACB00CR2)
 	db		70h, 00h		;PGA_pre_GAIN_CR3(ACB00CR3)
