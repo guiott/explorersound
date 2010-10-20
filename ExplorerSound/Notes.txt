@@ -1,51 +1,21 @@
-Analog blocks
--AInMux_0 has been substituted with AMUX4_mic to allow the switch through APIs of up to 4 inputs on Port_0_1/_03/_05/_07
--The three microphones inputs are sequentially routed to PGA_pre used as a buffer performing a little amplification
--The PGA_pre output is internally routed to BPF4_4KHz band pass filter to filter out all undesired signals with a little more amplification
--The output of BPF4_4KHz goes to AnalogBus 1 and out to Port_0_5
--Port_0_5 pin is internally connected also to AInMux_2 and routed to PGA_out for the final amplification.
--PGA_out output is connected to AnalogOutBuf_2 and routed to Port_0_4. The filtered signal is therefore available on Port_0_4.
--Port_0_4 is connect to Port_2_2 through a Schottky diode and a Capacitor in order to rectify the 4KHz signal. 
--The DC signal out of the rectification circuit on Port_2_2 is routed to ADCINVR_mes to measure via SW the level of the input 4KHz signal.
--The ADCINCVR_pot is used to read a pot, in order to manually (and optionally) set a threshold for the trigger part of the circuit.
--Both ADCINCVR_ According to the formulas in the datasheet, performs a full measure in 1.7ms with a 4.8MHz clock (VC1) and 1 bit resolution
--These parameters are choosen to have an high integration time that filters out undesired signals and because the reading cycle time is 10ms
--A spreadsheet is available for calculation of parametere (ADCINVRcalc.xls)
--performs 78 sps with 10 bit resolution and 320KHz clock (VC2)
--The RefMux_1 is routed to AnalogOutBuf_3 in order to obtain an AGND virtual ground reference for the inputs. It is connected to them through a 1MOhm R
--The SCBLOC_inbuff is used just as a buffer with a gain of 1 to connect the external Port_2_0 with ADCINCVR_Pot ADC.
-
-Digital Blocks
--TX clock derive from VC3 = 24MHz / 26 = 115384 * 8 bps = 0.16% error
--TX module is connected to Port_1_0
--The 16 bit heart beat timer HB_Tmr is the base clock for all of the timings in the program
+AInMux_0 has been substituted with AMUX4_mic to allow the switch through APIs of up to 4 inputs on Port_0_1/_03/_05/_07
+The three microphones inputs are sequentially routed to PGA_pre used as a buffer performing a little amplification
+The PGA_pre output is internally routed to BPF4_4KHz band pass filter to filter out all undesired signals with a little more amplification
+The output of BPF4_4KHz goes to AnalogBus 1 and out to Port_0_5
+Port_0_5 pin is internally connected also to AInMux_2 and routed to PGA_out for the final amplification.
+PGA_out output is connected to AnalogOutBuf_2 and routed to Port_0_4. The filtered signal is therefore available on Port_0_4.
+Port_0_4 is connect to Port_2_2 through a Schottky diode and an RC low-pass filter in order to rectify the 4KHz signal. 
+The DC signal out of the rectification circuit on Port_2_2 is routed to ADCINVR_mes to measure via SW the level of the input 4KHz signal.
+The ADCINCVR_pot is used to read a pot, in order to manually (and optionally) set a threshold for the trigger part of the circuit.
+Both ADCINCVR_ According to the formulas in the datasheet, performs a full measure in 1.7ms with a 4.8MHz clock (VC1) and 1 bit resolution
+These parameters are choosen to have an high integration time that filters out undesired signals and because the reading cycle time is 10ms
+A spreadsheet is available for calculation of parametere (ADCINVRcalc.xls)
+performs 78 sps with 10 bit resolution and 320KHz clock (VC2)
+The RefMux_1 is routed to AnalogOutBuf_3 in order to obtain an AGND virtual ground reference for the inputs. It is connected to them through a 1MOhm R
+The SCBLOC_inbuff is used just as a buffer with a gain of 1 to connect the external Port_2_0 with ADCINCVR_Pot ADC.
+TX clock derive from VC3 = 24MHz / 26 = 115384 * 8 bps = 0.16% error
+TX module is connected to Port_1_0
+The 16 bit heart beat timer HB_Tmr is the base clock for all of the timings in the program
 its timing is: VC2 = VC1 / 15 = SysClk / 5 / 15 =  24MHz / 5 / 15 = 320KHz
 	Timer Period = (1/VC2) * (PeriodRegister + 1) = 0.000003125 * (3199 + 1) = 10ms
-
-Software
--For each 10ms timer cycle are executed 1 pot measure and 3 mes measures, each of this one last for 1.7ms for a total time of 5.1ms
--The readings are cumulated at every 10 ms cycle and averaged every 10 cycles (100 ms) and sent via UART
--the amplification chain is:
-
---[1] 	MesValueIn -> |GfPre| -> MesValuePre -> |GfOut| -> MesValueOut
---		MesValueOut = ADC reading														 
---[2] 	MesValuePre = MesValue[i][1] = MesValueOut / GfOut	// used for intermediate calculi and for AGC procedure, where i = PortIndx
---[3]	MesValueIn	= MesValue[i][0] = MesValuePre / GfPre = MesValue[i][1] / GfPre	//used for intermediate calculi and for AGC procedure, where i = PortIndx
---		for (k = 0 to n) {MesValueSum[i][j] += MesValue[i][0]}	// Temporary cumulation  to compute average value
---		MesValueM[i] = MesValueSum[i] / n						// actual averaged value
---[4] 	GainIndx may be 0, 1, 2, 3, 4. Shifting right for this number means divide by 1, 2, 4, 8, 16, exactly the gain factor of the corresponding PGA
-
--[5] Automatic Gain Control, limited in 1 to 16 range compared to 1/16 to 48 native range
-GainIndx[3][2] matrix stores the current index of Gain Factor (GF) for each input. Rows are for channels inputs and columns for PGA stage 
-0 = PGA Pre, 1 = PGA Out
-it is referred to GF[5][2] constants table 
-0xF8, 1, 
-0x78, 2, 
-0x38, 4, 
-0x18, 8, 
-0x08, 16
-
-E.g.: a value of 2 in the first row, first column of GainIndx matrix, means that the PGA_pre for the first input channel has a gain of 4 (second row of GF table) and it is set with the instruction:
-PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
-that means:
-PGA_pre_SetGain(0x38);
+For each 10ms timer cycle are executed 1 pot measure and 3 mes measures, each of this one last for 1.7ms for a total time of 5.1ms
