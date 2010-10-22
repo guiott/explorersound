@@ -3,7 +3,7 @@
   <APP_EDITOR_SETTINGS>
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound.cmx" />
-    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\main.c" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\main.c" ACTIVE="true" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />
