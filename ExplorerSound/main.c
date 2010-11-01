@@ -37,7 +37,6 @@ guido@guiott.com
 void main(void)
 {
 	BYTE PortNum[3];
-	BYTE PortIndx = 0;
 	
 	BlocksInit();
 	
@@ -59,74 +58,37 @@ void main(void)
 			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
 		}
         
-		if(ADCINCVR_mes_fIsDataAvailable() != 0)// Wait for data to be ready
-        {   
+		if (Tmr2>2) // every 30ms
+		{
+			Tmr2=0;
+			ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
+			while(! ADCINCVR_mes_fIsDataAvailable());// Wait for data to be ready 
 			// Get Data, Clear data ready flag
-			MesValueOut = ADCINCVR_mes_iGetDataClearFlag(); // [1]
-			
-			// ???????????????????????????????????????????????????????????????????'debug ???????????????????????????????
-			TX8_CPutString("  --  ");
-			itoa(str, MesValueOut,10);
-			TX8_PutString(str);
-			TX8_CPutString(" : ");
-			itoa(str, PortIndx,10);
-			TX8_PutString(str);
-			// ???????????????????????????????????????????????????????????????????'debug ???????????????????????????????	
-			
-			
-			MesValue[PortIndx][1] = (MesValueOut) >> (GainIndx[PortIndx][1]); 			// [2][4]
+			MesValue[PortIndx][2] = ADCINCVR_mes_iGetDataClearFlag(); // [1]
+			MesValue[PortIndx][1] = (MesValue[PortIndx][2]) >> (GainIndx[PortIndx][1]); 			// [2][4]
 			MesValue[PortIndx][0] = (MesValue[PortIndx][1]) >> (GainIndx[PortIndx][0]); // [3][4]			
 			
-		//	AGC(PortIndx); ???????????????????????????????????????????????????????????????????????  debug
-						
-			MesValueSum[PortIndx][0]+= MesValue[PortIndx][0]; // Cumulate readings
-			MesValueSum[PortIndx][1]++; // count how many readings occurred
-														  
-			PortIndx++; // next mux port
-			if (PortIndx <3)
+		//	AGC(); ???????????????????????????????????????????????????????????????????????  debug
+			
+			PortIndx++;
+			if(PortIndx > 2) 
 			{
-				switch (PortIndx)
-				{
-				case 0:
-					AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
-				break;
-				
-				case 1:
-					AMUX4_mic_InputSelect(AMUX4_mic_PORT0_3);
-				break;
-				
-				case 2:
-					AMUX4_mic_InputSelect(AMUX4_mic_PORT0_7);
-				break;
-				}
-				
-		//		AMUX4_mic_InputSelect(PortNum[PortIndx]);
-				ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
+				PortIndx=0; // next mux port
 			}
+			AMUX4_mic_InputSelect(PortNum[PortIndx]);
 		}
 		
 		if (TmrFlag) // every 10ms
 		{	
 			TmrFlag = 0;
-			PortIndx= 0;
-				
-			AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample
-			ADCINCVR_mes_GetSamples(1);    // Start ADC to read 1 sample 
-			TX8_CPutString("\n\r_______"); // ??????????????????????????????????????????????????????????????????????????????????
 		}
 		
-		if (Tmr1 > 10) // every 100ms
+		if (Tmr1 > 9) // every 100ms
 		{
 			Tmr1 = 0;
-		//	UartTxValues(); // debug
-			// compute average value
-			for (i=0; i<3; i++)
-			{
-				MesValueM[i]=MesValueSum[i][0]/MesValueSum[i][1];
-				MesValueSum[i][0]=0;
-				MesValueSum[i][1]=0;
-			}
+			Tmr2 = 0;
+			UartTxValues(); // debug
 			DigitalOut();
 		}
 	}// ========================================================== Main loop 
@@ -134,34 +96,34 @@ void main(void)
 
 // Functions ***************************************************************
 
-void AGC(BYTE Port)
+void AGC(void)
 {// [5]
-	     if((MesValueOut > V_MAX) && (GainIndx[Port][1] > I_MIN))// PGA_out
+	     if((MesValue[PortIndx][2] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN))// PGA_out
 	{
-		GainIndx[Port][1]--;
-		PGA_out_SetGain(GF[GainIndx[Port][1]][0]); // set gain on PGA
+		GainIndx[PortIndx][1]--;
+		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[Port][1] > V_MAX) && (GainIndx[Port][0] > I_MIN))// PGA_pre
+	else if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN))// PGA_pre
 	{
-		GainIndx[Port][0]--;
-		PGA_pre_SetGain(GF[GainIndx[Port][0]][0]); // set gain on PGA
+		GainIndx[PortIndx][0]--;
+		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
 	}
-	else if((MesValueOut < V_MIN) && (GainIndx[Port][1] < I_MAX))// PGA_out
+	else if((MesValue[PortIndx][2] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX))// PGA_out
 	{
-		GainIndx[Port][1]++;
-		PGA_out_SetGain(GF[GainIndx[Port][1]][0]); // set gain on PGA
+		GainIndx[PortIndx][1]++;
+		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
 	}
-	else if((MesValue[Port][1] < V_MIN) && (GainIndx[Port][0] < I_MAX))// PGA_pre
+	else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX))// PGA_pre
 	{
-		GainIndx[Port][0]++;
-		PGA_pre_SetGain(GF[GainIndx[Port][0]][0]); // set gain on PGA
+		GainIndx[PortIndx][0]++;
+		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
 	}	
 }
 
 void DigitalOut(void)
 {// Controls the outputs according to pot setting point
 	DIGITAL_OUT_Off();
-	if (MesValueM[0]>PotValue)
+	if (MesValue[0][0]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_1_On();
@@ -171,7 +133,7 @@ void DigitalOut(void)
 		LED_1_Off();
 	}
 		
-	if (MesValueM[1]>PotValue)
+	if (MesValue[1][0]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_2_On();
@@ -181,7 +143,7 @@ void DigitalOut(void)
 		LED_2_Off();
 	}
 	
-	if (MesValueM[2]>PotValue)
+	if (MesValue[2][0]>PotValue)
 	{
 		DIGITAL_OUT_On();
 		LED_3_On();
@@ -206,13 +168,13 @@ void UartTxValues(void)
 */
 
 	TX8_CPutString("    Mes Value: 1 = ");
-	itoa(str, MesValueM[0],10);
+	itoa(str, MesValue[0][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
-	itoa(str, MesValueM[1],10);
+	itoa(str, MesValue[1][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  3 = ");
-	itoa(str, MesValueM[2],10);
+	itoa(str, MesValue[2][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  Gain Pre: 1 = ");
 	itoa(str, GF[GainIndx[0][0]][1], 10);
@@ -234,8 +196,8 @@ void UartTxValues(void)
 	TX8_PutString(str);	
 	
 	
-	TX8_CPutString("  --MesValueOut = ");
-	itoa(str, MesValueOut, 10);
+	TX8_CPutString("  --MesValue[PortIndx][2] = ");
+	itoa(str, MesValue[PortIndx][2], 10);
 	TX8_PutString(str);	
 
 /*
@@ -276,7 +238,7 @@ void BlocksInit(void)
 	TX8_EnableInt();
 	TX8_Start(TX8_PARITY_NONE);
 	
-	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_3);
+	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
 
 	PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
 	PGA_out_SetGain(GF[GainIndx[0][1]][0]);
@@ -289,6 +251,8 @@ void HB_Tmr_ISR_C(void)
 {// Base clock for all of the timings in the program
 	TmrFlag = 1;
 	Tmr1++;
+	Tmr2++;
+	Time10ms++;	
 }
 
 void DelayMs(int Ms)
