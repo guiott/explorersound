@@ -1,13 +1,11 @@
+BYTE PortIndx = 0;
 int PotValue;		// ADC value read from potentiometer
-int MesValueOut;	// ADC values read after peak detector
-int MesValue[3][2];	// Signal levels at input (indx 0) and pre (indx 1)
+int MesValue[3][3];	// Signal levels at input (indx 0), pre (indx 1) and OUT (indx 2)
 
-// First column: Cumulation of single measures to compute mean value
-// Second column: count of values cumulated
-long MesValueSum[3][2] = {0, 0, 0, 0, 0, 0};
-int MesValueM[3]; // mean value
 unsigned int i;
-unsigned int Tmr1;
+unsigned int Tmr1=0;
+unsigned int Tmr2=0;
+long Time10ms=0;
 BOOL TmrFlag = 0;
 BYTE str[7];		// for TX procedures
 
