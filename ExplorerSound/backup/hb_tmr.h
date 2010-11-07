@@ -69,7 +69,7 @@ extern WORD wHB_Tmr_CaptureCounter(void);         // Obsolete
 // Constants for HB_Tmr user defined values
 //--------------------------------------------------
 
-#define HB_Tmr_PERIOD                          ( 0x1d4c )
+#define HB_Tmr_PERIOD                          ( 0xc7f )
 #define HB_Tmr_COMPARE_VALUE                   ( 0x0 )
 
 

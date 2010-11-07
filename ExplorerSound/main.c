@@ -2,7 +2,7 @@
 ** Project:      ExplorerSound
 ** Author:    Guido Ottaviani-->guido@guiott.com<--
 ** Description: 
-** version 0.3   15-10-2010
+** version 1.0   07-11-2010
 **
 ** Detailed descriptions are on file "Notes.txt" 
 **
@@ -55,7 +55,8 @@ void main(void)
 		if(ADCINCVR_pot_fIsDataAvailable() != 0)// Wait for data to be ready
         {   
 			// Get Data, Clear data ready flag, in the range 0-1800
-			PotValue = ADCINCVR_pot_iGetDataClearFlag()+900;
+			// multiplying by 256 is to have the same order of ADC_mes values
+			PotValue = (((long)ADCINCVR_pot_iGetDataClearFlag())+900) << 8;  
 		}
         
 		if (Tmr2>2) // every 30ms
@@ -64,11 +65,11 @@ void main(void)
 			ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
 			while(! ADCINCVR_mes_fIsDataAvailable());// Wait for data to be ready 
 			// Get Data, Clear data ready flag
-			MesValue[PortIndx][2] = ADCINCVR_mes_iGetDataClearFlag(); // [1]
+			MesValue[PortIndx][2] = ((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
 			MesValue[PortIndx][1] = (MesValue[PortIndx][2]) >> (GainIndx[PortIndx][1]); 			// [2][4]
 			MesValue[PortIndx][0] = (MesValue[PortIndx][1]) >> (GainIndx[PortIndx][0]); // [3][4]			
 			
-		//	AGC(); ???????????????????????????????????????????????????????????????????????  debug
+			AGC(); 
 			
 			PortIndx++;
 			if(PortIndx > 2) 
@@ -168,13 +169,13 @@ void UartTxValues(void)
 */
 
 	TX8_CPutString("    Mes Value: 1 = ");
-	itoa(str, MesValue[0][0],10);
+	ltoa(str, MesValue[0][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
-	itoa(str, MesValue[1][0],10);
+	ltoa(str, MesValue[1][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  3 = ");
-	itoa(str, MesValue[2][0],10);
+	ltoa(str, MesValue[2][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  Gain Pre: 1 = ");
 	itoa(str, GF[GainIndx[0][0]][1], 10);
@@ -194,12 +195,7 @@ void UartTxValues(void)
 	TX8_CPutString("  -  3 = ");
 	itoa(str, GF[GainIndx[2][1]][1], 10);
 	TX8_PutString(str);	
-	
-	
-	TX8_CPutString("  --MesValue[PortIndx][2] = ");
-	itoa(str, MesValue[PortIndx][2], 10);
-	TX8_PutString(str);	
-
+				
 /*
 	TX8_CPutString("  --Pre = ");
 	itoa(str, MesValue[0][0], 10);
