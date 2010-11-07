@@ -27,7 +27,7 @@ Software
 -A "mes" measures is done every 30ms, to allow the peak detector capacitor voltage to stabilize
 -the amplification chain is:
 
---[1] 	MesValueIn -> |GfPre| -> MesValuePre -> |GfOut| -> MesValueOut
+--[1] 	MesValueIn -> |GfPre| -> MesValuePre -> |GfOut| -> MesValueOut (multiplying by 256 is to expand dynamic)
 --		MesValueOut = ADC reading														 
 --[2] 	MesValuePre = MesValue[i][1] = MesValueOut / GfOut	// used for intermediate calculi and for AGC procedure, where i = PortIndx
 --[3]	MesValueIn	= MesValue[i][0] = MesValuePre / GfPre = MesValue[i][1] / GfPre	//used for intermediate calculi and for AGC procedure, where i = PortIndx

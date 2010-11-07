@@ -1,6 +1,6 @@
 BYTE PortIndx = 0;
-int PotValue;		// ADC value read from potentiometer
-int MesValue[3][3];	// Signal levels at input (indx 0), pre (indx 1) and OUT (indx 2)
+long PotValue;		// ADC value read from potentiometer
+long MesValue[3][3];	// Signal levels at input (indx 0), pre (indx 1) and OUT (indx 2)
 
 unsigned int i;
 unsigned int Tmr1=0;
@@ -25,7 +25,7 @@ BYTE GainIndx[3][2]=   {2, 2,
 						2, 2, 
 						2, 2};
 						
-#define V_MAX 650	// Upper threshold for AGC
-#define V_MIN 100	// Lower threshold for AGC
+#define V_MAX 200000// Upper threshold for AGC
+#define V_MIN 50000	// Lower threshold for AGC
 #define I_MAX 4		// Upper limit for GainIndx 
 #define I_MIN 0		// Lower limit fo GainIndx

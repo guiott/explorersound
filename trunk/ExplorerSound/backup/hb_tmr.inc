@@ -26,7 +26,7 @@ HB_Tmr_INT_MASK:                           equ 0x02
 ; Constants for HB_Tmr user defined values
 ;--------------------------------------------------
 
-HB_Tmr_PERIOD:                             equ 0x1d4c
+HB_Tmr_PERIOD:                             equ 0xc7f
 HB_Tmr_COMPARE_VALUE:                      equ 0x0
 
 
