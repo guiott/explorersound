@@ -68,7 +68,8 @@ void main(void)
 			MesValue[PortIndx][2]=((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
 			MesValue[PortIndx][1]=(MesValue[PortIndx][2])/GF[GainIndx[PortIndx][1]][1]; // [2]
 			MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]			
-			
+			I2C_Regs.I2C_MesValue[PortIndx]=MesValue[PortIndx][0]; // Expose data to I2C master
+
 			AGC(); 
 			
 			PortIndx++;
@@ -221,7 +222,11 @@ void BlocksInit(void)
 	ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
 	AMUX4_mic_Start();
 	BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
-	I2CHW_Start();
+	
+	 // Set up I2C RAM buffer  
+   	EzI2Cs_1_SetRamBuffer(sizeof(I2C_Regs), 0, (BYTE *) &I2C_Regs);
+	EzI2Cs_1_Start(); // Turn on EzI2C 
+	
 	PGA_out_Start(PGA_out_HIGHPOWER);
 	PGA_pre_Start(PGA_pre_HIGHPOWER); 
 	RefMux_1_Start(RefMux_1_HIGHPOWER);

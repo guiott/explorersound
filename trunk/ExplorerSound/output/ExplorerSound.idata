@@ -1,12 +1,12 @@
-flash 1CCF SRAM   13:
+flash 1D3B SRAM   13:
  00 36 bytes
-flash 1CD3 SRAM   46:
+flash 1D3F SRAM   46:
  <size at next line>  F8  1 78  2 38  4 18  8  8 10 1C 18  C 30
   [size:] 14 bytes
-flash 1CE4 SRAM   54:
- 00 7 bytes
-flash 1CE8 SRAM   5B:
+flash 1D50 SRAM   54:
+ 00 19 bytes
+flash 1D54 SRAM   67:
  <size at next line>   2  2  2  2  2  2
   [size:] 6 bytes
-flash 1CF1 SRAM   61:
+flash 1D5D SRAM   6D:
  00 16 bytes

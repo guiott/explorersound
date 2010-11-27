@@ -40,26 +40,26 @@ AnalogColumn_InputMUX_3_IntCtrl_0_ADDR:	equ	102h
 AnalogColumn_InputMUX_3_IntCtrl_1_ADDR:	equ	103h
 AnalogColumn_InputMUX_3_IntEn_ADDR:	equ	1h
 AnalogColumn_InputMUX_3_MASK:	equ	40h
-; I2CHWSDA address and mask equates
-I2CHWSDA_Data_ADDR:	equ	4h
-I2CHWSDA_DriveMode_0_ADDR:	equ	104h
-I2CHWSDA_DriveMode_1_ADDR:	equ	105h
-I2CHWSDA_DriveMode_2_ADDR:	equ	7h
-I2CHWSDA_GlobalSelect_ADDR:	equ	6h
-I2CHWSDA_IntCtrl_0_ADDR:	equ	106h
-I2CHWSDA_IntCtrl_1_ADDR:	equ	107h
-I2CHWSDA_IntEn_ADDR:	equ	5h
-I2CHWSDA_MASK:	equ	20h
-; I2CHWSCL address and mask equates
-I2CHWSCL_Data_ADDR:	equ	4h
-I2CHWSCL_DriveMode_0_ADDR:	equ	104h
-I2CHWSCL_DriveMode_1_ADDR:	equ	105h
-I2CHWSCL_DriveMode_2_ADDR:	equ	7h
-I2CHWSCL_GlobalSelect_ADDR:	equ	6h
-I2CHWSCL_IntCtrl_0_ADDR:	equ	106h
-I2CHWSCL_IntCtrl_1_ADDR:	equ	107h
-I2CHWSCL_IntEn_ADDR:	equ	5h
-I2CHWSCL_MASK:	equ	80h
+; EzI2Cs_1SDA address and mask equates
+EzI2Cs_1SDA_Data_ADDR:	equ	4h
+EzI2Cs_1SDA_DriveMode_0_ADDR:	equ	104h
+EzI2Cs_1SDA_DriveMode_1_ADDR:	equ	105h
+EzI2Cs_1SDA_DriveMode_2_ADDR:	equ	7h
+EzI2Cs_1SDA_GlobalSelect_ADDR:	equ	6h
+EzI2Cs_1SDA_IntCtrl_0_ADDR:	equ	106h
+EzI2Cs_1SDA_IntCtrl_1_ADDR:	equ	107h
+EzI2Cs_1SDA_IntEn_ADDR:	equ	5h
+EzI2Cs_1SDA_MASK:	equ	20h
+; EzI2Cs_1SCL address and mask equates
+EzI2Cs_1SCL_Data_ADDR:	equ	4h
+EzI2Cs_1SCL_DriveMode_0_ADDR:	equ	104h
+EzI2Cs_1SCL_DriveMode_1_ADDR:	equ	105h
+EzI2Cs_1SCL_DriveMode_2_ADDR:	equ	7h
+EzI2Cs_1SCL_GlobalSelect_ADDR:	equ	6h
+EzI2Cs_1SCL_IntCtrl_0_ADDR:	equ	106h
+EzI2Cs_1SCL_IntCtrl_1_ADDR:	equ	107h
+EzI2Cs_1SCL_IntEn_ADDR:	equ	5h
+EzI2Cs_1SCL_MASK:	equ	80h
 ; DIGITAL_OUTPin address and mask equates
 DIGITAL_OUTPin_Data_ADDR:	equ	8h
 DIGITAL_OUTPin_DriveMode_0_ADDR:	equ	108h

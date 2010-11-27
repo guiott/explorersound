@@ -7,11 +7,10 @@ lib/adcincvr_potint.asm
 lib/amux4_mic.asm
 lib/bpf4_4khz.asm
 lib/digital_out.asm
+lib/ezi2cs_1.asm
+lib/ezi2cs_1int.asm
 lib/hb_tmr.asm
 lib/hb_tmrint.asm
-lib/i2chwcommon.asm
-lib/i2chwint.asm
-lib/i2chwrsrcinits.asm
 lib/led_1.asm
 lib/led_2.asm
 lib/led_3.asm
@@ -31,6 +30,7 @@ LMM info: area 'InterruptRAM' uses 19 bytes in SRAM bank 0
 LMM info: area 'data' item of 36 bytes allocated in SRAM page 0
 LMM info: area 'virtual_registers' uses 15 bytes in SRAM page 0
 LMM info: area 'data' item of 14 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 12 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 4 bytes allocated in SRAM page 0
@@ -40,8 +40,8 @@ LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
 LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
-  ROM 22% full. 6959 out of 32768 bytes used (does not include absolute areas).
-  RAM 7% full. 113 bytes used (does not include stack usage).
+  ROM 22% full. 7067 out of 32768 bytes used (does not include absolute areas).
+  RAM 7% full. 125 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 17:10:24
+ExplorerSound - 0 error(s) 0 warning(s) 19:27:41

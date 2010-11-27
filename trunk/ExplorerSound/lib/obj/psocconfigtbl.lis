@@ -885,6 +885,7 @@
  0050 8205              db              82h, 05h                ;BPF4_4KHz_FLINL_CR2(ASC10CR2)
  0052 832C              db              83h, 2ch                ;BPF4_4KHz_FLINL_CR3(ASC10CR3)
  0054           ;  Instance name DIGITAL_OUT, User Module LED
+ 0054           ;  Instance name EzI2Cs_1, User Module EzI2Cs
  0054           ;  Instance name HB_Tmr, User Module Timer16
  0054           ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
  0054 4300              db              43h, 00h                ;HB_Tmr_CONTROL_LSB_REG(DBB20CR0)
@@ -894,7 +895,6 @@
  005A 4704              db              47h, 04h                ;HB_Tmr_CONTROL_MSB_REG(DBB21CR0)
  005C 450C              db              45h, 0ch                ;HB_Tmr_PERIOD_MSB_REG(DBB21DR1)
  005E 4600              db              46h, 00h                ;HB_Tmr_COMPARE_MSB_REG(DBB21DR2)
- 0060           ;  Instance name I2CHW, User Module I2CHW
  0060           ;  Instance name LED_1, User Module LED
  0060           ;  Instance name LED_2, User Module LED
  0060           ;  Instance name LED_3, User Module LED
@@ -1004,6 +1004,7 @@
  00F9           ;       Instance name BPF4_4KHz, Block Name FLINH(ASC21)
  00F9           ;       Instance name BPF4_4KHz, Block Name FLINL(ASC10)
  00F9           ;  Instance name DIGITAL_OUT, User Module LED
+ 00F9           ;  Instance name EzI2Cs_1, User Module EzI2Cs
  00F9           ;  Instance name HB_Tmr, User Module Timer16
  00F9           ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
  00F9 4010              db              40h, 10h                ;HB_Tmr_FUNC_LSB_REG(DBB20FN)
@@ -1013,7 +1014,6 @@
  00FF 4430              db              44h, 30h                ;HB_Tmr_FUNC_MSB_REG(DBB21FN)
  0101 4536              db              45h, 36h                ;HB_Tmr_INPUT_MSB_REG(DBB21IN)
  0103 4640              db              46h, 40h                ;HB_Tmr_OUTPUT_MSB_REG(DBB21OU)
- 0105           ;  Instance name I2CHW, User Module I2CHW
  0105           ;  Instance name LED_1, User Module LED
  0105           ;  Instance name LED_2, User Module LED
  0105           ;  Instance name LED_3, User Module LED

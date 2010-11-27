@@ -66,6 +66,7 @@ LoadConfigTBL_explorersound_Bank0:
 	db		82h, 05h		;BPF4_4KHz_FLINL_CR2(ASC10CR2)
 	db		83h, 2ch		;BPF4_4KHz_FLINL_CR3(ASC10CR3)
 ;  Instance name DIGITAL_OUT, User Module LED
+;  Instance name EzI2Cs_1, User Module EzI2Cs
 ;  Instance name HB_Tmr, User Module Timer16
 ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
 	db		43h, 00h		;HB_Tmr_CONTROL_LSB_REG(DBB20CR0)
@@ -75,7 +76,6 @@ LoadConfigTBL_explorersound_Bank0:
 	db		47h, 04h		;HB_Tmr_CONTROL_MSB_REG(DBB21CR0)
 	db		45h, 0ch		;HB_Tmr_PERIOD_MSB_REG(DBB21DR1)
 	db		46h, 00h		;HB_Tmr_COMPARE_MSB_REG(DBB21DR2)
-;  Instance name I2CHW, User Module I2CHW
 ;  Instance name LED_1, User Module LED
 ;  Instance name LED_2, User Module LED
 ;  Instance name LED_3, User Module LED
@@ -185,6 +185,7 @@ LoadConfigTBL_explorersound_Bank1:
 ;       Instance name BPF4_4KHz, Block Name FLINH(ASC21)
 ;       Instance name BPF4_4KHz, Block Name FLINL(ASC10)
 ;  Instance name DIGITAL_OUT, User Module LED
+;  Instance name EzI2Cs_1, User Module EzI2Cs
 ;  Instance name HB_Tmr, User Module Timer16
 ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
 	db		40h, 10h		;HB_Tmr_FUNC_LSB_REG(DBB20FN)
@@ -194,7 +195,6 @@ LoadConfigTBL_explorersound_Bank1:
 	db		44h, 30h		;HB_Tmr_FUNC_MSB_REG(DBB21FN)
 	db		45h, 36h		;HB_Tmr_INPUT_MSB_REG(DBB21IN)
 	db		46h, 40h		;HB_Tmr_OUTPUT_MSB_REG(DBB21OU)
-;  Instance name I2CHW, User Module I2CHW
 ;  Instance name LED_1, User Module LED
 ;  Instance name LED_2, User Module LED
 ;  Instance name LED_3, User Module LED

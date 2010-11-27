@@ -8,10 +8,10 @@
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
    D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
 ./obj/main.o :  ./lib/ADCINC~1.H ./lib/ADCINC~2.H ./lib/AMUX4_~1.H\
-   ./lib/BPF4_4~1.H ./lib/DIGITA~1.H ./lib/HB_Tmr.h ./lib/I2CHWC~1.H\
-   ./lib/I2CHWS~1.H ./lib/LED_1.h ./lib/LED_2.h ./lib/LED_3.h\
-   ./lib/PGA_out.h ./lib/PGA_pre.h ./lib/PSoCAPI.h ./lib/RefMux_1.h\
-   ./lib/SCBLOC~1.H ./lib/TX8.h\
+   ./lib/BPF4_4~1.H ./lib/DIGITA~1.H ./lib/EzI2Cs_1.h ./lib/HB_Tmr.h\
+   ./lib/LED_1.h ./lib/LED_2.h ./lib/LED_3.h ./lib/PGA_out.h\
+   ./lib/PGA_pre.h ./lib/PSoCAPI.h ./lib/RefMux_1.h ./lib/SCBLOC~1.H\
+   ./lib/TX8.h\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/M8C.h\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8C.h\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.h\
@@ -42,19 +42,16 @@
 ./lib/obj/digital_out.o :  ./lib/DIGITA~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
    D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+./lib/obj/ezi2cs_1.o :  ./lib/EzI2Cs_1.inc\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
+   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
+./lib/obj/ezi2cs_1int.o :  ./lib/EzI2Cs_1.inc\
+   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
+   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
 ./lib/obj/hb_tmr.o :  ./lib/HB_Tmr.inc\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
    D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
 ./lib/obj/hb_tmrint.o :  ./lib/HB_Tmr.inc\
-   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
-./lib/obj/i2chwcommon.o :  ./lib/I2CHWC~1.INC\
-   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
-./lib/obj/i2chwint.o :  ./lib/I2CHWC~1.INC ./lib/I2CHWS~1.INC\
-   C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
-   D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
-./lib/obj/i2chwrsrcinits.o :  ./lib/I2CHWC~1.INC\
    C:/PROGRA~1/Cypress/Common/CYPRES~3/tools/include/CY8C29~1/m8c.inc\
    D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\memory.inc
 ./lib/obj/led_1.o :  ./lib/LED_1.inc\

@@ -1,6 +1,6 @@
 <PSOC_DEVICE_DB>
 	<PSOC_CONFIG_LIST>
-		<PSOC_CONFIG NAME="explorersound" BASE_DEVICE="CY8C29466" SOURCE_GEN_TIME="1289124496" CONFIG_SAVE_TIME="1289124496" CONFIG_SAVE_DATE="Sun Nov 07 11:08:16 2010
+		<PSOC_CONFIG NAME="explorersound" BASE_DEVICE="CY8C29466" SOURCE_GEN_TIME="1290881686" CONFIG_SAVE_TIME="1290881686" CONFIG_SAVE_DATE="Sat Nov 27 19:14:46 2010
 " VERSION="4.0" DESCRIPTION="" PACKAGE_TYPE="PDIP" PACKAGE_SHAPE="2" LOOP_CONFIG_INIT="Enable" UM_INT_GEN_CONTROL="Enable" CONFIG_NAME_PREPEND="Disable" DESIGN_VERSION="" DOC_FILENAME="" DEVICE_DISPLAY_NAME="CY8C29466-24PVXI" PSOC_EXPRESS_PROJECT="FALSE">
 			<DESIGN_FILE_LIST/>
 			<USER_MODULE_LIST>
@@ -434,6 +434,79 @@
 						<PARAMETER NAME="Port" VALUE="Port_2"/>
 					</PARAMETER_LIST>
 				</USER_MODULE>
+				<USER_MODULE NAME="EzI2Cs" INSTANCE_NAME="EzI2Cs_1" VERSION="1.2">
+					<SHAPE SHAPE_TYPE="BLOCKLIST" COLOR_INDEX="9" NAME="EzI2Cs27B">
+						<RESOURCE_LIST>
+							<RESOURCE NAME="I2C" TYPE="I2C_CONTROLLER" DEVICE_RESOURCE_NAME="I2CController"/>
+						</RESOURCE_LIST>
+					</SHAPE>
+					<PARAMETER_LIST>
+						<PARAMETER NAME="ADDR_REG_PRESENT" VALUE="No"/>
+						<PARAMETER NAME="Active Distance Threshold X" VALUE=""/>
+						<PARAMETER NAME="Active Distance Threshold Y" VALUE=""/>
+						<PARAMETER NAME="Address_Type" VALUE="Static"/>
+						<PARAMETER NAME="Auto_Addr_Check" VALUE="Disable"/>
+						<PARAMETER NAME="BaselineUpdateThreshold" VALUE=""/>
+						<PARAMETER NAME="Button FingerThreshold" VALUE=""/>
+						<PARAMETER NAME="CPU_CLK_SPEED_CY8C27xxxA" VALUE="Not CY8C27xxxA"/>
+						<PARAMETER NAME="CY8C27XXXA" VALUE="ID_A"/>
+						<PARAMETER NAME="Centroid" VALUE=""/>
+						<PARAMETER NAME="DeadTime" VALUE=""/>
+						<PARAMETER NAME="Debounce" VALUE=""/>
+						<PARAMETER NAME="Debounce MT Pan Count" VALUE=""/>
+						<PARAMETER NAME="Debounce MT Pan to Zoom Count" VALUE=""/>
+						<PARAMETER NAME="Debounce MT Zoom Count" VALUE=""/>
+						<PARAMETER NAME="Debounce ST Pan Count" VALUE=""/>
+						<PARAMETER NAME="Feedback Resistor Pin" VALUE=""/>
+						<PARAMETER NAME="FingerThreshold" VALUE=""/>
+						<PARAMETER NAME="Gain-Offset Compensation" VALUE=""/>
+						<PARAMETER NAME="Hysteresis" VALUE=""/>
+						<PARAMETER NAME="I2C Clock" VALUE="400K Fast"/>
+						<PARAMETER NAME="I2C Pin" VALUE="P[1]5-P[1]7"/>
+						<PARAMETER NAME="IntDispatchMode" VALUE="ActiveStatus"/>
+						<PARAMETER NAME="Integration Cycles" VALUE=""/>
+						<PARAMETER NAME="LowBaselineReset" VALUE=""/>
+						<PARAMETER NAME="MT Finger Settling Count" VALUE=""/>
+						<PARAMETER NAME="MT Gesture Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="MT Max Click Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="MT Min Click Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="Maximum Centroid Count" VALUE=""/>
+						<PARAMETER NAME="Modulator Capacitor Pin" VALUE=""/>
+						<PARAMETER NAME="NegativeNoiseThreshold" VALUE=""/>
+						<PARAMETER NAME="NoiseThreshold" VALUE=""/>
+						<PARAMETER NAME="On-Chip Centroid" VALUE=""/>
+						<PARAMETER NAME="Prescaler Period" VALUE=""/>
+						<PARAMETER NAME="ROM_Registers" VALUE="Disable"/>
+						<PARAMETER NAME="RawData IIR Filter" VALUE=""/>
+						<PARAMETER NAME="RawData IIR Filter Coeff" VALUE=""/>
+						<PARAMETER NAME="RawData Jitter Filter" VALUE=""/>
+						<PARAMETER NAME="RawData Median Filter" VALUE=""/>
+						<PARAMETER NAME="Ref Value" VALUE=""/>
+						<PARAMETER NAME="Reference" VALUE=""/>
+						<PARAMETER NAME="Resolution" VALUE=""/>
+						<PARAMETER NAME="Rotate Debounce Limit" VALUE=""/>
+						<PARAMETER NAME="ST Click X Radius PX" VALUE=""/>
+						<PARAMETER NAME="ST Click Y Radius PX" VALUE=""/>
+						<PARAMETER NAME="ST Max Click Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="ST Max DblClick Radius PX" VALUE=""/>
+						<PARAMETER NAME="ST Max DblClick Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="ST Min Click Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="ST Min DblClick Timeout Msec" VALUE=""/>
+						<PARAMETER NAME="Scanning Speed" VALUE=""/>
+						<PARAMETER NAME="Sensors Autoreset" VALUE=""/>
+						<PARAMETER NAME="ShieldElectrodeOut" VALUE=""/>
+						<PARAMETER NAME="Slave_Addr" VALUE="80"/>
+						<PARAMETER NAME="Tuner" VALUE=""/>
+						<PARAMETER NAME="USED_I2C_BLOCK" VALUE="I2CController_0"/>
+						<PARAMETER NAME="WOT FingerThreshold" VALUE=""/>
+						<PARAMETER NAME="XY IIR Filter" VALUE=""/>
+						<PARAMETER NAME="XY IIR Filter Coeff" VALUE=""/>
+						<PARAMETER NAME="XY Jitter Filter" VALUE=""/>
+						<PARAMETER NAME="Zoom Active Distance Threshold X" VALUE=""/>
+						<PARAMETER NAME="Zoom Active Distance Threshold Y" VALUE=""/>
+						<PARAMETER NAME="iDAC Range" VALUE=""/>
+					</PARAMETER_LIST>
+				</USER_MODULE>
 				<USER_MODULE NAME="Timer16" INSTANCE_NAME="HB_Tmr" VERSION="2.6">
 					<SHAPE SHAPE_TYPE="BLOCKLIST" COLOR_INDEX="6" NAME="Tmr1627">
 						<BLOCK_LIST>
@@ -524,78 +597,6 @@
 						<PARAMETER NAME="TC_PulseWidth" VALUE="Full Clock"/>
 						<PARAMETER NAME="TerminalCountOut" VALUE="None"/>
 						<PARAMETER NAME="Tuner" VALUE=""/>
-						<PARAMETER NAME="WOT FingerThreshold" VALUE=""/>
-						<PARAMETER NAME="XY IIR Filter" VALUE=""/>
-						<PARAMETER NAME="XY IIR Filter Coeff" VALUE=""/>
-						<PARAMETER NAME="XY Jitter Filter" VALUE=""/>
-						<PARAMETER NAME="Zoom Active Distance Threshold X" VALUE=""/>
-						<PARAMETER NAME="Zoom Active Distance Threshold Y" VALUE=""/>
-						<PARAMETER NAME="iDAC Range" VALUE=""/>
-					</PARAMETER_LIST>
-				</USER_MODULE>
-				<USER_MODULE NAME="I2CHW" INSTANCE_NAME="I2CHW" VERSION="1.6">
-					<SHAPE SHAPE_TYPE="BLOCKLIST" COLOR_INDEX="0" NAME="I2CHWSlave">
-						<RESOURCE_LIST>
-							<RESOURCE NAME="I2C" TYPE="I2C_CONTROLLER" DEVICE_RESOURCE_NAME="I2CController"/>
-						</RESOURCE_LIST>
-					</SHAPE>
-					<PARAMETER_LIST>
-						<PARAMETER NAME="ADDR_REG_PRESENT" VALUE="No"/>
-						<PARAMETER NAME="Active Distance Threshold X" VALUE=""/>
-						<PARAMETER NAME="Active Distance Threshold Y" VALUE=""/>
-						<PARAMETER NAME="Auto_Addr_Check" VALUE="Disable"/>
-						<PARAMETER NAME="BaselineUpdateThreshold" VALUE=""/>
-						<PARAMETER NAME="Button FingerThreshold" VALUE=""/>
-						<PARAMETER NAME="CPU_Clk_speed_(CY8C27xA)" VALUE="6MHz OR LESS"/>
-						<PARAMETER NAME="Centroid" VALUE=""/>
-						<PARAMETER NAME="Communication_Service_Type" VALUE="Interrupt"/>
-						<PARAMETER NAME="DeadTime" VALUE=""/>
-						<PARAMETER NAME="Debounce" VALUE=""/>
-						<PARAMETER NAME="Debounce MT Pan Count" VALUE=""/>
-						<PARAMETER NAME="Debounce MT Pan to Zoom Count" VALUE=""/>
-						<PARAMETER NAME="Debounce MT Zoom Count" VALUE=""/>
-						<PARAMETER NAME="Debounce ST Pan Count" VALUE=""/>
-						<PARAMETER NAME="Feedback Resistor Pin" VALUE=""/>
-						<PARAMETER NAME="FingerThreshold" VALUE=""/>
-						<PARAMETER NAME="Gain-Offset Compensation" VALUE=""/>
-						<PARAMETER NAME="Hysteresis" VALUE=""/>
-						<PARAMETER NAME="I2C Clock" VALUE="400K Fast"/>
-						<PARAMETER NAME="I2C Pin" VALUE="P[1]5-P[1]7"/>
-						<PARAMETER NAME="IntDispatchMode" VALUE="ActiveStatus"/>
-						<PARAMETER NAME="Integration Cycles" VALUE=""/>
-						<PARAMETER NAME="LowBaselineReset" VALUE=""/>
-						<PARAMETER NAME="MT Finger Settling Count" VALUE=""/>
-						<PARAMETER NAME="MT Gesture Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="MT Max Click Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="MT Min Click Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="Maximum Centroid Count" VALUE=""/>
-						<PARAMETER NAME="Modulator Capacitor Pin" VALUE=""/>
-						<PARAMETER NAME="NegativeNoiseThreshold" VALUE=""/>
-						<PARAMETER NAME="NoiseThreshold" VALUE=""/>
-						<PARAMETER NAME="On-Chip Centroid" VALUE=""/>
-						<PARAMETER NAME="Prescaler Period" VALUE=""/>
-						<PARAMETER NAME="RawData IIR Filter" VALUE=""/>
-						<PARAMETER NAME="RawData IIR Filter Coeff" VALUE=""/>
-						<PARAMETER NAME="RawData Jitter Filter" VALUE=""/>
-						<PARAMETER NAME="RawData Median Filter" VALUE=""/>
-						<PARAMETER NAME="Read_Buffer_Types" VALUE="RAM ONLY"/>
-						<PARAMETER NAME="Ref Value" VALUE=""/>
-						<PARAMETER NAME="Reference" VALUE=""/>
-						<PARAMETER NAME="Resolution" VALUE=""/>
-						<PARAMETER NAME="Rotate Debounce Limit" VALUE=""/>
-						<PARAMETER NAME="ST Click X Radius PX" VALUE=""/>
-						<PARAMETER NAME="ST Click Y Radius PX" VALUE=""/>
-						<PARAMETER NAME="ST Max Click Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="ST Max DblClick Radius PX" VALUE=""/>
-						<PARAMETER NAME="ST Max DblClick Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="ST Min Click Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="ST Min DblClick Timeout Msec" VALUE=""/>
-						<PARAMETER NAME="Scanning Speed" VALUE=""/>
-						<PARAMETER NAME="Sensors Autoreset" VALUE=""/>
-						<PARAMETER NAME="ShieldElectrodeOut" VALUE=""/>
-						<PARAMETER NAME="Slave_Addr" VALUE="0"/>
-						<PARAMETER NAME="Tuner" VALUE=""/>
-						<PARAMETER NAME="USED_I2C_BLOCK" VALUE="I2CController_0"/>
 						<PARAMETER NAME="WOT FingerThreshold" VALUE=""/>
 						<PARAMETER NAME="XY IIR Filter" VALUE=""/>
 						<PARAMETER NAME="XY IIR Filter Coeff" VALUE=""/>
@@ -1597,8 +1598,8 @@
 					<PIN_DESC PIN_NUMBER="7" PIN_LABEL="P2[3]" PIN_SELECT="AnalogInput" PIN_DRIVE="High Z Analog" PIN_DATA="" PIN_CUSTOM_NAME="Port_2_3" PIN_INTERRUPT="DisableInt"/>
 					<PIN_DESC PIN_NUMBER="8" PIN_LABEL="P2[1]" PIN_SELECT="AnalogInput" PIN_DRIVE="High Z Analog" PIN_DATA="" PIN_CUSTOM_NAME="Port_2_1" PIN_INTERRUPT="DisableInt"/>
 					<PIN_DESC PIN_NUMBER="9" PIN_LABEL="SMP" PIN_SELECT="" PIN_DRIVE="" PIN_DATA="" PIN_CUSTOM_NAME="" PIN_INTERRUPT=""/>
-					<PIN_DESC PIN_NUMBER="10" PIN_LABEL="P1[7]" PIN_SELECT="I2C SCL" PIN_DRIVE="Open Drain Low" PIN_DATA="" PIN_CUSTOM_NAME="I2CHWSCL" PIN_INTERRUPT="DisableInt"/>
-					<PIN_DESC PIN_NUMBER="11" PIN_LABEL="P1[5]" PIN_SELECT="I2C SDA" PIN_DRIVE="Open Drain Low" PIN_DATA="" PIN_CUSTOM_NAME="I2CHWSDA" PIN_INTERRUPT="DisableInt"/>
+					<PIN_DESC PIN_NUMBER="10" PIN_LABEL="P1[7]" PIN_SELECT="I2C SCL" PIN_DRIVE="Open Drain Low" PIN_DATA="" PIN_CUSTOM_NAME="EzI2Cs_1SCL" PIN_INTERRUPT="DisableInt"/>
+					<PIN_DESC PIN_NUMBER="11" PIN_LABEL="P1[5]" PIN_SELECT="I2C SDA" PIN_DRIVE="Open Drain Low" PIN_DATA="" PIN_CUSTOM_NAME="EzI2Cs_1SDA" PIN_INTERRUPT="DisableInt"/>
 					<PIN_DESC PIN_NUMBER="12" PIN_LABEL="P1[3]" PIN_SELECT="StdCPU" PIN_DRIVE="High Z Analog" PIN_DATA="" PIN_CUSTOM_NAME="Port_1_3" PIN_INTERRUPT="DisableInt"/>
 					<PIN_DESC PIN_NUMBER="13" PIN_LABEL="P1[1]" PIN_SELECT="StdCPU" PIN_DRIVE="High Z Analog" PIN_DATA="" PIN_CUSTOM_NAME="Port_1_1" PIN_INTERRUPT="DisableInt"/>
 					<PIN_DESC PIN_NUMBER="14" PIN_LABEL="VSS" PIN_SELECT="" PIN_DRIVE="" PIN_DATA="" PIN_CUSTOM_NAME="" PIN_INTERRUPT=""/>
