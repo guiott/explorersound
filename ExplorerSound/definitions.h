@@ -2,6 +2,11 @@ BYTE PortIndx = 0;
 long PotValue;		// ADC value read from potentiometer
 long MesValue[3][3];	// Signal levels at input (indx 0), pre (indx 1) and OUT (indx 2)
 
+struct I2C_Struct {   // I2C interface structure  
+    long I2C_MesValue[3];    
+} I2C_Regs;  
+
+
 unsigned int i;
 unsigned int Tmr1=0;
 unsigned int Tmr2=0;

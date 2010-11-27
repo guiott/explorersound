@@ -1471,7 +1471,7 @@
  005C 7E            reti
  005D           
                     org   60h                      ;PSoC I2C Interrupt Vector
- 0060 7D0000        ljmp        _I2CHW_ISR
+ 0060 7D0000        ljmp        _EzI2Cs_1_ISR
  0063 7E            reti
  0064           
                     org   64h                      ;Sleep Timer Interrupt Vector

@@ -6,11 +6,10 @@ lib/adcincvr_potint.asm
 lib/amux4_mic.asm   
 lib/bpf4_4khz.asm   
 lib/digital_out.asm   
+lib/ezi2cs_1.asm   
+lib/ezi2cs_1int.asm   
 lib/hb_tmr.asm   
 lib/hb_tmrint.asm   
-lib/i2chwcommon.asm   
-lib/i2chwint.asm   
-lib/i2chwrsrcinits.asm   
 lib/led_1.asm   
 lib/led_2.asm   
 lib/led_3.asm   

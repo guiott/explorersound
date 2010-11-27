@@ -7,12 +7,10 @@
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\definitions.h" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\Notes.txt" />
     <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\prototypes.h" />
-    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\lib\I2CHWCommon.h" />
-    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\lib\I2CHWSlave.inc" />
-    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\lib\I2CHWSlave.h" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />
+    <USERTYPE ID="S210" TYPESPEC="[s S210 I2C_Struct 12   '[3]L 1 I2C_MesValue 12 0 ]" />
     <EVENT NUMBER="0" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
     <EVENT NUMBER="1" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
     <EVENT NUMBER="2" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
