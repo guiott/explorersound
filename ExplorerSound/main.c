@@ -65,9 +65,9 @@ void main(void)
 			ADCINCVR_mes_GetSamples(1); // Start ADC to read once more
 			while(! ADCINCVR_mes_fIsDataAvailable());// Wait for data to be ready 
 			// Get Data, Clear data ready flag
-			MesValue[PortIndx][2] = ((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
-			MesValue[PortIndx][1] = (MesValue[PortIndx][2]) >> (GainIndx[PortIndx][1]); 			// [2][4]
-			MesValue[PortIndx][0] = (MesValue[PortIndx][1]) >> (GainIndx[PortIndx][0]); // [3][4]			
+			MesValue[PortIndx][2]=((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
+			MesValue[PortIndx][1]=(MesValue[PortIndx][2])/GF[GainIndx[PortIndx][1]][1]; // [2]
+			MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]			
 			
 			AGC(); 
 			
@@ -127,11 +127,11 @@ void DigitalOut(void)
 	if (MesValue[0][0]>PotValue)
 	{
 		DIGITAL_OUT_On();
-		LED_1_On();
+		LED_3_On();
 	}
 	else
 	{
-		LED_1_Off();
+		LED_3_Off();
 	}
 		
 	if (MesValue[1][0]>PotValue)
@@ -147,11 +147,11 @@ void DigitalOut(void)
 	if (MesValue[2][0]>PotValue)
 	{
 		DIGITAL_OUT_On();
-		LED_3_On();
+		LED_1_On();
 	}
 	else
 	{
-		LED_3_Off();
+		LED_1_Off();
 	}
 }
 
@@ -168,7 +168,7 @@ void UartTxValues(void)
 	TX8_PutString(str);
 */
 
-	TX8_CPutString("    Mes Value: 1 = ");
+	TX8_CPutString("Mes: 1 = ");
 	ltoa(str, MesValue[0][0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
@@ -177,7 +177,7 @@ void UartTxValues(void)
 	TX8_CPutString("  -  3 = ");
 	ltoa(str, MesValue[2][0],10);
 	TX8_PutString(str);
-	TX8_CPutString("  Gain Pre: 1 = ");
+	TX8_CPutString(" Pre: 1 = ");
 	itoa(str, GF[GainIndx[0][0]][1], 10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
@@ -186,7 +186,7 @@ void UartTxValues(void)
 	TX8_CPutString("  -  3 = ");
 	itoa(str, GF[GainIndx[2][0]][1], 10);
 	TX8_PutString(str);	
-	TX8_CPutString("  Gain Out: 1 = ");
+	TX8_CPutString(" Out: 1 = ");
 	itoa(str, GF[GainIndx[0][1]][1], 10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");

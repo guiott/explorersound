@@ -46,7 +46,9 @@
  0004 3804              .byte 56,4
  0006 1808              .byte 24,8
  0008 0810              .byte 8,16
- 000A                   .dbsym e GF _GF A[10:5:2]c
+ 000A 1C18              .byte 28,24
+ 000C 0C30              .byte 12,48
+ 000E                   .dbsym e GF _GF A[14:7:2]c
                         .area data(ram, con, rel)
  0000                   .dbfile D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\definitions.h
                         .area data(ram, con, rel)
@@ -111,7 +113,7 @@
  0004           ;       BYTE PortNum[3];
  0004           ;       
  0004           ;       BlocksInit();
- 0004 7C099D            xcall _BlocksInit
+ 0004 7C09B7            xcall _BlocksInit
  0007                   .dbline 43
  0007           ;       
  0007           ;       M8C_EnableGInt ;               // Turn on interrupts 
@@ -135,8 +137,8 @@
  0017                   .dbline 50
  0017           ;       
  0017           ;       LedTest();
- 0017 7C0A9D            xcall _LedTest
- 001A 82BD              xjmp L5
+ 0017 7C0AB7            xcall _LedTest
+ 001A 82D7              xjmp L5
  001C           L4:
  001C                   .dbline 54
  001C           ;       
@@ -215,7 +217,7 @@
  008B 1201              sub A,[_Tmr2+1]
  008D 5000              mov A,0
  008F 1A00              sbb A,[_Tmr2]
- 0091 D211              jnc L9
+ 0091 D22B              jnc L9
  0093           X4:
  0093                   .dbline 63
  0093           ;               {
@@ -243,7 +245,7 @@
  00AD AFF5              jz L11
  00AF                   .dbline 68
  00AF           ;                       // Get Data, Clear data ready flag
- 00AF           ;                       MesValue[PortIndx][2] = ((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
+ 00AF           ;                       MesValue[PortIndx][2]=((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
  00AF 10                push X
  00B0 7C0000            xcall _ADCINCVR_mes_iGetDataClearFlag
  00B3 62D000            mov REG[0xd0],>__r0
@@ -303,7 +305,7 @@
  0121 5100              mov A,[__r3]
  0123 3F00              mvi [__r5],A
  0125                   .dbline 69
- 0125           ;                       MesValue[PortIndx][1] = (MesValue[PortIndx][2]) >> (GainIndx[PortIndx][1]);                     // [2][4]
+ 0125           ;                       MesValue[PortIndx][1]=(MesValue[PortIndx][2])/GF[GainIndx[PortIndx][1]][1]; // [2]
  0125 62D000            mov REG[0xd0],>_PortIndx
  0128 5100              mov A,[_PortIndx]
  012A 62D000            mov REG[0xd0],>__r0
@@ -335,1690 +337,1702 @@
  0161 60D4              mov REG[0xd4],A
  0163 3E00              mvi A,[__r3]
  0165 5300              mov [__r3],A
- 0167 5100              mov A,[__r1]
- 0169 0108              add A,<_MesValue+8
- 016B 5300              mov [__r5],A
- 016D 5100              mov A,[__r0]
- 016F 0908              adc A,>_MesValue+8
- 0171 60D4              mov REG[0xd4],A
- 0173 3E00              mvi A,[__r5]
- 0175 5300              mov [__r8],A
- 0177 3E00              mvi A,[__r5]
- 0179 5300              mov [__r9],A
- 017B 3E00              mvi A,[__r5]
- 017D 5300              mov [__r10],A
- 017F 3E00              mvi A,[__r5]
- 0181 5300              mov [__r11],A
- 0183 5100              mov A,[__r8]
- 0185 08                push A
- 0186 5100              mov A,[__r9]
- 0188 08                push A
- 0189 5100              mov A,[__r10]
- 018B 08                push A
- 018C 5100              mov A,[__r11]
- 018E 5300              mov [__r7],A
- 0190 18                pop A
- 0191 5300              mov [__r6],A
- 0193 18                pop A
- 0194 5300              mov [__r5],A
- 0196 18                pop A
- 0197 5300              mov [__r4],A
- 0199 5100              mov A,[__r3]
- 019B 211F              and A,31
- 019D A00F              jz X8
- 019F           X9:
- 019F 62D000            mov REG[0xd0],>__r0
- 01A2 6800              asr [__r4]
- 01A4 6E00              rrc [__r5]
- 01A6 6E00              rrc [__r6]
- 01A8 6E00              rrc [__r7]
- 01AA 78                dec A
- 01AB BFF3              jnz X9
- 01AD           X8:
- 01AD 62D000            mov REG[0xd0],>__r0
- 01B0 060004            add [__r1],<_MesValue+4
- 01B3 0E0004            adc [__r0],>_MesValue+4
- 01B6 5100              mov A,[__r0]
- 01B8 60D5              mov REG[0xd5],A
- 01BA 5100              mov A,[__r4]
- 01BC 3F00              mvi [__r1],A
- 01BE 5100              mov A,[__r5]
- 01C0 3F00              mvi [__r1],A
- 01C2 5100              mov A,[__r6]
- 01C4 3F00              mvi [__r1],A
- 01C6 5100              mov A,[__r7]
- 01C8 3F00              mvi [__r1],A
- 01CA                   .dbline 70
- 01CA           ;                       MesValue[PortIndx][0] = (MesValue[PortIndx][1]) >> (GainIndx[PortIndx][0]); // [3][4]                   
- 01CA 62D000            mov REG[0xd0],>_PortIndx
- 01CD 5100              mov A,[_PortIndx]
- 01CF 62D000            mov REG[0xd0],>__r0
- 01D2 5300              mov [__r1],A
- 01D4 5000              mov A,0
- 01D6 08                push A
- 01D7 5100              mov A,[__r1]
- 01D9 08                push A
- 01DA 5000              mov A,0
- 01DC 08                push A
- 01DD 500C              mov A,12
- 01DF 08                push A
- 01E0 7C0000            xcall __mul16
- 01E3 38FC              add SP,-4
- 01E5 5100              mov A,[__rX]
- 01E7 5300              mov [__r1],A
- 01E9 5100              mov A,[__rY]
- 01EB 5300              mov [__r0],A
- 01ED 62D000            mov REG[0xd0],>_PortIndx
- 01F0 5100              mov A,[_PortIndx]
- 01F2 62D000            mov REG[0xd0],>__r0
- 01F5 5300              mov [__r3],A
- 01F7 550000            mov [__r2],0
- 01FA 6500              asl [__r3]
- 01FC 6B00              rlc [__r2]
- 01FE 060000            add [__r3],<_GainIndx
- 0201 0E0000            adc [__r2],>_GainIndx
- 0204 5100              mov A,[__r2]
- 0206 60D4              mov REG[0xd4],A
- 0208 3E00              mvi A,[__r3]
- 020A 5300              mov [__r3],A
- 020C 5100              mov A,[__r1]
- 020E 0104              add A,<_MesValue+4
- 0210 5300              mov [__r5],A
- 0212 5100              mov A,[__r0]
- 0214 0904              adc A,>_MesValue+4
- 0216 60D4              mov REG[0xd4],A
- 0218 3E00              mvi A,[__r5]
- 021A 5300              mov [__r8],A
- 021C 3E00              mvi A,[__r5]
- 021E 5300              mov [__r9],A
- 0220 3E00              mvi A,[__r5]
- 0222 5300              mov [__r10],A
- 0224 3E00              mvi A,[__r5]
- 0226 5300              mov [__r11],A
- 0228 5100              mov A,[__r8]
- 022A 08                push A
- 022B 5100              mov A,[__r9]
- 022D 08                push A
- 022E 5100              mov A,[__r10]
- 0230 08                push A
- 0231 5100              mov A,[__r11]
- 0233 5300              mov [__r7],A
- 0235 18                pop A
- 0236 5300              mov [__r6],A
- 0238 18                pop A
- 0239 5300              mov [__r5],A
- 023B 18                pop A
- 023C 5300              mov [__r4],A
- 023E 5100              mov A,[__r3]
- 0240 211F              and A,31
- 0242 A00F              jz X10
- 0244           X11:
- 0244 62D000            mov REG[0xd0],>__r0
- 0247 6800              asr [__r4]
- 0249 6E00              rrc [__r5]
- 024B 6E00              rrc [__r6]
- 024D 6E00              rrc [__r7]
- 024F 78                dec A
- 0250 BFF3              jnz X11
- 0252           X10:
- 0252 62D000            mov REG[0xd0],>__r0
- 0255 060000            add [__r1],<_MesValue
- 0258 0E0000            adc [__r0],>_MesValue
- 025B 5100              mov A,[__r0]
- 025D 60D5              mov REG[0xd5],A
- 025F 5100              mov A,[__r4]
- 0261 3F00              mvi [__r1],A
- 0263 5100              mov A,[__r5]
- 0265 3F00              mvi [__r1],A
- 0267 5100              mov A,[__r6]
- 0269 3F00              mvi [__r1],A
- 026B 5100              mov A,[__r7]
- 026D 3F00              mvi [__r1],A
- 026F                   .dbline 72
- 026F           ;                       
- 026F           ;                       AGC(); 
- 026F 906E              xcall _AGC
- 0271                   .dbline 74
- 0271           ;                       
- 0271           ;                       PortIndx++;
- 0271 62D000            mov REG[0xd0],>_PortIndx
- 0274 7600              inc [_PortIndx]
- 0276                   .dbline 75
- 0276           ;                       if(PortIndx > 2) 
- 0276 5002              mov A,2
- 0278 3A00              cmp A,[_PortIndx]
- 027A D007              jnc L19
- 027C           X12:
- 027C                   .dbline 76
- 027C           ;                       {
- 027C                   .dbline 77
- 027C           ;                               PortIndx=0; // next mux port
- 027C 62D000            mov REG[0xd0],>_PortIndx
- 027F 550000            mov [_PortIndx],0
- 0282                   .dbline 78
- 0282           ;                       }
- 0282           L19:
- 0282                   .dbline 79
- 0282           ;                       AMUX4_mic_InputSelect(PortNum[PortIndx]);
- 0282 62D000            mov REG[0xd0],>__r0
- 0285 550007            mov [__r0],7
- 0288 5A00              mov [__r1],X
- 028A 62D000            mov REG[0xd0],>_PortIndx
- 028D 5100              mov A,[_PortIndx]
- 028F 62D000            mov REG[0xd0],>__r0
- 0292 0200              add A,[__r1]
- 0294 5300              mov [__r1],A
- 0296 5000              mov A,0
- 0298 0A00              adc A,[__r0]
- 029A 60D4              mov REG[0xd4],A
- 029C 3E00              mvi A,[__r1]
- 029E 10                push X
- 029F 7C0000            xcall _AMUX4_mic_InputSelect
- 02A2 20                pop X
- 02A3                   .dbline 80
- 02A3           ;               }
- 02A3           L9:
- 02A3                   .dbline 82
- 02A3           ;               
- 02A3           ;               if (TmrFlag) // every 10ms
- 02A3 62D000            mov REG[0xd0],>_TmrFlag
- 02A6 3C0000            cmp [_TmrFlag],0
- 02A9 A00B              jz L21
- 02AB                   .dbline 83
- 02AB           ;               {       
- 02AB                   .dbline 84
- 02AB           ;                       TmrFlag = 0;
- 02AB 550000            mov [_TmrFlag],0
- 02AE                   .dbline 85
- 02AE           ;                       ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample
- 02AE 10                push X
- 02AF 5001              mov A,1
- 02B1 7C0000            xcall _ADCINCVR_pot_GetSamples
- 02B4 20                pop X
- 02B5                   .dbline 86
- 02B5           ;               }
- 02B5           L21:
- 02B5                   .dbline 88
- 02B5           ;               
- 02B5           ;               if (Tmr1 > 9) // every 100ms
- 02B5 62D000            mov REG[0xd0],>_Tmr1
- 02B8 5009              mov A,9
- 02BA 1201              sub A,[_Tmr1+1]
- 02BC 5000              mov A,0
- 02BE 1A00              sbb A,[_Tmr1]
- 02C0 D017              jnc L23
- 02C2           X13:
- 02C2                   .dbline 89
- 02C2           ;               {
- 02C2                   .dbline 90
- 02C2           ;                       Tmr1 = 0;
- 02C2 62D000            mov REG[0xd0],>_Tmr1
- 02C5 550100            mov [_Tmr1+1],0
- 02C8 550000            mov [_Tmr1],0
- 02CB                   .dbline 91
- 02CB           ;                       Tmr2 = 0;
- 02CB 62D000            mov REG[0xd0],>_Tmr2
- 02CE 550100            mov [_Tmr2+1],0
- 02D1 550000            mov [_Tmr2],0
- 02D4                   .dbline 92
- 02D4           ;                       UartTxValues(); // debug
- 02D4 943E              xcall _UartTxValues
- 02D6                   .dbline 93
- 02D6           ;                       DigitalOut();
- 02D6 936A              xcall _DigitalOut
- 02D8                   .dbline 94
- 02D8           ;               }
- 02D8           L23:
- 02D8                   .dbline 95
- 02D8           ;       }// ========================================================== Main loop 
- 02D8           L5:
- 02D8                   .dbline 53
- 02D8 8D43              xjmp L4
- 02DA           X0:
- 02DA                   .dbline -2
- 02DA           L1:
- 02DA 38FD              add SP,-3
- 02DC 20                pop X
- 02DD                   .dbline 0 ; func end
- 02DD 8FFF              jmp .
- 02DF                   .dbsym l PortNum 0 A[3:3]c
- 02DF                   .dbend
- 02DF                   .dbfunc e AGC _AGC fV
- 02DF           _AGC::
- 02DF                   .dbline -1
- 02DF                   .dbline 101
- 02DF           ; }
- 02DF           ; 
- 02DF           ; // Functions ***************************************************************
- 02DF           ; 
- 02DF           ; void AGC(void)
- 02DF           ; {// [5]
- 02DF                   .dbline 102
- 02DF           ;            if((MesValue[PortIndx][2] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN))// PGA_out
- 02DF 62D000            mov REG[0xd0],>_PortIndx
- 02E2 5100              mov A,[_PortIndx]
- 02E4 62D000            mov REG[0xd0],>__r0
- 02E7 5300              mov [__r1],A
- 02E9 5000              mov A,0
- 02EB 08                push A
- 02EC 5100              mov A,[__r1]
- 02EE 08                push A
- 02EF 5000              mov A,0
- 02F1 08                push A
- 02F2 500C              mov A,12
- 02F4 08                push A
- 02F5 7C0000            xcall __mul16
- 02F8 38FC              add SP,-4
- 02FA 5100              mov A,[__rX]
- 02FC 5300              mov [__r1],A
- 02FE 5100              mov A,[__rY]
- 0300 5300              mov [__r0],A
- 0302 060008            add [__r1],<_MesValue+8
- 0305 0E0008            adc [__r0],>_MesValue+8
- 0308 5100              mov A,[__r0]
- 030A 60D4              mov REG[0xd4],A
- 030C 3E00              mvi A,[__r1]
- 030E 5300              mov [__r4],A
- 0310 3E00              mvi A,[__r1]
- 0312 5300              mov [__r5],A
- 0314 3E00              mvi A,[__r1]
- 0316 5300              mov [__r6],A
- 0318 3E00              mvi A,[__r1]
- 031A 5300              mov [__r7],A
- 031C 5040              mov A,64
- 031E 1200              sub A,[__r7]
- 0320 500D              mov A,13
- 0322 1A00              sbb A,[__r6]
- 0324 5003              mov A,3
- 0326 1A00              sbb A,[__r5]
- 0328 5100              mov A,[__r4]
- 032A 3180              xor A,-128
- 032C 5300              mov [__rX],A
- 032E 5080              mov A,(0 ^ 0x80)
- 0330 1A00              sbb A,[__rX]
- 0332 D08B              jnc L26
- 0334           X14:
- 0334 62D000            mov REG[0xd0],>_PortIndx
- 0337 5100              mov A,[_PortIndx]
- 0339 62D000            mov REG[0xd0],>__r0
- 033C 5300              mov [__r1],A
- 033E 550000            mov [__r0],0
- 0341 6500              asl [__r1]
- 0343 6B00              rlc [__r0]
- 0345 060001            add [__r1],<_GainIndx+1
- 0348 0E0001            adc [__r0],>_GainIndx+1
- 034B 5100              mov A,[__r0]
- 034D 60D4              mov REG[0xd4],A
- 034F 3E00              mvi A,[__r1]
- 0351 5300              mov [__r0],A
- 0353 5000              mov A,0
- 0355 3A00              cmp A,[__r0]
- 0357 D066              jnc L26
- 0359           X15:
- 0359                   .dbline 103
- 0359           ;       {
- 0359                   .dbline 104
- 0359           ;               GainIndx[PortIndx][1]--;
- 0359 62D000            mov REG[0xd0],>_PortIndx
- 035C 5100              mov A,[_PortIndx]
- 035E 62D000            mov REG[0xd0],>__r0
- 0361 5300              mov [__r1],A
- 0363 550000            mov [__r0],0
- 0366 6500              asl [__r1]
- 0368 6B00              rlc [__r0]
- 036A 060001            add [__r1],<_GainIndx+1
- 036D 0E0001            adc [__r0],>_GainIndx+1
- 0370 5100              mov A,[__r0]
- 0372 60D4              mov REG[0xd4],A
- 0374 3E00              mvi A,[__r1]
- 0376 7A00              dec [__r1]
- 0378 5300              mov [__r2],A
- 037A 160001            sub [__r2],1
- 037D 5100              mov A,[__r0]
- 037F 60D5              mov REG[0xd5],A
- 0381 5100              mov A,[__r2]
- 0383 3F00              mvi [__r1],A
- 0385                   .dbline 105
- 0385           ;               PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
- 0385 62D000            mov REG[0xd0],>_PortIndx
- 0388 5100              mov A,[_PortIndx]
- 038A 62D000            mov REG[0xd0],>__r0
- 038D 5300              mov [__r1],A
- 038F 550000            mov [__r0],0
- 0392 6500              asl [__r1]
- 0394 6B00              rlc [__r0]
- 0396 060001            add [__r1],<_GainIndx+1
- 0399 0E0001            adc [__r0],>_GainIndx+1
- 039C 5100              mov A,[__r0]
- 039E 60D4              mov REG[0xd4],A
- 03A0 3E00              mvi A,[__r1]
- 03A2 5300              mov [__r1],A
- 03A4 550000            mov [__r0],0
- 03A7 6500              asl [__r1]
- 03A9 6B00              rlc [__r0]
- 03AB 060000            add [__r1],<_GF
- 03AE 0E0000            adc [__r0],>_GF
- 03B1 5100              mov A,[__r0]
- 03B3 60D4              mov REG[0xd4],A
- 03B5 3E00              mvi A,[__r1]
- 03B7 10                push X
- 03B8 7C0000            xcall _PGA_out_SetGain
- 03BB 20                pop X
- 03BC                   .dbline 106
- 03BC           ;       }
- 03BC 8284              xjmp L27
- 03BE           L26:
- 03BE                   .dbline 107
- 03BE           ;       else if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN))// PGA_pre
- 03BE 62D000            mov REG[0xd0],>_PortIndx
- 03C1 5100              mov A,[_PortIndx]
- 03C3 62D000            mov REG[0xd0],>__r0
- 03C6 5300              mov [__r1],A
- 03C8 5000              mov A,0
- 03CA 08                push A
- 03CB 5100              mov A,[__r1]
- 03CD 08                push A
- 03CE 5000              mov A,0
- 03D0 08                push A
- 03D1 500C              mov A,12
- 03D3 08                push A
- 03D4 7C0000            xcall __mul16
- 03D7 38FC              add SP,-4
- 03D9 5100              mov A,[__rX]
- 03DB 5300              mov [__r1],A
- 03DD 5100              mov A,[__rY]
- 03DF 5300              mov [__r0],A
- 03E1 060004            add [__r1],<_MesValue+4
- 03E4 0E0004            adc [__r0],>_MesValue+4
- 03E7 5100              mov A,[__r0]
- 03E9 60D4              mov REG[0xd4],A
- 03EB 3E00              mvi A,[__r1]
- 03ED 5300              mov [__r4],A
- 03EF 3E00              mvi A,[__r1]
- 03F1 5300              mov [__r5],A
- 03F3 3E00              mvi A,[__r1]
- 03F5 5300              mov [__r6],A
- 03F7 3E00              mvi A,[__r1]
- 03F9 5300              mov [__r7],A
- 03FB 5040              mov A,64
- 03FD 1200              sub A,[__r7]
- 03FF 500D              mov A,13
- 0401 1A00              sbb A,[__r6]
- 0403 5003              mov A,3
- 0405 1A00              sbb A,[__r5]
- 0407 5100              mov A,[__r4]
- 0409 3180              xor A,-128
- 040B 5300              mov [__rX],A
- 040D 5080              mov A,(0 ^ 0x80)
- 040F 1A00              sbb A,[__rX]
- 0411 D08B              jnc L32
- 0413           X16:
- 0413 62D000            mov REG[0xd0],>_PortIndx
- 0416 5100              mov A,[_PortIndx]
- 0418 62D000            mov REG[0xd0],>__r0
- 041B 5300              mov [__r1],A
- 041D 550000            mov [__r0],0
- 0420 6500              asl [__r1]
- 0422 6B00              rlc [__r0]
- 0424 060000            add [__r1],<_GainIndx
- 0427 0E0000            adc [__r0],>_GainIndx
- 042A 5100              mov A,[__r0]
- 042C 60D4              mov REG[0xd4],A
- 042E 3E00              mvi A,[__r1]
- 0430 5300              mov [__r0],A
- 0432 5000              mov A,0
- 0434 3A00              cmp A,[__r0]
- 0436 D066              jnc L32
- 0438           X17:
- 0438                   .dbline 108
- 0438           ;       {
- 0438                   .dbline 109
- 0438           ;               GainIndx[PortIndx][0]--;
- 0438 62D000            mov REG[0xd0],>_PortIndx
- 043B 5100              mov A,[_PortIndx]
- 043D 62D000            mov REG[0xd0],>__r0
- 0440 5300              mov [__r1],A
- 0442 550000            mov [__r0],0
- 0445 6500              asl [__r1]
- 0447 6B00              rlc [__r0]
- 0449 060000            add [__r1],<_GainIndx
- 044C 0E0000            adc [__r0],>_GainIndx
- 044F 5100              mov A,[__r0]
- 0451 60D4              mov REG[0xd4],A
- 0453 3E00              mvi A,[__r1]
- 0455 7A00              dec [__r1]
- 0457 5300              mov [__r2],A
- 0459 160001            sub [__r2],1
- 045C 5100              mov A,[__r0]
- 045E 60D5              mov REG[0xd5],A
- 0460 5100              mov A,[__r2]
- 0462 3F00              mvi [__r1],A
- 0464                   .dbline 110
- 0464           ;               PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
- 0464 62D000            mov REG[0xd0],>_PortIndx
- 0467 5100              mov A,[_PortIndx]
- 0469 62D000            mov REG[0xd0],>__r0
- 046C 5300              mov [__r1],A
- 046E 550000            mov [__r0],0
- 0471 6500              asl [__r1]
- 0473 6B00              rlc [__r0]
- 0475 060000            add [__r1],<_GainIndx
- 0478 0E0000            adc [__r0],>_GainIndx
- 047B 5100              mov A,[__r0]
- 047D 60D4              mov REG[0xd4],A
- 047F 3E00              mvi A,[__r1]
- 0481 5300              mov [__r1],A
- 0483 550000            mov [__r0],0
- 0486 6500              asl [__r1]
- 0488 6B00              rlc [__r0]
- 048A 060000            add [__r1],<_GF
- 048D 0E0000            adc [__r0],>_GF
- 0490 5100              mov A,[__r0]
- 0492 60D4              mov REG[0xd4],A
- 0494 3E00              mvi A,[__r1]
- 0496 10                push X
- 0497 7C0000            xcall _PGA_pre_SetGain
- 049A 20                pop X
- 049B                   .dbline 111
- 049B           ;       }
- 049B 81A5              xjmp L33
- 049D           L32:
- 049D                   .dbline 112
- 049D           ;       else if((MesValue[PortIndx][2] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX))// PGA_out
- 049D 62D000            mov REG[0xd0],>_PortIndx
- 04A0 5100              mov A,[_PortIndx]
- 04A2 62D000            mov REG[0xd0],>__r0
- 04A5 5300              mov [__r1],A
- 04A7 5000              mov A,0
- 04A9 08                push A
- 04AA 5100              mov A,[__r1]
- 04AC 08                push A
- 04AD 5000              mov A,0
- 04AF 08                push A
- 04B0 500C              mov A,12
- 04B2 08                push A
- 04B3 7C0000            xcall __mul16
- 04B6 38FC              add SP,-4
- 04B8 5100              mov A,[__rX]
- 04BA 5300              mov [__r1],A
- 04BC 5100              mov A,[__rY]
- 04BE 5300              mov [__r0],A
- 04C0 060008            add [__r1],<_MesValue+8
- 04C3 0E0008            adc [__r0],>_MesValue+8
- 04C6 5100              mov A,[__r0]
- 04C8 60D4              mov REG[0xd4],A
- 04CA 3E00              mvi A,[__r1]
- 04CC 5300              mov [__r4],A
- 04CE 3E00              mvi A,[__r1]
- 04D0 5300              mov [__r5],A
- 04D2 3E00              mvi A,[__r1]
- 04D4 5300              mov [__r6],A
- 04D6 3E00              mvi A,[__r1]
- 04D8 1150              sub A,80
- 04DA 5100              mov A,[__r6]
- 04DC 19C3              sbb A,-61
- 04DE 5100              mov A,[__r5]
- 04E0 1900              sbb A,0
- 04E2 5100              mov A,[__r4]
- 04E4 3180              xor A,-128
- 04E6 1980              sbb A,(0 ^ 0x80)
- 04E8 D087              jnc L35
- 04EA           X18:
- 04EA 62D000            mov REG[0xd0],>_PortIndx
- 04ED 5100              mov A,[_PortIndx]
- 04EF 62D000            mov REG[0xd0],>__r0
- 04F2 5300              mov [__r1],A
- 04F4 550000            mov [__r0],0
- 04F7 6500              asl [__r1]
- 04F9 6B00              rlc [__r0]
- 04FB 060001            add [__r1],<_GainIndx+1
- 04FE 0E0001            adc [__r0],>_GainIndx+1
- 0501 5100              mov A,[__r0]
- 0503 60D4              mov REG[0xd4],A
- 0505 3E00              mvi A,[__r1]
- 0507 3904              cmp A,4
- 0509 D066              jnc L35
- 050B           X19:
- 050B                   .dbline 113
- 050B           ;       {
- 050B                   .dbline 114
- 050B           ;               GainIndx[PortIndx][1]++;
- 050B 62D000            mov REG[0xd0],>_PortIndx
- 050E 5100              mov A,[_PortIndx]
- 0510 62D000            mov REG[0xd0],>__r0
- 0513 5300              mov [__r1],A
- 0515 550000            mov [__r0],0
- 0518 6500              asl [__r1]
- 051A 6B00              rlc [__r0]
- 051C 060001            add [__r1],<_GainIndx+1
- 051F 0E0001            adc [__r0],>_GainIndx+1
- 0522 5100              mov A,[__r0]
- 0524 60D4              mov REG[0xd4],A
- 0526 3E00              mvi A,[__r1]
- 0528 7A00              dec [__r1]
- 052A 5300              mov [__r2],A
- 052C 060001            add [__r2],1
- 052F 5100              mov A,[__r0]
- 0531 60D5              mov REG[0xd5],A
- 0533 5100              mov A,[__r2]
- 0535 3F00              mvi [__r1],A
- 0537                   .dbline 115
- 0537           ;               PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
- 0537 62D000            mov REG[0xd0],>_PortIndx
- 053A 5100              mov A,[_PortIndx]
- 053C 62D000            mov REG[0xd0],>__r0
- 053F 5300              mov [__r1],A
- 0541 550000            mov [__r0],0
- 0544 6500              asl [__r1]
- 0546 6B00              rlc [__r0]
- 0548 060001            add [__r1],<_GainIndx+1
- 054B 0E0001            adc [__r0],>_GainIndx+1
- 054E 5100              mov A,[__r0]
- 0550 60D4              mov REG[0xd4],A
- 0552 3E00              mvi A,[__r1]
- 0554 5300              mov [__r1],A
- 0556 550000            mov [__r0],0
- 0559 6500              asl [__r1]
- 055B 6B00              rlc [__r0]
- 055D 060000            add [__r1],<_GF
- 0560 0E0000            adc [__r0],>_GF
- 0563 5100              mov A,[__r0]
- 0565 60D4              mov REG[0xd4],A
- 0567 3E00              mvi A,[__r1]
- 0569 10                push X
- 056A 7C0000            xcall _PGA_out_SetGain
- 056D 20                pop X
- 056E                   .dbline 116
- 056E           ;       }
- 056E 80D2              xjmp L36
- 0570           L35:
- 0570                   .dbline 117
- 0570           ;       else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX))// PGA_pre
- 0570 62D000            mov REG[0xd0],>_PortIndx
- 0573 5100              mov A,[_PortIndx]
- 0575 62D000            mov REG[0xd0],>__r0
- 0578 5300              mov [__r1],A
- 057A 5000              mov A,0
- 057C 08                push A
- 057D 5100              mov A,[__r1]
- 057F 08                push A
- 0580 5000              mov A,0
- 0582 08                push A
- 0583 500C              mov A,12
- 0585 08                push A
- 0586 7C0000            xcall __mul16
- 0589 38FC              add SP,-4
- 058B 5100              mov A,[__rX]
- 058D 5300              mov [__r1],A
- 058F 5100              mov A,[__rY]
- 0591 5300              mov [__r0],A
- 0593 060004            add [__r1],<_MesValue+4
- 0596 0E0004            adc [__r0],>_MesValue+4
- 0599 5100              mov A,[__r0]
- 059B 60D4              mov REG[0xd4],A
- 059D 3E00              mvi A,[__r1]
- 059F 5300              mov [__r4],A
- 05A1 3E00              mvi A,[__r1]
- 05A3 5300              mov [__r5],A
- 05A5 3E00              mvi A,[__r1]
- 05A7 5300              mov [__r6],A
- 05A9 3E00              mvi A,[__r1]
- 05AB 1150              sub A,80
- 05AD 5100              mov A,[__r6]
- 05AF 19C3              sbb A,-61
- 05B1 5100              mov A,[__r5]
- 05B3 1900              sbb A,0
- 05B5 5100              mov A,[__r4]
- 05B7 3180              xor A,-128
- 05B9 1980              sbb A,(0 ^ 0x80)
- 05BB D085              jnc L41
- 05BD           X20:
- 05BD 62D000            mov REG[0xd0],>_PortIndx
- 05C0 5100              mov A,[_PortIndx]
- 05C2 62D000            mov REG[0xd0],>__r0
- 05C5 5300              mov [__r1],A
- 05C7 550000            mov [__r0],0
- 05CA 6500              asl [__r1]
- 05CC 6B00              rlc [__r0]
- 05CE 060000            add [__r1],<_GainIndx
- 05D1 0E0000            adc [__r0],>_GainIndx
- 05D4 5100              mov A,[__r0]
- 05D6 60D4              mov REG[0xd4],A
- 05D8 3E00              mvi A,[__r1]
- 05DA 3904              cmp A,4
- 05DC D064              jnc L41
- 05DE           X21:
- 05DE                   .dbline 118
- 05DE           ;       {
- 05DE                   .dbline 119
- 05DE           ;               GainIndx[PortIndx][0]++;
- 05DE 62D000            mov REG[0xd0],>_PortIndx
- 05E1 5100              mov A,[_PortIndx]
- 05E3 62D000            mov REG[0xd0],>__r0
- 05E6 5300              mov [__r1],A
- 05E8 550000            mov [__r0],0
- 05EB 6500              asl [__r1]
- 05ED 6B00              rlc [__r0]
- 05EF 060000            add [__r1],<_GainIndx
- 05F2 0E0000            adc [__r0],>_GainIndx
- 05F5 5100              mov A,[__r0]
- 05F7 60D4              mov REG[0xd4],A
- 05F9 3E00              mvi A,[__r1]
- 05FB 7A00              dec [__r1]
- 05FD 5300              mov [__r2],A
- 05FF 060001            add [__r2],1
- 0602 5100              mov A,[__r0]
- 0604 60D5              mov REG[0xd5],A
- 0606 5100              mov A,[__r2]
- 0608 3F00              mvi [__r1],A
- 060A                   .dbline 120
- 060A           ;               PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
- 060A 62D000            mov REG[0xd0],>_PortIndx
- 060D 5100              mov A,[_PortIndx]
- 060F 62D000            mov REG[0xd0],>__r0
- 0612 5300              mov [__r1],A
- 0614 550000            mov [__r0],0
- 0617 6500              asl [__r1]
- 0619 6B00              rlc [__r0]
- 061B 060000            add [__r1],<_GainIndx
- 061E 0E0000            adc [__r0],>_GainIndx
- 0621 5100              mov A,[__r0]
- 0623 60D4              mov REG[0xd4],A
- 0625 3E00              mvi A,[__r1]
- 0627 5300              mov [__r1],A
- 0629 550000            mov [__r0],0
- 062C 6500              asl [__r1]
- 062E 6B00              rlc [__r0]
- 0630 060000            add [__r1],<_GF
- 0633 0E0000            adc [__r0],>_GF
- 0636 5100              mov A,[__r0]
- 0638 60D4              mov REG[0xd4],A
- 063A 3E00              mvi A,[__r1]
- 063C 10                push X
- 063D 7C0000            xcall _PGA_pre_SetGain
- 0640 20                pop X
- 0641                   .dbline 121
- 0641           ;       }       
- 0641           L41:
- 0641           L36:
- 0641           L33:
- 0641           L27:
- 0641                   .dbline -2
- 0641           L25:
- 0641                   .dbline 0 ; func end
- 0641 7F                ret
- 0642                   .dbend
- 0642                   .dbfunc e DigitalOut _DigitalOut fV
- 0642           _DigitalOut::
- 0642                   .dbline -1
- 0642                   .dbline 125
- 0642           ; }
- 0642           ; 
- 0642           ; void DigitalOut(void)
- 0642           ; {// Controls the outputs according to pot setting point
- 0642                   .dbline 126
- 0642           ;       DIGITAL_OUT_Off();
- 0642 10                push X
- 0643 7C0000            xcall _DIGITAL_OUT_Off
- 0646 20                pop X
- 0647                   .dbline 127
- 0647           ;       if (MesValue[0][0]>PotValue)
- 0647 62D000            mov REG[0xd0],>_PotValue
- 064A 5103              mov A,[_PotValue+3]
- 064C 62D000            mov REG[0xd0],>_MesValue
- 064F 1203              sub A,[_MesValue+3]
- 0651 62D000            mov REG[0xd0],>_PotValue
- 0654 5102              mov A,[_PotValue+2]
- 0656 62D000            mov REG[0xd0],>_MesValue
- 0659 1A02              sbb A,[_MesValue+2]
- 065B 62D000            mov REG[0xd0],>_PotValue
- 065E 5101              mov A,[_PotValue+1]
- 0660 62D000            mov REG[0xd0],>_MesValue
- 0663 1A01              sbb A,[_MesValue+1]
- 0665 5100              mov A,[_MesValue]
- 0667 3180              xor A,-128
- 0669 62D000            mov REG[0xd0],>__r0
- 066C 5300              mov [__rX],A
- 066E 62D000            mov REG[0xd0],>_PotValue
- 0671 5100              mov A,[_PotValue]
- 0673 3180              xor A,-128
- 0675 62D000            mov REG[0xd0],>__r0
- 0678 1A00              sbb A,[__rX]
- 067A D00B              jnc L45
- 067C           X22:
- 067C                   .dbline 128
- 067C           ;       {
- 067C                   .dbline 129
- 067C           ;               DIGITAL_OUT_On();
- 067C 10                push X
- 067D 7C0000            xcall _DIGITAL_OUT_On
- 0680                   .dbline 130
- 0680           ;               LED_1_On();
- 0680 7C0000            xcall _LED_1_On
- 0683 20                pop X
- 0684                   .dbline 131
- 0684           ;       }
- 0684 8006              xjmp L46
- 0686           L45:
- 0686                   .dbline 133
- 0686           ;       else
- 0686           ;       {
- 0686                   .dbline 134
- 0686           ;               LED_1_Off();
- 0686 10                push X
- 0687 7C0000            xcall _LED_1_Off
- 068A 20                pop X
- 068B                   .dbline 135
- 068B           ;       }
- 068B           L46:
- 068B                   .dbline 137
- 068B           ;               
- 068B           ;       if (MesValue[1][0]>PotValue)
- 068B 62D000            mov REG[0xd0],>_PotValue
- 068E 5103              mov A,[_PotValue+3]
- 0690 62D000            mov REG[0xd0],>_MesValue
- 0693 120F              sub A,[_MesValue+12+3]
- 0695 62D000            mov REG[0xd0],>_PotValue
- 0698 5102              mov A,[_PotValue+2]
- 069A 62D000            mov REG[0xd0],>_MesValue
- 069D 1A0E              sbb A,[_MesValue+12+2]
- 069F 62D000            mov REG[0xd0],>_PotValue
- 06A2 5101              mov A,[_PotValue+1]
- 06A4 62D000            mov REG[0xd0],>_MesValue
- 06A7 1A0D              sbb A,[_MesValue+12+1]
- 06A9 510C              mov A,[_MesValue+12]
- 06AB 3180              xor A,-128
- 06AD 62D000            mov REG[0xd0],>__r0
- 06B0 5300              mov [__rX],A
- 06B2 62D000            mov REG[0xd0],>_PotValue
- 06B5 5100              mov A,[_PotValue]
- 06B7 3180              xor A,-128
- 06B9 62D000            mov REG[0xd0],>__r0
- 06BC 1A00              sbb A,[__rX]
- 06BE D00B              jnc L47
- 06C0           X23:
- 06C0                   .dbline 138
- 06C0           ;       {
- 06C0                   .dbline 139
- 06C0           ;               DIGITAL_OUT_On();
- 06C0 10                push X
- 06C1 7C0000            xcall _DIGITAL_OUT_On
- 06C4                   .dbline 140
- 06C4           ;               LED_2_On();
- 06C4 7C0000            xcall _LED_2_On
- 06C7 20                pop X
- 06C8                   .dbline 141
- 06C8           ;       }
- 06C8 8006              xjmp L48
- 06CA           L47:
- 06CA                   .dbline 143
- 06CA           ;       else
- 06CA           ;       {
- 06CA                   .dbline 144
- 06CA           ;               LED_2_Off();
- 06CA 10                push X
- 06CB 7C0000            xcall _LED_2_Off
- 06CE 20                pop X
- 06CF                   .dbline 145
- 06CF           ;       }
- 06CF           L48:
- 06CF                   .dbline 147
- 06CF           ;       
- 06CF           ;       if (MesValue[2][0]>PotValue)
- 06CF 62D000            mov REG[0xd0],>_PotValue
- 06D2 5103              mov A,[_PotValue+3]
- 06D4 62D000            mov REG[0xd0],>_MesValue
- 06D7 121B              sub A,[_MesValue+24+3]
- 06D9 62D000            mov REG[0xd0],>_PotValue
- 06DC 5102              mov A,[_PotValue+2]
- 06DE 62D000            mov REG[0xd0],>_MesValue
- 06E1 1A1A              sbb A,[_MesValue+24+2]
- 06E3 62D000            mov REG[0xd0],>_PotValue
- 06E6 5101              mov A,[_PotValue+1]
- 06E8 62D000            mov REG[0xd0],>_MesValue
- 06EB 1A19              sbb A,[_MesValue+24+1]
- 06ED 5118              mov A,[_MesValue+24]
- 06EF 3180              xor A,-128
- 06F1 62D000            mov REG[0xd0],>__r0
- 06F4 5300              mov [__rX],A
- 06F6 62D000            mov REG[0xd0],>_PotValue
- 06F9 5100              mov A,[_PotValue]
- 06FB 3180              xor A,-128
- 06FD 62D000            mov REG[0xd0],>__r0
- 0700 1A00              sbb A,[__rX]
- 0702 D00B              jnc L50
- 0704           X24:
- 0704                   .dbline 148
- 0704           ;       {
- 0704                   .dbline 149
- 0704           ;               DIGITAL_OUT_On();
- 0704 10                push X
- 0705 7C0000            xcall _DIGITAL_OUT_On
- 0708                   .dbline 150
- 0708           ;               LED_3_On();
- 0708 7C0000            xcall _LED_3_On
- 070B 20                pop X
- 070C                   .dbline 151
- 070C           ;       }
- 070C 8006              xjmp L51
- 070E           L50:
- 070E                   .dbline 153
- 070E           ;       else
- 070E           ;       {
- 070E                   .dbline 154
- 070E           ;               LED_3_Off();
- 070E 10                push X
- 070F 7C0000            xcall _LED_3_Off
- 0712 20                pop X
- 0713                   .dbline 155
- 0713           ;       }
- 0713           L51:
- 0713                   .dbline -2
- 0713           L44:
- 0713                   .dbline 0 ; func end
- 0713 7F                ret
- 0714                   .dbend
- 0714                   .dbfunc e UartTxValues _UartTxValues fV
- 0714           _UartTxValues::
- 0714                   .dbline -1
- 0714                   .dbline 159
- 0714           ; }
- 0714           ; 
- 0714           ; void UartTxValues(void)
- 0714           ; {/* Transmit via UART the analog values read from various inputs.
- 0714                   .dbline 164
- 0714           ;       Usefull for debugging purposes, it could be converted in a
- 0714           ;       command string using the same protocol used for dsNav if
- 0714           ;       needed to output sound level values via serial comm
- 0714           ; */
- 0714           ;       TX8_CPutString("\n\r");
- 0714 10                push X
- 0715 504A              mov A,>L54
- 0717 08                push A
- 0718 504A              mov A,<L54
- 071A 5C                mov X,A
- 071B 18                pop A
- 071C 7C0000            xcall _TX8_CPutString
- 071F 20                pop X
- 0720                   .dbline 171
- 0720           ;       
- 0720           ; /*    TX8_CPutString("Pot Value = ");
- 0720           ;       itoa(str, PotValue,10);
- 0720           ;       TX8_PutString(str);
- 0720           ; */
- 0720           ; 
- 0720           ;       TX8_CPutString("    Mes Value: 1 = ");
- 0720 10                push X
- 0721 5036              mov A,>L55
- 0723 08                push A
- 0724 5036              mov A,<L55
- 0726 5C                mov X,A
- 0727 18                pop A
- 0728 7C0000            xcall _TX8_CPutString
- 072B 20                pop X
- 072C                   .dbline 172
- 072C           ;       ltoa(str, MesValue[0][0],10);
- 072C 5000              mov A,0
- 072E 08                push A
- 072F 500A              mov A,10
+ 0167 550000            mov [__r2],0
+ 016A 6500              asl [__r3]
+ 016C 6B00              rlc [__r2]
+ 016E 060001            add [__r3],<_GF+1
+ 0171 0E0001            adc [__r2],>_GF+1
+ 0174 5100              mov A,[__r2]
+ 0176 60D4              mov REG[0xd4],A
+ 0178 3E00              mvi A,[__r3]
+ 017A 5300              mov [__r7],A
+ 017C 5100              mov A,[__r1]
+ 017E 0108              add A,<_MesValue+8
+ 0180 5300              mov [__r3],A
+ 0182 5100              mov A,[__r0]
+ 0184 0908              adc A,>_MesValue+8
+ 0186 60D4              mov REG[0xd4],A
+ 0188 3E00              mvi A,[__r3]
+ 018A 5300              mov [__r8],A
+ 018C 3E00              mvi A,[__r3]
+ 018E 5300              mov [__r9],A
+ 0190 3E00              mvi A,[__r3]
+ 0192 5300              mov [__r10],A
+ 0194 3E00              mvi A,[__r3]
+ 0196 5300              mov [__r11],A
+ 0198 5000              mov A,0
+ 019A 08                push A
+ 019B 08                push A
+ 019C 08                push A
+ 019D 5100              mov A,[__r7]
+ 019F 08                push A
+ 01A0 5100              mov A,[__r8]
+ 01A2 08                push A
+ 01A3 5100              mov A,[__r9]
+ 01A5 08                push A
+ 01A6 5100              mov A,[__r10]
+ 01A8 08                push A
+ 01A9 5100              mov A,[__r11]
+ 01AB 08                push A
+ 01AC 7C0000            xcall __divmod_32X32_32
+ 01AF 18                pop A
+ 01B0 5300              mov [__r7],A
+ 01B2 18                pop A
+ 01B3 5300              mov [__r6],A
+ 01B5 18                pop A
+ 01B6 5300              mov [__r5],A
+ 01B8 18                pop A
+ 01B9 5300              mov [__r4],A
+ 01BB 38FC              add SP,-4
+ 01BD 060004            add [__r1],<_MesValue+4
+ 01C0 0E0004            adc [__r0],>_MesValue+4
+ 01C3 5100              mov A,[__r0]
+ 01C5 60D5              mov REG[0xd5],A
+ 01C7 5100              mov A,[__r4]
+ 01C9 3F00              mvi [__r1],A
+ 01CB 5100              mov A,[__r5]
+ 01CD 3F00              mvi [__r1],A
+ 01CF 5100              mov A,[__r6]
+ 01D1 3F00              mvi [__r1],A
+ 01D3 5100              mov A,[__r7]
+ 01D5 3F00              mvi [__r1],A
+ 01D7                   .dbline 70
+ 01D7           ;                       MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]                      
+ 01D7 62D000            mov REG[0xd0],>_PortIndx
+ 01DA 5100              mov A,[_PortIndx]
+ 01DC 62D000            mov REG[0xd0],>__r0
+ 01DF 5300              mov [__r1],A
+ 01E1 5000              mov A,0
+ 01E3 08                push A
+ 01E4 5100              mov A,[__r1]
+ 01E6 08                push A
+ 01E7 5000              mov A,0
+ 01E9 08                push A
+ 01EA 500C              mov A,12
+ 01EC 08                push A
+ 01ED 7C0000            xcall __mul16
+ 01F0 38FC              add SP,-4
+ 01F2 5100              mov A,[__rX]
+ 01F4 5300              mov [__r1],A
+ 01F6 5100              mov A,[__rY]
+ 01F8 5300              mov [__r0],A
+ 01FA 62D000            mov REG[0xd0],>_PortIndx
+ 01FD 5100              mov A,[_PortIndx]
+ 01FF 62D000            mov REG[0xd0],>__r0
+ 0202 5300              mov [__r3],A
+ 0204 550000            mov [__r2],0
+ 0207 6500              asl [__r3]
+ 0209 6B00              rlc [__r2]
+ 020B 060000            add [__r3],<_GainIndx
+ 020E 0E0000            adc [__r2],>_GainIndx
+ 0211 5100              mov A,[__r2]
+ 0213 60D4              mov REG[0xd4],A
+ 0215 3E00              mvi A,[__r3]
+ 0217 5300              mov [__r3],A
+ 0219 550000            mov [__r2],0
+ 021C 6500              asl [__r3]
+ 021E 6B00              rlc [__r2]
+ 0220 060001            add [__r3],<_GF+1
+ 0223 0E0001            adc [__r2],>_GF+1
+ 0226 5100              mov A,[__r2]
+ 0228 60D4              mov REG[0xd4],A
+ 022A 3E00              mvi A,[__r3]
+ 022C 5300              mov [__r7],A
+ 022E 5100              mov A,[__r1]
+ 0230 0104              add A,<_MesValue+4
+ 0232 5300              mov [__r3],A
+ 0234 5100              mov A,[__r0]
+ 0236 0904              adc A,>_MesValue+4
+ 0238 60D4              mov REG[0xd4],A
+ 023A 3E00              mvi A,[__r3]
+ 023C 5300              mov [__r8],A
+ 023E 3E00              mvi A,[__r3]
+ 0240 5300              mov [__r9],A
+ 0242 3E00              mvi A,[__r3]
+ 0244 5300              mov [__r10],A
+ 0246 3E00              mvi A,[__r3]
+ 0248 5300              mov [__r11],A
+ 024A 5000              mov A,0
+ 024C 08                push A
+ 024D 08                push A
+ 024E 08                push A
+ 024F 5100              mov A,[__r7]
+ 0251 08                push A
+ 0252 5100              mov A,[__r8]
+ 0254 08                push A
+ 0255 5100              mov A,[__r9]
+ 0257 08                push A
+ 0258 5100              mov A,[__r10]
+ 025A 08                push A
+ 025B 5100              mov A,[__r11]
+ 025D 08                push A
+ 025E 7C0000            xcall __divmod_32X32_32
+ 0261 18                pop A
+ 0262 5300              mov [__r7],A
+ 0264 18                pop A
+ 0265 5300              mov [__r6],A
+ 0267 18                pop A
+ 0268 5300              mov [__r5],A
+ 026A 18                pop A
+ 026B 5300              mov [__r4],A
+ 026D 38FC              add SP,-4
+ 026F 060000            add [__r1],<_MesValue
+ 0272 0E0000            adc [__r0],>_MesValue
+ 0275 5100              mov A,[__r0]
+ 0277 60D5              mov REG[0xd5],A
+ 0279 5100              mov A,[__r4]
+ 027B 3F00              mvi [__r1],A
+ 027D 5100              mov A,[__r5]
+ 027F 3F00              mvi [__r1],A
+ 0281 5100              mov A,[__r6]
+ 0283 3F00              mvi [__r1],A
+ 0285 5100              mov A,[__r7]
+ 0287 3F00              mvi [__r1],A
+ 0289                   .dbline 72
+ 0289           ;                       
+ 0289           ;                       AGC(); 
+ 0289 906E              xcall _AGC
+ 028B                   .dbline 74
+ 028B           ;                       
+ 028B           ;                       PortIndx++;
+ 028B 62D000            mov REG[0xd0],>_PortIndx
+ 028E 7600              inc [_PortIndx]
+ 0290                   .dbline 75
+ 0290           ;                       if(PortIndx > 2) 
+ 0290 5002              mov A,2
+ 0292 3A00              cmp A,[_PortIndx]
+ 0294 D007              jnc L21
+ 0296           X8:
+ 0296                   .dbline 76
+ 0296           ;                       {
+ 0296                   .dbline 77
+ 0296           ;                               PortIndx=0; // next mux port
+ 0296 62D000            mov REG[0xd0],>_PortIndx
+ 0299 550000            mov [_PortIndx],0
+ 029C                   .dbline 78
+ 029C           ;                       }
+ 029C           L21:
+ 029C                   .dbline 79
+ 029C           ;                       AMUX4_mic_InputSelect(PortNum[PortIndx]);
+ 029C 62D000            mov REG[0xd0],>__r0
+ 029F 550007            mov [__r0],7
+ 02A2 5A00              mov [__r1],X
+ 02A4 62D000            mov REG[0xd0],>_PortIndx
+ 02A7 5100              mov A,[_PortIndx]
+ 02A9 62D000            mov REG[0xd0],>__r0
+ 02AC 0200              add A,[__r1]
+ 02AE 5300              mov [__r1],A
+ 02B0 5000              mov A,0
+ 02B2 0A00              adc A,[__r0]
+ 02B4 60D4              mov REG[0xd4],A
+ 02B6 3E00              mvi A,[__r1]
+ 02B8 10                push X
+ 02B9 7C0000            xcall _AMUX4_mic_InputSelect
+ 02BC 20                pop X
+ 02BD                   .dbline 80
+ 02BD           ;               }
+ 02BD           L9:
+ 02BD                   .dbline 82
+ 02BD           ;               
+ 02BD           ;               if (TmrFlag) // every 10ms
+ 02BD 62D000            mov REG[0xd0],>_TmrFlag
+ 02C0 3C0000            cmp [_TmrFlag],0
+ 02C3 A00B              jz L23
+ 02C5                   .dbline 83
+ 02C5           ;               {       
+ 02C5                   .dbline 84
+ 02C5           ;                       TmrFlag = 0;
+ 02C5 550000            mov [_TmrFlag],0
+ 02C8                   .dbline 85
+ 02C8           ;                       ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample
+ 02C8 10                push X
+ 02C9 5001              mov A,1
+ 02CB 7C0000            xcall _ADCINCVR_pot_GetSamples
+ 02CE 20                pop X
+ 02CF                   .dbline 86
+ 02CF           ;               }
+ 02CF           L23:
+ 02CF                   .dbline 88
+ 02CF           ;               
+ 02CF           ;               if (Tmr1 > 9) // every 100ms
+ 02CF 62D000            mov REG[0xd0],>_Tmr1
+ 02D2 5009              mov A,9
+ 02D4 1201              sub A,[_Tmr1+1]
+ 02D6 5000              mov A,0
+ 02D8 1A00              sbb A,[_Tmr1]
+ 02DA D017              jnc L25
+ 02DC           X9:
+ 02DC                   .dbline 89
+ 02DC           ;               {
+ 02DC                   .dbline 90
+ 02DC           ;                       Tmr1 = 0;
+ 02DC 62D000            mov REG[0xd0],>_Tmr1
+ 02DF 550100            mov [_Tmr1+1],0
+ 02E2 550000            mov [_Tmr1],0
+ 02E5                   .dbline 91
+ 02E5           ;                       Tmr2 = 0;
+ 02E5 62D000            mov REG[0xd0],>_Tmr2
+ 02E8 550100            mov [_Tmr2+1],0
+ 02EB 550000            mov [_Tmr2],0
+ 02EE                   .dbline 92
+ 02EE           ;                       UartTxValues(); // debug
+ 02EE 943E              xcall _UartTxValues
+ 02F0                   .dbline 93
+ 02F0           ;                       DigitalOut();
+ 02F0 936A              xcall _DigitalOut
+ 02F2                   .dbline 94
+ 02F2           ;               }
+ 02F2           L25:
+ 02F2                   .dbline 95
+ 02F2           ;       }// ========================================================== Main loop 
+ 02F2           L5:
+ 02F2                   .dbline 53
+ 02F2 8D29              xjmp L4
+ 02F4           X0:
+ 02F4                   .dbline -2
+ 02F4           L1:
+ 02F4 38FD              add SP,-3
+ 02F6 20                pop X
+ 02F7                   .dbline 0 ; func end
+ 02F7 8FFF              jmp .
+ 02F9                   .dbsym l PortNum 0 A[3:3]c
+ 02F9                   .dbend
+ 02F9                   .dbfunc e AGC _AGC fV
+ 02F9           _AGC::
+ 02F9                   .dbline -1
+ 02F9                   .dbline 101
+ 02F9           ; }
+ 02F9           ; 
+ 02F9           ; // Functions ***************************************************************
+ 02F9           ; 
+ 02F9           ; void AGC(void)
+ 02F9           ; {// [5]
+ 02F9                   .dbline 102
+ 02F9           ;            if((MesValue[PortIndx][2] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN))// PGA_out
+ 02F9 62D000            mov REG[0xd0],>_PortIndx
+ 02FC 5100              mov A,[_PortIndx]
+ 02FE 62D000            mov REG[0xd0],>__r0
+ 0301 5300              mov [__r1],A
+ 0303 5000              mov A,0
+ 0305 08                push A
+ 0306 5100              mov A,[__r1]
+ 0308 08                push A
+ 0309 5000              mov A,0
+ 030B 08                push A
+ 030C 500C              mov A,12
+ 030E 08                push A
+ 030F 7C0000            xcall __mul16
+ 0312 38FC              add SP,-4
+ 0314 5100              mov A,[__rX]
+ 0316 5300              mov [__r1],A
+ 0318 5100              mov A,[__rY]
+ 031A 5300              mov [__r0],A
+ 031C 060008            add [__r1],<_MesValue+8
+ 031F 0E0008            adc [__r0],>_MesValue+8
+ 0322 5100              mov A,[__r0]
+ 0324 60D4              mov REG[0xd4],A
+ 0326 3E00              mvi A,[__r1]
+ 0328 5300              mov [__r4],A
+ 032A 3E00              mvi A,[__r1]
+ 032C 5300              mov [__r5],A
+ 032E 3E00              mvi A,[__r1]
+ 0330 5300              mov [__r6],A
+ 0332 3E00              mvi A,[__r1]
+ 0334 5300              mov [__r7],A
+ 0336 5040              mov A,64
+ 0338 1200              sub A,[__r7]
+ 033A 500D              mov A,13
+ 033C 1A00              sbb A,[__r6]
+ 033E 5003              mov A,3
+ 0340 1A00              sbb A,[__r5]
+ 0342 5100              mov A,[__r4]
+ 0344 3180              xor A,-128
+ 0346 5300              mov [__rX],A
+ 0348 5080              mov A,(0 ^ 0x80)
+ 034A 1A00              sbb A,[__rX]
+ 034C D08B              jnc L28
+ 034E           X10:
+ 034E 62D000            mov REG[0xd0],>_PortIndx
+ 0351 5100              mov A,[_PortIndx]
+ 0353 62D000            mov REG[0xd0],>__r0
+ 0356 5300              mov [__r1],A
+ 0358 550000            mov [__r0],0
+ 035B 6500              asl [__r1]
+ 035D 6B00              rlc [__r0]
+ 035F 060001            add [__r1],<_GainIndx+1
+ 0362 0E0001            adc [__r0],>_GainIndx+1
+ 0365 5100              mov A,[__r0]
+ 0367 60D4              mov REG[0xd4],A
+ 0369 3E00              mvi A,[__r1]
+ 036B 5300              mov [__r0],A
+ 036D 5000              mov A,0
+ 036F 3A00              cmp A,[__r0]
+ 0371 D066              jnc L28
+ 0373           X11:
+ 0373                   .dbline 103
+ 0373           ;       {
+ 0373                   .dbline 104
+ 0373           ;               GainIndx[PortIndx][1]--;
+ 0373 62D000            mov REG[0xd0],>_PortIndx
+ 0376 5100              mov A,[_PortIndx]
+ 0378 62D000            mov REG[0xd0],>__r0
+ 037B 5300              mov [__r1],A
+ 037D 550000            mov [__r0],0
+ 0380 6500              asl [__r1]
+ 0382 6B00              rlc [__r0]
+ 0384 060001            add [__r1],<_GainIndx+1
+ 0387 0E0001            adc [__r0],>_GainIndx+1
+ 038A 5100              mov A,[__r0]
+ 038C 60D4              mov REG[0xd4],A
+ 038E 3E00              mvi A,[__r1]
+ 0390 7A00              dec [__r1]
+ 0392 5300              mov [__r2],A
+ 0394 160001            sub [__r2],1
+ 0397 5100              mov A,[__r0]
+ 0399 60D5              mov REG[0xd5],A
+ 039B 5100              mov A,[__r2]
+ 039D 3F00              mvi [__r1],A
+ 039F                   .dbline 105
+ 039F           ;               PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
+ 039F 62D000            mov REG[0xd0],>_PortIndx
+ 03A2 5100              mov A,[_PortIndx]
+ 03A4 62D000            mov REG[0xd0],>__r0
+ 03A7 5300              mov [__r1],A
+ 03A9 550000            mov [__r0],0
+ 03AC 6500              asl [__r1]
+ 03AE 6B00              rlc [__r0]
+ 03B0 060001            add [__r1],<_GainIndx+1
+ 03B3 0E0001            adc [__r0],>_GainIndx+1
+ 03B6 5100              mov A,[__r0]
+ 03B8 60D4              mov REG[0xd4],A
+ 03BA 3E00              mvi A,[__r1]
+ 03BC 5300              mov [__r1],A
+ 03BE 550000            mov [__r0],0
+ 03C1 6500              asl [__r1]
+ 03C3 6B00              rlc [__r0]
+ 03C5 060000            add [__r1],<_GF
+ 03C8 0E0000            adc [__r0],>_GF
+ 03CB 5100              mov A,[__r0]
+ 03CD 60D4              mov REG[0xd4],A
+ 03CF 3E00              mvi A,[__r1]
+ 03D1 10                push X
+ 03D2 7C0000            xcall _PGA_out_SetGain
+ 03D5 20                pop X
+ 03D6                   .dbline 106
+ 03D6           ;       }
+ 03D6 8284              xjmp L29
+ 03D8           L28:
+ 03D8                   .dbline 107
+ 03D8           ;       else if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN))// PGA_pre
+ 03D8 62D000            mov REG[0xd0],>_PortIndx
+ 03DB 5100              mov A,[_PortIndx]
+ 03DD 62D000            mov REG[0xd0],>__r0
+ 03E0 5300              mov [__r1],A
+ 03E2 5000              mov A,0
+ 03E4 08                push A
+ 03E5 5100              mov A,[__r1]
+ 03E7 08                push A
+ 03E8 5000              mov A,0
+ 03EA 08                push A
+ 03EB 500C              mov A,12
+ 03ED 08                push A
+ 03EE 7C0000            xcall __mul16
+ 03F1 38FC              add SP,-4
+ 03F3 5100              mov A,[__rX]
+ 03F5 5300              mov [__r1],A
+ 03F7 5100              mov A,[__rY]
+ 03F9 5300              mov [__r0],A
+ 03FB 060004            add [__r1],<_MesValue+4
+ 03FE 0E0004            adc [__r0],>_MesValue+4
+ 0401 5100              mov A,[__r0]
+ 0403 60D4              mov REG[0xd4],A
+ 0405 3E00              mvi A,[__r1]
+ 0407 5300              mov [__r4],A
+ 0409 3E00              mvi A,[__r1]
+ 040B 5300              mov [__r5],A
+ 040D 3E00              mvi A,[__r1]
+ 040F 5300              mov [__r6],A
+ 0411 3E00              mvi A,[__r1]
+ 0413 5300              mov [__r7],A
+ 0415 5040              mov A,64
+ 0417 1200              sub A,[__r7]
+ 0419 500D              mov A,13
+ 041B 1A00              sbb A,[__r6]
+ 041D 5003              mov A,3
+ 041F 1A00              sbb A,[__r5]
+ 0421 5100              mov A,[__r4]
+ 0423 3180              xor A,-128
+ 0425 5300              mov [__rX],A
+ 0427 5080              mov A,(0 ^ 0x80)
+ 0429 1A00              sbb A,[__rX]
+ 042B D08B              jnc L34
+ 042D           X12:
+ 042D 62D000            mov REG[0xd0],>_PortIndx
+ 0430 5100              mov A,[_PortIndx]
+ 0432 62D000            mov REG[0xd0],>__r0
+ 0435 5300              mov [__r1],A
+ 0437 550000            mov [__r0],0
+ 043A 6500              asl [__r1]
+ 043C 6B00              rlc [__r0]
+ 043E 060000            add [__r1],<_GainIndx
+ 0441 0E0000            adc [__r0],>_GainIndx
+ 0444 5100              mov A,[__r0]
+ 0446 60D4              mov REG[0xd4],A
+ 0448 3E00              mvi A,[__r1]
+ 044A 5300              mov [__r0],A
+ 044C 5000              mov A,0
+ 044E 3A00              cmp A,[__r0]
+ 0450 D066              jnc L34
+ 0452           X13:
+ 0452                   .dbline 108
+ 0452           ;       {
+ 0452                   .dbline 109
+ 0452           ;               GainIndx[PortIndx][0]--;
+ 0452 62D000            mov REG[0xd0],>_PortIndx
+ 0455 5100              mov A,[_PortIndx]
+ 0457 62D000            mov REG[0xd0],>__r0
+ 045A 5300              mov [__r1],A
+ 045C 550000            mov [__r0],0
+ 045F 6500              asl [__r1]
+ 0461 6B00              rlc [__r0]
+ 0463 060000            add [__r1],<_GainIndx
+ 0466 0E0000            adc [__r0],>_GainIndx
+ 0469 5100              mov A,[__r0]
+ 046B 60D4              mov REG[0xd4],A
+ 046D 3E00              mvi A,[__r1]
+ 046F 7A00              dec [__r1]
+ 0471 5300              mov [__r2],A
+ 0473 160001            sub [__r2],1
+ 0476 5100              mov A,[__r0]
+ 0478 60D5              mov REG[0xd5],A
+ 047A 5100              mov A,[__r2]
+ 047C 3F00              mvi [__r1],A
+ 047E                   .dbline 110
+ 047E           ;               PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
+ 047E 62D000            mov REG[0xd0],>_PortIndx
+ 0481 5100              mov A,[_PortIndx]
+ 0483 62D000            mov REG[0xd0],>__r0
+ 0486 5300              mov [__r1],A
+ 0488 550000            mov [__r0],0
+ 048B 6500              asl [__r1]
+ 048D 6B00              rlc [__r0]
+ 048F 060000            add [__r1],<_GainIndx
+ 0492 0E0000            adc [__r0],>_GainIndx
+ 0495 5100              mov A,[__r0]
+ 0497 60D4              mov REG[0xd4],A
+ 0499 3E00              mvi A,[__r1]
+ 049B 5300              mov [__r1],A
+ 049D 550000            mov [__r0],0
+ 04A0 6500              asl [__r1]
+ 04A2 6B00              rlc [__r0]
+ 04A4 060000            add [__r1],<_GF
+ 04A7 0E0000            adc [__r0],>_GF
+ 04AA 5100              mov A,[__r0]
+ 04AC 60D4              mov REG[0xd4],A
+ 04AE 3E00              mvi A,[__r1]
+ 04B0 10                push X
+ 04B1 7C0000            xcall _PGA_pre_SetGain
+ 04B4 20                pop X
+ 04B5                   .dbline 111
+ 04B5           ;       }
+ 04B5 81A5              xjmp L35
+ 04B7           L34:
+ 04B7                   .dbline 112
+ 04B7           ;       else if((MesValue[PortIndx][2] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX))// PGA_out
+ 04B7 62D000            mov REG[0xd0],>_PortIndx
+ 04BA 5100              mov A,[_PortIndx]
+ 04BC 62D000            mov REG[0xd0],>__r0
+ 04BF 5300              mov [__r1],A
+ 04C1 5000              mov A,0
+ 04C3 08                push A
+ 04C4 5100              mov A,[__r1]
+ 04C6 08                push A
+ 04C7 5000              mov A,0
+ 04C9 08                push A
+ 04CA 500C              mov A,12
+ 04CC 08                push A
+ 04CD 7C0000            xcall __mul16
+ 04D0 38FC              add SP,-4
+ 04D2 5100              mov A,[__rX]
+ 04D4 5300              mov [__r1],A
+ 04D6 5100              mov A,[__rY]
+ 04D8 5300              mov [__r0],A
+ 04DA 060008            add [__r1],<_MesValue+8
+ 04DD 0E0008            adc [__r0],>_MesValue+8
+ 04E0 5100              mov A,[__r0]
+ 04E2 60D4              mov REG[0xd4],A
+ 04E4 3E00              mvi A,[__r1]
+ 04E6 5300              mov [__r4],A
+ 04E8 3E00              mvi A,[__r1]
+ 04EA 5300              mov [__r5],A
+ 04EC 3E00              mvi A,[__r1]
+ 04EE 5300              mov [__r6],A
+ 04F0 3E00              mvi A,[__r1]
+ 04F2 1150              sub A,80
+ 04F4 5100              mov A,[__r6]
+ 04F6 19C3              sbb A,-61
+ 04F8 5100              mov A,[__r5]
+ 04FA 1900              sbb A,0
+ 04FC 5100              mov A,[__r4]
+ 04FE 3180              xor A,-128
+ 0500 1980              sbb A,(0 ^ 0x80)
+ 0502 D087              jnc L37
+ 0504           X14:
+ 0504 62D000            mov REG[0xd0],>_PortIndx
+ 0507 5100              mov A,[_PortIndx]
+ 0509 62D000            mov REG[0xd0],>__r0
+ 050C 5300              mov [__r1],A
+ 050E 550000            mov [__r0],0
+ 0511 6500              asl [__r1]
+ 0513 6B00              rlc [__r0]
+ 0515 060001            add [__r1],<_GainIndx+1
+ 0518 0E0001            adc [__r0],>_GainIndx+1
+ 051B 5100              mov A,[__r0]
+ 051D 60D4              mov REG[0xd4],A
+ 051F 3E00              mvi A,[__r1]
+ 0521 3906              cmp A,6
+ 0523 D066              jnc L37
+ 0525           X15:
+ 0525                   .dbline 113
+ 0525           ;       {
+ 0525                   .dbline 114
+ 0525           ;               GainIndx[PortIndx][1]++;
+ 0525 62D000            mov REG[0xd0],>_PortIndx
+ 0528 5100              mov A,[_PortIndx]
+ 052A 62D000            mov REG[0xd0],>__r0
+ 052D 5300              mov [__r1],A
+ 052F 550000            mov [__r0],0
+ 0532 6500              asl [__r1]
+ 0534 6B00              rlc [__r0]
+ 0536 060001            add [__r1],<_GainIndx+1
+ 0539 0E0001            adc [__r0],>_GainIndx+1
+ 053C 5100              mov A,[__r0]
+ 053E 60D4              mov REG[0xd4],A
+ 0540 3E00              mvi A,[__r1]
+ 0542 7A00              dec [__r1]
+ 0544 5300              mov [__r2],A
+ 0546 060001            add [__r2],1
+ 0549 5100              mov A,[__r0]
+ 054B 60D5              mov REG[0xd5],A
+ 054D 5100              mov A,[__r2]
+ 054F 3F00              mvi [__r1],A
+ 0551                   .dbline 115
+ 0551           ;               PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
+ 0551 62D000            mov REG[0xd0],>_PortIndx
+ 0554 5100              mov A,[_PortIndx]
+ 0556 62D000            mov REG[0xd0],>__r0
+ 0559 5300              mov [__r1],A
+ 055B 550000            mov [__r0],0
+ 055E 6500              asl [__r1]
+ 0560 6B00              rlc [__r0]
+ 0562 060001            add [__r1],<_GainIndx+1
+ 0565 0E0001            adc [__r0],>_GainIndx+1
+ 0568 5100              mov A,[__r0]
+ 056A 60D4              mov REG[0xd4],A
+ 056C 3E00              mvi A,[__r1]
+ 056E 5300              mov [__r1],A
+ 0570 550000            mov [__r0],0
+ 0573 6500              asl [__r1]
+ 0575 6B00              rlc [__r0]
+ 0577 060000            add [__r1],<_GF
+ 057A 0E0000            adc [__r0],>_GF
+ 057D 5100              mov A,[__r0]
+ 057F 60D4              mov REG[0xd4],A
+ 0581 3E00              mvi A,[__r1]
+ 0583 10                push X
+ 0584 7C0000            xcall _PGA_out_SetGain
+ 0587 20                pop X
+ 0588                   .dbline 116
+ 0588           ;       }
+ 0588 80D2              xjmp L38
+ 058A           L37:
+ 058A                   .dbline 117
+ 058A           ;       else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX))// PGA_pre
+ 058A 62D000            mov REG[0xd0],>_PortIndx
+ 058D 5100              mov A,[_PortIndx]
+ 058F 62D000            mov REG[0xd0],>__r0
+ 0592 5300              mov [__r1],A
+ 0594 5000              mov A,0
+ 0596 08                push A
+ 0597 5100              mov A,[__r1]
+ 0599 08                push A
+ 059A 5000              mov A,0
+ 059C 08                push A
+ 059D 500C              mov A,12
+ 059F 08                push A
+ 05A0 7C0000            xcall __mul16
+ 05A3 38FC              add SP,-4
+ 05A5 5100              mov A,[__rX]
+ 05A7 5300              mov [__r1],A
+ 05A9 5100              mov A,[__rY]
+ 05AB 5300              mov [__r0],A
+ 05AD 060004            add [__r1],<_MesValue+4
+ 05B0 0E0004            adc [__r0],>_MesValue+4
+ 05B3 5100              mov A,[__r0]
+ 05B5 60D4              mov REG[0xd4],A
+ 05B7 3E00              mvi A,[__r1]
+ 05B9 5300              mov [__r4],A
+ 05BB 3E00              mvi A,[__r1]
+ 05BD 5300              mov [__r5],A
+ 05BF 3E00              mvi A,[__r1]
+ 05C1 5300              mov [__r6],A
+ 05C3 3E00              mvi A,[__r1]
+ 05C5 1150              sub A,80
+ 05C7 5100              mov A,[__r6]
+ 05C9 19C3              sbb A,-61
+ 05CB 5100              mov A,[__r5]
+ 05CD 1900              sbb A,0
+ 05CF 5100              mov A,[__r4]
+ 05D1 3180              xor A,-128
+ 05D3 1980              sbb A,(0 ^ 0x80)
+ 05D5 D085              jnc L43
+ 05D7           X16:
+ 05D7 62D000            mov REG[0xd0],>_PortIndx
+ 05DA 5100              mov A,[_PortIndx]
+ 05DC 62D000            mov REG[0xd0],>__r0
+ 05DF 5300              mov [__r1],A
+ 05E1 550000            mov [__r0],0
+ 05E4 6500              asl [__r1]
+ 05E6 6B00              rlc [__r0]
+ 05E8 060000            add [__r1],<_GainIndx
+ 05EB 0E0000            adc [__r0],>_GainIndx
+ 05EE 5100              mov A,[__r0]
+ 05F0 60D4              mov REG[0xd4],A
+ 05F2 3E00              mvi A,[__r1]
+ 05F4 3906              cmp A,6
+ 05F6 D064              jnc L43
+ 05F8           X17:
+ 05F8                   .dbline 118
+ 05F8           ;       {
+ 05F8                   .dbline 119
+ 05F8           ;               GainIndx[PortIndx][0]++;
+ 05F8 62D000            mov REG[0xd0],>_PortIndx
+ 05FB 5100              mov A,[_PortIndx]
+ 05FD 62D000            mov REG[0xd0],>__r0
+ 0600 5300              mov [__r1],A
+ 0602 550000            mov [__r0],0
+ 0605 6500              asl [__r1]
+ 0607 6B00              rlc [__r0]
+ 0609 060000            add [__r1],<_GainIndx
+ 060C 0E0000            adc [__r0],>_GainIndx
+ 060F 5100              mov A,[__r0]
+ 0611 60D4              mov REG[0xd4],A
+ 0613 3E00              mvi A,[__r1]
+ 0615 7A00              dec [__r1]
+ 0617 5300              mov [__r2],A
+ 0619 060001            add [__r2],1
+ 061C 5100              mov A,[__r0]
+ 061E 60D5              mov REG[0xd5],A
+ 0620 5100              mov A,[__r2]
+ 0622 3F00              mvi [__r1],A
+ 0624                   .dbline 120
+ 0624           ;               PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
+ 0624 62D000            mov REG[0xd0],>_PortIndx
+ 0627 5100              mov A,[_PortIndx]
+ 0629 62D000            mov REG[0xd0],>__r0
+ 062C 5300              mov [__r1],A
+ 062E 550000            mov [__r0],0
+ 0631 6500              asl [__r1]
+ 0633 6B00              rlc [__r0]
+ 0635 060000            add [__r1],<_GainIndx
+ 0638 0E0000            adc [__r0],>_GainIndx
+ 063B 5100              mov A,[__r0]
+ 063D 60D4              mov REG[0xd4],A
+ 063F 3E00              mvi A,[__r1]
+ 0641 5300              mov [__r1],A
+ 0643 550000            mov [__r0],0
+ 0646 6500              asl [__r1]
+ 0648 6B00              rlc [__r0]
+ 064A 060000            add [__r1],<_GF
+ 064D 0E0000            adc [__r0],>_GF
+ 0650 5100              mov A,[__r0]
+ 0652 60D4              mov REG[0xd4],A
+ 0654 3E00              mvi A,[__r1]
+ 0656 10                push X
+ 0657 7C0000            xcall _PGA_pre_SetGain
+ 065A 20                pop X
+ 065B                   .dbline 121
+ 065B           ;       }       
+ 065B           L43:
+ 065B           L38:
+ 065B           L35:
+ 065B           L29:
+ 065B                   .dbline -2
+ 065B           L27:
+ 065B                   .dbline 0 ; func end
+ 065B 7F                ret
+ 065C                   .dbend
+ 065C                   .dbfunc e DigitalOut _DigitalOut fV
+ 065C           _DigitalOut::
+ 065C                   .dbline -1
+ 065C                   .dbline 125
+ 065C           ; }
+ 065C           ; 
+ 065C           ; void DigitalOut(void)
+ 065C           ; {// Controls the outputs according to pot setting point
+ 065C                   .dbline 126
+ 065C           ;       DIGITAL_OUT_Off();
+ 065C 10                push X
+ 065D 7C0000            xcall _DIGITAL_OUT_Off
+ 0660 20                pop X
+ 0661                   .dbline 127
+ 0661           ;       if (MesValue[0][0]>PotValue)
+ 0661 62D000            mov REG[0xd0],>_PotValue
+ 0664 5103              mov A,[_PotValue+3]
+ 0666 62D000            mov REG[0xd0],>_MesValue
+ 0669 1203              sub A,[_MesValue+3]
+ 066B 62D000            mov REG[0xd0],>_PotValue
+ 066E 5102              mov A,[_PotValue+2]
+ 0670 62D000            mov REG[0xd0],>_MesValue
+ 0673 1A02              sbb A,[_MesValue+2]
+ 0675 62D000            mov REG[0xd0],>_PotValue
+ 0678 5101              mov A,[_PotValue+1]
+ 067A 62D000            mov REG[0xd0],>_MesValue
+ 067D 1A01              sbb A,[_MesValue+1]
+ 067F 5100              mov A,[_MesValue]
+ 0681 3180              xor A,-128
+ 0683 62D000            mov REG[0xd0],>__r0
+ 0686 5300              mov [__rX],A
+ 0688 62D000            mov REG[0xd0],>_PotValue
+ 068B 5100              mov A,[_PotValue]
+ 068D 3180              xor A,-128
+ 068F 62D000            mov REG[0xd0],>__r0
+ 0692 1A00              sbb A,[__rX]
+ 0694 D00B              jnc L47
+ 0696           X18:
+ 0696                   .dbline 128
+ 0696           ;       {
+ 0696                   .dbline 129
+ 0696           ;               DIGITAL_OUT_On();
+ 0696 10                push X
+ 0697 7C0000            xcall _DIGITAL_OUT_On
+ 069A                   .dbline 130
+ 069A           ;               LED_3_On();
+ 069A 7C0000            xcall _LED_3_On
+ 069D 20                pop X
+ 069E                   .dbline 131
+ 069E           ;       }
+ 069E 8006              xjmp L48
+ 06A0           L47:
+ 06A0                   .dbline 133
+ 06A0           ;       else
+ 06A0           ;       {
+ 06A0                   .dbline 134
+ 06A0           ;               LED_3_Off();
+ 06A0 10                push X
+ 06A1 7C0000            xcall _LED_3_Off
+ 06A4 20                pop X
+ 06A5                   .dbline 135
+ 06A5           ;       }
+ 06A5           L48:
+ 06A5                   .dbline 137
+ 06A5           ;               
+ 06A5           ;       if (MesValue[1][0]>PotValue)
+ 06A5 62D000            mov REG[0xd0],>_PotValue
+ 06A8 5103              mov A,[_PotValue+3]
+ 06AA 62D000            mov REG[0xd0],>_MesValue
+ 06AD 120F              sub A,[_MesValue+12+3]
+ 06AF 62D000            mov REG[0xd0],>_PotValue
+ 06B2 5102              mov A,[_PotValue+2]
+ 06B4 62D000            mov REG[0xd0],>_MesValue
+ 06B7 1A0E              sbb A,[_MesValue+12+2]
+ 06B9 62D000            mov REG[0xd0],>_PotValue
+ 06BC 5101              mov A,[_PotValue+1]
+ 06BE 62D000            mov REG[0xd0],>_MesValue
+ 06C1 1A0D              sbb A,[_MesValue+12+1]
+ 06C3 510C              mov A,[_MesValue+12]
+ 06C5 3180              xor A,-128
+ 06C7 62D000            mov REG[0xd0],>__r0
+ 06CA 5300              mov [__rX],A
+ 06CC 62D000            mov REG[0xd0],>_PotValue
+ 06CF 5100              mov A,[_PotValue]
+ 06D1 3180              xor A,-128
+ 06D3 62D000            mov REG[0xd0],>__r0
+ 06D6 1A00              sbb A,[__rX]
+ 06D8 D00B              jnc L49
+ 06DA           X19:
+ 06DA                   .dbline 138
+ 06DA           ;       {
+ 06DA                   .dbline 139
+ 06DA           ;               DIGITAL_OUT_On();
+ 06DA 10                push X
+ 06DB 7C0000            xcall _DIGITAL_OUT_On
+ 06DE                   .dbline 140
+ 06DE           ;               LED_2_On();
+ 06DE 7C0000            xcall _LED_2_On
+ 06E1 20                pop X
+ 06E2                   .dbline 141
+ 06E2           ;       }
+ 06E2 8006              xjmp L50
+ 06E4           L49:
+ 06E4                   .dbline 143
+ 06E4           ;       else
+ 06E4           ;       {
+ 06E4                   .dbline 144
+ 06E4           ;               LED_2_Off();
+ 06E4 10                push X
+ 06E5 7C0000            xcall _LED_2_Off
+ 06E8 20                pop X
+ 06E9                   .dbline 145
+ 06E9           ;       }
+ 06E9           L50:
+ 06E9                   .dbline 147
+ 06E9           ;       
+ 06E9           ;       if (MesValue[2][0]>PotValue)
+ 06E9 62D000            mov REG[0xd0],>_PotValue
+ 06EC 5103              mov A,[_PotValue+3]
+ 06EE 62D000            mov REG[0xd0],>_MesValue
+ 06F1 121B              sub A,[_MesValue+24+3]
+ 06F3 62D000            mov REG[0xd0],>_PotValue
+ 06F6 5102              mov A,[_PotValue+2]
+ 06F8 62D000            mov REG[0xd0],>_MesValue
+ 06FB 1A1A              sbb A,[_MesValue+24+2]
+ 06FD 62D000            mov REG[0xd0],>_PotValue
+ 0700 5101              mov A,[_PotValue+1]
+ 0702 62D000            mov REG[0xd0],>_MesValue
+ 0705 1A19              sbb A,[_MesValue+24+1]
+ 0707 5118              mov A,[_MesValue+24]
+ 0709 3180              xor A,-128
+ 070B 62D000            mov REG[0xd0],>__r0
+ 070E 5300              mov [__rX],A
+ 0710 62D000            mov REG[0xd0],>_PotValue
+ 0713 5100              mov A,[_PotValue]
+ 0715 3180              xor A,-128
+ 0717 62D000            mov REG[0xd0],>__r0
+ 071A 1A00              sbb A,[__rX]
+ 071C D00B              jnc L52
+ 071E           X20:
+ 071E                   .dbline 148
+ 071E           ;       {
+ 071E                   .dbline 149
+ 071E           ;               DIGITAL_OUT_On();
+ 071E 10                push X
+ 071F 7C0000            xcall _DIGITAL_OUT_On
+ 0722                   .dbline 150
+ 0722           ;               LED_1_On();
+ 0722 7C0000            xcall _LED_1_On
+ 0725 20                pop X
+ 0726                   .dbline 151
+ 0726           ;       }
+ 0726 8006              xjmp L53
+ 0728           L52:
+ 0728                   .dbline 153
+ 0728           ;       else
+ 0728           ;       {
+ 0728                   .dbline 154
+ 0728           ;               LED_1_Off();
+ 0728 10                push X
+ 0729 7C0000            xcall _LED_1_Off
+ 072C 20                pop X
+ 072D                   .dbline 155
+ 072D           ;       }
+ 072D           L53:
+ 072D                   .dbline -2
+ 072D           L46:
+ 072D                   .dbline 0 ; func end
+ 072D 7F                ret
+ 072E                   .dbend
+ 072E                   .dbfunc e UartTxValues _UartTxValues fV
+ 072E           _UartTxValues::
+ 072E                   .dbline -1
+ 072E                   .dbline 159
+ 072E           ; }
+ 072E           ; 
+ 072E           ; void UartTxValues(void)
+ 072E           ; {/* Transmit via UART the analog values read from various inputs.
+ 072E                   .dbline 164
+ 072E           ;       Usefull for debugging purposes, it could be converted in a
+ 072E           ;       command string using the same protocol used for dsNav if
+ 072E           ;       needed to output sound level values via serial comm
+ 072E           ; */
+ 072E           ;       TX8_CPutString("\n\r");
+ 072E 10                push X
+ 072F 5034              mov A,>L56
  0731 08                push A
- 0732 62D000            mov REG[0xd0],>_MesValue
- 0735 5100              mov A,[_MesValue]
- 0737 08                push A
- 0738 5101              mov A,[_MesValue+1]
- 073A 08                push A
- 073B 5102              mov A,[_MesValue+2]
+ 0732 5034              mov A,<L56
+ 0734 5C                mov X,A
+ 0735 18                pop A
+ 0736 7C0000            xcall _TX8_CPutString
+ 0739 20                pop X
+ 073A                   .dbline 171
+ 073A           ;       
+ 073A           ; /*    TX8_CPutString("Pot Value = ");
+ 073A           ;       itoa(str, PotValue,10);
+ 073A           ;       TX8_PutString(str);
+ 073A           ; */
+ 073A           ; 
+ 073A           ;       TX8_CPutString("Mes: 1 = ");
+ 073A 10                push X
+ 073B 502A              mov A,>L57
  073D 08                push A
- 073E 5103              mov A,[_MesValue+3]
- 0740 08                push A
- 0741 5000              mov A,>_str
- 0743 08                push A
- 0744 5000              mov A,<_str
- 0746 08                push A
- 0747 7C0000            xcall _ltoa
- 074A 38F8              add SP,-8
- 074C                   .dbline 173
- 074C           ;       TX8_PutString(str);
- 074C 10                push X
- 074D 5000              mov A,>_str
- 074F 08                push A
- 0750 5000              mov A,<_str
- 0752 5C                mov X,A
- 0753 18                pop A
- 0754 7C0000            xcall _TX8_PutString
- 0757 20                pop X
- 0758                   .dbline 174
- 0758           ;       TX8_CPutString("  -  2 = ");
- 0758 10                push X
- 0759 502C              mov A,>L56
- 075B 08                push A
- 075C 502C              mov A,<L56
- 075E 5C                mov X,A
- 075F 18                pop A
- 0760 7C0000            xcall _TX8_CPutString
- 0763 20                pop X
- 0764                   .dbline 175
- 0764           ;       ltoa(str, MesValue[1][0],10);
- 0764 5000              mov A,0
- 0766 08                push A
- 0767 500A              mov A,10
+ 073E 502A              mov A,<L57
+ 0740 5C                mov X,A
+ 0741 18                pop A
+ 0742 7C0000            xcall _TX8_CPutString
+ 0745 20                pop X
+ 0746                   .dbline 172
+ 0746           ;       ltoa(str, MesValue[0][0],10);
+ 0746 5000              mov A,0
+ 0748 08                push A
+ 0749 500A              mov A,10
+ 074B 08                push A
+ 074C 62D000            mov REG[0xd0],>_MesValue
+ 074F 5100              mov A,[_MesValue]
+ 0751 08                push A
+ 0752 5101              mov A,[_MesValue+1]
+ 0754 08                push A
+ 0755 5102              mov A,[_MesValue+2]
+ 0757 08                push A
+ 0758 5103              mov A,[_MesValue+3]
+ 075A 08                push A
+ 075B 5000              mov A,>_str
+ 075D 08                push A
+ 075E 5000              mov A,<_str
+ 0760 08                push A
+ 0761 7C0000            xcall _ltoa
+ 0764 38F8              add SP,-8
+ 0766                   .dbline 173
+ 0766           ;       TX8_PutString(str);
+ 0766 10                push X
+ 0767 5000              mov A,>_str
  0769 08                push A
- 076A 62D000            mov REG[0xd0],>_MesValue
- 076D 510C              mov A,[_MesValue+12]
- 076F 08                push A
- 0770 510D              mov A,[_MesValue+12+1]
- 0772 08                push A
- 0773 510E              mov A,[_MesValue+12+2]
+ 076A 5000              mov A,<_str
+ 076C 5C                mov X,A
+ 076D 18                pop A
+ 076E 7C0000            xcall _TX8_PutString
+ 0771 20                pop X
+ 0772                   .dbline 174
+ 0772           ;       TX8_CPutString("  -  2 = ");
+ 0772 10                push X
+ 0773 5020              mov A,>L58
  0775 08                push A
- 0776 510F              mov A,[_MesValue+12+3]
- 0778 08                push A
- 0779 5000              mov A,>_str
- 077B 08                push A
- 077C 5000              mov A,<_str
- 077E 08                push A
- 077F 7C0000            xcall _ltoa
- 0782 38F8              add SP,-8
- 0784                   .dbline 176
- 0784           ;       TX8_PutString(str);
- 0784 10                push X
- 0785 5000              mov A,>_str
- 0787 08                push A
- 0788 5000              mov A,<_str
- 078A 5C                mov X,A
- 078B 18                pop A
- 078C 7C0000            xcall _TX8_PutString
- 078F 20                pop X
- 0790                   .dbline 177
- 0790           ;       TX8_CPutString("  -  3 = ");
- 0790 10                push X
- 0791 5022              mov A,>L58
- 0793 08                push A
- 0794 5022              mov A,<L58
- 0796 5C                mov X,A
- 0797 18                pop A
- 0798 7C0000            xcall _TX8_CPutString
- 079B 20                pop X
- 079C                   .dbline 178
- 079C           ;       ltoa(str, MesValue[2][0],10);
- 079C 5000              mov A,0
- 079E 08                push A
- 079F 500A              mov A,10
+ 0776 5020              mov A,<L58
+ 0778 5C                mov X,A
+ 0779 18                pop A
+ 077A 7C0000            xcall _TX8_CPutString
+ 077D 20                pop X
+ 077E                   .dbline 175
+ 077E           ;       ltoa(str, MesValue[1][0],10);
+ 077E 5000              mov A,0
+ 0780 08                push A
+ 0781 500A              mov A,10
+ 0783 08                push A
+ 0784 62D000            mov REG[0xd0],>_MesValue
+ 0787 510C              mov A,[_MesValue+12]
+ 0789 08                push A
+ 078A 510D              mov A,[_MesValue+12+1]
+ 078C 08                push A
+ 078D 510E              mov A,[_MesValue+12+2]
+ 078F 08                push A
+ 0790 510F              mov A,[_MesValue+12+3]
+ 0792 08                push A
+ 0793 5000              mov A,>_str
+ 0795 08                push A
+ 0796 5000              mov A,<_str
+ 0798 08                push A
+ 0799 7C0000            xcall _ltoa
+ 079C 38F8              add SP,-8
+ 079E                   .dbline 176
+ 079E           ;       TX8_PutString(str);
+ 079E 10                push X
+ 079F 5000              mov A,>_str
  07A1 08                push A
- 07A2 62D000            mov REG[0xd0],>_MesValue
- 07A5 5118              mov A,[_MesValue+24]
- 07A7 08                push A
- 07A8 5119              mov A,[_MesValue+24+1]
- 07AA 08                push A
- 07AB 511A              mov A,[_MesValue+24+2]
+ 07A2 5000              mov A,<_str
+ 07A4 5C                mov X,A
+ 07A5 18                pop A
+ 07A6 7C0000            xcall _TX8_PutString
+ 07A9 20                pop X
+ 07AA                   .dbline 177
+ 07AA           ;       TX8_CPutString("  -  3 = ");
+ 07AA 10                push X
+ 07AB 5016              mov A,>L60
  07AD 08                push A
- 07AE 511B              mov A,[_MesValue+24+3]
- 07B0 08                push A
- 07B1 5000              mov A,>_str
- 07B3 08                push A
- 07B4 5000              mov A,<_str
- 07B6 08                push A
- 07B7 7C0000            xcall _ltoa
- 07BA 38F8              add SP,-8
- 07BC                   .dbline 179
- 07BC           ;       TX8_PutString(str);
- 07BC 10                push X
- 07BD 5000              mov A,>_str
- 07BF 08                push A
- 07C0 5000              mov A,<_str
- 07C2 5C                mov X,A
- 07C3 18                pop A
- 07C4 7C0000            xcall _TX8_PutString
- 07C7 20                pop X
- 07C8                   .dbline 180
- 07C8           ;       TX8_CPutString("  Gain Pre: 1 = ");
- 07C8 10                push X
- 07C9 5011              mov A,>L60
- 07CB 08                push A
- 07CC 5011              mov A,<L60
- 07CE 5C                mov X,A
- 07CF 18                pop A
- 07D0 7C0000            xcall _TX8_CPutString
- 07D3 20                pop X
- 07D4                   .dbline 181
- 07D4           ;       itoa(str, GF[GainIndx[0][0]][1], 10);
- 07D4 5000              mov A,0
- 07D6 08                push A
- 07D7 500A              mov A,10
+ 07AE 5016              mov A,<L60
+ 07B0 5C                mov X,A
+ 07B1 18                pop A
+ 07B2 7C0000            xcall _TX8_CPutString
+ 07B5 20                pop X
+ 07B6                   .dbline 178
+ 07B6           ;       ltoa(str, MesValue[2][0],10);
+ 07B6 5000              mov A,0
+ 07B8 08                push A
+ 07B9 500A              mov A,10
+ 07BB 08                push A
+ 07BC 62D000            mov REG[0xd0],>_MesValue
+ 07BF 5118              mov A,[_MesValue+24]
+ 07C1 08                push A
+ 07C2 5119              mov A,[_MesValue+24+1]
+ 07C4 08                push A
+ 07C5 511A              mov A,[_MesValue+24+2]
+ 07C7 08                push A
+ 07C8 511B              mov A,[_MesValue+24+3]
+ 07CA 08                push A
+ 07CB 5000              mov A,>_str
+ 07CD 08                push A
+ 07CE 5000              mov A,<_str
+ 07D0 08                push A
+ 07D1 7C0000            xcall _ltoa
+ 07D4 38F8              add SP,-8
+ 07D6                   .dbline 179
+ 07D6           ;       TX8_PutString(str);
+ 07D6 10                push X
+ 07D7 5000              mov A,>_str
  07D9 08                push A
- 07DA 62D000            mov REG[0xd0],>_GainIndx
- 07DD 5100              mov A,[_GainIndx]
- 07DF 62D000            mov REG[0xd0],>__r0
- 07E2 5300              mov [__r1],A
- 07E4 550000            mov [__r0],0
- 07E7 6500              asl [__r1]
- 07E9 6B00              rlc [__r0]
- 07EB 060001            add [__r1],<_GF+1
- 07EE 0E0001            adc [__r0],>_GF+1
- 07F1 5100              mov A,[__r0]
- 07F3 60D4              mov REG[0xd4],A
- 07F5 3E00              mvi A,[__r1]
- 07F7 5300              mov [__r1],A
- 07F9 5000              mov A,0
- 07FB 08                push A
- 07FC 5100              mov A,[__r1]
- 07FE 08                push A
- 07FF 5000              mov A,>_str
- 0801 08                push A
- 0802 5000              mov A,<_str
- 0804 08                push A
- 0805 7C0000            xcall _itoa
- 0808 38FA              add SP,-6
- 080A                   .dbline 182
- 080A           ;       TX8_PutString(str);
- 080A 10                push X
- 080B 5000              mov A,>_str
- 080D 08                push A
- 080E 5000              mov A,<_str
- 0810 5C                mov X,A
- 0811 18                pop A
- 0812 7C0000            xcall _TX8_PutString
- 0815 20                pop X
- 0816                   .dbline 183
- 0816           ;       TX8_CPutString("  -  2 = ");
- 0816 10                push X
- 0817 502C              mov A,>L56
- 0819 08                push A
- 081A 502C              mov A,<L56
- 081C 5C                mov X,A
- 081D 18                pop A
- 081E 7C0000            xcall _TX8_CPutString
- 0821 20                pop X
- 0822                   .dbline 184
- 0822           ;       itoa(str, GF[GainIndx[1][0]][1], 10);
- 0822 5000              mov A,0
- 0824 08                push A
- 0825 500A              mov A,10
+ 07DA 5000              mov A,<_str
+ 07DC 5C                mov X,A
+ 07DD 18                pop A
+ 07DE 7C0000            xcall _TX8_PutString
+ 07E1 20                pop X
+ 07E2                   .dbline 180
+ 07E2           ;       TX8_CPutString(" Pre: 1 = ");
+ 07E2 10                push X
+ 07E3 500B              mov A,>L62
+ 07E5 08                push A
+ 07E6 500B              mov A,<L62
+ 07E8 5C                mov X,A
+ 07E9 18                pop A
+ 07EA 7C0000            xcall _TX8_CPutString
+ 07ED 20                pop X
+ 07EE                   .dbline 181
+ 07EE           ;       itoa(str, GF[GainIndx[0][0]][1], 10);
+ 07EE 5000              mov A,0
+ 07F0 08                push A
+ 07F1 500A              mov A,10
+ 07F3 08                push A
+ 07F4 62D000            mov REG[0xd0],>_GainIndx
+ 07F7 5100              mov A,[_GainIndx]
+ 07F9 62D000            mov REG[0xd0],>__r0
+ 07FC 5300              mov [__r1],A
+ 07FE 550000            mov [__r0],0
+ 0801 6500              asl [__r1]
+ 0803 6B00              rlc [__r0]
+ 0805 060001            add [__r1],<_GF+1
+ 0808 0E0001            adc [__r0],>_GF+1
+ 080B 5100              mov A,[__r0]
+ 080D 60D4              mov REG[0xd4],A
+ 080F 3E00              mvi A,[__r1]
+ 0811 5300              mov [__r1],A
+ 0813 5000              mov A,0
+ 0815 08                push A
+ 0816 5100              mov A,[__r1]
+ 0818 08                push A
+ 0819 5000              mov A,>_str
+ 081B 08                push A
+ 081C 5000              mov A,<_str
+ 081E 08                push A
+ 081F 7C0000            xcall _itoa
+ 0822 38FA              add SP,-6
+ 0824                   .dbline 182
+ 0824           ;       TX8_PutString(str);
+ 0824 10                push X
+ 0825 5000              mov A,>_str
  0827 08                push A
- 0828 62D000            mov REG[0xd0],>_GainIndx
- 082B 5102              mov A,[_GainIndx+2]
- 082D 62D000            mov REG[0xd0],>__r0
- 0830 5300              mov [__r1],A
- 0832 550000            mov [__r0],0
- 0835 6500              asl [__r1]
- 0837 6B00              rlc [__r0]
- 0839 060001            add [__r1],<_GF+1
- 083C 0E0001            adc [__r0],>_GF+1
- 083F 5100              mov A,[__r0]
- 0841 60D4              mov REG[0xd4],A
- 0843 3E00              mvi A,[__r1]
- 0845 5300              mov [__r1],A
- 0847 5000              mov A,0
- 0849 08                push A
- 084A 5100              mov A,[__r1]
- 084C 08                push A
- 084D 5000              mov A,>_str
- 084F 08                push A
- 0850 5000              mov A,<_str
- 0852 08                push A
- 0853 7C0000            xcall _itoa
- 0856 38FA              add SP,-6
- 0858                   .dbline 185
- 0858           ;       TX8_PutString(str);     
- 0858 10                push X
- 0859 5000              mov A,>_str
- 085B 08                push A
- 085C 5000              mov A,<_str
- 085E 5C                mov X,A
- 085F 18                pop A
- 0860 7C0000            xcall _TX8_PutString
- 0863 20                pop X
- 0864                   .dbline 186
- 0864           ;       TX8_CPutString("  -  3 = ");
- 0864 10                push X
- 0865 5022              mov A,>L58
- 0867 08                push A
- 0868 5022              mov A,<L58
- 086A 5C                mov X,A
- 086B 18                pop A
- 086C 7C0000            xcall _TX8_CPutString
- 086F 20                pop X
- 0870                   .dbline 187
- 0870           ;       itoa(str, GF[GainIndx[2][0]][1], 10);
- 0870 5000              mov A,0
- 0872 08                push A
- 0873 500A              mov A,10
+ 0828 5000              mov A,<_str
+ 082A 5C                mov X,A
+ 082B 18                pop A
+ 082C 7C0000            xcall _TX8_PutString
+ 082F 20                pop X
+ 0830                   .dbline 183
+ 0830           ;       TX8_CPutString("  -  2 = ");
+ 0830 10                push X
+ 0831 5020              mov A,>L58
+ 0833 08                push A
+ 0834 5020              mov A,<L58
+ 0836 5C                mov X,A
+ 0837 18                pop A
+ 0838 7C0000            xcall _TX8_CPutString
+ 083B 20                pop X
+ 083C                   .dbline 184
+ 083C           ;       itoa(str, GF[GainIndx[1][0]][1], 10);
+ 083C 5000              mov A,0
+ 083E 08                push A
+ 083F 500A              mov A,10
+ 0841 08                push A
+ 0842 62D000            mov REG[0xd0],>_GainIndx
+ 0845 5102              mov A,[_GainIndx+2]
+ 0847 62D000            mov REG[0xd0],>__r0
+ 084A 5300              mov [__r1],A
+ 084C 550000            mov [__r0],0
+ 084F 6500              asl [__r1]
+ 0851 6B00              rlc [__r0]
+ 0853 060001            add [__r1],<_GF+1
+ 0856 0E0001            adc [__r0],>_GF+1
+ 0859 5100              mov A,[__r0]
+ 085B 60D4              mov REG[0xd4],A
+ 085D 3E00              mvi A,[__r1]
+ 085F 5300              mov [__r1],A
+ 0861 5000              mov A,0
+ 0863 08                push A
+ 0864 5100              mov A,[__r1]
+ 0866 08                push A
+ 0867 5000              mov A,>_str
+ 0869 08                push A
+ 086A 5000              mov A,<_str
+ 086C 08                push A
+ 086D 7C0000            xcall _itoa
+ 0870 38FA              add SP,-6
+ 0872                   .dbline 185
+ 0872           ;       TX8_PutString(str);     
+ 0872 10                push X
+ 0873 5000              mov A,>_str
  0875 08                push A
- 0876 62D000            mov REG[0xd0],>_GainIndx
- 0879 5104              mov A,[_GainIndx+4]
- 087B 62D000            mov REG[0xd0],>__r0
- 087E 5300              mov [__r1],A
- 0880 550000            mov [__r0],0
- 0883 6500              asl [__r1]
- 0885 6B00              rlc [__r0]
- 0887 060001            add [__r1],<_GF+1
- 088A 0E0001            adc [__r0],>_GF+1
- 088D 5100              mov A,[__r0]
- 088F 60D4              mov REG[0xd4],A
- 0891 3E00              mvi A,[__r1]
- 0893 5300              mov [__r1],A
- 0895 5000              mov A,0
- 0897 08                push A
- 0898 5100              mov A,[__r1]
- 089A 08                push A
- 089B 5000              mov A,>_str
- 089D 08                push A
- 089E 5000              mov A,<_str
- 08A0 08                push A
- 08A1 7C0000            xcall _itoa
- 08A4 38FA              add SP,-6
- 08A6                   .dbline 188
- 08A6           ;       TX8_PutString(str);     
- 08A6 10                push X
- 08A7 5000              mov A,>_str
- 08A9 08                push A
- 08AA 5000              mov A,<_str
- 08AC 5C                mov X,A
- 08AD 18                pop A
- 08AE 7C0000            xcall _TX8_PutString
- 08B1 20                pop X
- 08B2                   .dbline 189
- 08B2           ;       TX8_CPutString("  Gain Out: 1 = ");
- 08B2 10                push X
- 08B3 5000              mov A,>L66
- 08B5 08                push A
- 08B6 5000              mov A,<L66
- 08B8 5C                mov X,A
- 08B9 18                pop A
- 08BA 7C0000            xcall _TX8_CPutString
- 08BD 20                pop X
- 08BE                   .dbline 190
- 08BE           ;       itoa(str, GF[GainIndx[0][1]][1], 10);
- 08BE 5000              mov A,0
- 08C0 08                push A
- 08C1 500A              mov A,10
+ 0876 5000              mov A,<_str
+ 0878 5C                mov X,A
+ 0879 18                pop A
+ 087A 7C0000            xcall _TX8_PutString
+ 087D 20                pop X
+ 087E                   .dbline 186
+ 087E           ;       TX8_CPutString("  -  3 = ");
+ 087E 10                push X
+ 087F 5016              mov A,>L60
+ 0881 08                push A
+ 0882 5016              mov A,<L60
+ 0884 5C                mov X,A
+ 0885 18                pop A
+ 0886 7C0000            xcall _TX8_CPutString
+ 0889 20                pop X
+ 088A                   .dbline 187
+ 088A           ;       itoa(str, GF[GainIndx[2][0]][1], 10);
+ 088A 5000              mov A,0
+ 088C 08                push A
+ 088D 500A              mov A,10
+ 088F 08                push A
+ 0890 62D000            mov REG[0xd0],>_GainIndx
+ 0893 5104              mov A,[_GainIndx+4]
+ 0895 62D000            mov REG[0xd0],>__r0
+ 0898 5300              mov [__r1],A
+ 089A 550000            mov [__r0],0
+ 089D 6500              asl [__r1]
+ 089F 6B00              rlc [__r0]
+ 08A1 060001            add [__r1],<_GF+1
+ 08A4 0E0001            adc [__r0],>_GF+1
+ 08A7 5100              mov A,[__r0]
+ 08A9 60D4              mov REG[0xd4],A
+ 08AB 3E00              mvi A,[__r1]
+ 08AD 5300              mov [__r1],A
+ 08AF 5000              mov A,0
+ 08B1 08                push A
+ 08B2 5100              mov A,[__r1]
+ 08B4 08                push A
+ 08B5 5000              mov A,>_str
+ 08B7 08                push A
+ 08B8 5000              mov A,<_str
+ 08BA 08                push A
+ 08BB 7C0000            xcall _itoa
+ 08BE 38FA              add SP,-6
+ 08C0                   .dbline 188
+ 08C0           ;       TX8_PutString(str);     
+ 08C0 10                push X
+ 08C1 5000              mov A,>_str
  08C3 08                push A
- 08C4 62D000            mov REG[0xd0],>_GainIndx
- 08C7 5101              mov A,[_GainIndx+1]
- 08C9 62D000            mov REG[0xd0],>__r0
- 08CC 5300              mov [__r1],A
- 08CE 550000            mov [__r0],0
- 08D1 6500              asl [__r1]
- 08D3 6B00              rlc [__r0]
- 08D5 060001            add [__r1],<_GF+1
- 08D8 0E0001            adc [__r0],>_GF+1
- 08DB 5100              mov A,[__r0]
- 08DD 60D4              mov REG[0xd4],A
- 08DF 3E00              mvi A,[__r1]
- 08E1 5300              mov [__r1],A
- 08E3 5000              mov A,0
- 08E5 08                push A
- 08E6 5100              mov A,[__r1]
- 08E8 08                push A
- 08E9 5000              mov A,>_str
- 08EB 08                push A
- 08EC 5000              mov A,<_str
- 08EE 08                push A
- 08EF 7C0000            xcall _itoa
- 08F2 38FA              add SP,-6
- 08F4                   .dbline 191
- 08F4           ;       TX8_PutString(str);
- 08F4 10                push X
- 08F5 5000              mov A,>_str
- 08F7 08                push A
- 08F8 5000              mov A,<_str
- 08FA 5C                mov X,A
- 08FB 18                pop A
- 08FC 7C0000            xcall _TX8_PutString
- 08FF 20                pop X
- 0900                   .dbline 192
- 0900           ;       TX8_CPutString("  -  2 = ");
- 0900 10                push X
- 0901 502C              mov A,>L56
- 0903 08                push A
- 0904 502C              mov A,<L56
- 0906 5C                mov X,A
- 0907 18                pop A
- 0908 7C0000            xcall _TX8_CPutString
- 090B 20                pop X
- 090C                   .dbline 193
- 090C           ;       itoa(str, GF[GainIndx[1][1]][1], 10);
- 090C 5000              mov A,0
- 090E 08                push A
- 090F 500A              mov A,10
+ 08C4 5000              mov A,<_str
+ 08C6 5C                mov X,A
+ 08C7 18                pop A
+ 08C8 7C0000            xcall _TX8_PutString
+ 08CB 20                pop X
+ 08CC                   .dbline 189
+ 08CC           ;       TX8_CPutString(" Out: 1 = ");
+ 08CC 10                push X
+ 08CD 5000              mov A,>L68
+ 08CF 08                push A
+ 08D0 5000              mov A,<L68
+ 08D2 5C                mov X,A
+ 08D3 18                pop A
+ 08D4 7C0000            xcall _TX8_CPutString
+ 08D7 20                pop X
+ 08D8                   .dbline 190
+ 08D8           ;       itoa(str, GF[GainIndx[0][1]][1], 10);
+ 08D8 5000              mov A,0
+ 08DA 08                push A
+ 08DB 500A              mov A,10
+ 08DD 08                push A
+ 08DE 62D000            mov REG[0xd0],>_GainIndx
+ 08E1 5101              mov A,[_GainIndx+1]
+ 08E3 62D000            mov REG[0xd0],>__r0
+ 08E6 5300              mov [__r1],A
+ 08E8 550000            mov [__r0],0
+ 08EB 6500              asl [__r1]
+ 08ED 6B00              rlc [__r0]
+ 08EF 060001            add [__r1],<_GF+1
+ 08F2 0E0001            adc [__r0],>_GF+1
+ 08F5 5100              mov A,[__r0]
+ 08F7 60D4              mov REG[0xd4],A
+ 08F9 3E00              mvi A,[__r1]
+ 08FB 5300              mov [__r1],A
+ 08FD 5000              mov A,0
+ 08FF 08                push A
+ 0900 5100              mov A,[__r1]
+ 0902 08                push A
+ 0903 5000              mov A,>_str
+ 0905 08                push A
+ 0906 5000              mov A,<_str
+ 0908 08                push A
+ 0909 7C0000            xcall _itoa
+ 090C 38FA              add SP,-6
+ 090E                   .dbline 191
+ 090E           ;       TX8_PutString(str);
+ 090E 10                push X
+ 090F 5000              mov A,>_str
  0911 08                push A
- 0912 62D000            mov REG[0xd0],>_GainIndx
- 0915 5103              mov A,[_GainIndx+2+1]
- 0917 62D000            mov REG[0xd0],>__r0
- 091A 5300              mov [__r1],A
- 091C 550000            mov [__r0],0
- 091F 6500              asl [__r1]
- 0921 6B00              rlc [__r0]
- 0923 060001            add [__r1],<_GF+1
- 0926 0E0001            adc [__r0],>_GF+1
- 0929 5100              mov A,[__r0]
- 092B 60D4              mov REG[0xd4],A
- 092D 3E00              mvi A,[__r1]
- 092F 5300              mov [__r1],A
- 0931 5000              mov A,0
- 0933 08                push A
- 0934 5100              mov A,[__r1]
- 0936 08                push A
- 0937 5000              mov A,>_str
- 0939 08                push A
- 093A 5000              mov A,<_str
- 093C 08                push A
- 093D 7C0000            xcall _itoa
- 0940 38FA              add SP,-6
- 0942                   .dbline 194
- 0942           ;       TX8_PutString(str);     
- 0942 10                push X
- 0943 5000              mov A,>_str
- 0945 08                push A
- 0946 5000              mov A,<_str
- 0948 5C                mov X,A
- 0949 18                pop A
- 094A 7C0000            xcall _TX8_PutString
- 094D 20                pop X
- 094E                   .dbline 195
- 094E           ;       TX8_CPutString("  -  3 = ");
- 094E 10                push X
- 094F 5022              mov A,>L58
- 0951 08                push A
- 0952 5022              mov A,<L58
- 0954 5C                mov X,A
- 0955 18                pop A
- 0956 7C0000            xcall _TX8_CPutString
- 0959 20                pop X
- 095A                   .dbline 196
- 095A           ;       itoa(str, GF[GainIndx[2][1]][1], 10);
- 095A 5000              mov A,0
- 095C 08                push A
- 095D 500A              mov A,10
+ 0912 5000              mov A,<_str
+ 0914 5C                mov X,A
+ 0915 18                pop A
+ 0916 7C0000            xcall _TX8_PutString
+ 0919 20                pop X
+ 091A                   .dbline 192
+ 091A           ;       TX8_CPutString("  -  2 = ");
+ 091A 10                push X
+ 091B 5020              mov A,>L58
+ 091D 08                push A
+ 091E 5020              mov A,<L58
+ 0920 5C                mov X,A
+ 0921 18                pop A
+ 0922 7C0000            xcall _TX8_CPutString
+ 0925 20                pop X
+ 0926                   .dbline 193
+ 0926           ;       itoa(str, GF[GainIndx[1][1]][1], 10);
+ 0926 5000              mov A,0
+ 0928 08                push A
+ 0929 500A              mov A,10
+ 092B 08                push A
+ 092C 62D000            mov REG[0xd0],>_GainIndx
+ 092F 5103              mov A,[_GainIndx+2+1]
+ 0931 62D000            mov REG[0xd0],>__r0
+ 0934 5300              mov [__r1],A
+ 0936 550000            mov [__r0],0
+ 0939 6500              asl [__r1]
+ 093B 6B00              rlc [__r0]
+ 093D 060001            add [__r1],<_GF+1
+ 0940 0E0001            adc [__r0],>_GF+1
+ 0943 5100              mov A,[__r0]
+ 0945 60D4              mov REG[0xd4],A
+ 0947 3E00              mvi A,[__r1]
+ 0949 5300              mov [__r1],A
+ 094B 5000              mov A,0
+ 094D 08                push A
+ 094E 5100              mov A,[__r1]
+ 0950 08                push A
+ 0951 5000              mov A,>_str
+ 0953 08                push A
+ 0954 5000              mov A,<_str
+ 0956 08                push A
+ 0957 7C0000            xcall _itoa
+ 095A 38FA              add SP,-6
+ 095C                   .dbline 194
+ 095C           ;       TX8_PutString(str);     
+ 095C 10                push X
+ 095D 5000              mov A,>_str
  095F 08                push A
- 0960 62D000            mov REG[0xd0],>_GainIndx
- 0963 5105              mov A,[_GainIndx+4+1]
- 0965 62D000            mov REG[0xd0],>__r0
- 0968 5300              mov [__r1],A
- 096A 550000            mov [__r0],0
- 096D 6500              asl [__r1]
- 096F 6B00              rlc [__r0]
- 0971 060001            add [__r1],<_GF+1
- 0974 0E0001            adc [__r0],>_GF+1
- 0977 5100              mov A,[__r0]
- 0979 60D4              mov REG[0xd4],A
- 097B 3E00              mvi A,[__r1]
- 097D 5300              mov [__r1],A
- 097F 5000              mov A,0
- 0981 08                push A
- 0982 5100              mov A,[__r1]
- 0984 08                push A
- 0985 5000              mov A,>_str
- 0987 08                push A
- 0988 5000              mov A,<_str
- 098A 08                push A
- 098B 7C0000            xcall _itoa
- 098E 38FA              add SP,-6
- 0990                   .dbline 197
- 0990           ;       TX8_PutString(str);     
- 0990 10                push X
- 0991 5000              mov A,>_str
- 0993 08                push A
- 0994 5000              mov A,<_str
- 0996 5C                mov X,A
- 0997 18                pop A
- 0998 7C0000            xcall _TX8_PutString
- 099B 20                pop X
- 099C                   .dbline -2
- 099C           L53:
- 099C                   .dbline 0 ; func end
- 099C 7F                ret
- 099D                   .dbend
- 099D                   .dbfunc e BlocksInit _BlocksInit fV
- 099D           _BlocksInit::
- 099D                   .dbline -1
- 099D                   .dbline 219
- 099D           ;                               
- 099D           ; /*
- 099D           ;       TX8_CPutString("  --Pre = ");
- 099D           ;       itoa(str, MesValue[0][0], 10);
- 099D           ;       TX8_PutString(str);
- 099D           ;       
- 099D           ;       TX8_CPutString("  --Out = ");
- 099D           ;       itoa(str, MesValue[0][1], 10);
- 099D           ;       TX8_PutString(str);
- 099D           ;       
- 099D           ;       TX8_CPutString("  --Sum = ");
- 099D           ;       itoa(str, MesValueSum[0][0], 10);
- 099D           ;       TX8_PutString(str);
- 099D           ;       
- 099D           ;       TX8_CPutString("  --Count = ");
- 099D           ;       itoa(str, MesValueSum[0][1], 10);
- 099D           ;       TX8_PutString(str);
- 099D           ; */
- 099D           ; }
- 099D           ;       
- 099D           ; void BlocksInit(void)
- 099D           ; {// Analog and digital blocks inizialization
- 099D                   .dbline 220
- 099D           ;       ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);     
- 099D 10                push X
- 099E 5003              mov A,3
- 09A0 7C0000            xcall _ADCINCVR_pot_Start
- 09A3 20                pop X
- 09A4                   .dbline 221
- 09A4           ;       ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
- 09A4 10                push X
- 09A5 5003              mov A,3
- 09A7 7C0000            xcall _ADCINCVR_mes_Start
- 09AA                   .dbline 222
- 09AA           ;       AMUX4_mic_Start();
- 09AA 7C0000            xcall _AMUX4_mic_Start
- 09AD 20                pop X
- 09AE                   .dbline 223
- 09AE           ;       BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
- 09AE 10                push X
- 09AF 5003              mov A,3
- 09B1 7C0000            xcall _BPF4_4KHz_Start
- 09B4                   .dbline 224
- 09B4           ;       I2CHW_Start();
- 09B4 7C0000            xcall _I2CHW_Start
- 09B7 20                pop X
- 09B8                   .dbline 225
- 09B8           ;       PGA_out_Start(PGA_out_HIGHPOWER);
- 09B8 10                push X
- 09B9 5003              mov A,3
- 09BB 7C0000            xcall _PGA_out_Start
- 09BE 20                pop X
- 09BF                   .dbline 226
- 09BF           ;       PGA_pre_Start(PGA_pre_HIGHPOWER); 
- 09BF 10                push X
- 09C0 5003              mov A,3
- 09C2 7C0000            xcall _PGA_pre_Start
- 09C5 20                pop X
- 09C6                   .dbline 227
- 09C6           ;       RefMux_1_Start(RefMux_1_HIGHPOWER);
- 09C6 10                push X
- 09C7 5003              mov A,3
- 09C9 7C0000            xcall _RefMux_1_Start
- 09CC 20                pop X
- 09CD                   .dbline 228
- 09CD           ;     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);
- 09CD 10                push X
- 09CE 5003              mov A,3
- 09D0 7C0000            xcall _SCBLOCK_inbuff_Start
- 09D3                   .dbline 229
- 09D3           ;       LED_1_Start();
- 09D3 7C0000            xcall _LED_1_Start
- 09D6                   .dbline 230
- 09D6           ;       LED_2_Start();
- 09D6 7C0000            xcall _LED_2_Start
- 09D9                   .dbline 231
- 09D9           ;       LED_3_Start();
- 09D9 7C0000            xcall _LED_3_Start
- 09DC                   .dbline 232
- 09DC           ;       DIGITAL_OUT_Start();  
- 09DC 7C0000            xcall _DIGITAL_OUT_Start
- 09DF                   .dbline 234
- 09DF           ;       
- 09DF           ;       TX8_EnableInt();
- 09DF 7C0000            xcall _TX8_EnableInt
- 09E2 20                pop X
- 09E3                   .dbline 235
- 09E3           ;       TX8_Start(TX8_PARITY_NONE);
- 09E3 10                push X
- 09E4 5000              mov A,0
- 09E6 7C0000            xcall _TX8_Start
- 09E9 20                pop X
- 09EA                   .dbline 237
- 09EA           ;       
- 09EA           ;       AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
- 09EA 10                push X
- 09EB 5000              mov A,0
- 09ED 7C0000            xcall _AMUX4_mic_InputSelect
- 09F0 20                pop X
- 09F1                   .dbline 239
- 09F1           ; 
- 09F1           ;       PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
- 09F1 62D000            mov REG[0xd0],>_GainIndx
- 09F4 5100              mov A,[_GainIndx]
- 09F6 62D000            mov REG[0xd0],>__r0
- 09F9 5300              mov [__r1],A
- 09FB 550000            mov [__r0],0
- 09FE 6500              asl [__r1]
- 0A00 6B00              rlc [__r0]
- 0A02 060000            add [__r1],<_GF
- 0A05 0E0000            adc [__r0],>_GF
- 0A08 5100              mov A,[__r0]
- 0A0A 60D4              mov REG[0xd4],A
- 0A0C 3E00              mvi A,[__r1]
- 0A0E 10                push X
- 0A0F 7C0000            xcall _PGA_pre_SetGain
- 0A12 20                pop X
- 0A13                   .dbline 240
- 0A13           ;       PGA_out_SetGain(GF[GainIndx[0][1]][0]);
- 0A13 62D000            mov REG[0xd0],>_GainIndx
- 0A16 5101              mov A,[_GainIndx+1]
- 0A18 62D000            mov REG[0xd0],>__r0
- 0A1B 5300              mov [__r1],A
- 0A1D 550000            mov [__r0],0
- 0A20 6500              asl [__r1]
- 0A22 6B00              rlc [__r0]
- 0A24 060000            add [__r1],<_GF
- 0A27 0E0000            adc [__r0],>_GF
- 0A2A 5100              mov A,[__r0]
- 0A2C 60D4              mov REG[0xd4],A
- 0A2E 3E00              mvi A,[__r1]
- 0A30 10                push X
- 0A31 7C0000            xcall _PGA_out_SetGain
- 0A34                   .dbline 242
- 0A34           ;       
- 0A34           ;     HB_Tmr_EnableInt();  
- 0A34 7C0000            xcall _HB_Tmr_EnableInt
- 0A37                   .dbline 243
- 0A37           ;       HB_Tmr_Start();         
- 0A37 7C0000            xcall _HB_Tmr_Start
- 0A3A 20                pop X
- 0A3B                   .dbline -2
- 0A3B           L75:
- 0A3B                   .dbline 0 ; func end
- 0A3B 7F                ret
- 0A3C                   .dbend
- 0A3C                   .dbfunc e HB_Tmr_ISR_C _HB_Tmr_ISR_C fV
- 0A3C           _HB_Tmr_ISR_C::
- 0A3C                   .dbline -1
- 0A3C 71C0              or F,-64
- 0A3E 08                push A
- 0A3F 5DD0              mov A,REG[0xd0]
- 0A41 08                push A
- 0A42                   .dbline 247
- 0A42           ; }
- 0A42           ;       
- 0A42           ; void HB_Tmr_ISR_C(void)
- 0A42           ; {// Base clock for all of the timings in the program
- 0A42                   .dbline 248
- 0A42           ;       TmrFlag = 1;
- 0A42 62D000            mov REG[0xd0],>_TmrFlag
- 0A45 550001            mov [_TmrFlag],1
- 0A48                   .dbline 249
- 0A48           ;       Tmr1++;
- 0A48 62D000            mov REG[0xd0],>_Tmr1
- 0A4B 7601              inc [_Tmr1+1]
- 0A4D 0E0000            adc [_Tmr1],0
- 0A50                   .dbline 250
- 0A50           ;       Tmr2++;
- 0A50 62D000            mov REG[0xd0],>_Tmr2
- 0A53 7601              inc [_Tmr2+1]
- 0A55 0E0000            adc [_Tmr2],0
- 0A58                   .dbline 251
- 0A58           ;       Time10ms++;     
- 0A58 62D000            mov REG[0xd0],>_Time10ms
- 0A5B 060301            add [_Time10ms+3],1
- 0A5E 0E0200            adc [_Time10ms+2],0
- 0A61 0E0100            adc [_Time10ms+1],0
- 0A64 0E0000            adc [_Time10ms],0
- 0A67                   .dbline -2
- 0A67           L77:
- 0A67 18                pop A
- 0A68 60D0              mov REG[208],A
- 0A6A 18                pop A
- 0A6B                   .dbline 0 ; func end
- 0A6B 7E                reti
- 0A6C                   .dbend
- 0A6C                   .dbfunc e DelayMs _DelayMs fV
- 0A6C           ;              i -> X+0
- 0A6C           ;             Ms -> X-5
- 0A6C           _DelayMs::
- 0A6C                   .dbline -1
- 0A6C 10                push X
- 0A6D 4F                mov X,SP
- 0A6E 3802              add SP,2
- 0A70                   .dbline 255
- 0A70           ; }
- 0A70           ; 
- 0A70           ; void DelayMs(int Ms)
- 0A70           ; {
- 0A70                   .dbline 257
- 0A70           ;       int i;
- 0A70           ;       for (i=0; i<Ms; i++)
- 0A70 560100            mov [X+1],0
- 0A73 560000            mov [X+0],0
- 0A76 800D              xjmp L82
- 0A78           L79:
- 0A78                   .dbline 258
- 0A78           ;       {
- 0A78                   .dbline 259
- 0A78           ;               Delay50uTimes(20);
- 0A78 10                push X
- 0A79 5014              mov A,20
- 0A7B 7C0000            xcall _Delay50uTimes
- 0A7E 20                pop X
- 0A7F                   .dbline 260
- 0A7F           ;       }
- 0A7F           L80:
- 0A7F                   .dbline 257
- 0A7F 7701              inc [X+1]
- 0A81 0F0000            adc [X+0],0
- 0A84           L82:
- 0A84                   .dbline 257
- 0A84 5201              mov A,[X+1]
- 0A86 13FC              sub A,[X-4]
- 0A88 52FB              mov A,[X-5]
- 0A8A 3180              xor A,-128
- 0A8C 62D000            mov REG[0xd0],>__r0
- 0A8F 5300              mov [__rX],A
- 0A91 5200              mov A,[X+0]
- 0A93 3180              xor A,-128
- 0A95 1A00              sbb A,[__rX]
- 0A97 CFE0              jc L79
- 0A99           X25:
- 0A99                   .dbline -2
- 0A99           L78:
- 0A99 38FE              add SP,-2
- 0A9B 20                pop X
- 0A9C                   .dbline 0 ; func end
- 0A9C 7F                ret
- 0A9D                   .dbsym l i 0 I
- 0A9D                   .dbsym l Ms -5 I
- 0A9D                   .dbend
- 0A9D                   .dbfunc e LedTest _LedTest fV
- 0A9D           ;              i -> X+0
- 0A9D           _LedTest::
- 0A9D                   .dbline -1
- 0A9D 10                push X
- 0A9E 4F                mov X,SP
- 0A9F 3802              add SP,2
- 0AA1                   .dbline 264
- 0AA1           ; }
- 0AA1           ; 
- 0AA1           ; void LedTest(void)
- 0AA1           ; {
- 0AA1                   .dbline 266
- 0AA1           ;       int i;
- 0AA1           ;       LED_1_Off();
- 0AA1 10                push X
- 0AA2 7C0000            xcall _LED_1_Off
- 0AA5                   .dbline 267
- 0AA5           ;       LED_2_Off();
- 0AA5 7C0000            xcall _LED_2_Off
- 0AA8                   .dbline 268
- 0AA8           ;       LED_3_Off();
- 0AA8 7C0000            xcall _LED_3_Off
- 0AAB 20                pop X
- 0AAC                   .dbline 270
- 0AAC           ;       
- 0AAC           ;       for (i=0; i<3; i++)
- 0AAC 560100            mov [X+1],0
- 0AAF 560000            mov [X+0],0
- 0AB2           L84:
- 0AB2                   .dbline 271
- 0AB2           ;       {
- 0AB2                   .dbline 272
- 0AB2           ;               LED_1_On();
- 0AB2 10                push X
- 0AB3 7C0000            xcall _LED_1_On
- 0AB6 20                pop X
- 0AB7                   .dbline 273
- 0AB7           ;               DelayMs(500);
- 0AB7 5001              mov A,1
- 0AB9 08                push A
- 0ABA 50F4              mov A,-12
- 0ABC 08                push A
- 0ABD 9FAD              xcall _DelayMs
- 0ABF 38FE              add SP,-2
- 0AC1                   .dbline 274
- 0AC1           ;               LED_1_Off();
- 0AC1 10                push X
- 0AC2 7C0000            xcall _LED_1_Off
- 0AC5                   .dbline 275
- 0AC5           ;               LED_2_On();
- 0AC5 7C0000            xcall _LED_2_On
- 0AC8 20                pop X
- 0AC9                   .dbline 276
- 0AC9           ;               DelayMs(500);
- 0AC9 5001              mov A,1
- 0ACB 08                push A
- 0ACC 50F4              mov A,-12
- 0ACE 08                push A
- 0ACF 9F9B              xcall _DelayMs
- 0AD1 38FE              add SP,-2
- 0AD3                   .dbline 277
- 0AD3           ;               LED_2_Off();
- 0AD3 10                push X
- 0AD4 7C0000            xcall _LED_2_Off
- 0AD7                   .dbline 278
- 0AD7           ;               LED_3_On();
- 0AD7 7C0000            xcall _LED_3_On
- 0ADA 20                pop X
- 0ADB                   .dbline 279
- 0ADB           ;               DelayMs(500);
- 0ADB 5001              mov A,1
- 0ADD 08                push A
- 0ADE 50F4              mov A,-12
- 0AE0 08                push A
- 0AE1 9F89              xcall _DelayMs
- 0AE3 38FE              add SP,-2
- 0AE5                   .dbline 280
- 0AE5           ;               LED_3_Off();
- 0AE5 10                push X
- 0AE6 7C0000            xcall _LED_3_Off
- 0AE9 20                pop X
- 0AEA                   .dbline 281
- 0AEA           ;       }
- 0AEA           L85:
- 0AEA                   .dbline 270
- 0AEA 7701              inc [X+1]
- 0AEC 0F0000            adc [X+0],0
- 0AEF                   .dbline 270
- 0AEF 5201              mov A,[X+1]
- 0AF1 1103              sub A,3
- 0AF3 5200              mov A,[X+0]
- 0AF5 3180              xor A,-128
- 0AF7 1980              sbb A,(0 ^ 0x80)
- 0AF9 CFB8              jc L84
- 0AFB           X26:
- 0AFB                   .dbline -2
- 0AFB           L83:
- 0AFB 38FE              add SP,-2
- 0AFD 20                pop X
- 0AFE                   .dbline 0 ; func end
- 0AFE 7F                ret
- 0AFF                   .dbsym l i 0 I
- 0AFF                   .dbend
+ 0960 5000              mov A,<_str
+ 0962 5C                mov X,A
+ 0963 18                pop A
+ 0964 7C0000            xcall _TX8_PutString
+ 0967 20                pop X
+ 0968                   .dbline 195
+ 0968           ;       TX8_CPutString("  -  3 = ");
+ 0968 10                push X
+ 0969 5016              mov A,>L60
+ 096B 08                push A
+ 096C 5016              mov A,<L60
+ 096E 5C                mov X,A
+ 096F 18                pop A
+ 0970 7C0000            xcall _TX8_CPutString
+ 0973 20                pop X
+ 0974                   .dbline 196
+ 0974           ;       itoa(str, GF[GainIndx[2][1]][1], 10);
+ 0974 5000              mov A,0
+ 0976 08                push A
+ 0977 500A              mov A,10
+ 0979 08                push A
+ 097A 62D000            mov REG[0xd0],>_GainIndx
+ 097D 5105              mov A,[_GainIndx+4+1]
+ 097F 62D000            mov REG[0xd0],>__r0
+ 0982 5300              mov [__r1],A
+ 0984 550000            mov [__r0],0
+ 0987 6500              asl [__r1]
+ 0989 6B00              rlc [__r0]
+ 098B 060001            add [__r1],<_GF+1
+ 098E 0E0001            adc [__r0],>_GF+1
+ 0991 5100              mov A,[__r0]
+ 0993 60D4              mov REG[0xd4],A
+ 0995 3E00              mvi A,[__r1]
+ 0997 5300              mov [__r1],A
+ 0999 5000              mov A,0
+ 099B 08                push A
+ 099C 5100              mov A,[__r1]
+ 099E 08                push A
+ 099F 5000              mov A,>_str
+ 09A1 08                push A
+ 09A2 5000              mov A,<_str
+ 09A4 08                push A
+ 09A5 7C0000            xcall _itoa
+ 09A8 38FA              add SP,-6
+ 09AA                   .dbline 197
+ 09AA           ;       TX8_PutString(str);     
+ 09AA 10                push X
+ 09AB 5000              mov A,>_str
+ 09AD 08                push A
+ 09AE 5000              mov A,<_str
+ 09B0 5C                mov X,A
+ 09B1 18                pop A
+ 09B2 7C0000            xcall _TX8_PutString
+ 09B5 20                pop X
+ 09B6                   .dbline -2
+ 09B6           L55:
+ 09B6                   .dbline 0 ; func end
+ 09B6 7F                ret
+ 09B7                   .dbend
+ 09B7                   .dbfunc e BlocksInit _BlocksInit fV
+ 09B7           _BlocksInit::
+ 09B7                   .dbline -1
+ 09B7                   .dbline 219
+ 09B7           ;                               
+ 09B7           ; /*
+ 09B7           ;       TX8_CPutString("  --Pre = ");
+ 09B7           ;       itoa(str, MesValue[0][0], 10);
+ 09B7           ;       TX8_PutString(str);
+ 09B7           ;       
+ 09B7           ;       TX8_CPutString("  --Out = ");
+ 09B7           ;       itoa(str, MesValue[0][1], 10);
+ 09B7           ;       TX8_PutString(str);
+ 09B7           ;       
+ 09B7           ;       TX8_CPutString("  --Sum = ");
+ 09B7           ;       itoa(str, MesValueSum[0][0], 10);
+ 09B7           ;       TX8_PutString(str);
+ 09B7           ;       
+ 09B7           ;       TX8_CPutString("  --Count = ");
+ 09B7           ;       itoa(str, MesValueSum[0][1], 10);
+ 09B7           ;       TX8_PutString(str);
+ 09B7           ; */
+ 09B7           ; }
+ 09B7           ;       
+ 09B7           ; void BlocksInit(void)
+ 09B7           ; {// Analog and digital blocks inizialization
+ 09B7                   .dbline 220
+ 09B7           ;       ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);     
+ 09B7 10                push X
+ 09B8 5003              mov A,3
+ 09BA 7C0000            xcall _ADCINCVR_pot_Start
+ 09BD 20                pop X
+ 09BE                   .dbline 221
+ 09BE           ;       ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
+ 09BE 10                push X
+ 09BF 5003              mov A,3
+ 09C1 7C0000            xcall _ADCINCVR_mes_Start
+ 09C4                   .dbline 222
+ 09C4           ;       AMUX4_mic_Start();
+ 09C4 7C0000            xcall _AMUX4_mic_Start
+ 09C7 20                pop X
+ 09C8                   .dbline 223
+ 09C8           ;       BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
+ 09C8 10                push X
+ 09C9 5003              mov A,3
+ 09CB 7C0000            xcall _BPF4_4KHz_Start
+ 09CE                   .dbline 224
+ 09CE           ;       I2CHW_Start();
+ 09CE 7C0000            xcall _I2CHW_Start
+ 09D1 20                pop X
+ 09D2                   .dbline 225
+ 09D2           ;       PGA_out_Start(PGA_out_HIGHPOWER);
+ 09D2 10                push X
+ 09D3 5003              mov A,3
+ 09D5 7C0000            xcall _PGA_out_Start
+ 09D8 20                pop X
+ 09D9                   .dbline 226
+ 09D9           ;       PGA_pre_Start(PGA_pre_HIGHPOWER); 
+ 09D9 10                push X
+ 09DA 5003              mov A,3
+ 09DC 7C0000            xcall _PGA_pre_Start
+ 09DF 20                pop X
+ 09E0                   .dbline 227
+ 09E0           ;       RefMux_1_Start(RefMux_1_HIGHPOWER);
+ 09E0 10                push X
+ 09E1 5003              mov A,3
+ 09E3 7C0000            xcall _RefMux_1_Start
+ 09E6 20                pop X
+ 09E7                   .dbline 228
+ 09E7           ;     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);
+ 09E7 10                push X
+ 09E8 5003              mov A,3
+ 09EA 7C0000            xcall _SCBLOCK_inbuff_Start
+ 09ED                   .dbline 229
+ 09ED           ;       LED_1_Start();
+ 09ED 7C0000            xcall _LED_1_Start
+ 09F0                   .dbline 230
+ 09F0           ;       LED_2_Start();
+ 09F0 7C0000            xcall _LED_2_Start
+ 09F3                   .dbline 231
+ 09F3           ;       LED_3_Start();
+ 09F3 7C0000            xcall _LED_3_Start
+ 09F6                   .dbline 232
+ 09F6           ;       DIGITAL_OUT_Start();  
+ 09F6 7C0000            xcall _DIGITAL_OUT_Start
+ 09F9                   .dbline 234
+ 09F9           ;       
+ 09F9           ;       TX8_EnableInt();
+ 09F9 7C0000            xcall _TX8_EnableInt
+ 09FC 20                pop X
+ 09FD                   .dbline 235
+ 09FD           ;       TX8_Start(TX8_PARITY_NONE);
+ 09FD 10                push X
+ 09FE 5000              mov A,0
+ 0A00 7C0000            xcall _TX8_Start
+ 0A03 20                pop X
+ 0A04                   .dbline 237
+ 0A04           ;       
+ 0A04           ;       AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
+ 0A04 10                push X
+ 0A05 5000              mov A,0
+ 0A07 7C0000            xcall _AMUX4_mic_InputSelect
+ 0A0A 20                pop X
+ 0A0B                   .dbline 239
+ 0A0B           ; 
+ 0A0B           ;       PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
+ 0A0B 62D000            mov REG[0xd0],>_GainIndx
+ 0A0E 5100              mov A,[_GainIndx]
+ 0A10 62D000            mov REG[0xd0],>__r0
+ 0A13 5300              mov [__r1],A
+ 0A15 550000            mov [__r0],0
+ 0A18 6500              asl [__r1]
+ 0A1A 6B00              rlc [__r0]
+ 0A1C 060000            add [__r1],<_GF
+ 0A1F 0E0000            adc [__r0],>_GF
+ 0A22 5100              mov A,[__r0]
+ 0A24 60D4              mov REG[0xd4],A
+ 0A26 3E00              mvi A,[__r1]
+ 0A28 10                push X
+ 0A29 7C0000            xcall _PGA_pre_SetGain
+ 0A2C 20                pop X
+ 0A2D                   .dbline 240
+ 0A2D           ;       PGA_out_SetGain(GF[GainIndx[0][1]][0]);
+ 0A2D 62D000            mov REG[0xd0],>_GainIndx
+ 0A30 5101              mov A,[_GainIndx+1]
+ 0A32 62D000            mov REG[0xd0],>__r0
+ 0A35 5300              mov [__r1],A
+ 0A37 550000            mov [__r0],0
+ 0A3A 6500              asl [__r1]
+ 0A3C 6B00              rlc [__r0]
+ 0A3E 060000            add [__r1],<_GF
+ 0A41 0E0000            adc [__r0],>_GF
+ 0A44 5100              mov A,[__r0]
+ 0A46 60D4              mov REG[0xd4],A
+ 0A48 3E00              mvi A,[__r1]
+ 0A4A 10                push X
+ 0A4B 7C0000            xcall _PGA_out_SetGain
+ 0A4E                   .dbline 242
+ 0A4E           ;       
+ 0A4E           ;     HB_Tmr_EnableInt();  
+ 0A4E 7C0000            xcall _HB_Tmr_EnableInt
+ 0A51                   .dbline 243
+ 0A51           ;       HB_Tmr_Start();         
+ 0A51 7C0000            xcall _HB_Tmr_Start
+ 0A54 20                pop X
+ 0A55                   .dbline -2
+ 0A55           L77:
+ 0A55                   .dbline 0 ; func end
+ 0A55 7F                ret
+ 0A56                   .dbend
+ 0A56                   .dbfunc e HB_Tmr_ISR_C _HB_Tmr_ISR_C fV
+ 0A56           _HB_Tmr_ISR_C::
+ 0A56                   .dbline -1
+ 0A56 71C0              or F,-64
+ 0A58 08                push A
+ 0A59 5DD0              mov A,REG[0xd0]
+ 0A5B 08                push A
+ 0A5C                   .dbline 247
+ 0A5C           ; }
+ 0A5C           ;       
+ 0A5C           ; void HB_Tmr_ISR_C(void)
+ 0A5C           ; {// Base clock for all of the timings in the program
+ 0A5C                   .dbline 248
+ 0A5C           ;       TmrFlag = 1;
+ 0A5C 62D000            mov REG[0xd0],>_TmrFlag
+ 0A5F 550001            mov [_TmrFlag],1
+ 0A62                   .dbline 249
+ 0A62           ;       Tmr1++;
+ 0A62 62D000            mov REG[0xd0],>_Tmr1
+ 0A65 7601              inc [_Tmr1+1]
+ 0A67 0E0000            adc [_Tmr1],0
+ 0A6A                   .dbline 250
+ 0A6A           ;       Tmr2++;
+ 0A6A 62D000            mov REG[0xd0],>_Tmr2
+ 0A6D 7601              inc [_Tmr2+1]
+ 0A6F 0E0000            adc [_Tmr2],0
+ 0A72                   .dbline 251
+ 0A72           ;       Time10ms++;     
+ 0A72 62D000            mov REG[0xd0],>_Time10ms
+ 0A75 060301            add [_Time10ms+3],1
+ 0A78 0E0200            adc [_Time10ms+2],0
+ 0A7B 0E0100            adc [_Time10ms+1],0
+ 0A7E 0E0000            adc [_Time10ms],0
+ 0A81                   .dbline -2
+ 0A81           L79:
+ 0A81 18                pop A
+ 0A82 60D0              mov REG[208],A
+ 0A84 18                pop A
+ 0A85                   .dbline 0 ; func end
+ 0A85 7E                reti
+ 0A86                   .dbend
+ 0A86                   .dbfunc e DelayMs _DelayMs fV
+ 0A86           ;              i -> X+0
+ 0A86           ;             Ms -> X-5
+ 0A86           _DelayMs::
+ 0A86                   .dbline -1
+ 0A86 10                push X
+ 0A87 4F                mov X,SP
+ 0A88 3802              add SP,2
+ 0A8A                   .dbline 255
+ 0A8A           ; }
+ 0A8A           ; 
+ 0A8A           ; void DelayMs(int Ms)
+ 0A8A           ; {
+ 0A8A                   .dbline 257
+ 0A8A           ;       int i;
+ 0A8A           ;       for (i=0; i<Ms; i++)
+ 0A8A 560100            mov [X+1],0
+ 0A8D 560000            mov [X+0],0
+ 0A90 800D              xjmp L84
+ 0A92           L81:
+ 0A92                   .dbline 258
+ 0A92           ;       {
+ 0A92                   .dbline 259
+ 0A92           ;               Delay50uTimes(20);
+ 0A92 10                push X
+ 0A93 5014              mov A,20
+ 0A95 7C0000            xcall _Delay50uTimes
+ 0A98 20                pop X
+ 0A99                   .dbline 260
+ 0A99           ;       }
+ 0A99           L82:
+ 0A99                   .dbline 257
+ 0A99 7701              inc [X+1]
+ 0A9B 0F0000            adc [X+0],0
+ 0A9E           L84:
+ 0A9E                   .dbline 257
+ 0A9E 5201              mov A,[X+1]
+ 0AA0 13FC              sub A,[X-4]
+ 0AA2 52FB              mov A,[X-5]
+ 0AA4 3180              xor A,-128
+ 0AA6 62D000            mov REG[0xd0],>__r0
+ 0AA9 5300              mov [__rX],A
+ 0AAB 5200              mov A,[X+0]
+ 0AAD 3180              xor A,-128
+ 0AAF 1A00              sbb A,[__rX]
+ 0AB1 CFE0              jc L81
+ 0AB3           X21:
+ 0AB3                   .dbline -2
+ 0AB3           L80:
+ 0AB3 38FE              add SP,-2
+ 0AB5 20                pop X
+ 0AB6                   .dbline 0 ; func end
+ 0AB6 7F                ret
+ 0AB7                   .dbsym l i 0 I
+ 0AB7                   .dbsym l Ms -5 I
+ 0AB7                   .dbend
+ 0AB7                   .dbfunc e LedTest _LedTest fV
+ 0AB7           ;              i -> X+0
+ 0AB7           _LedTest::
+ 0AB7                   .dbline -1
+ 0AB7 10                push X
+ 0AB8 4F                mov X,SP
+ 0AB9 3802              add SP,2
+ 0ABB                   .dbline 264
+ 0ABB           ; }
+ 0ABB           ; 
+ 0ABB           ; void LedTest(void)
+ 0ABB           ; {
+ 0ABB                   .dbline 266
+ 0ABB           ;       int i;
+ 0ABB           ;       LED_1_Off();
+ 0ABB 10                push X
+ 0ABC 7C0000            xcall _LED_1_Off
+ 0ABF                   .dbline 267
+ 0ABF           ;       LED_2_Off();
+ 0ABF 7C0000            xcall _LED_2_Off
+ 0AC2                   .dbline 268
+ 0AC2           ;       LED_3_Off();
+ 0AC2 7C0000            xcall _LED_3_Off
+ 0AC5 20                pop X
+ 0AC6                   .dbline 270
+ 0AC6           ;       
+ 0AC6           ;       for (i=0; i<3; i++)
+ 0AC6 560100            mov [X+1],0
+ 0AC9 560000            mov [X+0],0
+ 0ACC           L86:
+ 0ACC                   .dbline 271
+ 0ACC           ;       {
+ 0ACC                   .dbline 272
+ 0ACC           ;               LED_1_On();
+ 0ACC 10                push X
+ 0ACD 7C0000            xcall _LED_1_On
+ 0AD0 20                pop X
+ 0AD1                   .dbline 273
+ 0AD1           ;               DelayMs(500);
+ 0AD1 5001              mov A,1
+ 0AD3 08                push A
+ 0AD4 50F4              mov A,-12
+ 0AD6 08                push A
+ 0AD7 9FAD              xcall _DelayMs
+ 0AD9 38FE              add SP,-2
+ 0ADB                   .dbline 274
+ 0ADB           ;               LED_1_Off();
+ 0ADB 10                push X
+ 0ADC 7C0000            xcall _LED_1_Off
+ 0ADF                   .dbline 275
+ 0ADF           ;               LED_2_On();
+ 0ADF 7C0000            xcall _LED_2_On
+ 0AE2 20                pop X
+ 0AE3                   .dbline 276
+ 0AE3           ;               DelayMs(500);
+ 0AE3 5001              mov A,1
+ 0AE5 08                push A
+ 0AE6 50F4              mov A,-12
+ 0AE8 08                push A
+ 0AE9 9F9B              xcall _DelayMs
+ 0AEB 38FE              add SP,-2
+ 0AED                   .dbline 277
+ 0AED           ;               LED_2_Off();
+ 0AED 10                push X
+ 0AEE 7C0000            xcall _LED_2_Off
+ 0AF1                   .dbline 278
+ 0AF1           ;               LED_3_On();
+ 0AF1 7C0000            xcall _LED_3_On
+ 0AF4 20                pop X
+ 0AF5                   .dbline 279
+ 0AF5           ;               DelayMs(500);
+ 0AF5 5001              mov A,1
+ 0AF7 08                push A
+ 0AF8 50F4              mov A,-12
+ 0AFA 08                push A
+ 0AFB 9F89              xcall _DelayMs
+ 0AFD 38FE              add SP,-2
+ 0AFF                   .dbline 280
+ 0AFF           ;               LED_3_Off();
+ 0AFF 10                push X
+ 0B00 7C0000            xcall _LED_3_Off
+ 0B03 20                pop X
+ 0B04                   .dbline 281
+ 0B04           ;       }
+ 0B04           L87:
+ 0B04                   .dbline 270
+ 0B04 7701              inc [X+1]
+ 0B06 0F0000            adc [X+0],0
+ 0B09                   .dbline 270
+ 0B09 5201              mov A,[X+1]
+ 0B0B 1103              sub A,3
+ 0B0D 5200              mov A,[X+0]
+ 0B0F 3180              xor A,-128
+ 0B11 1980              sbb A,(0 ^ 0x80)
+ 0B13 CFB8              jc L86
+ 0B15           X22:
+ 0B15                   .dbline -2
+ 0B15           L85:
+ 0B15 38FE              add SP,-2
+ 0B17 20                pop X
+ 0B18                   .dbline 0 ; func end
+ 0B18 7F                ret
+ 0B19                   .dbsym l i 0 I
+ 0B19                   .dbend
                         .area data(ram, con, rel)
  0000                   .dbfile D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\main.c
  0000           _str::
@@ -2044,18 +2058,15 @@
  0000 00000000          .byte 0,0,0,0
  0004                   .dbsym e PotValue _PotValue L
                         .area lit(rom, con, rel)
- 0000           L66:
- 0000 20204761696E204F75743A2031203D20  .byte 32,32,'G,'a,'i,'n,32,'O,'u,'t,58,32,49,32,61,32
- 0010 00                .byte 0
- 0011           L60:
- 0011 20204761696E205072653A2031203D20  .byte 32,32,'G,'a,'i,'n,32,'P,'r,'e,58,32,49,32,61,32
- 0021 00                .byte 0
- 0022           L58:
- 0022 20202D202033203D2000      .byte 32,32,45,32,32,51,32,61,32,0
- 002C           L56:
- 002C 20202D202032203D2000      .byte 32,32,45,32,32,50,32,61,32,0
- 0036           L55:
- 0036 202020204D65732056616C75653A2031  .byte 32,32,32,32,'M,'e,'s,32,'V,'a,'l,'u,'e,58,32,49
- 0046 203D2000          .byte 32,61,32,0
- 004A           L54:
- 004A 0A0D00            .byte 10,13,0
+ 0000           L68:
+ 0000 204F75743A2031203D2000    .byte 32,'O,'u,'t,58,32,49,32,61,32,0
+ 000B           L62:
+ 000B 205072653A2031203D2000    .byte 32,'P,'r,'e,58,32,49,32,61,32,0
+ 0016           L60:
+ 0016 20202D202033203D2000      .byte 32,32,45,32,32,51,32,61,32,0
+ 0020           L58:
+ 0020 20202D202032203D2000      .byte 32,32,45,32,32,50,32,61,32,0
+ 002A           L57:
+ 002A 4D65733A2031203D2000      .byte 'M,'e,'s,58,32,49,32,61,32,0
+ 0034           L56:
+ 0034 0A0D00            .byte 10,13,0
