@@ -31,7 +31,6 @@ Software
 --		MesValueOut = ADC reading														 
 --[2] 	MesValuePre = MesValue[i][1] = MesValueOut / GfOut	// used for intermediate calculi and for AGC procedure, where i = PortIndx
 --[3]	MesValueIn	= MesValue[i][0] = MesValuePre / GfPre = MesValue[i][1] / GfPre	//used for intermediate calculi and for AGC procedure, where i = PortIndx
---[4] 	GainIndx may be 0, 1, 2, 3, 4. Shifting right for this number means divide by 1, 2, 4, 8, 16, exactly the gain factor of the corresponding PGA
 
 -[5] Automatic Gain Control, limited in 1 to 16 range compared to 1/16 to 48 native range
 GainIndx[3][2] matrix stores the current index of Gain Factor (GF) for each input. Rows are for channels inputs and columns for PGA stage 
