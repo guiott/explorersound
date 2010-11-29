@@ -934,7 +934,7 @@
  008C 6500              db              65h, 00h                ; AnalogSyncControl register (ASY_CR)
  008E E600              db              e6h, 00h                ; DecimatorControl_0 register (DEC_CR0)
  0090 E700              db              e7h, 00h                ; DecimatorControl_1 register (DEC_CR1)
- 0092 D604              db              d6h, 04h                ; I2CConfig register (I2C_CFG)
+ 0092 D600              db              d6h, 00h                ; I2CConfig register (I2C_CFG)
  0094 B000              db              b0h, 00h                ; Row_0_InputMux register (RDI0RI)
  0096 B100              db              b1h, 00h                ; Row_0_InputSync register (RDI0SYN)
  0098 B200              db              b2h, 00h                ; Row_0_LogicInputAMux register (RDI0IS)
