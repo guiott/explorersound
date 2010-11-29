@@ -115,7 +115,7 @@ LoadConfigTBL_explorersound_Bank0:
 	db		65h, 00h		; AnalogSyncControl register (ASY_CR)
 	db		e6h, 00h		; DecimatorControl_0 register (DEC_CR0)
 	db		e7h, 00h		; DecimatorControl_1 register (DEC_CR1)
-	db		d6h, 04h		; I2CConfig register (I2C_CFG)
+	db		d6h, 00h		; I2CConfig register (I2C_CFG)
 	db		b0h, 00h		; Row_0_InputMux register (RDI0RI)
 	db		b1h, 00h		; Row_0_InputSync register (RDI0SYN)
 	db		b2h, 00h		; Row_0_LogicInputAMux register (RDI0IS)

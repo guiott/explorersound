@@ -883,7 +883,7 @@ FILE: lib\psocconfigtbl.asm
                                         (0115) 	db		65h, 00h		; AnalogSyncControl register (ASY_CR)
                                         (0116) 	db		e6h, 00h		; DecimatorControl_0 register (DEC_CR0)
                                         (0117) 	db		e7h, 00h		; DecimatorControl_1 register (DEC_CR1)
-                                        (0118) 	db		d6h, 04h		; I2CConfig register (I2C_CFG)
+                                        (0118) 	db		d6h, 00h		; I2CConfig register (I2C_CFG)
                                         (0119) 	db		b0h, 00h		; Row_0_InputMux register (RDI0RI)
                                         (0120) 	db		b1h, 00h		; Row_0_InputSync register (RDI0SYN)
                                         (0121) 	db		b2h, 00h		; Row_0_LogicInputAMux register (RDI0IS)
