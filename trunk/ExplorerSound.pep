@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <PSOC_WND_PERSIST>
   <APP_EDITOR_SETTINGS>
+<<<<<<< .mine
+<<<<<<< .mine
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\main.c" ACTIVE="true" />
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\definitions.h" />
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\Notes.txt" />
+    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\prototypes.h" />
+=======
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\Notes.txt" />
+=======
+>>>>>>> .r51
+>>>>>>> .r29
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />

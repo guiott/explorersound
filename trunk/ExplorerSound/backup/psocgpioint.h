@@ -74,42 +74,42 @@ BYTE			AnalogColumn_InputMUX_3_IntCtrl_1_ADDR;
 #pragma	ioport	AnalogColumn_InputMUX_3_IntEn_ADDR:	0x1
 BYTE			AnalogColumn_InputMUX_3_IntEn_ADDR;
 #define AnalogColumn_InputMUX_3_MASK 0x40
-// I2CHWSDA address and mask defines
-#pragma	ioport	I2CHWSDA_Data_ADDR:	0x4
-BYTE			I2CHWSDA_Data_ADDR;
-#pragma	ioport	I2CHWSDA_DriveMode_0_ADDR:	0x104
-BYTE			I2CHWSDA_DriveMode_0_ADDR;
-#pragma	ioport	I2CHWSDA_DriveMode_1_ADDR:	0x105
-BYTE			I2CHWSDA_DriveMode_1_ADDR;
-#pragma	ioport	I2CHWSDA_DriveMode_2_ADDR:	0x7
-BYTE			I2CHWSDA_DriveMode_2_ADDR;
-#pragma	ioport	I2CHWSDA_GlobalSelect_ADDR:	0x6
-BYTE			I2CHWSDA_GlobalSelect_ADDR;
-#pragma	ioport	I2CHWSDA_IntCtrl_0_ADDR:	0x106
-BYTE			I2CHWSDA_IntCtrl_0_ADDR;
-#pragma	ioport	I2CHWSDA_IntCtrl_1_ADDR:	0x107
-BYTE			I2CHWSDA_IntCtrl_1_ADDR;
-#pragma	ioport	I2CHWSDA_IntEn_ADDR:	0x5
-BYTE			I2CHWSDA_IntEn_ADDR;
-#define I2CHWSDA_MASK 0x20
-// I2CHWSCL address and mask defines
-#pragma	ioport	I2CHWSCL_Data_ADDR:	0x4
-BYTE			I2CHWSCL_Data_ADDR;
-#pragma	ioport	I2CHWSCL_DriveMode_0_ADDR:	0x104
-BYTE			I2CHWSCL_DriveMode_0_ADDR;
-#pragma	ioport	I2CHWSCL_DriveMode_1_ADDR:	0x105
-BYTE			I2CHWSCL_DriveMode_1_ADDR;
-#pragma	ioport	I2CHWSCL_DriveMode_2_ADDR:	0x7
-BYTE			I2CHWSCL_DriveMode_2_ADDR;
-#pragma	ioport	I2CHWSCL_GlobalSelect_ADDR:	0x6
-BYTE			I2CHWSCL_GlobalSelect_ADDR;
-#pragma	ioport	I2CHWSCL_IntCtrl_0_ADDR:	0x106
-BYTE			I2CHWSCL_IntCtrl_0_ADDR;
-#pragma	ioport	I2CHWSCL_IntCtrl_1_ADDR:	0x107
-BYTE			I2CHWSCL_IntCtrl_1_ADDR;
-#pragma	ioport	I2CHWSCL_IntEn_ADDR:	0x5
-BYTE			I2CHWSCL_IntEn_ADDR;
-#define I2CHWSCL_MASK 0x80
+// EzI2Cs_1SDA address and mask defines
+#pragma	ioport	EzI2Cs_1SDA_Data_ADDR:	0x4
+BYTE			EzI2Cs_1SDA_Data_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_DriveMode_0_ADDR:	0x104
+BYTE			EzI2Cs_1SDA_DriveMode_0_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_DriveMode_1_ADDR:	0x105
+BYTE			EzI2Cs_1SDA_DriveMode_1_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_DriveMode_2_ADDR:	0x7
+BYTE			EzI2Cs_1SDA_DriveMode_2_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_GlobalSelect_ADDR:	0x6
+BYTE			EzI2Cs_1SDA_GlobalSelect_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_IntCtrl_0_ADDR:	0x106
+BYTE			EzI2Cs_1SDA_IntCtrl_0_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_IntCtrl_1_ADDR:	0x107
+BYTE			EzI2Cs_1SDA_IntCtrl_1_ADDR;
+#pragma	ioport	EzI2Cs_1SDA_IntEn_ADDR:	0x5
+BYTE			EzI2Cs_1SDA_IntEn_ADDR;
+#define EzI2Cs_1SDA_MASK 0x20
+// EzI2Cs_1SCL address and mask defines
+#pragma	ioport	EzI2Cs_1SCL_Data_ADDR:	0x4
+BYTE			EzI2Cs_1SCL_Data_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_DriveMode_0_ADDR:	0x104
+BYTE			EzI2Cs_1SCL_DriveMode_0_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_DriveMode_1_ADDR:	0x105
+BYTE			EzI2Cs_1SCL_DriveMode_1_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_DriveMode_2_ADDR:	0x7
+BYTE			EzI2Cs_1SCL_DriveMode_2_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_GlobalSelect_ADDR:	0x6
+BYTE			EzI2Cs_1SCL_GlobalSelect_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_IntCtrl_0_ADDR:	0x106
+BYTE			EzI2Cs_1SCL_IntCtrl_0_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_IntCtrl_1_ADDR:	0x107
+BYTE			EzI2Cs_1SCL_IntCtrl_1_ADDR;
+#pragma	ioport	EzI2Cs_1SCL_IntEn_ADDR:	0x5
+BYTE			EzI2Cs_1SCL_IntEn_ADDR;
+#define EzI2Cs_1SCL_MASK 0x80
 // DIGITAL_OUTPin address and mask defines
 #pragma	ioport	DIGITAL_OUTPin_Data_ADDR:	0x8
 BYTE			DIGITAL_OUTPin_Data_ADDR;
