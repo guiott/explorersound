@@ -206,7 +206,7 @@ ENDIF
     reti
 
     org   60h                      ;PSoC I2C Interrupt Vector
-    ljmp	_I2CHW_ISR
+    ljmp	_EzI2Cs_1_ISR
     reti
 
     org   64h                      ;Sleep Timer Interrupt Vector

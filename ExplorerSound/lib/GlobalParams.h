@@ -15,9 +15,9 @@
 #define PLL_MODE               0x0     //PLL mode value
 #define PLL_MODE_MASK          0x40    //PLL mode mask
 #define PLL_MODE_JUST          0x0     //PLL mode value justified
-#define SLEEP_TIMER            0x1     //Sleep Timer value
+#define SLEEP_TIMER            0x2     //Sleep Timer value
 #define SLEEP_TIMER_MASK       0x18    //Sleep Timer mask
-#define SLEEP_TIMER_JUST       0x8     //Sleep Timer value justified
+#define SLEEP_TIMER_JUST       0x10    //Sleep Timer value justified
 #define SWITCH_MODE_PUMP       0x1     //Switch Mode Pump value
 #define SWITCH_MODE_PUMP_MASK  0x80    //Switch Mode Pump mask
 #define SWITCH_MODE_PUMP_JUST  0x80    //Switch Mode Pump value justified
@@ -25,7 +25,7 @@
 #define POWER_SETTING          0x10    //Power Setting [ Vcc / SysClk freq ] 0x10 = 5.0V / 24MHz
 										//				0x08 = 3.3V / 24MHz
 										//				0x09 = 3.3V / 12MHz
-#define WATCHDOG_ENABLE        0x0     //Watchdog Enable 1 = Enable
+#define WATCHDOG_ENABLE        0x1     //Watchdog Enable 1 = Enable
 
 #define CLOCK_DIV_VC1          0x4     // VC1 clock divider 
 #define CLOCK_DIV_VC1_MASK     0xf0    // VC1 clock divider mask

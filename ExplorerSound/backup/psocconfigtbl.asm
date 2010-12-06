@@ -66,6 +66,7 @@ LoadConfigTBL_explorersound_Bank0:
 	db		82h, 05h		;BPF4_4KHz_FLINL_CR2(ASC10CR2)
 	db		83h, 2ch		;BPF4_4KHz_FLINL_CR3(ASC10CR3)
 ;  Instance name DIGITAL_OUT, User Module LED
+;  Instance name EzI2Cs_1, User Module EzI2Cs
 ;  Instance name HB_Tmr, User Module Timer16
 ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
 	db		43h, 00h		;HB_Tmr_CONTROL_LSB_REG(DBB20CR0)
@@ -75,19 +76,18 @@ LoadConfigTBL_explorersound_Bank0:
 	db		47h, 04h		;HB_Tmr_CONTROL_MSB_REG(DBB21CR0)
 	db		45h, 0ch		;HB_Tmr_PERIOD_MSB_REG(DBB21DR1)
 	db		46h, 00h		;HB_Tmr_COMPARE_MSB_REG(DBB21DR2)
-;  Instance name I2CHW, User Module I2CHW
 ;  Instance name LED_1, User Module LED
 ;  Instance name LED_2, User Module LED
 ;  Instance name LED_3, User Module LED
 ;  Instance name PGA_out, User Module PGA
 ;       Instance name PGA_out, Block Name GAIN(ACB02)
-	db		79h, 3dh		;PGA_out_GAIN_CR0(ACB02CR0)
+	db		79h, 1dh		;PGA_out_GAIN_CR0(ACB02CR0)
 	db		7ah, a1h		;PGA_out_GAIN_CR1(ACB02CR1)
 	db		7bh, 20h		;PGA_out_GAIN_CR2(ACB02CR2)
 	db		78h, 00h		;PGA_out_GAIN_CR3(ACB02CR3)
 ;  Instance name PGA_pre, User Module PGA
 ;       Instance name PGA_pre, Block Name GAIN(ACB00)
-	db		71h, 3dh		;PGA_pre_GAIN_CR0(ACB00CR0)
+	db		71h, 4dh		;PGA_pre_GAIN_CR0(ACB00CR0)
 	db		72h, a1h		;PGA_pre_GAIN_CR1(ACB00CR1)
 	db		73h, 20h		;PGA_pre_GAIN_CR2(ACB00CR2)
 	db		70h, 00h		;PGA_pre_GAIN_CR3(ACB00CR3)
@@ -115,7 +115,7 @@ LoadConfigTBL_explorersound_Bank0:
 	db		65h, 00h		; AnalogSyncControl register (ASY_CR)
 	db		e6h, 00h		; DecimatorControl_0 register (DEC_CR0)
 	db		e7h, 00h		; DecimatorControl_1 register (DEC_CR1)
-	db		d6h, 04h		; I2CConfig register (I2C_CFG)
+	db		d6h, 00h		; I2CConfig register (I2C_CFG)
 	db		b0h, 00h		; Row_0_InputMux register (RDI0RI)
 	db		b1h, 00h		; Row_0_InputSync register (RDI0SYN)
 	db		b2h, 00h		; Row_0_LogicInputAMux register (RDI0IS)
@@ -185,6 +185,7 @@ LoadConfigTBL_explorersound_Bank1:
 ;       Instance name BPF4_4KHz, Block Name FLINH(ASC21)
 ;       Instance name BPF4_4KHz, Block Name FLINL(ASC10)
 ;  Instance name DIGITAL_OUT, User Module LED
+;  Instance name EzI2Cs_1, User Module EzI2Cs
 ;  Instance name HB_Tmr, User Module Timer16
 ;       Instance name HB_Tmr, Block Name TIMER16_LSB(DBB20)
 	db		40h, 10h		;HB_Tmr_FUNC_LSB_REG(DBB20FN)
@@ -194,7 +195,6 @@ LoadConfigTBL_explorersound_Bank1:
 	db		44h, 30h		;HB_Tmr_FUNC_MSB_REG(DBB21FN)
 	db		45h, 36h		;HB_Tmr_INPUT_MSB_REG(DBB21IN)
 	db		46h, 40h		;HB_Tmr_OUTPUT_MSB_REG(DBB21OU)
-;  Instance name I2CHW, User Module I2CHW
 ;  Instance name LED_1, User Module LED
 ;  Instance name LED_2, User Module LED
 ;  Instance name LED_3, User Module LED

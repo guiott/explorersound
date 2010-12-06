@@ -3,7 +3,8 @@ long PotValue;		// ADC value read from potentiometer
 long MesValue[3][3];	// Signal levels at input (indx 0), pre (indx 1) and OUT (indx 2)
 
 struct I2C_Struct {   // I2C interface structure  
-    long I2C_MesValue[3];    
+    long I2C_MesValue[3];   
+	BYTE I2cCheck;
 } I2C_Regs;  
 
 

@@ -48,6 +48,7 @@ void main(void)
 	PortNum[2] = AMUX4_mic_PORT0_7;
 	
 	LedTest();
+	I2cCheck = 0;
 	
 	// Main loop=============================================================
 	while (1)
@@ -78,6 +79,14 @@ void main(void)
 				PortIndx=0; // next mux port
 			}
 			AMUX4_mic_InputSelect(PortNum[PortIndx]);
+			
+			// I2C comm test. If master is able to change I2cCheck the comm is working
+			// otherwise the CPU will be reset by the watchdog timer
+			if (I2cCheck)	 
+			{
+				I2cCheck = 0;
+				M8C_ClearWDT;
+			}
 		}
 		
 		if (TmrFlag) // every 10ms
@@ -272,16 +281,16 @@ void LedTest(void)
 	LED_2_Off();
 	LED_3_Off();
 	
-	for (i=0; i<3; i++)
+	for (i=0; i<2; i++)
 	{
 		LED_1_On();
-		DelayMs(500);
+		DelayMs(150);
 		LED_1_Off();
 		LED_2_On();
-		DelayMs(500);
+		DelayMs(150);
 		LED_2_Off();
 		LED_3_On();
-		DelayMs(500);
+		DelayMs(150);
 		LED_3_Off();
 	}
 }
