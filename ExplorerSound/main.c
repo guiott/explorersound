@@ -99,7 +99,8 @@ void main(void)
 		{
 			Tmr1 = 0;
 			Tmr2 = 0;
-			UartTxValues(); // debug
+			// UartTxValues(); // uncomment this line for debug
+			// M8C_ClearWDT;   // uncomment this line for debug without I2C master
 			DigitalOut();
 		}
 	}// ========================================================== Main loop 
@@ -233,7 +234,7 @@ void BlocksInit(void)
 	BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
 	
 	 // Set up I2C RAM buffer  
-   	EzI2Cs_1_SetRamBuffer(sizeof(I2C_Regs), 0, (BYTE *) &I2C_Regs);
+   	EzI2Cs_1_SetRamBuffer(sizeof(I2C_Regs), 13, (BYTE *) &I2C_Regs);
 	EzI2Cs_1_Start(); // Turn on EzI2C 
 	
 	PGA_out_Start(PGA_out_HIGHPOWER);
