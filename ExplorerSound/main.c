@@ -68,8 +68,10 @@ void main(void)
 			// Get Data, Clear data ready flag
 			MesValue[PortIndx][2]=((long)ADCINCVR_mes_iGetDataClearFlag()) << 8; // [1]
 			MesValue[PortIndx][1]=(MesValue[PortIndx][2])/GF[GainIndx[PortIndx][1]][1]; // [2]
-			MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]			
-			I2C_Regs.I2C_MesValue[PortIndx]=MesValue[PortIndx][0]; // Expose data to I2C master
+			MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]	
+			// Expose data to I2C master
+			I2C_Regs.I2C_MesValue[PortIndx]=MesValue[PortIndx][0]; // linear
+			I2C_Regs.DbMesValue[PortIndx]=10*(log((float)MesValue[PortIndx][0])+0.5); // logarithmic (dB rounded to next)
 
 			AGC(); 
 			
@@ -82,9 +84,9 @@ void main(void)
 			
 			// I2C comm test. If master is able to change I2cCheck the comm is working
 			// otherwise the CPU will be reset by the watchdog timer
-			if (I2cCheck)	 
+			if (I2C_Regs.I2cCheck)	 
 			{
-				I2cCheck = 0;
+				I2C_Regs.I2cCheck = 0;
 				M8C_ClearWDT;
 			}
 		}
