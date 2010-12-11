@@ -1,11 +1,11 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Mon Nov 29 00:52:03 2010
+Date:         Sat Dec 11 22:21:52 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 22% full. 7067 out of 32768 bytes used (does not include absolute areas).
-  RAM 7% full. 125 bytes used (does not include stack usage).
+  ROM 29% full. 9495 out of 32768 bytes used (does not include absolute areas).
+  RAM 8% full. 131 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -289,45 +289,65 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0BF4   1147 =   4423. bytes (rel,con,rom)
+                            text   0BF4   1AC3 =   6851. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
        0BF4  __text_start
-       0BF4  _Delay50uTimes
        0BF4  Delay50uTimes
+       0BF4  _Delay50uTimes
        0BFA  Delay50u_Table
        0C02  Delay50u
        0C02  _Delay50u
        0C16  _main
-       0F7B  _AGC
-       12DE  _DigitalOut
-       13B0  _UartTxValues
-       1639  _BlocksInit
-       16EB  _HB_Tmr_ISR_C
-       171B  _DelayMs
-       174C  _LedTest
-       17AE  __divmod_32X32_32
-       17EB  __divmodu_16X16_16
-       17F6  __divmodu_32X32_32
-       1805  __i_div16_block_util
-       183E  __i_div32_block_util
-       18A1  __i_div32_not_util
-       18B9  __mul16
-       18E9  _itoa
-       1AC2  _ltoa
-       1D63  __xidata_end
-       1D3B  __text_end
+       10E4  _AGC
+       1447  _DigitalOut
+       1519  _UartTxValues
+       17A2  _BlocksInit
+       1854  _HB_Tmr_ISR_C
+       1884  _DelayMs
+       18B5  _LedTest
+       1917  __divmod_32X32_32
+       1954  __divmodu_16X16_16
+       195F  __divmodu_32X32_32
+       196E  __fp2long
+       19C4  __F_analysisEject_util
+       19CF  __F_Round_util
+       19E5  __F_Normal_util
+       19F0  __F_clrReg_util
+       19FB  __F_NaN_Res_util
+       1A07  __F_SaveRes_util
+       1A24  __F_SendToReg_util
+       1A35  __F_sInf_Res_util
+       1A42  __F_sZero_Res_util
+       1A4A  __F_Type_Oprnd_util
+       1A69  __F_Unnormal_util
+       1A7F  __fpadd
+       1B7F  __fpcmp
+       1BDC  __fpdiv
+       1CBF  __fpmul
+       1D88  __fpsub
+       1D91  __i_div16_block_util
+       1DCA  __i_div32_block_util
+       1E2D  __i_div32_not_util
+       1E45  __long2fp
+       1EB0  __mul16
+       1EE0  _itoa
+       20B9  _ltoa
+       2332  _frexpf
+       2408  _logf
+       26B7  __text_end
+       26DF  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                             TOP   0068   0140 =    320. bytes (abs,ovr,rom)
+                             TOP   0068   0143 =    323. bytes (abs,ovr,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
        0068  __Start
-       013D  bGetPowerSetting
-       013D  _bGetPowerSetting
+       0140  bGetPowerSetting
+       0140  _bGetPowerSetting
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -372,45 +392,46 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-               virtual_registers   0037   000F =     15. bytes (rel,con,ram)
+               virtual_registers   0047   000F =     15. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
-       0037  __rZ
-       0038  __rY
-       0039  __rX
-       003A  __r11
-       003B  __r10
-       003C  __r9
-       003D  __r8
-       003E  __r7
-       003F  __r6
-       0040  __r5
-       0041  __r4
-       0042  __r3
-       0043  __r2
-       0044  __r1
-       0045  __r0
+       0047  __rZ
+       0048  __rY
+       0049  __rX
+       004A  __r11
+       004B  __r10
+       004C  __r9
+       004D  __r8
+       004E  __r7
+       004F  __r6
+       0050  __r5
+       0051  __r4
+       0052  __r3
+       0053  __r2
+       0054  __r1
+       0055  __r0
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            data   0000   005B =     91. bytes (rel,con,ram)
+                            data   0000   0061 =     97. bytes (rel,con,ram)
 
        Addr  Global Symbol
       -----  --------------------------------
        0000  __data_start
        0013  _MesValue
-       0046  _GF
-       0054  _I2C_Regs
-       0060  _str
-       0067  _GainIndx
-       006D  _Time10ms
-       0071  _PotValue
-       0075  _Tmr2
-       0077  _Tmr1
-       0079  _i
-       007B  _PortIndx
-       007C  _TmrFlag
+       0037  _I2C_Regs
+       0056  _GF
+       0064  _str
+       006B  _GainIndx
+       0071  _Time10ms
+       0075  _PotValue
+       0079  _Tmr2
+       007B  _Tmr1
+       007D  _i
+       007F  _errno
+       0081  _PortIndx
+       0082  _TmrFlag
 
 Files Linked      [ module(s) ]
 
@@ -422,14 +443,17 @@ Files Linked      [ module(s) ]
 [ bpf4_4khz.asm, amux4_mic.asm, adcincvr_potint.asm, adcincvr_pot.asm, adcincvr_mesint.asm ]
 [ adcincvr_mes.asm, rZ.asm, rY.asm, rX.asm, r11.asm, r10.asm, r9.asm, r8.asm, r7.asm, r6.asm, r5.asm, r4.asm ]
 [ r3.asm, r2.asm, r1.asm, r0.asm, divmod_32x32_32_util.asm, divmodu_16x16_16_util.asm, divmodu_32x32_32_util.asm ]
-[ i_div16_block_util.asm, i_div32_block_util.asm, i_div32_not_util.asm, mul16_util.asm, itoa.s ]
-[ ltoa.s ]
+[ fp2long_util.asm, fp_analysiseject_util.asm, fp_clrreg_util.asm, fp_nan_res_util.asm, fp_saveres_util.asm ]
+[ fp_sendtoreg_util.asm, fp_sinf_res_util.asm, fp_szero_res_util.asm, fp_type_oprnd_util.asm ]
+[ fp_unnormal_util.asm, fpadd_util.asm, fpcmp_util.asm, fpdiv_util.asm, fpmul_util.asm, fpsub_util.asm ]
+[ i_div16_block_util.asm, i_div32_block_util.asm, i_div32_not_util.asm, long2fp_util.asm ]
+[ mul16_util.asm, itoa.s, ltoa.s, frexpf.s, logf.s, errno.s ]
 
 Area Definitions
 
 -blit:0x1a0.0x7fff
 -bdata:0.0x6ff
 -BInterruptRAM:0	allocated at: 0
--Bvirtual_registers	allocated at: 0x37
+-Bvirtual_registers	allocated at: 0x47
 -Bexplorersound_RAM	allocated at: 0
 

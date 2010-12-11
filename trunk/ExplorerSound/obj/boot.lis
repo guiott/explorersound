@@ -29,9 +29,9 @@
  0000           PLL_MODE:				equ	0h		;PLL mode value
  0040           PLL_MODE_MASK:			equ	40h		;PLL mode mask
  0000           PLL_MODE_JUST:			equ	0h		;PLL mode value justified
- 0001           SLEEP_TIMER:			equ	1h		;Sleep Timer value
+ 0002           SLEEP_TIMER:			equ	2h		;Sleep Timer value
  0018           SLEEP_TIMER_MASK:		equ	18h		;Sleep Timer mask
- 0008           SLEEP_TIMER_JUST:		equ	8h		;Sleep Timer value justified
+ 0010           SLEEP_TIMER_JUST:		equ	10h		;Sleep Timer value justified
  0001           SWITCH_MODE_PUMP:		equ	1h		;Switch Mode Pump setting
  0080           SWITCH_MODE_PUMP_MASK:	equ	80h		;Switch Mode Pump mask
  0080           SWITCH_MODE_PUMP_JUST:	equ	80h	;Switch Mode Pump justified
@@ -55,7 +55,7 @@
  0001           POWER_SET_SLOW_IMO:     equ 01h  ; MASK for slow Internal Main Oscillator (IMO) 
  0000           
  0000           COMM_RX_PRESENT:		equ	0		;1 = TRUE
- 0000           WATCHDOG_ENABLE:		equ 0	;Watchdog Enable 1 = Enable
+ 0001           WATCHDOG_ENABLE:		equ 1	;Watchdog Enable 1 = Enable
  0000           
  0004           CLOCK_DIV_VC1:			equ	4h	;VC1 clock divider
  00F0           CLOCK_DIV_VC1_MASK:		equ	f0h	;VC1 clock divider mask
@@ -1511,13 +1511,13 @@
  007B               ; %45%20%46%46% End workaround
  007B           
                 IF ( WATCHDOG_ENABLE )             ; WDT selected in Global Params
-                    and   reg[CPU_SCR0], ~CPU_SCR0_PORS_MASK
+ 007B 41FFEF        and   reg[CPU_SCR0], ~CPU_SCR0_PORS_MASK
                 ENDIF
                 
                 IF ( SELECT_32K )
                     or   reg[CPU_SCR1],  CPU_SCR1_ECO_ALLOWED  ; ECO will be used in this project
                 ELSE
- 007B 41FEFB        and  reg[CPU_SCR1], ~CPU_SCR1_ECO_ALLOWED  ; Prevent ECO from being enabled
+ 007E 41FEFB        and  reg[CPU_SCR1], ~CPU_SCR1_ECO_ALLOWED  ; Prevent ECO from being enabled
                 ENDIF
                 
                     ;---------------------------
@@ -1527,13 +1527,13 @@
                     ; The real stack start will be assigned later.
                     ;
  0080           _stack_start:          equ 80h
- 007E 5080          mov   A, _stack_start          ; Set top of stack to end of used RAM
- 0080 4E            swap  SP, A                    ; This is only temporary if going to LMM
- 0081           
- 0081               ;-----------------------------------------------
- 0081               ; Set Power-related Trim & the AGND Bypass bit.
- 0081               ;-----------------------------------------------
- 0081           
+ 0081 5080          mov   A, _stack_start          ; Set top of stack to end of used RAM
+ 0083 4E            swap  SP, A                    ; This is only temporary if going to LMM
+ 0084           
+ 0084               ;-----------------------------------------------
+ 0084               ; Set Power-related Trim & the AGND Bypass bit.
+ 0084               ;-----------------------------------------------
+ 0084           
                 IF ( POWER_SETTING & POWER_SET_5V0)            ; *** 5.0 Volt operation   ***
                  IF ( POWER_SETTING & POWER_SET_SLOW_IMO)      ; *** 6MHZ Main Oscillator ***
                     or  reg[CPU_SCR1], CPU_SCR1_SLIMO
@@ -1663,13 +1663,13 @@
                  ENDIF
                 ENDIF ; 3.3 Volt Operation
                 
- 0081 55F800        mov  [bSSC_KEY1],  0           ; Lock out Flash and Supervisiory operations
- 0084 55F900        mov  [bSSC_KEYSP], 0
- 0087           
- 0087               ;---------------------------------------
- 0087               ; Initialize Crystal Oscillator and PLL
- 0087               ;---------------------------------------
- 0087           
+ 0084 55F800        mov  [bSSC_KEY1],  0           ; Lock out Flash and Supervisiory operations
+ 0087 55F900        mov  [bSSC_KEYSP], 0
+ 008A           
+ 008A               ;---------------------------------------
+ 008A               ; Initialize Crystal Oscillator and PLL
+ 008A               ;---------------------------------------
+ 008A           
                 IF ( SELECT_32K & WAIT_FOR_32K )
                     ; If the user has requested the External Crystal Oscillator (ECO) then turn it
                     ; on and wait for it to stabilize and the system to switch over to it. The PLL
@@ -1688,11 +1688,11 @@
                                                           ;   since interrupts are not globally enabled
                 ELSE ; !( SELECT_32K & WAIT_FOR_32K )
                     ; Either no ECO, or waiting for stable clock is to be done in main
- 0087 7110          or    F, FLAG_XIO_MASK
- 0089 62E00A        mov   reg[OSC_CR0], (SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | OSC_CR0_CPU_12MHz)
- 008C 70EF          and   F, ~FLAG_XIO_MASK
- 008E 62E338        mov   reg[RES_WDT], 38h
- 0091           
+ 008A 7110          or    F, FLAG_XIO_MASK
+ 008C 62E012        mov   reg[OSC_CR0], (SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | OSC_CR0_CPU_12MHz)
+ 008F 70EF          and   F, ~FLAG_XIO_MASK
+ 0091 62E338        mov   reg[RES_WDT], 38h
+ 0094           
                 ENDIF ;( SELECT_32K & WAIT_FOR_32K )
                 
                 IF ( PLL_MODE )
@@ -1722,12 +1722,12 @@
                     ;------------------------
                     ; Close CT leakage path.
                     ;------------------------
- 0091 627105        mov   reg[ACB00CR0], 05h
- 0094 627505        mov   reg[ACB01CR0], 05h
- 0097 627905        mov   reg[ACB02CR0], 05h
- 009A 627D05        mov   reg[ACB03CR0], 05h
- 009D           
- 009D           
+ 0094 627105        mov   reg[ACB00CR0], 05h
+ 0097 627505        mov   reg[ACB01CR0], 05h
+ 009A 627905        mov   reg[ACB02CR0], 05h
+ 009D 627D05        mov   reg[ACB03CR0], 05h
+ 00A0           
+ 00A0           
                 IF      (TOOLCHAIN & HITECH)
                     ;---------------------------------------------
                     ; HI-TECH initialization: Enter the Large Memory Model, if applicable
@@ -1771,32 +1771,32 @@
                     ;---------------------------------------------
                 IF ( SYSTEM_LARGE_MEMORY_MODEL )
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 009D 62D107          mov reg[STK_PP], SYSTEM_STACK_PAGE
+ 00A0 62D107          mov reg[STK_PP], SYSTEM_STACK_PAGE
                    ENDIF
- 00A0 5000          mov   A, SYSTEM_STACK_BASE_ADDR        ;   and offset, if any
- 00A2 4E            swap  A, SP
+ 00A3 5000          mov   A, SYSTEM_STACK_BASE_ADDR        ;   and offset, if any
+ 00A5 4E            swap  A, SP
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
                       IF ( SYSTEM_MULTIPAGE_STACK )
                          mov   A, reg[STK_PP]
                          mov   reg[IDX_PP], A
                       ELSE
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 00A3 62D307          mov reg[IDX_PP], SYSTEM_STACK_PAGE
+ 00A6 62D307          mov reg[IDX_PP], SYSTEM_STACK_PAGE
                    ENDIF
                       ENDIF
                    ENDIF
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 00A6 62D000          mov reg[CUR_PP], 0
+ 00A9 62D000          mov reg[CUR_PP], 0
                    ENDIF
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 00A9 62D500          mov reg[MVW_PP], 0
+ 00AC 62D500          mov reg[MVW_PP], 0
                    ENDIF
                    IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 00AC 62D400          mov reg[MVR_PP], 0
+ 00AF 62D400          mov reg[MVR_PP], 0
                    ENDIF
                 
                   IF ( SYSTEM_IDXPG_TRACKS_STK_PP ); Now enable paging:
- 00AF 71C0          or    F, FLAG_PGMODE_11b       ; LMM w/ IndexPage<==>StackPage
+ 00B2 71C0          or    F, FLAG_PGMODE_11b       ; LMM w/ IndexPage<==>StackPage
                   ELSE
                     or    F, FLAG_PGMODE_10b       ; LMM w/ independent IndexPage
                   ENDIF ;  SYSTEM_IDXPG_TRACKS_STK_PP
@@ -1814,11 +1814,11 @@
                     ; to minimize start up time; (2) We may still need to play with the
                     ; Sleep Timer.
                     ;
- 00B1 7C0000        lcall LoadConfigInit
- 00B4           
- 00B4               ;-----------------------------------
- 00B4               ; Initialize C Run-Time Environment
- 00B4               ;-----------------------------------
+ 00B4 7C0000        lcall LoadConfigInit
+ 00B7           
+ 00B7               ;-----------------------------------
+ 00B7               ; Initialize C Run-Time Environment
+ 00B7               ;-----------------------------------
                 IF ( C_LANGUAGE_SUPPORT )
                 IF ( SYSTEM_SMALL_MEMORY_MODEL )
                     mov  A,0                           ; clear the 'bss' segment to zero
@@ -1846,125 +1846,125 @@
                 ENDIF ; SYSTEM_SMALL_MEMORY_MODEL
                 
                 IF ( SYSTEM_LARGE_MEMORY_MODEL )
- 00B4 62D000        mov   reg[CUR_PP], >__r0           ; force direct addr mode instructions
- 00B7                                                  ; to use the Virtual Register page.
- 00B7           
- 00B7               ; Dereference the constant (flash) pointer pXIData to access the start
- 00B7               ; of the extended idata area, "xidata." Xidata follows the end of the
- 00B7               ; text segment and may have been relocated by the Code Compressor.
- 00B7               ;
- 00B7 5000          mov   A, >__pXIData                ; Get the address of the flash
- 00B9 5700          mov   X, <__pXIData                ;   pointer to the xidata area.
- 00BB 08            push  A
- 00BC 28            romx                               ; get the MSB of xidata's address
- 00BD 5300          mov   [__r0], A
- 00BF 18            pop   A
- 00C0 75            inc   X
- 00C1 0900          adc   A, 0
- 00C3 28            romx                               ; get the LSB of xidata's address
- 00C4 4B            swap  A, X
- 00C5 5100          mov   A, [__r0]                    ; pXIData (in [A,X]) points to the
- 00C7                                                  ;   XIData structure list in flash
- 00C7 8004          jmp   .AccessStruct
- 00C9           
- 00C9               ; Unpack one element in the xidata "structure list" that specifies the
- 00C9               ; values of C variables. Each structure contains 3 member elements.
- 00C9               ; The first is a pointer to a contiguous block of RAM to be initial-
- 00C9               ; ized. Blocks are always 255 bytes or less in length and never cross
- 00C9               ; RAM page boundaries. The list terminates when the MSB of the pointer
- 00C9               ; contains 0xFF. There are two formats for the struct depending on the
- 00C9               ; value in the second member element, an unsigned byte:
- 00C9               ; (1) If the value of the second element is non-zero, it represents
- 00C9               ; the 'size' of the block of RAM to be initialized. In this case, the
- 00C9               ; third member of the struct is an array of bytes of length 'size' and
- 00C9               ; the bytes are copied to the block of RAM.
- 00C9               ; (2) If the value of the second element is zero, the block of RAM is
- 00C9               ; to be cleared to zero. In this case, the third member of the struct
- 00C9               ; is an unsigned byte containing the number of bytes to clear.
- 00C9           
- 00C9           .AccessNextStructLoop:
- 00C9 75            inc   X                            ; pXIData++
- 00CA 0900          adc   A, 0
- 00CC           .AccessStruct:                         ; Entry point for first block
- 00CC               ;
- 00CC               ; Assert: pXIData in [A,X] points to the beginning of an XIData struct.
- 00CC               ;
- 00CC 62E300        mov   reg[RES_WDT], 00h
- 00CF 08            push  A
- 00D0 28            romx                               ; MSB of RAM addr (CPU.A <- *pXIData)
- 00D1 60D5          mov   reg[MVW_PP], A               ;   for use with MVI write operations
- 00D3 74            inc   A                            ; End of Struct List? (MSB==0xFF?)
- 00D4 A04B          jz    .C_RTE_WrapUp                ;   Yes, C runtime environment complete
- 00D6 18            pop   A                            ; restore pXIData to [A,X]
- 00D7 75            inc   X                            ; pXIData++
- 00D8 0900          adc   A, 0
- 00DA 08            push  A
- 00DB 28            romx                               ; LSB of RAM addr (CPU.A <- *pXIData)
- 00DC 5300          mov   [__r0], A                    ; RAM Addr now in [reg[MVW_PP],[__r0]]
- 00DE 18            pop   A                            ; restore pXIData to [A,X]
- 00DF 75            inc   X                            ; pXIData++ (point to size)
- 00E0 0900          adc   A, 0
- 00E2 08            push  A
- 00E3 28            romx                               ; Get the size (CPU.A <- *pXIData)
- 00E4 A01C          jz    .ClearRAMBlockToZero         ; If Size==0, then go clear RAM
- 00E6 5300          mov   [__r1], A                    ;             else downcount in __r1
- 00E8 18            pop   A                            ; restore pXIData to [A,X]
- 00E9           
- 00E9           .CopyNextByteLoop:
- 00E9               ; For each byte in the structure's array member, copy from flash to RAM.
- 00E9               ; Assert: pXIData in [A,X] points to previous byte of flash source;
- 00E9               ;         [reg[MVW_PP],[__r0]] points to next RAM destination;
- 00E9               ;         __r1 holds a non-zero count of the number of bytes remaining.
- 00E9               ;
- 00E9 75            inc   X                            ; pXIData++ (point to next data byte)
- 00EA 0900          adc   A, 0
- 00EC 08            push  A
- 00ED 28            romx                               ; Get the data value (CPU.A <- *pXIData)
- 00EE 3F00          mvi   [__r0], A                    ; Transfer the data to RAM
- 00F0 4700FF        tst   [__r0], 0xff                 ; Check for page crossing
- 00F3 B006          jnz   .CopyLoopTail                ;   No crossing, keep going
- 00F5 5DD5          mov   A, reg[ MVW_PP]              ;   If crossing, bump MVW page reg
- 00F7 74            inc   A
- 00F8 60D5          mov   reg[ MVW_PP], A
- 00FA           .CopyLoopTail:
- 00FA 18            pop   A                            ; restore pXIData to [A,X]
- 00FB 7A00          dec   [__r1]                       ; End of this array in flash?
- 00FD BFEB          jnz   .CopyNextByteLoop            ;   No,  more bytes to copy
- 00FF 8FC9          jmp   .AccessNextStructLoop        ;   Yes, initialize another RAM block
- 0101           
- 0101           .ClearRAMBlockToZero:
- 0101 18            pop   A                            ; restore pXIData to [A,X]
- 0102 75            inc   X                            ; pXIData++ (point to next data byte)
- 0103 0900          adc   A, 0
- 0105 08            push  A
- 0106 28            romx                               ; Get the run length (CPU.A <- *pXIData)
- 0107 5300          mov   [__r1], A                    ; Initialize downcounter
- 0109 5000          mov   A, 0                         ; Initialize source data
- 010B           
- 010B           .ClearRAMBlockLoop:
- 010B               ; Assert: [reg[MVW_PP],[__r0]] points to next RAM destination and
- 010B               ;         __r1 holds a non-zero count of the number of bytes remaining.
- 010B               ;
- 010B 3F00          mvi   [__r0], A                    ; Clear a byte
- 010D 4700FF        tst   [__r0], 0xff                 ; Check for page crossing
- 0110 B008          jnz   .ClearLoopTail               ;   No crossing, keep going
- 0112 5DD5          mov   A, reg[ MVW_PP]              ;   If crossing, bump MVW page reg
- 0114 74            inc   A
- 0115 60D5          mov   reg[ MVW_PP], A
- 0117 5000          mov   A, 0                         ; Restore the zero used for clearing
- 0119           .ClearLoopTail:
- 0119 7A00          dec   [__r1]                       ; Was this the last byte?
- 011B BFEF          jnz   .ClearRAMBlockLoop           ;   No,  continue
- 011D 18            pop   A                            ;   Yes, restore pXIData to [A,X] and
- 011E 8FAA          jmp   .AccessNextStructLoop        ;        initialize another RAM block
- 0120           
- 0120           .C_RTE_WrapUp:
- 0120 18            pop   A                            ; balance stack
- 0121           
+ 00B7 62D000        mov   reg[CUR_PP], >__r0           ; force direct addr mode instructions
+ 00BA                                                  ; to use the Virtual Register page.
+ 00BA           
+ 00BA               ; Dereference the constant (flash) pointer pXIData to access the start
+ 00BA               ; of the extended idata area, "xidata." Xidata follows the end of the
+ 00BA               ; text segment and may have been relocated by the Code Compressor.
+ 00BA               ;
+ 00BA 5000          mov   A, >__pXIData                ; Get the address of the flash
+ 00BC 5700          mov   X, <__pXIData                ;   pointer to the xidata area.
+ 00BE 08            push  A
+ 00BF 28            romx                               ; get the MSB of xidata's address
+ 00C0 5300          mov   [__r0], A
+ 00C2 18            pop   A
+ 00C3 75            inc   X
+ 00C4 0900          adc   A, 0
+ 00C6 28            romx                               ; get the LSB of xidata's address
+ 00C7 4B            swap  A, X
+ 00C8 5100          mov   A, [__r0]                    ; pXIData (in [A,X]) points to the
+ 00CA                                                  ;   XIData structure list in flash
+ 00CA 8004          jmp   .AccessStruct
+ 00CC           
+ 00CC               ; Unpack one element in the xidata "structure list" that specifies the
+ 00CC               ; values of C variables. Each structure contains 3 member elements.
+ 00CC               ; The first is a pointer to a contiguous block of RAM to be initial-
+ 00CC               ; ized. Blocks are always 255 bytes or less in length and never cross
+ 00CC               ; RAM page boundaries. The list terminates when the MSB of the pointer
+ 00CC               ; contains 0xFF. There are two formats for the struct depending on the
+ 00CC               ; value in the second member element, an unsigned byte:
+ 00CC               ; (1) If the value of the second element is non-zero, it represents
+ 00CC               ; the 'size' of the block of RAM to be initialized. In this case, the
+ 00CC               ; third member of the struct is an array of bytes of length 'size' and
+ 00CC               ; the bytes are copied to the block of RAM.
+ 00CC               ; (2) If the value of the second element is zero, the block of RAM is
+ 00CC               ; to be cleared to zero. In this case, the third member of the struct
+ 00CC               ; is an unsigned byte containing the number of bytes to clear.
+ 00CC           
+ 00CC           .AccessNextStructLoop:
+ 00CC 75            inc   X                            ; pXIData++
+ 00CD 0900          adc   A, 0
+ 00CF           .AccessStruct:                         ; Entry point for first block
+ 00CF               ;
+ 00CF               ; Assert: pXIData in [A,X] points to the beginning of an XIData struct.
+ 00CF               ;
+ 00CF 62E300        mov   reg[RES_WDT], 00h
+ 00D2 08            push  A
+ 00D3 28            romx                               ; MSB of RAM addr (CPU.A <- *pXIData)
+ 00D4 60D5          mov   reg[MVW_PP], A               ;   for use with MVI write operations
+ 00D6 74            inc   A                            ; End of Struct List? (MSB==0xFF?)
+ 00D7 A04B          jz    .C_RTE_WrapUp                ;   Yes, C runtime environment complete
+ 00D9 18            pop   A                            ; restore pXIData to [A,X]
+ 00DA 75            inc   X                            ; pXIData++
+ 00DB 0900          adc   A, 0
+ 00DD 08            push  A
+ 00DE 28            romx                               ; LSB of RAM addr (CPU.A <- *pXIData)
+ 00DF 5300          mov   [__r0], A                    ; RAM Addr now in [reg[MVW_PP],[__r0]]
+ 00E1 18            pop   A                            ; restore pXIData to [A,X]
+ 00E2 75            inc   X                            ; pXIData++ (point to size)
+ 00E3 0900          adc   A, 0
+ 00E5 08            push  A
+ 00E6 28            romx                               ; Get the size (CPU.A <- *pXIData)
+ 00E7 A01C          jz    .ClearRAMBlockToZero         ; If Size==0, then go clear RAM
+ 00E9 5300          mov   [__r1], A                    ;             else downcount in __r1
+ 00EB 18            pop   A                            ; restore pXIData to [A,X]
+ 00EC           
+ 00EC           .CopyNextByteLoop:
+ 00EC               ; For each byte in the structure's array member, copy from flash to RAM.
+ 00EC               ; Assert: pXIData in [A,X] points to previous byte of flash source;
+ 00EC               ;         [reg[MVW_PP],[__r0]] points to next RAM destination;
+ 00EC               ;         __r1 holds a non-zero count of the number of bytes remaining.
+ 00EC               ;
+ 00EC 75            inc   X                            ; pXIData++ (point to next data byte)
+ 00ED 0900          adc   A, 0
+ 00EF 08            push  A
+ 00F0 28            romx                               ; Get the data value (CPU.A <- *pXIData)
+ 00F1 3F00          mvi   [__r0], A                    ; Transfer the data to RAM
+ 00F3 4700FF        tst   [__r0], 0xff                 ; Check for page crossing
+ 00F6 B006          jnz   .CopyLoopTail                ;   No crossing, keep going
+ 00F8 5DD5          mov   A, reg[ MVW_PP]              ;   If crossing, bump MVW page reg
+ 00FA 74            inc   A
+ 00FB 60D5          mov   reg[ MVW_PP], A
+ 00FD           .CopyLoopTail:
+ 00FD 18            pop   A                            ; restore pXIData to [A,X]
+ 00FE 7A00          dec   [__r1]                       ; End of this array in flash?
+ 0100 BFEB          jnz   .CopyNextByteLoop            ;   No,  more bytes to copy
+ 0102 8FC9          jmp   .AccessNextStructLoop        ;   Yes, initialize another RAM block
+ 0104           
+ 0104           .ClearRAMBlockToZero:
+ 0104 18            pop   A                            ; restore pXIData to [A,X]
+ 0105 75            inc   X                            ; pXIData++ (point to next data byte)
+ 0106 0900          adc   A, 0
+ 0108 08            push  A
+ 0109 28            romx                               ; Get the run length (CPU.A <- *pXIData)
+ 010A 5300          mov   [__r1], A                    ; Initialize downcounter
+ 010C 5000          mov   A, 0                         ; Initialize source data
+ 010E           
+ 010E           .ClearRAMBlockLoop:
+ 010E               ; Assert: [reg[MVW_PP],[__r0]] points to next RAM destination and
+ 010E               ;         __r1 holds a non-zero count of the number of bytes remaining.
+ 010E               ;
+ 010E 3F00          mvi   [__r0], A                    ; Clear a byte
+ 0110 4700FF        tst   [__r0], 0xff                 ; Check for page crossing
+ 0113 B008          jnz   .ClearLoopTail               ;   No crossing, keep going
+ 0115 5DD5          mov   A, reg[ MVW_PP]              ;   If crossing, bump MVW page reg
+ 0117 74            inc   A
+ 0118 60D5          mov   reg[ MVW_PP], A
+ 011A 5000          mov   A, 0                         ; Restore the zero used for clearing
+ 011C           .ClearLoopTail:
+ 011C 7A00          dec   [__r1]                       ; Was this the last byte?
+ 011E BFEF          jnz   .ClearRAMBlockLoop           ;   No,  continue
+ 0120 18            pop   A                            ;   Yes, restore pXIData to [A,X] and
+ 0121 8FAA          jmp   .AccessNextStructLoop        ;        initialize another RAM block
+ 0123           
+ 0123           .C_RTE_WrapUp:
+ 0123 18            pop   A                            ; balance stack
+ 0124           
                 ENDIF ; SYSTEM_LARGE_MEMORY_MODEL
                 
- 0121           C_RTE_Done:
- 0121           
+ 0124           C_RTE_Done:
+ 0124           
                 ENDIF ; C_LANGUAGE_SUPPORT
                 
                     ;-------------------------------
@@ -2000,53 +2000,53 @@
                     ;  values should not be changed from the settings here. Failure to follow this instruction could 
                     ;  lead to corruption of PSoC flash.
                 
- 0121 7110          or    F, FLAG_XIO_MASK
- 0123           
+ 0124 7110          or    F, FLAG_XIO_MASK
+ 0126           
                 IF (POWER_SETTING & POWER_SET_5V0)          ; 5.0V Operation?
                  IF (POWER_SETTING & POWER_SET_SLOW_IMO)    ; and Slow Mode?
                  ELSE                                       ;    No, fast mode
                   IF ( CPU_CLOCK_JUST ^ OSC_CR0_CPU_24MHz ) ;    As fast as 24MHz?
                                                             ;       no, set midpoint POR in user code, if desired
                   ELSE ; 24HMz                              ;
- 0123 43E320        or    reg[VLT_CR],  VLT_CR_POR_HIGH     ;      yes, highest POR trip point required
+ 0126 43E320        or    reg[VLT_CR],  VLT_CR_POR_HIGH     ;      yes, highest POR trip point required
                   ENDIF ; 24MHz
                  ENDIF ; Slow Mode
                 ENDIF ; 5.0V Operation
                 
- 0126 70EF          and   F, ~FLAG_XIO_MASK
- 0128           
- 0128               ;----------------------------
- 0128               ; Wrap up and invoke "main"
- 0128               ;----------------------------
- 0128           
- 0128               ; Disable the Sleep interrupt that was used for timing above.  In fact,
- 0128               ; no interrupts should be enabled now, so may as well clear the register.
- 0128               ;
- 0128 62E000        mov  reg[INT_MSK0],0
+ 0129 70EF          and   F, ~FLAG_XIO_MASK
  012B           
- 012B               ; Everything has started OK. Now select requested CPU & sleep frequency.
- 012B               ; And put decimator in full mode so it does not consume too much current.
+ 012B               ;----------------------------
+ 012B               ; Wrap up and invoke "main"
+ 012B               ;----------------------------
+ 012B           
+ 012B               ; Disable the Sleep interrupt that was used for timing above.  In fact,
+ 012B               ; no interrupts should be enabled now, so may as well clear the register.
  012B               ;
- 012B 7110          or    F, FLAG_XIO_MASK
- 012D 62E00B        mov  reg[OSC_CR0],(SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | CPU_CLOCK_JUST)
- 0130 43E780        or   reg[DEC_CR2],80h                    ; Put decimator in full mode
- 0133 70EF          and   F, ~FLAG_XIO_MASK
- 0135           
- 0135               ; Global Interrupt are NOT enabled, this should be done in main().
- 0135               ; LVD is set but will not occur unless Global Interrupts are enabled.
- 0135               ; Global Interrupts should be enabled as soon as possible in main().
- 0135               ;
- 0135 62E200        mov  reg[INT_VC],0             ; Clear any pending interrupts which may
- 0138                                              ; have been set during the boot process.
+ 012B 62E000        mov  reg[INT_MSK0],0
+ 012E           
+ 012E               ; Everything has started OK. Now select requested CPU & sleep frequency.
+ 012E               ; And put decimator in full mode so it does not consume too much current.
+ 012E               ;
+ 012E 7110          or    F, FLAG_XIO_MASK
+ 0130 62E013        mov  reg[OSC_CR0],(SELECT_32K_JUST | PLL_MODE_JUST | SLEEP_TIMER_JUST | CPU_CLOCK_JUST)
+ 0133 43E780        or   reg[DEC_CR2],80h                    ; Put decimator in full mode
+ 0136 70EF          and   F, ~FLAG_XIO_MASK
+ 0138           
+ 0138               ; Global Interrupt are NOT enabled, this should be done in main().
+ 0138               ; LVD is set but will not occur unless Global Interrupts are enabled.
+ 0138               ; Global Interrupts should be enabled as soon as possible in main().
+ 0138               ;
+ 0138 62E200        mov  reg[INT_VC],0             ; Clear any pending interrupts which may
+ 013B                                              ; have been set during the boot process.
                 IF      (TOOLCHAIN & HITECH)
                         ljmp  startup                  ; Jump to C compiler startup code
                 ELSE
                 IF ENABLE_LJMP_TO_MAIN
                     ljmp  _main                    ; goto main (no return)
                 ELSE
- 0138 7C0000        lcall _main                    ; call main
- 013B           .Exit:
- 013B 8FFF          jmp  .Exit                     ; Wait here after return till power-off or reset
+ 013B 7C0000        lcall _main                    ; call main
+ 013E           .Exit:
+ 013E 8FFF          jmp  .Exit                     ; Wait here after return till power-off or reset
                 ENDIF
                 ENDIF ; TOOLCHAIN
                 
@@ -2054,14 +2054,14 @@
                     ; Library Access to Global Parms
                     ;---------------------------------
                     ;
- 013D            bGetPowerSetting:
- 013D           _bGetPowerSetting:
- 013D               ; Returns value of POWER_SETTING in the A register.
- 013D               ; No inputs. No Side Effects.
- 013D               ;
- 013D 5010          mov   A, POWER_SETTING
- 013F 7F            ret
- 0140           
+ 0140            bGetPowerSetting:
+ 0140           _bGetPowerSetting:
+ 0140               ; Returns value of POWER_SETTING in the A register.
+ 0140               ; No inputs. No Side Effects.
+ 0140               ;
+ 0140 5010          mov   A, POWER_SETTING
+ 0142 7F            ret
+ 0143           
                 IF      (TOOLCHAIN & HITECH)
                 ELSE
                     ;---------------------------------
