@@ -1013,9 +1013,9 @@
  0000           PLL_MODE:				equ	0h		;PLL mode value
  0040           PLL_MODE_MASK:			equ	40h		;PLL mode mask
  0000           PLL_MODE_JUST:			equ	0h		;PLL mode value justified
- 0001           SLEEP_TIMER:			equ	1h		;Sleep Timer value
+ 0002           SLEEP_TIMER:			equ	2h		;Sleep Timer value
  0018           SLEEP_TIMER_MASK:		equ	18h		;Sleep Timer mask
- 0008           SLEEP_TIMER_JUST:		equ	8h		;Sleep Timer value justified
+ 0010           SLEEP_TIMER_JUST:		equ	10h		;Sleep Timer value justified
  0001           SWITCH_MODE_PUMP:		equ	1h		;Switch Mode Pump setting
  0080           SWITCH_MODE_PUMP_MASK:	equ	80h		;Switch Mode Pump mask
  0080           SWITCH_MODE_PUMP_JUST:	equ	80h	;Switch Mode Pump justified
@@ -1039,7 +1039,7 @@
  0001           POWER_SET_SLOW_IMO:     equ 01h  ; MASK for slow Internal Main Oscillator (IMO) 
  0000           
  0000           COMM_RX_PRESENT:		equ	0		;1 = TRUE
- 0000           WATCHDOG_ENABLE:		equ 0	;Watchdog Enable 1 = Enable
+ 0001           WATCHDOG_ENABLE:		equ 1	;Watchdog Enable 1 = Enable
  0000           
  0004           CLOCK_DIV_VC1:			equ	4h	;VC1 clock divider
  00F0           CLOCK_DIV_VC1_MASK:		equ	f0h	;VC1 clock divider mask

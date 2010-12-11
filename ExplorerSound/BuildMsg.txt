@@ -1,4 +1,48 @@
 Starting MAKE...
-CAUTION there are no library files
+creating project.mk 
+lib/adcincvr_mes.asm
+lib/adcincvr_mesint.asm
+lib/adcincvr_pot.asm
+lib/adcincvr_potint.asm
+lib/amux4_mic.asm
+lib/bpf4_4khz.asm
+lib/digital_out.asm
+lib/ezi2cs_1.asm
+lib/ezi2cs_1int.asm
+lib/hb_tmr.asm
+lib/hb_tmrint.asm
+lib/led_1.asm
+lib/led_2.asm
+lib/led_3.asm
+lib/pga_out.asm
+lib/pga_pre.asm
+lib/psocconfig.asm
+lib/psocconfigtbl.asm
+lib/refmux_1.asm
+lib/scblock_inbuff.asm
+lib/tx8.asm
+lib/tx8plus.asm
+./boot.asm
+./delay.asm
+./main.c
+Linking..
+LMM info: area 'InterruptRAM' uses 19 bytes in SRAM bank 0
+LMM info: area 'data' item of 36 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 16 bytes allocated in SRAM page 0
+LMM info: area 'virtual_registers' uses 15 bytes in SRAM page 0
+LMM info: area 'data' item of 14 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 7 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 6 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 4 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 4 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 2 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
+LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
+  ROM 29% full. 9495 out of 32768 bytes used (does not include absolute areas).
+  RAM 8% full. 131 bytes used (does not include stack usage).
+idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 17:06:17
+ExplorerSound - 0 error(s) 0 warning(s) 22:21:53

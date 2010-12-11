@@ -27,6 +27,7 @@ guido@guiott.com
 
 #include <m8c.h>        // part specific constants and macros
 #include <stdlib.h>
+#include <math.h>
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include "prototypes.h"
 #include "definitions.h"
@@ -48,7 +49,7 @@ void main(void)
 	PortNum[2] = AMUX4_mic_PORT0_7;
 	
 	LedTest();
-	I2cCheck = 0;
+	I2C_Regs.I2cCheck = 0;
 	
 	// Main loop=============================================================
 	while (1)
