@@ -2,7 +2,7 @@
 ** Project:      ExplorerSound
 ** Author:    Guido Ottaviani-->guido@guiott.com<--
 ** Description: 
-** version 1.0   07-11-2010
+** version 1.1   12-12-2010
 **
 ** Detailed descriptions are on file "Notes.txt" 
 **
@@ -72,7 +72,7 @@ void main(void)
 			MesValue[PortIndx][0]=(MesValue[PortIndx][1])/GF[GainIndx[PortIndx][0]][1]; // [3]	
 			// Expose data to I2C master
 			I2C_Regs.I2C_MesValue[PortIndx]=MesValue[PortIndx][0]; // linear
-			I2C_Regs.DbMesValue[PortIndx]=10*(log((float)MesValue[PortIndx][0])+0.5); // logarithmic (dB rounded to next)
+			I2C_Regs.DbMesValue[PortIndx]=(10*log10(MesValue[PortIndx][0]))+0.5; // logarithmic (dB rounded to next)
 
 			AGC(); 
 			
@@ -102,8 +102,8 @@ void main(void)
 		{
 			Tmr1 = 0;
 			Tmr2 = 0;
-			// UartTxValues(); // uncomment this line for debug
-			// M8C_ClearWDT;   // uncomment this line for debug without I2C master
+		 	// UartTxValues(); // uncomment this line for debug
+		 	// M8C_ClearWDT;   // uncomment this line for debug without I2C master
 			DigitalOut();
 		}
 	}// ========================================================== Main loop 
@@ -183,13 +183,13 @@ void UartTxValues(void)
 */
 
 	TX8_CPutString("Mes: 1 = ");
-	ltoa(str, MesValue[0][0],10);
+	ltoa(str, I2C_Regs.DbMesValue[0],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  2 = ");
-	ltoa(str, MesValue[1][0],10);
+	ltoa(str, I2C_Regs.DbMesValue[1],10);
 	TX8_PutString(str);
 	TX8_CPutString("  -  3 = ");
-	ltoa(str, MesValue[2][0],10);
+	ltoa(str, I2C_Regs.DbMesValue[2],10);
 	TX8_PutString(str);
 	TX8_CPutString(" Pre: 1 = ");
 	itoa(str, GF[GainIndx[0][0]][1], 10);
@@ -272,6 +272,7 @@ void HB_Tmr_ISR_C(void)
 void DelayMs(int Ms)
 {
 	int i;
+	M8C_ClearWDT; //WDT is every 1/8*3=375ms
 	for (i=0; i<Ms; i++)
 	{
 		Delay50uTimes(20);

@@ -3353,7 +3353,7 @@ FILE: lib\hb_tmrint.asm
                                         (0068)    ;   NOTE: interrupt service routines must preserve
                                         (0069)    ;   the values of the A and X CPU registers.
                                         (0070)    
-06A8: 7D 18 54 LJMP  _HB_Tmr_ISR_C      (0071) 	ljmp _HB_Tmr_ISR_C  ; jump to the ISR written in C in mainc.c
+06A8: 7D 18 61 LJMP  _HB_Tmr_ISR_C      (0071) 	ljmp _HB_Tmr_ISR_C  ; jump to the ISR written in C in mainc.c
                                         (0072) 	
                                         (0073)    ;---------------------------------------------------
                                         (0074)    ; Insert your custom code above this banner
@@ -7269,7 +7269,7 @@ FILE: D:\PROGRA~1\PSOCPR~1\EXPLOR~1\EXPLOR~1\main.c
 (0002) ** Project:      ExplorerSound
 (0003) ** Author:    Guido Ottaviani-->guido@guiott.com<--
 (0004) ** Description: 
-(0005) ** version 1.0   07-11-2010
+(0005) ** version 1.1   12-12-2010
 (0006) **
 (0007) ** Detailed descriptions are on file "Notes.txt" 
 (0008) **
@@ -7312,7 +7312,7 @@ _main:
 (0040) 	BYTE PortNum[3];
 (0041) 	
 (0042) 	BlocksInit();
-    0C1A: 7C 17 A2 LCALL _BlocksInit
+    0C1A: 7C 17 AF LCALL _BlocksInit
 (0043) 	
 (0044) 	M8C_EnableGInt ;               // Turn on interrupts 
     0C1D: 71 01    OR    F,0x1
@@ -7329,11 +7329,11 @@ _main:
     0C2A: 56 02 03 MOV   [X+2],0x3
 (0050) 	
 (0051) 	LedTest();
-    0C2D: 7C 18 B5 LCALL _LedTest
+    0C2D: 7C 18 C5 LCALL _LedTest
 (0052) 	I2C_Regs.I2cCheck = 0;
     0C30: 62 D0 00 MOV   REG[0xD0],0x0
     0C33: 55 43 00 MOV   [I2C_Regs+12],0x0
-    0C36: 84 A6    JMP   0x10DD
+    0C36: 84 AA    JMP   0x10E1
 (0053) 	
 (0054) 	// Main loop=============================================================
 (0055) 	while (1)
@@ -7401,7 +7401,7 @@ _main:
     0CA7: 12 7A    SUB   A,[Tmr2+1]
     0CA9: 50 00    MOV   A,0x0
     0CAB: 1A 79    SBB   A,[Tmr2]
-    0CAD: D3 FC    JNC   0x10AA
+    0CAD: D4 00    JNC   0x10AE
 (0065) 		{
 (0066) 			Tmr2=0;
     0CAF: 62 D0 00 MOV   REG[0xD0],0x0
@@ -7458,7 +7458,7 @@ _main:
     0D16: 08       PUSH  A
     0D17: 50 0C    MOV   A,0xC
     0D19: 08       PUSH  A
-    0D1A: 7C 1E B0 LCALL __mul16
+    0D1A: 7C 1E C0 LCALL __mul16
     0D1D: 38 FC    ADD   SP,0xFC
     0D1F: 51 49    MOV   A,[__rX]
     0D21: 53 50    MOV   [__r5],A
@@ -7489,7 +7489,7 @@ _main:
     0D53: 08       PUSH  A
     0D54: 50 0C    MOV   A,0xC
     0D56: 08       PUSH  A
-    0D57: 7C 1E B0 LCALL __mul16
+    0D57: 7C 1E C0 LCALL __mul16
     0D5A: 38 FC    ADD   SP,0xFC
     0D5C: 51 49    MOV   A,[__rX]
     0D5E: 53 54    MOV   [__r1],A
@@ -7545,7 +7545,7 @@ _main:
     0DC4: 08       PUSH  A
     0DC5: 51 4A    MOV   A,[__r11]
     0DC7: 08       PUSH  A
-    0DC8: 7C 19 17 LCALL __divmod_32X32_32
+    0DC8: 7C 19 27 LCALL __divmod_32X32_32
     0DCB: 18       POP   A
     0DCC: 53 4E    MOV   [__r7],A
     0DCE: 18       POP   A
@@ -7580,7 +7580,7 @@ _main:
     0E05: 08       PUSH  A
     0E06: 50 0C    MOV   A,0xC
     0E08: 08       PUSH  A
-    0E09: 7C 1E B0 LCALL __mul16
+    0E09: 7C 1E C0 LCALL __mul16
     0E0C: 38 FC    ADD   SP,0xFC
     0E0E: 51 49    MOV   A,[__rX]
     0E10: 53 54    MOV   [__r1],A
@@ -7636,7 +7636,7 @@ _main:
     0E76: 08       PUSH  A
     0E77: 51 4A    MOV   A,[__r11]
     0E79: 08       PUSH  A
-    0E7A: 7C 19 17 LCALL __divmod_32X32_32
+    0E7A: 7C 19 27 LCALL __divmod_32X32_32
     0E7D: 18       POP   A
     0E7E: 53 4E    MOV   [__r7],A
     0E80: 18       POP   A
@@ -7672,7 +7672,7 @@ _main:
     0EB7: 08       PUSH  A
     0EB8: 50 0C    MOV   A,0xC
     0EBA: 08       PUSH  A
-    0EBB: 7C 1E B0 LCALL __mul16
+    0EBB: 7C 1E C0 LCALL __mul16
     0EBE: 38 FC    ADD   SP,0xFC
     0EC0: 51 49    MOV   A,[__rX]
     0EC2: 53 54    MOV   [__r1],A
@@ -7711,7 +7711,7 @@ _main:
     0F0B: 3F 54    MVI   [__r1],A
     0F0D: 51 4E    MOV   A,[__r7]
     0F0F: 3F 54    MVI   [__r1],A
-(0075) 			I2C_Regs.DbMesValue[PortIndx]=10*(log((float)MesValue[PortIndx][0])+0.5); // logarithmic (dB rounded to next)
+(0075) 			I2C_Regs.DbMesValue[PortIndx]=(10*log10(MesValue[PortIndx][0]))+0.5; // logarithmic (dB rounded to next)
     0F11: 62 D0 00 MOV   REG[0xD0],0x0
     0F14: 51 81    MOV   A,[PortIndx]
     0F16: 62 D0 00 MOV   REG[0xD0],0x0
@@ -7724,7 +7724,7 @@ _main:
     0F23: 08       PUSH  A
     0F24: 50 0C    MOV   A,0xC
     0F26: 08       PUSH  A
-    0F27: 7C 1E B0 LCALL __mul16
+    0F27: 7C 1E C0 LCALL __mul16
     0F2A: 38 FC    ADD   SP,0xFC
     0F2C: 51 49    MOV   A,[__rX]
     0F2E: 53 54    MOV   [__r1],A
@@ -7750,7 +7750,7 @@ _main:
     0F56: 08       PUSH  A
     0F57: 51 4E    MOV   A,[__r7]
     0F59: 08       PUSH  A
-    0F5A: 7C 1E 45 LCALL __long2fp
+    0F5A: 7C 1E 55 LCALL __long2fp
     0F5D: 18       POP   A
     0F5E: 53 52    MOV   [__r3],A
     0F60: 18       POP   A
@@ -7765,237 +7765,239 @@ _main:
     0F6D: 08       PUSH  A
     0F6E: 51 52    MOV   A,[__r3]
     0F70: 08       PUSH  A
-    0F71: 7C 24 08 LCALL _logf
+    0F71: 7C 24 18 LCALL _log10f
     0F74: 38 FC    ADD   SP,0xFC
     0F76: 62 D0 00 MOV   REG[0xD0],0x0
-    0F79: 50 3F    MOV   A,0x3F
+    0F79: 51 55    MOV   A,[__r0]
     0F7B: 08       PUSH  A
-    0F7C: 50 00    MOV   A,0x0
+    0F7C: 51 54    MOV   A,[__r1]
     0F7E: 08       PUSH  A
-    0F7F: 08       PUSH  A
-    0F80: 08       PUSH  A
-    0F81: 51 55    MOV   A,[__r0]
-    0F83: 08       PUSH  A
-    0F84: 51 54    MOV   A,[__r1]
-    0F86: 08       PUSH  A
-    0F87: 51 53    MOV   A,[__r2]
-    0F89: 08       PUSH  A
-    0F8A: 51 52    MOV   A,[__r3]
-    0F8C: 08       PUSH  A
-    0F8D: 7C 1A 7F LCALL __fpadd
-    0F90: 18       POP   A
-    0F91: 53 52    MOV   [__r3],A
-    0F93: 18       POP   A
-    0F94: 53 53    MOV   [__r2],A
-    0F96: 18       POP   A
-    0F97: 53 54    MOV   [__r1],A
-    0F99: 18       POP   A
-    0F9A: 38 FC    ADD   SP,0xFC
-    0F9C: 08       PUSH  A
-    0F9D: 51 54    MOV   A,[__r1]
-    0F9F: 08       PUSH  A
-    0FA0: 51 53    MOV   A,[__r2]
+    0F7F: 51 53    MOV   A,[__r2]
+    0F81: 08       PUSH  A
+    0F82: 51 52    MOV   A,[__r3]
+    0F84: 08       PUSH  A
+    0F85: 50 41    MOV   A,0x41
+    0F87: 08       PUSH  A
+    0F88: 50 20    MOV   A,0x20
+    0F8A: 08       PUSH  A
+    0F8B: 50 00    MOV   A,0x0
+    0F8D: 08       PUSH  A
+    0F8E: 08       PUSH  A
+    0F8F: 7C 1C CF LCALL __fpmul
+    0F92: 18       POP   A
+    0F93: 53 52    MOV   [__r3],A
+    0F95: 18       POP   A
+    0F96: 53 53    MOV   [__r2],A
+    0F98: 18       POP   A
+    0F99: 53 54    MOV   [__r1],A
+    0F9B: 18       POP   A
+    0F9C: 53 55    MOV   [__r0],A
+    0F9E: 38 FC    ADD   SP,0xFC
+    0FA0: 50 3F    MOV   A,0x3F
     0FA2: 08       PUSH  A
-    0FA3: 51 52    MOV   A,[__r3]
+    0FA3: 50 00    MOV   A,0x0
     0FA5: 08       PUSH  A
-    0FA6: 50 41    MOV   A,0x41
-    0FA8: 08       PUSH  A
-    0FA9: 50 20    MOV   A,0x20
-    0FAB: 08       PUSH  A
-    0FAC: 50 00    MOV   A,0x0
-    0FAE: 08       PUSH  A
-    0FAF: 08       PUSH  A
-    0FB0: 7C 1C BF LCALL __fpmul
-    0FB3: 18       POP   A
-    0FB4: 53 52    MOV   [__r3],A
-    0FB6: 18       POP   A
-    0FB7: 53 53    MOV   [__r2],A
-    0FB9: 18       POP   A
-    0FBA: 53 54    MOV   [__r1],A
-    0FBC: 18       POP   A
-    0FBD: 53 55    MOV   [__r0],A
-    0FBF: 38 FC    ADD   SP,0xFC
-    0FC1: 50 47    MOV   A,0x47
-    0FC3: 08       PUSH  A
-    0FC4: 50 00    MOV   A,0x0
-    0FC6: 08       PUSH  A
+    0FA6: 08       PUSH  A
+    0FA7: 08       PUSH  A
+    0FA8: 51 55    MOV   A,[__r0]
+    0FAA: 08       PUSH  A
+    0FAB: 51 54    MOV   A,[__r1]
+    0FAD: 08       PUSH  A
+    0FAE: 51 53    MOV   A,[__r2]
+    0FB0: 08       PUSH  A
+    0FB1: 51 52    MOV   A,[__r3]
+    0FB3: 08       PUSH  A
+    0FB4: 7C 1A 8F LCALL __fpadd
+    0FB7: 18       POP   A
+    0FB8: 53 52    MOV   [__r3],A
+    0FBA: 18       POP   A
+    0FBB: 53 53    MOV   [__r2],A
+    0FBD: 18       POP   A
+    0FBE: 53 54    MOV   [__r1],A
+    0FC0: 18       POP   A
+    0FC1: 53 55    MOV   [__r0],A
+    0FC3: 38 FC    ADD   SP,0xFC
+    0FC5: 50 47    MOV   A,0x47
     0FC7: 08       PUSH  A
-    0FC8: 08       PUSH  A
-    0FC9: 51 55    MOV   A,[__r0]
+    0FC8: 50 00    MOV   A,0x0
+    0FCA: 08       PUSH  A
     0FCB: 08       PUSH  A
-    0FCC: 51 54    MOV   A,[__r1]
-    0FCE: 08       PUSH  A
-    0FCF: 51 53    MOV   A,[__r2]
-    0FD1: 08       PUSH  A
-    0FD2: 51 52    MOV   A,[__r3]
-    0FD4: 08       PUSH  A
-    0FD5: 7C 1B 7F LCALL __fpcmp
-    0FD8: 38 F8    ADD   SP,0xF8
-    0FDA: 39 FF    CMP   A,0xFF
-    0FDC: A0 47    JZ    0x1024
-    0FDE: 50 47    MOV   A,0x47
-    0FE0: 08       PUSH  A
-    0FE1: 50 00    MOV   A,0x0
-    0FE3: 08       PUSH  A
+    0FCC: 08       PUSH  A
+    0FCD: 51 55    MOV   A,[__r0]
+    0FCF: 08       PUSH  A
+    0FD0: 51 54    MOV   A,[__r1]
+    0FD2: 08       PUSH  A
+    0FD3: 51 53    MOV   A,[__r2]
+    0FD5: 08       PUSH  A
+    0FD6: 51 52    MOV   A,[__r3]
+    0FD8: 08       PUSH  A
+    0FD9: 7C 1B 8F LCALL __fpcmp
+    0FDC: 38 F8    ADD   SP,0xF8
+    0FDE: 39 FF    CMP   A,0xFF
+    0FE0: A0 47    JZ    0x1028
+    0FE2: 50 47    MOV   A,0x47
     0FE4: 08       PUSH  A
-    0FE5: 08       PUSH  A
-    0FE6: 51 55    MOV   A,[__r0]
+    0FE5: 50 00    MOV   A,0x0
+    0FE7: 08       PUSH  A
     0FE8: 08       PUSH  A
-    0FE9: 51 54    MOV   A,[__r1]
-    0FEB: 08       PUSH  A
-    0FEC: 51 53    MOV   A,[__r2]
-    0FEE: 08       PUSH  A
-    0FEF: 51 52    MOV   A,[__r3]
-    0FF1: 08       PUSH  A
-    0FF2: 7C 1D 88 LCALL __fpsub
-    0FF5: 18       POP   A
-    0FF6: 53 4E    MOV   [__r7],A
-    0FF8: 18       POP   A
-    0FF9: 53 4F    MOV   [__r6],A
-    0FFB: 18       POP   A
-    0FFC: 53 50    MOV   [__r5],A
-    0FFE: 18       POP   A
-    0FFF: 38 FC    ADD   SP,0xFC
-    1001: 08       PUSH  A
-    1002: 51 50    MOV   A,[__r5]
-    1004: 08       PUSH  A
-    1005: 51 4F    MOV   A,[__r6]
-    1007: 08       PUSH  A
-    1008: 51 4E    MOV   A,[__r7]
-    100A: 08       PUSH  A
-    100B: 7C 19 6E LCALL __fp2long
-    100E: 18       POP   A
-    100F: 53 50    MOV   [__r5],A
-    1011: 18       POP   A
-    1012: 53 51    MOV   [__r4],A
-    1014: 38 FE    ADD   SP,0xFE
-    1016: 51 50    MOV   A,[__r5]
-    1018: 01 00    ADD   A,0x0
-    101A: 54 04    MOV   [X+4],A
-    101C: 51 51    MOV   A,[__r4]
-    101E: 09 80    ADC   A,0x80
-    1020: 54 03    MOV   [X+3],A
-    1022: 80 23    JMP   0x1046
-    1024: 62 D0 00 MOV   REG[0xD0],0x0
-    1027: 51 55    MOV   A,[__r0]
-    1029: 08       PUSH  A
-    102A: 51 54    MOV   A,[__r1]
-    102C: 08       PUSH  A
-    102D: 51 53    MOV   A,[__r2]
-    102F: 08       PUSH  A
-    1030: 51 52    MOV   A,[__r3]
-    1032: 08       PUSH  A
-    1033: 7C 19 6E LCALL __fp2long
-    1036: 18       POP   A
-    1037: 53 54    MOV   [__r1],A
-    1039: 18       POP   A
-    103A: 53 55    MOV   [__r0],A
-    103C: 38 FE    ADD   SP,0xFE
-    103E: 51 54    MOV   A,[__r1]
-    1040: 54 04    MOV   [X+4],A
-    1042: 51 55    MOV   A,[__r0]
-    1044: 54 03    MOV   [X+3],A
-    1046: 62 D0 00 MOV   REG[0xD0],0x0
-    1049: 52 04    MOV   A,[X+4]
-    104B: 53 55    MOV   [__r0],A
-    104D: 62 D0 00 MOV   REG[0xD0],0x0
-    1050: 51 81    MOV   A,[PortIndx]
-    1052: 62 D0 00 MOV   REG[0xD0],0x0
-    1055: 53 52    MOV   [__r3],A
-    1057: 55 53 00 MOV   [__r2],0x0
-    105A: 06 52 44 ADD   [__r3],0x44
-    105D: 0E 53 00 ADC   [__r2],0x0
-    1060: 51 53    MOV   A,[__r2]
-    1062: 60 D5    MOV   REG[0xD5],A
-    1064: 51 55    MOV   A,[__r0]
-    1066: 3F 52    MVI   [__r3],A
+    0FE9: 08       PUSH  A
+    0FEA: 51 55    MOV   A,[__r0]
+    0FEC: 08       PUSH  A
+    0FED: 51 54    MOV   A,[__r1]
+    0FEF: 08       PUSH  A
+    0FF0: 51 53    MOV   A,[__r2]
+    0FF2: 08       PUSH  A
+    0FF3: 51 52    MOV   A,[__r3]
+    0FF5: 08       PUSH  A
+    0FF6: 7C 1D 98 LCALL __fpsub
+    0FF9: 18       POP   A
+    0FFA: 53 4E    MOV   [__r7],A
+    0FFC: 18       POP   A
+    0FFD: 53 4F    MOV   [__r6],A
+    0FFF: 18       POP   A
+    1000: 53 50    MOV   [__r5],A
+    1002: 18       POP   A
+    1003: 38 FC    ADD   SP,0xFC
+    1005: 08       PUSH  A
+    1006: 51 50    MOV   A,[__r5]
+    1008: 08       PUSH  A
+    1009: 51 4F    MOV   A,[__r6]
+    100B: 08       PUSH  A
+    100C: 51 4E    MOV   A,[__r7]
+    100E: 08       PUSH  A
+    100F: 7C 19 7E LCALL __fp2long
+    1012: 18       POP   A
+    1013: 53 50    MOV   [__r5],A
+    1015: 18       POP   A
+    1016: 53 51    MOV   [__r4],A
+    1018: 38 FE    ADD   SP,0xFE
+    101A: 51 50    MOV   A,[__r5]
+    101C: 01 00    ADD   A,0x0
+    101E: 54 04    MOV   [X+4],A
+    1020: 51 51    MOV   A,[__r4]
+    1022: 09 80    ADC   A,0x80
+    1024: 54 03    MOV   [X+3],A
+    1026: 80 23    JMP   0x104A
+    1028: 62 D0 00 MOV   REG[0xD0],0x0
+    102B: 51 55    MOV   A,[__r0]
+    102D: 08       PUSH  A
+    102E: 51 54    MOV   A,[__r1]
+    1030: 08       PUSH  A
+    1031: 51 53    MOV   A,[__r2]
+    1033: 08       PUSH  A
+    1034: 51 52    MOV   A,[__r3]
+    1036: 08       PUSH  A
+    1037: 7C 19 7E LCALL __fp2long
+    103A: 18       POP   A
+    103B: 53 54    MOV   [__r1],A
+    103D: 18       POP   A
+    103E: 53 55    MOV   [__r0],A
+    1040: 38 FE    ADD   SP,0xFE
+    1042: 51 54    MOV   A,[__r1]
+    1044: 54 04    MOV   [X+4],A
+    1046: 51 55    MOV   A,[__r0]
+    1048: 54 03    MOV   [X+3],A
+    104A: 62 D0 00 MOV   REG[0xD0],0x0
+    104D: 52 04    MOV   A,[X+4]
+    104F: 53 55    MOV   [__r0],A
+    1051: 62 D0 00 MOV   REG[0xD0],0x0
+    1054: 51 81    MOV   A,[PortIndx]
+    1056: 62 D0 00 MOV   REG[0xD0],0x0
+    1059: 53 52    MOV   [__r3],A
+    105B: 55 53 00 MOV   [__r2],0x0
+    105E: 06 52 44 ADD   [__r3],0x44
+    1061: 0E 53 00 ADC   [__r2],0x0
+    1064: 51 53    MOV   A,[__r2]
+    1066: 60 D5    MOV   REG[0xD5],A
+    1068: 51 55    MOV   A,[__r0]
+    106A: 3F 52    MVI   [__r3],A
 (0076) 
 (0077) 			AGC(); 
-    1068: 90 7A    CALL  _AGC
+    106C: 90 7A    CALL  _AGC
 (0078) 			
 (0079) 			PortIndx++;
-    106A: 62 D0 00 MOV   REG[0xD0],0x0
-    106D: 76 81    INC   [PortIndx]
+    106E: 62 D0 00 MOV   REG[0xD0],0x0
+    1071: 76 81    INC   [PortIndx]
 (0080) 			if(PortIndx > 2) 
-    106F: 50 02    MOV   A,0x2
-    1071: 3A 81    CMP   A,[PortIndx]
-    1073: D0 07    JNC   0x107B
+    1073: 50 02    MOV   A,0x2
+    1075: 3A 81    CMP   A,[PortIndx]
+    1077: D0 07    JNC   0x107F
 (0081) 			{
 (0082) 				PortIndx=0; // next mux port
-    1075: 62 D0 00 MOV   REG[0xD0],0x0
-    1078: 55 81 00 MOV   [PortIndx],0x0
+    1079: 62 D0 00 MOV   REG[0xD0],0x0
+    107C: 55 81 00 MOV   [PortIndx],0x0
 (0083) 			}
 (0084) 			AMUX4_mic_InputSelect(PortNum[PortIndx]);
-    107B: 62 D0 00 MOV   REG[0xD0],0x0
-    107E: 55 55 07 MOV   [__r0],0x7
-    1081: 5A 54    MOV   [__r1],X
-    1083: 62 D0 00 MOV   REG[0xD0],0x0
-    1086: 51 81    MOV   A,[PortIndx]
-    1088: 62 D0 00 MOV   REG[0xD0],0x0
-    108B: 02 54    ADD   A,[__r1]
-    108D: 53 54    MOV   [__r1],A
-    108F: 50 00    MOV   A,0x0
-    1091: 0A 55    ADC   A,[__r0]
-    1093: 60 D4    MOV   REG[0xD4],A
-    1095: 3E 54    MVI   A,[__r1]
-    1097: 10       PUSH  X
-    1098: 7C 09 4D LCALL 0x094D
-    109B: 20       POP   X
+    107F: 62 D0 00 MOV   REG[0xD0],0x0
+    1082: 55 55 07 MOV   [__r0],0x7
+    1085: 5A 54    MOV   [__r1],X
+    1087: 62 D0 00 MOV   REG[0xD0],0x0
+    108A: 51 81    MOV   A,[PortIndx]
+    108C: 62 D0 00 MOV   REG[0xD0],0x0
+    108F: 02 54    ADD   A,[__r1]
+    1091: 53 54    MOV   [__r1],A
+    1093: 50 00    MOV   A,0x0
+    1095: 0A 55    ADC   A,[__r0]
+    1097: 60 D4    MOV   REG[0xD4],A
+    1099: 3E 54    MVI   A,[__r1]
+    109B: 10       PUSH  X
+    109C: 7C 09 4D LCALL 0x094D
+    109F: 20       POP   X
 (0085) 			
 (0086) 			// I2C comm test. If master is able to change I2cCheck the comm is working
 (0087) 			// otherwise the CPU will be reset by the watchdog timer
 (0088) 			if (I2C_Regs.I2cCheck)	 
-    109C: 62 D0 00 MOV   REG[0xD0],0x0
-    109F: 3C 43 00 CMP   [I2C_Regs+12],0x0
-    10A2: A0 07    JZ    0x10AA
+    10A0: 62 D0 00 MOV   REG[0xD0],0x0
+    10A3: 3C 43 00 CMP   [I2C_Regs+12],0x0
+    10A6: A0 07    JZ    0x10AE
 (0089) 			{
 (0090) 				I2C_Regs.I2cCheck = 0;
-    10A4: 55 43 00 MOV   [I2C_Regs+12],0x0
+    10A8: 55 43 00 MOV   [I2C_Regs+12],0x0
 (0091) 				M8C_ClearWDT;
-    10A7: 62 E3 00 MOV   REG[0xE3],0x0
+    10AB: 62 E3 00 MOV   REG[0xE3],0x0
 (0092) 			}
 (0093) 		}
 (0094) 		
 (0095) 		if (TmrFlag) // every 10ms
-    10AA: 62 D0 00 MOV   REG[0xD0],0x0
-    10AD: 3C 82 00 CMP   [TmrFlag],0x0
-    10B0: A0 0B    JZ    0x10BC
+    10AE: 62 D0 00 MOV   REG[0xD0],0x0
+    10B1: 3C 82 00 CMP   [TmrFlag],0x0
+    10B4: A0 0B    JZ    0x10C0
 (0096) 		{	
 (0097) 			TmrFlag = 0;
-    10B2: 55 82 00 MOV   [TmrFlag],0x0
+    10B6: 55 82 00 MOV   [TmrFlag],0x0
 (0098) 			ADCINCVR_pot_GetSamples(1);    // Start ADC to read 1 sample
-    10B5: 10       PUSH  X
-    10B6: 50 01    MOV   A,0x1
-    10B8: 7C 0A 15 LCALL 0x0A15
-    10BB: 20       POP   X
+    10B9: 10       PUSH  X
+    10BA: 50 01    MOV   A,0x1
+    10BC: 7C 0A 15 LCALL 0x0A15
+    10BF: 20       POP   X
 (0099) 		}
 (0100) 		
 (0101) 		if (Tmr1 > 9) // every 100ms
-    10BC: 62 D0 00 MOV   REG[0xD0],0x0
-    10BF: 50 09    MOV   A,0x9
-    10C1: 12 7C    SUB   A,[Tmr1+1]
-    10C3: 50 00    MOV   A,0x0
-    10C5: 1A 7B    SBB   A,[Tmr1]
-    10C7: D0 15    JNC   0x10DD
+    10C0: 62 D0 00 MOV   REG[0xD0],0x0
+    10C3: 50 09    MOV   A,0x9
+    10C5: 12 7C    SUB   A,[Tmr1+1]
+    10C7: 50 00    MOV   A,0x0
+    10C9: 1A 7B    SBB   A,[Tmr1]
+    10CB: D0 15    JNC   0x10E1
 (0102) 		{
 (0103) 			Tmr1 = 0;
-    10C9: 62 D0 00 MOV   REG[0xD0],0x0
-    10CC: 55 7C 00 MOV   [Tmr1+1],0x0
-    10CF: 55 7B 00 MOV   [Tmr1],0x0
+    10CD: 62 D0 00 MOV   REG[0xD0],0x0
+    10D0: 55 7C 00 MOV   [Tmr1+1],0x0
+    10D3: 55 7B 00 MOV   [Tmr1],0x0
 (0104) 			Tmr2 = 0;
-    10D2: 62 D0 00 MOV   REG[0xD0],0x0
-    10D5: 55 7A 00 MOV   [Tmr2+1],0x0
-    10D8: 55 79 00 MOV   [Tmr2],0x0
-(0105) 			// UartTxValues(); // uncomment this line for debug
-(0106) 			// M8C_ClearWDT;   // uncomment this line for debug without I2C master
+    10D6: 62 D0 00 MOV   REG[0xD0],0x0
+    10D9: 55 7A 00 MOV   [Tmr2+1],0x0
+    10DC: 55 79 00 MOV   [Tmr2],0x0
+(0105) 		 	// UartTxValues(); // uncomment this line for debug
+(0106) 		 	// M8C_ClearWDT;   // uncomment this line for debug without I2C master
 (0107) 			DigitalOut();
-    10DB: 93 6A    CALL  _DigitalOut
+    10DF: 93 6A    CALL  _DigitalOut
 (0108) 		}
 (0109) 	}// ========================================================== Main loop 
-    10DD: 8B 5A    JMP   0x0C38
-    10DF: 38 FB    ADD   SP,0xFB
-    10E1: 20       POP   X
-    10E2: 8F FF    JMP   0x10E2
+    10E1: 8B 56    JMP   0x0C38
+    10E3: 38 FB    ADD   SP,0xFB
+    10E5: 20       POP   X
+    10E6: 8F FF    JMP   0x10E6
 (0110) }
 (0111) 
 (0112) // Functions ***************************************************************
@@ -8004,550 +8006,550 @@ _main:
 (0115) {// [5]
 (0116) 	     if((MesValue[PortIndx][2] > V_MAX) && (GainIndx[PortIndx][1] > I_MIN))// PGA_out
 _AGC:
-    10E4: 62 D0 00 MOV   REG[0xD0],0x0
-    10E7: 51 81    MOV   A,[PortIndx]
-    10E9: 62 D0 00 MOV   REG[0xD0],0x0
-    10EC: 53 54    MOV   [__r1],A
-    10EE: 50 00    MOV   A,0x0
-    10F0: 08       PUSH  A
-    10F1: 51 54    MOV   A,[__r1]
-    10F3: 08       PUSH  A
-    10F4: 50 00    MOV   A,0x0
-    10F6: 08       PUSH  A
-    10F7: 50 0C    MOV   A,0xC
-    10F9: 08       PUSH  A
-    10FA: 7C 1E B0 LCALL __mul16
-    10FD: 38 FC    ADD   SP,0xFC
-    10FF: 51 49    MOV   A,[__rX]
-    1101: 53 54    MOV   [__r1],A
-    1103: 51 48    MOV   A,[__rY]
-    1105: 53 55    MOV   [__r0],A
-    1107: 06 54 1B ADD   [__r1],0x1B
-    110A: 0E 55 00 ADC   [__r0],0x0
-    110D: 51 55    MOV   A,[__r0]
-    110F: 60 D4    MOV   REG[0xD4],A
-    1111: 3E 54    MVI   A,[__r1]
-    1113: 53 51    MOV   [__r4],A
+    10E8: 62 D0 00 MOV   REG[0xD0],0x0
+    10EB: 51 81    MOV   A,[PortIndx]
+    10ED: 62 D0 00 MOV   REG[0xD0],0x0
+    10F0: 53 54    MOV   [__r1],A
+    10F2: 50 00    MOV   A,0x0
+    10F4: 08       PUSH  A
+    10F5: 51 54    MOV   A,[__r1]
+    10F7: 08       PUSH  A
+    10F8: 50 00    MOV   A,0x0
+    10FA: 08       PUSH  A
+    10FB: 50 0C    MOV   A,0xC
+    10FD: 08       PUSH  A
+    10FE: 7C 1E C0 LCALL __mul16
+    1101: 38 FC    ADD   SP,0xFC
+    1103: 51 49    MOV   A,[__rX]
+    1105: 53 54    MOV   [__r1],A
+    1107: 51 48    MOV   A,[__rY]
+    1109: 53 55    MOV   [__r0],A
+    110B: 06 54 1B ADD   [__r1],0x1B
+    110E: 0E 55 00 ADC   [__r0],0x0
+    1111: 51 55    MOV   A,[__r0]
+    1113: 60 D4    MOV   REG[0xD4],A
     1115: 3E 54    MVI   A,[__r1]
-    1117: 53 50    MOV   [__r5],A
+    1117: 53 51    MOV   [__r4],A
     1119: 3E 54    MVI   A,[__r1]
-    111B: 53 4F    MOV   [__r6],A
+    111B: 53 50    MOV   [__r5],A
     111D: 3E 54    MVI   A,[__r1]
-    111F: 53 4E    MOV   [__r7],A
-    1121: 50 40    MOV   A,0x40
-    1123: 12 4E    SUB   A,[__r7]
-    1125: 50 0D    MOV   A,0xD
-    1127: 1A 4F    SBB   A,[__r6]
-    1129: 50 03    MOV   A,0x3
-    112B: 1A 50    SBB   A,[__r5]
-    112D: 51 51    MOV   A,[__r4]
-    112F: 31 80    XOR   A,0x80
-    1131: 53 49    MOV   [__rX],A
-    1133: 50 80    MOV   A,0x80
-    1135: 1A 49    SBB   A,[__rX]
-    1137: D0 8B    JNC   0x11C3
-    1139: 62 D0 00 MOV   REG[0xD0],0x0
-    113C: 51 81    MOV   A,[PortIndx]
-    113E: 62 D0 00 MOV   REG[0xD0],0x0
-    1141: 53 54    MOV   [__r1],A
-    1143: 55 55 00 MOV   [__r0],0x0
-    1146: 65 54    ASL   [__r1]
-    1148: 6B 55    RLC   [__r0]
-    114A: 06 54 6C ADD   [__r1],0x6C
-    114D: 0E 55 00 ADC   [__r0],0x0
-    1150: 51 55    MOV   A,[__r0]
-    1152: 60 D4    MOV   REG[0xD4],A
-    1154: 3E 54    MVI   A,[__r1]
-    1156: 53 55    MOV   [__r0],A
-    1158: 50 00    MOV   A,0x0
-    115A: 3A 55    CMP   A,[__r0]
-    115C: D0 66    JNC   0x11C3
+    111F: 53 4F    MOV   [__r6],A
+    1121: 3E 54    MVI   A,[__r1]
+    1123: 53 4E    MOV   [__r7],A
+    1125: 50 40    MOV   A,0x40
+    1127: 12 4E    SUB   A,[__r7]
+    1129: 50 0D    MOV   A,0xD
+    112B: 1A 4F    SBB   A,[__r6]
+    112D: 50 03    MOV   A,0x3
+    112F: 1A 50    SBB   A,[__r5]
+    1131: 51 51    MOV   A,[__r4]
+    1133: 31 80    XOR   A,0x80
+    1135: 53 49    MOV   [__rX],A
+    1137: 50 80    MOV   A,0x80
+    1139: 1A 49    SBB   A,[__rX]
+    113B: D0 8B    JNC   0x11C7
+    113D: 62 D0 00 MOV   REG[0xD0],0x0
+    1140: 51 81    MOV   A,[PortIndx]
+    1142: 62 D0 00 MOV   REG[0xD0],0x0
+    1145: 53 54    MOV   [__r1],A
+    1147: 55 55 00 MOV   [__r0],0x0
+    114A: 65 54    ASL   [__r1]
+    114C: 6B 55    RLC   [__r0]
+    114E: 06 54 6C ADD   [__r1],0x6C
+    1151: 0E 55 00 ADC   [__r0],0x0
+    1154: 51 55    MOV   A,[__r0]
+    1156: 60 D4    MOV   REG[0xD4],A
+    1158: 3E 54    MVI   A,[__r1]
+    115A: 53 55    MOV   [__r0],A
+    115C: 50 00    MOV   A,0x0
+    115E: 3A 55    CMP   A,[__r0]
+    1160: D0 66    JNC   0x11C7
 (0117) 	{
 (0118) 		GainIndx[PortIndx][1]--;
-    115E: 62 D0 00 MOV   REG[0xD0],0x0
-    1161: 51 81    MOV   A,[PortIndx]
-    1163: 62 D0 00 MOV   REG[0xD0],0x0
-    1166: 53 54    MOV   [__r1],A
-    1168: 55 55 00 MOV   [__r0],0x0
-    116B: 65 54    ASL   [__r1]
-    116D: 6B 55    RLC   [__r0]
-    116F: 06 54 6C ADD   [__r1],0x6C
-    1172: 0E 55 00 ADC   [__r0],0x0
-    1175: 51 55    MOV   A,[__r0]
-    1177: 60 D4    MOV   REG[0xD4],A
-    1179: 3E 54    MVI   A,[__r1]
-    117B: 7A 54    DEC   [__r1]
-    117D: 53 53    MOV   [__r2],A
-    117F: 16 53 01 SUB   [__r2],0x1
-    1182: 51 55    MOV   A,[__r0]
-    1184: 60 D5    MOV   REG[0xD5],A
-    1186: 51 53    MOV   A,[__r2]
-    1188: 3F 54    MVI   [__r1],A
+    1162: 62 D0 00 MOV   REG[0xD0],0x0
+    1165: 51 81    MOV   A,[PortIndx]
+    1167: 62 D0 00 MOV   REG[0xD0],0x0
+    116A: 53 54    MOV   [__r1],A
+    116C: 55 55 00 MOV   [__r0],0x0
+    116F: 65 54    ASL   [__r1]
+    1171: 6B 55    RLC   [__r0]
+    1173: 06 54 6C ADD   [__r1],0x6C
+    1176: 0E 55 00 ADC   [__r0],0x0
+    1179: 51 55    MOV   A,[__r0]
+    117B: 60 D4    MOV   REG[0xD4],A
+    117D: 3E 54    MVI   A,[__r1]
+    117F: 7A 54    DEC   [__r1]
+    1181: 53 53    MOV   [__r2],A
+    1183: 16 53 01 SUB   [__r2],0x1
+    1186: 51 55    MOV   A,[__r0]
+    1188: 60 D5    MOV   REG[0xD5],A
+    118A: 51 53    MOV   A,[__r2]
+    118C: 3F 54    MVI   [__r1],A
 (0119) 		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
-    118A: 62 D0 00 MOV   REG[0xD0],0x0
-    118D: 51 81    MOV   A,[PortIndx]
-    118F: 62 D0 00 MOV   REG[0xD0],0x0
-    1192: 53 54    MOV   [__r1],A
-    1194: 55 55 00 MOV   [__r0],0x0
-    1197: 65 54    ASL   [__r1]
-    1199: 6B 55    RLC   [__r0]
-    119B: 06 54 6C ADD   [__r1],0x6C
-    119E: 0E 55 00 ADC   [__r0],0x0
-    11A1: 51 55    MOV   A,[__r0]
-    11A3: 60 D4    MOV   REG[0xD4],A
-    11A5: 3E 54    MVI   A,[__r1]
-    11A7: 53 54    MOV   [__r1],A
-    11A9: 55 55 00 MOV   [__r0],0x0
-    11AC: 65 54    ASL   [__r1]
-    11AE: 6B 55    RLC   [__r0]
-    11B0: 06 54 56 ADD   [__r1],0x56
-    11B3: 0E 55 00 ADC   [__r0],0x0
-    11B6: 51 55    MOV   A,[__r0]
-    11B8: 60 D4    MOV   REG[0xD4],A
-    11BA: 3E 54    MVI   A,[__r1]
-    11BC: 10       PUSH  X
-    11BD: 7C 05 C3 LCALL 0x05C3
-    11C0: 20       POP   X
+    118E: 62 D0 00 MOV   REG[0xD0],0x0
+    1191: 51 81    MOV   A,[PortIndx]
+    1193: 62 D0 00 MOV   REG[0xD0],0x0
+    1196: 53 54    MOV   [__r1],A
+    1198: 55 55 00 MOV   [__r0],0x0
+    119B: 65 54    ASL   [__r1]
+    119D: 6B 55    RLC   [__r0]
+    119F: 06 54 6C ADD   [__r1],0x6C
+    11A2: 0E 55 00 ADC   [__r0],0x0
+    11A5: 51 55    MOV   A,[__r0]
+    11A7: 60 D4    MOV   REG[0xD4],A
+    11A9: 3E 54    MVI   A,[__r1]
+    11AB: 53 54    MOV   [__r1],A
+    11AD: 55 55 00 MOV   [__r0],0x0
+    11B0: 65 54    ASL   [__r1]
+    11B2: 6B 55    RLC   [__r0]
+    11B4: 06 54 56 ADD   [__r1],0x56
+    11B7: 0E 55 00 ADC   [__r0],0x0
+    11BA: 51 55    MOV   A,[__r0]
+    11BC: 60 D4    MOV   REG[0xD4],A
+    11BE: 3E 54    MVI   A,[__r1]
+    11C0: 10       PUSH  X
+    11C1: 7C 05 C3 LCALL 0x05C3
+    11C4: 20       POP   X
 (0120) 	}
-    11C1: 82 84    JMP   0x1446
+    11C5: 82 84    JMP   0x144A
 (0121) 	else if((MesValue[PortIndx][1] > V_MAX) && (GainIndx[PortIndx][0] > I_MIN))// PGA_pre
-    11C3: 62 D0 00 MOV   REG[0xD0],0x0
-    11C6: 51 81    MOV   A,[PortIndx]
-    11C8: 62 D0 00 MOV   REG[0xD0],0x0
-    11CB: 53 54    MOV   [__r1],A
-    11CD: 50 00    MOV   A,0x0
-    11CF: 08       PUSH  A
-    11D0: 51 54    MOV   A,[__r1]
-    11D2: 08       PUSH  A
-    11D3: 50 00    MOV   A,0x0
-    11D5: 08       PUSH  A
-    11D6: 50 0C    MOV   A,0xC
-    11D8: 08       PUSH  A
-    11D9: 7C 1E B0 LCALL __mul16
-    11DC: 38 FC    ADD   SP,0xFC
-    11DE: 51 49    MOV   A,[__rX]
-    11E0: 53 54    MOV   [__r1],A
-    11E2: 51 48    MOV   A,[__rY]
-    11E4: 53 55    MOV   [__r0],A
-    11E6: 06 54 17 ADD   [__r1],0x17
-    11E9: 0E 55 00 ADC   [__r0],0x0
-    11EC: 51 55    MOV   A,[__r0]
-    11EE: 60 D4    MOV   REG[0xD4],A
-    11F0: 3E 54    MVI   A,[__r1]
-    11F2: 53 51    MOV   [__r4],A
+    11C7: 62 D0 00 MOV   REG[0xD0],0x0
+    11CA: 51 81    MOV   A,[PortIndx]
+    11CC: 62 D0 00 MOV   REG[0xD0],0x0
+    11CF: 53 54    MOV   [__r1],A
+    11D1: 50 00    MOV   A,0x0
+    11D3: 08       PUSH  A
+    11D4: 51 54    MOV   A,[__r1]
+    11D6: 08       PUSH  A
+    11D7: 50 00    MOV   A,0x0
+    11D9: 08       PUSH  A
+    11DA: 50 0C    MOV   A,0xC
+    11DC: 08       PUSH  A
+    11DD: 7C 1E C0 LCALL __mul16
+    11E0: 38 FC    ADD   SP,0xFC
+    11E2: 51 49    MOV   A,[__rX]
+    11E4: 53 54    MOV   [__r1],A
+    11E6: 51 48    MOV   A,[__rY]
+    11E8: 53 55    MOV   [__r0],A
+    11EA: 06 54 17 ADD   [__r1],0x17
+    11ED: 0E 55 00 ADC   [__r0],0x0
+    11F0: 51 55    MOV   A,[__r0]
+    11F2: 60 D4    MOV   REG[0xD4],A
     11F4: 3E 54    MVI   A,[__r1]
-    11F6: 53 50    MOV   [__r5],A
+    11F6: 53 51    MOV   [__r4],A
     11F8: 3E 54    MVI   A,[__r1]
-    11FA: 53 4F    MOV   [__r6],A
+    11FA: 53 50    MOV   [__r5],A
     11FC: 3E 54    MVI   A,[__r1]
-    11FE: 53 4E    MOV   [__r7],A
-    1200: 50 40    MOV   A,0x40
-    1202: 12 4E    SUB   A,[__r7]
-    1204: 50 0D    MOV   A,0xD
-    1206: 1A 4F    SBB   A,[__r6]
-    1208: 50 03    MOV   A,0x3
-    120A: 1A 50    SBB   A,[__r5]
-    120C: 51 51    MOV   A,[__r4]
-    120E: 31 80    XOR   A,0x80
-    1210: 53 49    MOV   [__rX],A
-    1212: 50 80    MOV   A,0x80
-    1214: 1A 49    SBB   A,[__rX]
-    1216: D0 8B    JNC   0x12A2
-    1218: 62 D0 00 MOV   REG[0xD0],0x0
-    121B: 51 81    MOV   A,[PortIndx]
-    121D: 62 D0 00 MOV   REG[0xD0],0x0
-    1220: 53 54    MOV   [__r1],A
-    1222: 55 55 00 MOV   [__r0],0x0
-    1225: 65 54    ASL   [__r1]
-    1227: 6B 55    RLC   [__r0]
-    1229: 06 54 6B ADD   [__r1],0x6B
-    122C: 0E 55 00 ADC   [__r0],0x0
-    122F: 51 55    MOV   A,[__r0]
-    1231: 60 D4    MOV   REG[0xD4],A
-    1233: 3E 54    MVI   A,[__r1]
-    1235: 53 55    MOV   [__r0],A
-    1237: 50 00    MOV   A,0x0
-    1239: 3A 55    CMP   A,[__r0]
-    123B: D0 66    JNC   0x12A2
+    11FE: 53 4F    MOV   [__r6],A
+    1200: 3E 54    MVI   A,[__r1]
+    1202: 53 4E    MOV   [__r7],A
+    1204: 50 40    MOV   A,0x40
+    1206: 12 4E    SUB   A,[__r7]
+    1208: 50 0D    MOV   A,0xD
+    120A: 1A 4F    SBB   A,[__r6]
+    120C: 50 03    MOV   A,0x3
+    120E: 1A 50    SBB   A,[__r5]
+    1210: 51 51    MOV   A,[__r4]
+    1212: 31 80    XOR   A,0x80
+    1214: 53 49    MOV   [__rX],A
+    1216: 50 80    MOV   A,0x80
+    1218: 1A 49    SBB   A,[__rX]
+    121A: D0 8B    JNC   0x12A6
+    121C: 62 D0 00 MOV   REG[0xD0],0x0
+    121F: 51 81    MOV   A,[PortIndx]
+    1221: 62 D0 00 MOV   REG[0xD0],0x0
+    1224: 53 54    MOV   [__r1],A
+    1226: 55 55 00 MOV   [__r0],0x0
+    1229: 65 54    ASL   [__r1]
+    122B: 6B 55    RLC   [__r0]
+    122D: 06 54 6B ADD   [__r1],0x6B
+    1230: 0E 55 00 ADC   [__r0],0x0
+    1233: 51 55    MOV   A,[__r0]
+    1235: 60 D4    MOV   REG[0xD4],A
+    1237: 3E 54    MVI   A,[__r1]
+    1239: 53 55    MOV   [__r0],A
+    123B: 50 00    MOV   A,0x0
+    123D: 3A 55    CMP   A,[__r0]
+    123F: D0 66    JNC   0x12A6
 (0122) 	{
 (0123) 		GainIndx[PortIndx][0]--;
-    123D: 62 D0 00 MOV   REG[0xD0],0x0
-    1240: 51 81    MOV   A,[PortIndx]
-    1242: 62 D0 00 MOV   REG[0xD0],0x0
-    1245: 53 54    MOV   [__r1],A
-    1247: 55 55 00 MOV   [__r0],0x0
-    124A: 65 54    ASL   [__r1]
-    124C: 6B 55    RLC   [__r0]
-    124E: 06 54 6B ADD   [__r1],0x6B
-    1251: 0E 55 00 ADC   [__r0],0x0
-    1254: 51 55    MOV   A,[__r0]
-    1256: 60 D4    MOV   REG[0xD4],A
-    1258: 3E 54    MVI   A,[__r1]
-    125A: 7A 54    DEC   [__r1]
-    125C: 53 53    MOV   [__r2],A
-    125E: 16 53 01 SUB   [__r2],0x1
-    1261: 51 55    MOV   A,[__r0]
-    1263: 60 D5    MOV   REG[0xD5],A
-    1265: 51 53    MOV   A,[__r2]
-    1267: 3F 54    MVI   [__r1],A
+    1241: 62 D0 00 MOV   REG[0xD0],0x0
+    1244: 51 81    MOV   A,[PortIndx]
+    1246: 62 D0 00 MOV   REG[0xD0],0x0
+    1249: 53 54    MOV   [__r1],A
+    124B: 55 55 00 MOV   [__r0],0x0
+    124E: 65 54    ASL   [__r1]
+    1250: 6B 55    RLC   [__r0]
+    1252: 06 54 6B ADD   [__r1],0x6B
+    1255: 0E 55 00 ADC   [__r0],0x0
+    1258: 51 55    MOV   A,[__r0]
+    125A: 60 D4    MOV   REG[0xD4],A
+    125C: 3E 54    MVI   A,[__r1]
+    125E: 7A 54    DEC   [__r1]
+    1260: 53 53    MOV   [__r2],A
+    1262: 16 53 01 SUB   [__r2],0x1
+    1265: 51 55    MOV   A,[__r0]
+    1267: 60 D5    MOV   REG[0xD5],A
+    1269: 51 53    MOV   A,[__r2]
+    126B: 3F 54    MVI   [__r1],A
 (0124) 		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
-    1269: 62 D0 00 MOV   REG[0xD0],0x0
-    126C: 51 81    MOV   A,[PortIndx]
-    126E: 62 D0 00 MOV   REG[0xD0],0x0
-    1271: 53 54    MOV   [__r1],A
-    1273: 55 55 00 MOV   [__r0],0x0
-    1276: 65 54    ASL   [__r1]
-    1278: 6B 55    RLC   [__r0]
-    127A: 06 54 6B ADD   [__r1],0x6B
-    127D: 0E 55 00 ADC   [__r0],0x0
-    1280: 51 55    MOV   A,[__r0]
-    1282: 60 D4    MOV   REG[0xD4],A
-    1284: 3E 54    MVI   A,[__r1]
-    1286: 53 54    MOV   [__r1],A
-    1288: 55 55 00 MOV   [__r0],0x0
-    128B: 65 54    ASL   [__r1]
-    128D: 6B 55    RLC   [__r0]
-    128F: 06 54 56 ADD   [__r1],0x56
-    1292: 0E 55 00 ADC   [__r0],0x0
-    1295: 51 55    MOV   A,[__r0]
-    1297: 60 D4    MOV   REG[0xD4],A
-    1299: 3E 54    MVI   A,[__r1]
-    129B: 10       PUSH  X
-    129C: 7C 05 83 LCALL 0x0583
-    129F: 20       POP   X
+    126D: 62 D0 00 MOV   REG[0xD0],0x0
+    1270: 51 81    MOV   A,[PortIndx]
+    1272: 62 D0 00 MOV   REG[0xD0],0x0
+    1275: 53 54    MOV   [__r1],A
+    1277: 55 55 00 MOV   [__r0],0x0
+    127A: 65 54    ASL   [__r1]
+    127C: 6B 55    RLC   [__r0]
+    127E: 06 54 6B ADD   [__r1],0x6B
+    1281: 0E 55 00 ADC   [__r0],0x0
+    1284: 51 55    MOV   A,[__r0]
+    1286: 60 D4    MOV   REG[0xD4],A
+    1288: 3E 54    MVI   A,[__r1]
+    128A: 53 54    MOV   [__r1],A
+    128C: 55 55 00 MOV   [__r0],0x0
+    128F: 65 54    ASL   [__r1]
+    1291: 6B 55    RLC   [__r0]
+    1293: 06 54 56 ADD   [__r1],0x56
+    1296: 0E 55 00 ADC   [__r0],0x0
+    1299: 51 55    MOV   A,[__r0]
+    129B: 60 D4    MOV   REG[0xD4],A
+    129D: 3E 54    MVI   A,[__r1]
+    129F: 10       PUSH  X
+    12A0: 7C 05 83 LCALL 0x0583
+    12A3: 20       POP   X
 (0125) 	}
-    12A0: 81 A5    JMP   0x1446
+    12A4: 81 A5    JMP   0x144A
 (0126) 	else if((MesValue[PortIndx][2] < V_MIN) && (GainIndx[PortIndx][1] < I_MAX))// PGA_out
-    12A2: 62 D0 00 MOV   REG[0xD0],0x0
-    12A5: 51 81    MOV   A,[PortIndx]
-    12A7: 62 D0 00 MOV   REG[0xD0],0x0
-    12AA: 53 54    MOV   [__r1],A
-    12AC: 50 00    MOV   A,0x0
-    12AE: 08       PUSH  A
-    12AF: 51 54    MOV   A,[__r1]
-    12B1: 08       PUSH  A
-    12B2: 50 00    MOV   A,0x0
-    12B4: 08       PUSH  A
-    12B5: 50 0C    MOV   A,0xC
-    12B7: 08       PUSH  A
-    12B8: 7C 1E B0 LCALL __mul16
-    12BB: 38 FC    ADD   SP,0xFC
-    12BD: 51 49    MOV   A,[__rX]
-    12BF: 53 54    MOV   [__r1],A
-    12C1: 51 48    MOV   A,[__rY]
-    12C3: 53 55    MOV   [__r0],A
-    12C5: 06 54 1B ADD   [__r1],0x1B
-    12C8: 0E 55 00 ADC   [__r0],0x0
-    12CB: 51 55    MOV   A,[__r0]
-    12CD: 60 D4    MOV   REG[0xD4],A
-    12CF: 3E 54    MVI   A,[__r1]
-    12D1: 53 51    MOV   [__r4],A
+    12A6: 62 D0 00 MOV   REG[0xD0],0x0
+    12A9: 51 81    MOV   A,[PortIndx]
+    12AB: 62 D0 00 MOV   REG[0xD0],0x0
+    12AE: 53 54    MOV   [__r1],A
+    12B0: 50 00    MOV   A,0x0
+    12B2: 08       PUSH  A
+    12B3: 51 54    MOV   A,[__r1]
+    12B5: 08       PUSH  A
+    12B6: 50 00    MOV   A,0x0
+    12B8: 08       PUSH  A
+    12B9: 50 0C    MOV   A,0xC
+    12BB: 08       PUSH  A
+    12BC: 7C 1E C0 LCALL __mul16
+    12BF: 38 FC    ADD   SP,0xFC
+    12C1: 51 49    MOV   A,[__rX]
+    12C3: 53 54    MOV   [__r1],A
+    12C5: 51 48    MOV   A,[__rY]
+    12C7: 53 55    MOV   [__r0],A
+    12C9: 06 54 1B ADD   [__r1],0x1B
+    12CC: 0E 55 00 ADC   [__r0],0x0
+    12CF: 51 55    MOV   A,[__r0]
+    12D1: 60 D4    MOV   REG[0xD4],A
     12D3: 3E 54    MVI   A,[__r1]
-    12D5: 53 50    MOV   [__r5],A
+    12D5: 53 51    MOV   [__r4],A
     12D7: 3E 54    MVI   A,[__r1]
-    12D9: 53 4F    MOV   [__r6],A
+    12D9: 53 50    MOV   [__r5],A
     12DB: 3E 54    MVI   A,[__r1]
-    12DD: 11 50    SUB   A,0x50
-    12DF: 51 4F    MOV   A,[__r6]
-    12E1: 19 C3    SBB   A,0xC3
-    12E3: 51 50    MOV   A,[__r5]
-    12E5: 19 00    SBB   A,0x0
-    12E7: 51 51    MOV   A,[__r4]
-    12E9: 31 80    XOR   A,0x80
-    12EB: 19 80    SBB   A,0x80
-    12ED: D0 87    JNC   0x1375
-    12EF: 62 D0 00 MOV   REG[0xD0],0x0
-    12F2: 51 81    MOV   A,[PortIndx]
-    12F4: 62 D0 00 MOV   REG[0xD0],0x0
-    12F7: 53 54    MOV   [__r1],A
-    12F9: 55 55 00 MOV   [__r0],0x0
-    12FC: 65 54    ASL   [__r1]
-    12FE: 6B 55    RLC   [__r0]
-    1300: 06 54 6C ADD   [__r1],0x6C
-    1303: 0E 55 00 ADC   [__r0],0x0
-    1306: 51 55    MOV   A,[__r0]
-    1308: 60 D4    MOV   REG[0xD4],A
-    130A: 3E 54    MVI   A,[__r1]
-    130C: 39 06    CMP   A,0x6
-    130E: D0 66    JNC   0x1375
+    12DD: 53 4F    MOV   [__r6],A
+    12DF: 3E 54    MVI   A,[__r1]
+    12E1: 11 50    SUB   A,0x50
+    12E3: 51 4F    MOV   A,[__r6]
+    12E5: 19 C3    SBB   A,0xC3
+    12E7: 51 50    MOV   A,[__r5]
+    12E9: 19 00    SBB   A,0x0
+    12EB: 51 51    MOV   A,[__r4]
+    12ED: 31 80    XOR   A,0x80
+    12EF: 19 80    SBB   A,0x80
+    12F1: D0 87    JNC   0x1379
+    12F3: 62 D0 00 MOV   REG[0xD0],0x0
+    12F6: 51 81    MOV   A,[PortIndx]
+    12F8: 62 D0 00 MOV   REG[0xD0],0x0
+    12FB: 53 54    MOV   [__r1],A
+    12FD: 55 55 00 MOV   [__r0],0x0
+    1300: 65 54    ASL   [__r1]
+    1302: 6B 55    RLC   [__r0]
+    1304: 06 54 6C ADD   [__r1],0x6C
+    1307: 0E 55 00 ADC   [__r0],0x0
+    130A: 51 55    MOV   A,[__r0]
+    130C: 60 D4    MOV   REG[0xD4],A
+    130E: 3E 54    MVI   A,[__r1]
+    1310: 39 06    CMP   A,0x6
+    1312: D0 66    JNC   0x1379
 (0127) 	{
 (0128) 		GainIndx[PortIndx][1]++;
-    1310: 62 D0 00 MOV   REG[0xD0],0x0
-    1313: 51 81    MOV   A,[PortIndx]
-    1315: 62 D0 00 MOV   REG[0xD0],0x0
-    1318: 53 54    MOV   [__r1],A
-    131A: 55 55 00 MOV   [__r0],0x0
-    131D: 65 54    ASL   [__r1]
-    131F: 6B 55    RLC   [__r0]
-    1321: 06 54 6C ADD   [__r1],0x6C
-    1324: 0E 55 00 ADC   [__r0],0x0
-    1327: 51 55    MOV   A,[__r0]
-    1329: 60 D4    MOV   REG[0xD4],A
-    132B: 3E 54    MVI   A,[__r1]
-    132D: 7A 54    DEC   [__r1]
-    132F: 53 53    MOV   [__r2],A
-    1331: 06 53 01 ADD   [__r2],0x1
-    1334: 51 55    MOV   A,[__r0]
-    1336: 60 D5    MOV   REG[0xD5],A
-    1338: 51 53    MOV   A,[__r2]
-    133A: 3F 54    MVI   [__r1],A
+    1314: 62 D0 00 MOV   REG[0xD0],0x0
+    1317: 51 81    MOV   A,[PortIndx]
+    1319: 62 D0 00 MOV   REG[0xD0],0x0
+    131C: 53 54    MOV   [__r1],A
+    131E: 55 55 00 MOV   [__r0],0x0
+    1321: 65 54    ASL   [__r1]
+    1323: 6B 55    RLC   [__r0]
+    1325: 06 54 6C ADD   [__r1],0x6C
+    1328: 0E 55 00 ADC   [__r0],0x0
+    132B: 51 55    MOV   A,[__r0]
+    132D: 60 D4    MOV   REG[0xD4],A
+    132F: 3E 54    MVI   A,[__r1]
+    1331: 7A 54    DEC   [__r1]
+    1333: 53 53    MOV   [__r2],A
+    1335: 06 53 01 ADD   [__r2],0x1
+    1338: 51 55    MOV   A,[__r0]
+    133A: 60 D5    MOV   REG[0xD5],A
+    133C: 51 53    MOV   A,[__r2]
+    133E: 3F 54    MVI   [__r1],A
 (0129) 		PGA_out_SetGain(GF[GainIndx[PortIndx][1]][0]); // set gain on PGA
-    133C: 62 D0 00 MOV   REG[0xD0],0x0
-    133F: 51 81    MOV   A,[PortIndx]
-    1341: 62 D0 00 MOV   REG[0xD0],0x0
-    1344: 53 54    MOV   [__r1],A
-    1346: 55 55 00 MOV   [__r0],0x0
-    1349: 65 54    ASL   [__r1]
-    134B: 6B 55    RLC   [__r0]
-    134D: 06 54 6C ADD   [__r1],0x6C
-    1350: 0E 55 00 ADC   [__r0],0x0
-    1353: 51 55    MOV   A,[__r0]
-    1355: 60 D4    MOV   REG[0xD4],A
-    1357: 3E 54    MVI   A,[__r1]
-    1359: 53 54    MOV   [__r1],A
-    135B: 55 55 00 MOV   [__r0],0x0
-    135E: 65 54    ASL   [__r1]
-    1360: 6B 55    RLC   [__r0]
-    1362: 06 54 56 ADD   [__r1],0x56
-    1365: 0E 55 00 ADC   [__r0],0x0
-    1368: 51 55    MOV   A,[__r0]
-    136A: 60 D4    MOV   REG[0xD4],A
-    136C: 3E 54    MVI   A,[__r1]
-    136E: 10       PUSH  X
-    136F: 7C 05 C3 LCALL 0x05C3
-    1372: 20       POP   X
+    1340: 62 D0 00 MOV   REG[0xD0],0x0
+    1343: 51 81    MOV   A,[PortIndx]
+    1345: 62 D0 00 MOV   REG[0xD0],0x0
+    1348: 53 54    MOV   [__r1],A
+    134A: 55 55 00 MOV   [__r0],0x0
+    134D: 65 54    ASL   [__r1]
+    134F: 6B 55    RLC   [__r0]
+    1351: 06 54 6C ADD   [__r1],0x6C
+    1354: 0E 55 00 ADC   [__r0],0x0
+    1357: 51 55    MOV   A,[__r0]
+    1359: 60 D4    MOV   REG[0xD4],A
+    135B: 3E 54    MVI   A,[__r1]
+    135D: 53 54    MOV   [__r1],A
+    135F: 55 55 00 MOV   [__r0],0x0
+    1362: 65 54    ASL   [__r1]
+    1364: 6B 55    RLC   [__r0]
+    1366: 06 54 56 ADD   [__r1],0x56
+    1369: 0E 55 00 ADC   [__r0],0x0
+    136C: 51 55    MOV   A,[__r0]
+    136E: 60 D4    MOV   REG[0xD4],A
+    1370: 3E 54    MVI   A,[__r1]
+    1372: 10       PUSH  X
+    1373: 7C 05 C3 LCALL 0x05C3
+    1376: 20       POP   X
 (0130) 	}
-    1373: 80 D2    JMP   0x1446
+    1377: 80 D2    JMP   0x144A
 (0131) 	else if((MesValue[PortIndx][1] < V_MIN) && (GainIndx[PortIndx][0] < I_MAX))// PGA_pre
-    1375: 62 D0 00 MOV   REG[0xD0],0x0
-    1378: 51 81    MOV   A,[PortIndx]
-    137A: 62 D0 00 MOV   REG[0xD0],0x0
-    137D: 53 54    MOV   [__r1],A
-    137F: 50 00    MOV   A,0x0
-    1381: 08       PUSH  A
-    1382: 51 54    MOV   A,[__r1]
-    1384: 08       PUSH  A
-    1385: 50 00    MOV   A,0x0
-    1387: 08       PUSH  A
-    1388: 50 0C    MOV   A,0xC
-    138A: 08       PUSH  A
-    138B: 7C 1E B0 LCALL __mul16
-    138E: 38 FC    ADD   SP,0xFC
-    1390: 51 49    MOV   A,[__rX]
-    1392: 53 54    MOV   [__r1],A
-    1394: 51 48    MOV   A,[__rY]
-    1396: 53 55    MOV   [__r0],A
-    1398: 06 54 17 ADD   [__r1],0x17
-    139B: 0E 55 00 ADC   [__r0],0x0
-    139E: 51 55    MOV   A,[__r0]
-    13A0: 60 D4    MOV   REG[0xD4],A
-    13A2: 3E 54    MVI   A,[__r1]
-    13A4: 53 51    MOV   [__r4],A
+    1379: 62 D0 00 MOV   REG[0xD0],0x0
+    137C: 51 81    MOV   A,[PortIndx]
+    137E: 62 D0 00 MOV   REG[0xD0],0x0
+    1381: 53 54    MOV   [__r1],A
+    1383: 50 00    MOV   A,0x0
+    1385: 08       PUSH  A
+    1386: 51 54    MOV   A,[__r1]
+    1388: 08       PUSH  A
+    1389: 50 00    MOV   A,0x0
+    138B: 08       PUSH  A
+    138C: 50 0C    MOV   A,0xC
+    138E: 08       PUSH  A
+    138F: 7C 1E C0 LCALL __mul16
+    1392: 38 FC    ADD   SP,0xFC
+    1394: 51 49    MOV   A,[__rX]
+    1396: 53 54    MOV   [__r1],A
+    1398: 51 48    MOV   A,[__rY]
+    139A: 53 55    MOV   [__r0],A
+    139C: 06 54 17 ADD   [__r1],0x17
+    139F: 0E 55 00 ADC   [__r0],0x0
+    13A2: 51 55    MOV   A,[__r0]
+    13A4: 60 D4    MOV   REG[0xD4],A
     13A6: 3E 54    MVI   A,[__r1]
-    13A8: 53 50    MOV   [__r5],A
+    13A8: 53 51    MOV   [__r4],A
     13AA: 3E 54    MVI   A,[__r1]
-    13AC: 53 4F    MOV   [__r6],A
+    13AC: 53 50    MOV   [__r5],A
     13AE: 3E 54    MVI   A,[__r1]
-    13B0: 11 50    SUB   A,0x50
-    13B2: 51 4F    MOV   A,[__r6]
-    13B4: 19 C3    SBB   A,0xC3
-    13B6: 51 50    MOV   A,[__r5]
-    13B8: 19 00    SBB   A,0x0
-    13BA: 51 51    MOV   A,[__r4]
-    13BC: 31 80    XOR   A,0x80
-    13BE: 19 80    SBB   A,0x80
-    13C0: D0 85    JNC   0x1446
-    13C2: 62 D0 00 MOV   REG[0xD0],0x0
-    13C5: 51 81    MOV   A,[PortIndx]
-    13C7: 62 D0 00 MOV   REG[0xD0],0x0
-    13CA: 53 54    MOV   [__r1],A
-    13CC: 55 55 00 MOV   [__r0],0x0
-    13CF: 65 54    ASL   [__r1]
-    13D1: 6B 55    RLC   [__r0]
-    13D3: 06 54 6B ADD   [__r1],0x6B
-    13D6: 0E 55 00 ADC   [__r0],0x0
-    13D9: 51 55    MOV   A,[__r0]
-    13DB: 60 D4    MOV   REG[0xD4],A
-    13DD: 3E 54    MVI   A,[__r1]
-    13DF: 39 06    CMP   A,0x6
-    13E1: D0 64    JNC   0x1446
+    13B0: 53 4F    MOV   [__r6],A
+    13B2: 3E 54    MVI   A,[__r1]
+    13B4: 11 50    SUB   A,0x50
+    13B6: 51 4F    MOV   A,[__r6]
+    13B8: 19 C3    SBB   A,0xC3
+    13BA: 51 50    MOV   A,[__r5]
+    13BC: 19 00    SBB   A,0x0
+    13BE: 51 51    MOV   A,[__r4]
+    13C0: 31 80    XOR   A,0x80
+    13C2: 19 80    SBB   A,0x80
+    13C4: D0 85    JNC   0x144A
+    13C6: 62 D0 00 MOV   REG[0xD0],0x0
+    13C9: 51 81    MOV   A,[PortIndx]
+    13CB: 62 D0 00 MOV   REG[0xD0],0x0
+    13CE: 53 54    MOV   [__r1],A
+    13D0: 55 55 00 MOV   [__r0],0x0
+    13D3: 65 54    ASL   [__r1]
+    13D5: 6B 55    RLC   [__r0]
+    13D7: 06 54 6B ADD   [__r1],0x6B
+    13DA: 0E 55 00 ADC   [__r0],0x0
+    13DD: 51 55    MOV   A,[__r0]
+    13DF: 60 D4    MOV   REG[0xD4],A
+    13E1: 3E 54    MVI   A,[__r1]
+    13E3: 39 06    CMP   A,0x6
+    13E5: D0 64    JNC   0x144A
 (0132) 	{
 (0133) 		GainIndx[PortIndx][0]++;
-    13E3: 62 D0 00 MOV   REG[0xD0],0x0
-    13E6: 51 81    MOV   A,[PortIndx]
-    13E8: 62 D0 00 MOV   REG[0xD0],0x0
-    13EB: 53 54    MOV   [__r1],A
-    13ED: 55 55 00 MOV   [__r0],0x0
-    13F0: 65 54    ASL   [__r1]
-    13F2: 6B 55    RLC   [__r0]
-    13F4: 06 54 6B ADD   [__r1],0x6B
-    13F7: 0E 55 00 ADC   [__r0],0x0
-    13FA: 51 55    MOV   A,[__r0]
-    13FC: 60 D4    MOV   REG[0xD4],A
-    13FE: 3E 54    MVI   A,[__r1]
-    1400: 7A 54    DEC   [__r1]
-    1402: 53 53    MOV   [__r2],A
-    1404: 06 53 01 ADD   [__r2],0x1
-    1407: 51 55    MOV   A,[__r0]
-    1409: 60 D5    MOV   REG[0xD5],A
-    140B: 51 53    MOV   A,[__r2]
-    140D: 3F 54    MVI   [__r1],A
+    13E7: 62 D0 00 MOV   REG[0xD0],0x0
+    13EA: 51 81    MOV   A,[PortIndx]
+    13EC: 62 D0 00 MOV   REG[0xD0],0x0
+    13EF: 53 54    MOV   [__r1],A
+    13F1: 55 55 00 MOV   [__r0],0x0
+    13F4: 65 54    ASL   [__r1]
+    13F6: 6B 55    RLC   [__r0]
+    13F8: 06 54 6B ADD   [__r1],0x6B
+    13FB: 0E 55 00 ADC   [__r0],0x0
+    13FE: 51 55    MOV   A,[__r0]
+    1400: 60 D4    MOV   REG[0xD4],A
+    1402: 3E 54    MVI   A,[__r1]
+    1404: 7A 54    DEC   [__r1]
+    1406: 53 53    MOV   [__r2],A
+    1408: 06 53 01 ADD   [__r2],0x1
+    140B: 51 55    MOV   A,[__r0]
+    140D: 60 D5    MOV   REG[0xD5],A
+    140F: 51 53    MOV   A,[__r2]
+    1411: 3F 54    MVI   [__r1],A
 (0134) 		PGA_pre_SetGain(GF[GainIndx[PortIndx][0]][0]); // set gain on PGA
-    140F: 62 D0 00 MOV   REG[0xD0],0x0
-    1412: 51 81    MOV   A,[PortIndx]
-    1414: 62 D0 00 MOV   REG[0xD0],0x0
-    1417: 53 54    MOV   [__r1],A
-    1419: 55 55 00 MOV   [__r0],0x0
-    141C: 65 54    ASL   [__r1]
-    141E: 6B 55    RLC   [__r0]
-    1420: 06 54 6B ADD   [__r1],0x6B
-    1423: 0E 55 00 ADC   [__r0],0x0
-    1426: 51 55    MOV   A,[__r0]
-    1428: 60 D4    MOV   REG[0xD4],A
-    142A: 3E 54    MVI   A,[__r1]
-    142C: 53 54    MOV   [__r1],A
-    142E: 55 55 00 MOV   [__r0],0x0
-    1431: 65 54    ASL   [__r1]
-    1433: 6B 55    RLC   [__r0]
-    1435: 06 54 56 ADD   [__r1],0x56
-    1438: 0E 55 00 ADC   [__r0],0x0
-    143B: 51 55    MOV   A,[__r0]
-    143D: 60 D4    MOV   REG[0xD4],A
-    143F: 3E 54    MVI   A,[__r1]
-    1441: 10       PUSH  X
-    1442: 7C 05 83 LCALL 0x0583
-    1445: 20       POP   X
+    1413: 62 D0 00 MOV   REG[0xD0],0x0
+    1416: 51 81    MOV   A,[PortIndx]
+    1418: 62 D0 00 MOV   REG[0xD0],0x0
+    141B: 53 54    MOV   [__r1],A
+    141D: 55 55 00 MOV   [__r0],0x0
+    1420: 65 54    ASL   [__r1]
+    1422: 6B 55    RLC   [__r0]
+    1424: 06 54 6B ADD   [__r1],0x6B
+    1427: 0E 55 00 ADC   [__r0],0x0
+    142A: 51 55    MOV   A,[__r0]
+    142C: 60 D4    MOV   REG[0xD4],A
+    142E: 3E 54    MVI   A,[__r1]
+    1430: 53 54    MOV   [__r1],A
+    1432: 55 55 00 MOV   [__r0],0x0
+    1435: 65 54    ASL   [__r1]
+    1437: 6B 55    RLC   [__r0]
+    1439: 06 54 56 ADD   [__r1],0x56
+    143C: 0E 55 00 ADC   [__r0],0x0
+    143F: 51 55    MOV   A,[__r0]
+    1441: 60 D4    MOV   REG[0xD4],A
+    1443: 3E 54    MVI   A,[__r1]
+    1445: 10       PUSH  X
+    1446: 7C 05 83 LCALL 0x0583
+    1449: 20       POP   X
 (0135) 	}	
-    1446: 7F       RET   
+    144A: 7F       RET   
 (0136) }
 (0137) 
 (0138) void DigitalOut(void)
 (0139) {// Controls the outputs according to pot setting point
 (0140) 	DIGITAL_OUT_Off();
 _DigitalOut:
-    1447: 10       PUSH  X
-    1448: 7C 08 4D LCALL 0x084D
-    144B: 20       POP   X
+    144B: 10       PUSH  X
+    144C: 7C 08 4D LCALL 0x084D
+    144F: 20       POP   X
 (0141) 	if (MesValue[0][0]>PotValue)
-    144C: 62 D0 00 MOV   REG[0xD0],0x0
-    144F: 51 78    MOV   A,[PotValue+3]
-    1451: 62 D0 00 MOV   REG[0xD0],0x0
-    1454: 12 16    SUB   A,[MesValue+3]
-    1456: 62 D0 00 MOV   REG[0xD0],0x0
-    1459: 51 77    MOV   A,[PotValue+2]
-    145B: 62 D0 00 MOV   REG[0xD0],0x0
-    145E: 1A 15    SBB   A,[MesValue+2]
-    1460: 62 D0 00 MOV   REG[0xD0],0x0
-    1463: 51 76    MOV   A,[PotValue+1]
-    1465: 62 D0 00 MOV   REG[0xD0],0x0
-    1468: 1A 14    SBB   A,[MesValue+1]
-    146A: 51 13    MOV   A,[MesValue]
-    146C: 31 80    XOR   A,0x80
-    146E: 62 D0 00 MOV   REG[0xD0],0x0
-    1471: 53 49    MOV   [__rX],A
-    1473: 62 D0 00 MOV   REG[0xD0],0x0
-    1476: 51 75    MOV   A,[PotValue]
-    1478: 31 80    XOR   A,0x80
-    147A: 62 D0 00 MOV   REG[0xD0],0x0
-    147D: 1A 49    SBB   A,[__rX]
-    147F: D0 0B    JNC   0x148B
+    1450: 62 D0 00 MOV   REG[0xD0],0x0
+    1453: 51 78    MOV   A,[PotValue+3]
+    1455: 62 D0 00 MOV   REG[0xD0],0x0
+    1458: 12 16    SUB   A,[MesValue+3]
+    145A: 62 D0 00 MOV   REG[0xD0],0x0
+    145D: 51 77    MOV   A,[PotValue+2]
+    145F: 62 D0 00 MOV   REG[0xD0],0x0
+    1462: 1A 15    SBB   A,[MesValue+2]
+    1464: 62 D0 00 MOV   REG[0xD0],0x0
+    1467: 51 76    MOV   A,[PotValue+1]
+    1469: 62 D0 00 MOV   REG[0xD0],0x0
+    146C: 1A 14    SBB   A,[MesValue+1]
+    146E: 51 13    MOV   A,[MesValue]
+    1470: 31 80    XOR   A,0x80
+    1472: 62 D0 00 MOV   REG[0xD0],0x0
+    1475: 53 49    MOV   [__rX],A
+    1477: 62 D0 00 MOV   REG[0xD0],0x0
+    147A: 51 75    MOV   A,[PotValue]
+    147C: 31 80    XOR   A,0x80
+    147E: 62 D0 00 MOV   REG[0xD0],0x0
+    1481: 1A 49    SBB   A,[__rX]
+    1483: D0 0B    JNC   0x148F
 (0142) 	{
 (0143) 		DIGITAL_OUT_On();
-    1481: 10       PUSH  X
-    1482: 7C 08 49 LCALL 0x0849
+    1485: 10       PUSH  X
+    1486: 7C 08 49 LCALL 0x0849
 (0144) 		LED_3_On();
-    1485: 7C 05 F1 LCALL 0x05F1
-    1488: 20       POP   X
+    1489: 7C 05 F1 LCALL 0x05F1
+    148C: 20       POP   X
 (0145) 	}
-    1489: 80 06    JMP   0x1490
+    148D: 80 06    JMP   0x1494
 (0146) 	else
 (0147) 	{
 (0148) 		LED_3_Off();
-    148B: 10       PUSH  X
-    148C: 7C 05 F5 LCALL 0x05F5
-    148F: 20       POP   X
+    148F: 10       PUSH  X
+    1490: 7C 05 F5 LCALL 0x05F5
+    1493: 20       POP   X
 (0149) 	}
 (0150) 		
 (0151) 	if (MesValue[1][0]>PotValue)
-    1490: 62 D0 00 MOV   REG[0xD0],0x0
-    1493: 51 78    MOV   A,[PotValue+3]
-    1495: 62 D0 00 MOV   REG[0xD0],0x0
-    1498: 12 22    SUB   A,[MesValue+15]
-    149A: 62 D0 00 MOV   REG[0xD0],0x0
-    149D: 51 77    MOV   A,[PotValue+2]
-    149F: 62 D0 00 MOV   REG[0xD0],0x0
-    14A2: 1A 21    SBB   A,[MesValue+14]
-    14A4: 62 D0 00 MOV   REG[0xD0],0x0
-    14A7: 51 76    MOV   A,[PotValue+1]
-    14A9: 62 D0 00 MOV   REG[0xD0],0x0
-    14AC: 1A 20    SBB   A,[MesValue+13]
-    14AE: 51 1F    MOV   A,[MesValue+12]
-    14B0: 31 80    XOR   A,0x80
-    14B2: 62 D0 00 MOV   REG[0xD0],0x0
-    14B5: 53 49    MOV   [__rX],A
-    14B7: 62 D0 00 MOV   REG[0xD0],0x0
-    14BA: 51 75    MOV   A,[PotValue]
-    14BC: 31 80    XOR   A,0x80
-    14BE: 62 D0 00 MOV   REG[0xD0],0x0
-    14C1: 1A 49    SBB   A,[__rX]
-    14C3: D0 0B    JNC   0x14CF
+    1494: 62 D0 00 MOV   REG[0xD0],0x0
+    1497: 51 78    MOV   A,[PotValue+3]
+    1499: 62 D0 00 MOV   REG[0xD0],0x0
+    149C: 12 22    SUB   A,[MesValue+15]
+    149E: 62 D0 00 MOV   REG[0xD0],0x0
+    14A1: 51 77    MOV   A,[PotValue+2]
+    14A3: 62 D0 00 MOV   REG[0xD0],0x0
+    14A6: 1A 21    SBB   A,[MesValue+14]
+    14A8: 62 D0 00 MOV   REG[0xD0],0x0
+    14AB: 51 76    MOV   A,[PotValue+1]
+    14AD: 62 D0 00 MOV   REG[0xD0],0x0
+    14B0: 1A 20    SBB   A,[MesValue+13]
+    14B2: 51 1F    MOV   A,[MesValue+12]
+    14B4: 31 80    XOR   A,0x80
+    14B6: 62 D0 00 MOV   REG[0xD0],0x0
+    14B9: 53 49    MOV   [__rX],A
+    14BB: 62 D0 00 MOV   REG[0xD0],0x0
+    14BE: 51 75    MOV   A,[PotValue]
+    14C0: 31 80    XOR   A,0x80
+    14C2: 62 D0 00 MOV   REG[0xD0],0x0
+    14C5: 1A 49    SBB   A,[__rX]
+    14C7: D0 0B    JNC   0x14D3
 (0152) 	{
 (0153) 		DIGITAL_OUT_On();
-    14C5: 10       PUSH  X
-    14C6: 7C 08 49 LCALL 0x0849
+    14C9: 10       PUSH  X
+    14CA: 7C 08 49 LCALL 0x0849
 (0154) 		LED_2_On();
-    14C9: 7C 06 2E LCALL 0x062E
-    14CC: 20       POP   X
+    14CD: 7C 06 2E LCALL 0x062E
+    14D0: 20       POP   X
 (0155) 	}
-    14CD: 80 06    JMP   0x14D4
+    14D1: 80 06    JMP   0x14D8
 (0156) 	else
 (0157) 	{
 (0158) 		LED_2_Off();
-    14CF: 10       PUSH  X
-    14D0: 7C 06 32 LCALL 0x0632
-    14D3: 20       POP   X
+    14D3: 10       PUSH  X
+    14D4: 7C 06 32 LCALL 0x0632
+    14D7: 20       POP   X
 (0159) 	}
 (0160) 	
 (0161) 	if (MesValue[2][0]>PotValue)
-    14D4: 62 D0 00 MOV   REG[0xD0],0x0
-    14D7: 51 78    MOV   A,[PotValue+3]
-    14D9: 62 D0 00 MOV   REG[0xD0],0x0
-    14DC: 12 2E    SUB   A,[MesValue+27]
-    14DE: 62 D0 00 MOV   REG[0xD0],0x0
-    14E1: 51 77    MOV   A,[PotValue+2]
-    14E3: 62 D0 00 MOV   REG[0xD0],0x0
-    14E6: 1A 2D    SBB   A,[MesValue+26]
-    14E8: 62 D0 00 MOV   REG[0xD0],0x0
-    14EB: 51 76    MOV   A,[PotValue+1]
-    14ED: 62 D0 00 MOV   REG[0xD0],0x0
-    14F0: 1A 2C    SBB   A,[MesValue+25]
-    14F2: 51 2B    MOV   A,[MesValue+24]
-    14F4: 31 80    XOR   A,0x80
-    14F6: 62 D0 00 MOV   REG[0xD0],0x0
-    14F9: 53 49    MOV   [__rX],A
-    14FB: 62 D0 00 MOV   REG[0xD0],0x0
-    14FE: 51 75    MOV   A,[PotValue]
-    1500: 31 80    XOR   A,0x80
-    1502: 62 D0 00 MOV   REG[0xD0],0x0
-    1505: 1A 49    SBB   A,[__rX]
-    1507: D0 0B    JNC   0x1513
+    14D8: 62 D0 00 MOV   REG[0xD0],0x0
+    14DB: 51 78    MOV   A,[PotValue+3]
+    14DD: 62 D0 00 MOV   REG[0xD0],0x0
+    14E0: 12 2E    SUB   A,[MesValue+27]
+    14E2: 62 D0 00 MOV   REG[0xD0],0x0
+    14E5: 51 77    MOV   A,[PotValue+2]
+    14E7: 62 D0 00 MOV   REG[0xD0],0x0
+    14EA: 1A 2D    SBB   A,[MesValue+26]
+    14EC: 62 D0 00 MOV   REG[0xD0],0x0
+    14EF: 51 76    MOV   A,[PotValue+1]
+    14F1: 62 D0 00 MOV   REG[0xD0],0x0
+    14F4: 1A 2C    SBB   A,[MesValue+25]
+    14F6: 51 2B    MOV   A,[MesValue+24]
+    14F8: 31 80    XOR   A,0x80
+    14FA: 62 D0 00 MOV   REG[0xD0],0x0
+    14FD: 53 49    MOV   [__rX],A
+    14FF: 62 D0 00 MOV   REG[0xD0],0x0
+    1502: 51 75    MOV   A,[PotValue]
+    1504: 31 80    XOR   A,0x80
+    1506: 62 D0 00 MOV   REG[0xD0],0x0
+    1509: 1A 49    SBB   A,[__rX]
+    150B: D0 0B    JNC   0x1517
 (0162) 	{
 (0163) 		DIGITAL_OUT_On();
-    1509: 10       PUSH  X
-    150A: 7C 08 49 LCALL 0x0849
+    150D: 10       PUSH  X
+    150E: 7C 08 49 LCALL 0x0849
 (0164) 		LED_1_On();
-    150D: 7C 06 6B LCALL 0x066B
-    1510: 20       POP   X
+    1511: 7C 06 6B LCALL 0x066B
+    1514: 20       POP   X
 (0165) 	}
-    1511: 80 06    JMP   0x1518
+    1515: 80 06    JMP   0x151C
 (0166) 	else
 (0167) 	{
 (0168) 		LED_1_Off();
-    1513: 10       PUSH  X
-    1514: 7C 06 6F LCALL 0x066F
-    1517: 20       POP   X
+    1517: 10       PUSH  X
+    1518: 7C 06 6F LCALL 0x066F
+    151B: 20       POP   X
 (0169) 	}
-    1518: 7F       RET   
+    151C: 7F       RET   
 (0170) }
 (0171) 
 (0172) void UartTxValues(void)
@@ -8558,14 +8560,14 @@ _DigitalOut:
 (0177) */
 (0178) 	TX8_CPutString("\n\r");
 _UartTxValues:
-    1519: 10       PUSH  X
-    151A: 50 01    MOV   A,0x1
-    151C: 08       PUSH  A
-    151D: 50 D4    MOV   A,0xD4
-    151F: 5C       MOV   X,A
-    1520: 18       POP   A
-    1521: 7C 05 16 LCALL 0x0516
-    1524: 20       POP   X
+    151D: 10       PUSH  X
+    151E: 50 01    MOV   A,0x1
+    1520: 08       PUSH  A
+    1521: 50 D4    MOV   A,0xD4
+    1523: 5C       MOV   X,A
+    1524: 18       POP   A
+    1525: 7C 05 16 LCALL 0x0516
+    1528: 20       POP   X
 (0179) 	
 (0180) /*	TX8_CPutString("Pot Value = ");
 (0181) 	itoa(str, PotValue,10);
@@ -8573,396 +8575,399 @@ _UartTxValues:
 (0183) */
 (0184) 
 (0185) 	TX8_CPutString("Mes: 1 = ");
-    1525: 10       PUSH  X
-    1526: 50 01    MOV   A,0x1
-    1528: 08       PUSH  A
-    1529: 50 CA    MOV   A,0xCA
-    152B: 5C       MOV   X,A
-    152C: 18       POP   A
-    152D: 7C 05 16 LCALL 0x0516
-    1530: 20       POP   X
-(0186) 	ltoa(str, MesValue[0][0],10);
-    1531: 50 00    MOV   A,0x0
-    1533: 08       PUSH  A
-    1534: 50 0A    MOV   A,0xA
-    1536: 08       PUSH  A
-    1537: 62 D0 00 MOV   REG[0xD0],0x0
-    153A: 51 13    MOV   A,[MesValue]
-    153C: 08       PUSH  A
-    153D: 51 14    MOV   A,[MesValue+1]
-    153F: 08       PUSH  A
-    1540: 51 15    MOV   A,[MesValue+2]
-    1542: 08       PUSH  A
-    1543: 51 16    MOV   A,[MesValue+3]
-    1545: 08       PUSH  A
-    1546: 50 00    MOV   A,0x0
+    1529: 10       PUSH  X
+    152A: 50 01    MOV   A,0x1
+    152C: 08       PUSH  A
+    152D: 50 CA    MOV   A,0xCA
+    152F: 5C       MOV   X,A
+    1530: 18       POP   A
+    1531: 7C 05 16 LCALL 0x0516
+    1534: 20       POP   X
+(0186) 	ltoa(str, I2C_Regs.DbMesValue[0],10);
+    1535: 50 00    MOV   A,0x0
+    1537: 08       PUSH  A
+    1538: 50 0A    MOV   A,0xA
+    153A: 08       PUSH  A
+    153B: 62 D0 00 MOV   REG[0xD0],0x0
+    153E: 51 44    MOV   A,[I2C_Regs+13]
+    1540: 62 D0 00 MOV   REG[0xD0],0x0
+    1543: 53 52    MOV   [__r3],A
+    1545: 50 00    MOV   A,0x0
+    1547: 08       PUSH  A
     1548: 08       PUSH  A
-    1549: 50 64    MOV   A,0x64
-    154B: 08       PUSH  A
-    154C: 7C 20 B9 LCALL _ltoa
-    154F: 38 F8    ADD   SP,0xF8
+    1549: 08       PUSH  A
+    154A: 51 52    MOV   A,[__r3]
+    154C: 08       PUSH  A
+    154D: 50 00    MOV   A,0x0
+    154F: 08       PUSH  A
+    1550: 50 64    MOV   A,0x64
+    1552: 08       PUSH  A
+    1553: 7C 20 C9 LCALL _ltoa
+    1556: 38 F8    ADD   SP,0xF8
 (0187) 	TX8_PutString(str);
-    1551: 10       PUSH  X
-    1552: 50 00    MOV   A,0x0
-    1554: 08       PUSH  A
-    1555: 50 64    MOV   A,0x64
-    1557: 5C       MOV   X,A
-    1558: 18       POP   A
-    1559: 7C 04 B4 LCALL 0x04B4
-    155C: 20       POP   X
+    1558: 10       PUSH  X
+    1559: 50 00    MOV   A,0x0
+    155B: 08       PUSH  A
+    155C: 50 64    MOV   A,0x64
+    155E: 5C       MOV   X,A
+    155F: 18       POP   A
+    1560: 7C 04 B4 LCALL 0x04B4
+    1563: 20       POP   X
 (0188) 	TX8_CPutString("  -  2 = ");
-    155D: 10       PUSH  X
-    155E: 50 01    MOV   A,0x1
-    1560: 08       PUSH  A
-    1561: 50 C0    MOV   A,0xC0
-    1563: 5C       MOV   X,A
-    1564: 18       POP   A
-    1565: 7C 05 16 LCALL 0x0516
-    1568: 20       POP   X
-(0189) 	ltoa(str, MesValue[1][0],10);
-    1569: 50 00    MOV   A,0x0
-    156B: 08       PUSH  A
-    156C: 50 0A    MOV   A,0xA
-    156E: 08       PUSH  A
-    156F: 62 D0 00 MOV   REG[0xD0],0x0
-    1572: 51 1F    MOV   A,[MesValue+12]
-    1574: 08       PUSH  A
-    1575: 51 20    MOV   A,[MesValue+13]
-    1577: 08       PUSH  A
-    1578: 51 21    MOV   A,[MesValue+14]
-    157A: 08       PUSH  A
-    157B: 51 22    MOV   A,[MesValue+15]
-    157D: 08       PUSH  A
-    157E: 50 00    MOV   A,0x0
-    1580: 08       PUSH  A
-    1581: 50 64    MOV   A,0x64
+    1564: 10       PUSH  X
+    1565: 50 01    MOV   A,0x1
+    1567: 08       PUSH  A
+    1568: 50 C0    MOV   A,0xC0
+    156A: 5C       MOV   X,A
+    156B: 18       POP   A
+    156C: 7C 05 16 LCALL 0x0516
+    156F: 20       POP   X
+(0189) 	ltoa(str, I2C_Regs.DbMesValue[1],10);
+    1570: 50 00    MOV   A,0x0
+    1572: 08       PUSH  A
+    1573: 50 0A    MOV   A,0xA
+    1575: 08       PUSH  A
+    1576: 62 D0 00 MOV   REG[0xD0],0x0
+    1579: 51 45    MOV   A,[I2C_Regs+14]
+    157B: 62 D0 00 MOV   REG[0xD0],0x0
+    157E: 53 52    MOV   [__r3],A
+    1580: 50 00    MOV   A,0x0
+    1582: 08       PUSH  A
     1583: 08       PUSH  A
-    1584: 7C 20 B9 LCALL _ltoa
-    1587: 38 F8    ADD   SP,0xF8
+    1584: 08       PUSH  A
+    1585: 51 52    MOV   A,[__r3]
+    1587: 08       PUSH  A
+    1588: 50 00    MOV   A,0x0
+    158A: 08       PUSH  A
+    158B: 50 64    MOV   A,0x64
+    158D: 08       PUSH  A
+    158E: 7C 20 C9 LCALL _ltoa
+    1591: 38 F8    ADD   SP,0xF8
 (0190) 	TX8_PutString(str);
-    1589: 10       PUSH  X
-    158A: 50 00    MOV   A,0x0
-    158C: 08       PUSH  A
-    158D: 50 64    MOV   A,0x64
-    158F: 5C       MOV   X,A
-    1590: 18       POP   A
-    1591: 7C 04 B4 LCALL 0x04B4
-    1594: 20       POP   X
+    1593: 10       PUSH  X
+    1594: 50 00    MOV   A,0x0
+    1596: 08       PUSH  A
+    1597: 50 64    MOV   A,0x64
+    1599: 5C       MOV   X,A
+    159A: 18       POP   A
+    159B: 7C 04 B4 LCALL 0x04B4
+    159E: 20       POP   X
 (0191) 	TX8_CPutString("  -  3 = ");
-    1595: 10       PUSH  X
-    1596: 50 01    MOV   A,0x1
-    1598: 08       PUSH  A
-    1599: 50 B6    MOV   A,0xB6
-    159B: 5C       MOV   X,A
-    159C: 18       POP   A
-    159D: 7C 05 16 LCALL 0x0516
-    15A0: 20       POP   X
-(0192) 	ltoa(str, MesValue[2][0],10);
-    15A1: 50 00    MOV   A,0x0
-    15A3: 08       PUSH  A
-    15A4: 50 0A    MOV   A,0xA
-    15A6: 08       PUSH  A
-    15A7: 62 D0 00 MOV   REG[0xD0],0x0
-    15AA: 51 2B    MOV   A,[MesValue+24]
-    15AC: 08       PUSH  A
-    15AD: 51 2C    MOV   A,[MesValue+25]
-    15AF: 08       PUSH  A
-    15B0: 51 2D    MOV   A,[MesValue+26]
-    15B2: 08       PUSH  A
-    15B3: 51 2E    MOV   A,[MesValue+27]
-    15B5: 08       PUSH  A
-    15B6: 50 00    MOV   A,0x0
-    15B8: 08       PUSH  A
-    15B9: 50 64    MOV   A,0x64
-    15BB: 08       PUSH  A
-    15BC: 7C 20 B9 LCALL _ltoa
-    15BF: 38 F8    ADD   SP,0xF8
+    159F: 10       PUSH  X
+    15A0: 50 01    MOV   A,0x1
+    15A2: 08       PUSH  A
+    15A3: 50 B6    MOV   A,0xB6
+    15A5: 5C       MOV   X,A
+    15A6: 18       POP   A
+    15A7: 7C 05 16 LCALL 0x0516
+    15AA: 20       POP   X
+(0192) 	ltoa(str, I2C_Regs.DbMesValue[2],10);
+    15AB: 50 00    MOV   A,0x0
+    15AD: 08       PUSH  A
+    15AE: 50 0A    MOV   A,0xA
+    15B0: 08       PUSH  A
+    15B1: 62 D0 00 MOV   REG[0xD0],0x0
+    15B4: 51 46    MOV   A,[I2C_Regs+15]
+    15B6: 62 D0 00 MOV   REG[0xD0],0x0
+    15B9: 53 52    MOV   [__r3],A
+    15BB: 50 00    MOV   A,0x0
+    15BD: 08       PUSH  A
+    15BE: 08       PUSH  A
+    15BF: 08       PUSH  A
+    15C0: 51 52    MOV   A,[__r3]
+    15C2: 08       PUSH  A
+    15C3: 50 00    MOV   A,0x0
+    15C5: 08       PUSH  A
+    15C6: 50 64    MOV   A,0x64
+    15C8: 08       PUSH  A
+    15C9: 7C 20 C9 LCALL _ltoa
+    15CC: 38 F8    ADD   SP,0xF8
 (0193) 	TX8_PutString(str);
-    15C1: 10       PUSH  X
-    15C2: 50 00    MOV   A,0x0
-    15C4: 08       PUSH  A
-    15C5: 50 64    MOV   A,0x64
-    15C7: 5C       MOV   X,A
-    15C8: 18       POP   A
-    15C9: 7C 04 B4 LCALL 0x04B4
-    15CC: 20       POP   X
+    15CE: 10       PUSH  X
+    15CF: 50 00    MOV   A,0x0
+    15D1: 08       PUSH  A
+    15D2: 50 64    MOV   A,0x64
+    15D4: 5C       MOV   X,A
+    15D5: 18       POP   A
+    15D6: 7C 04 B4 LCALL 0x04B4
+    15D9: 20       POP   X
 (0194) 	TX8_CPutString(" Pre: 1 = ");
-    15CD: 10       PUSH  X
-    15CE: 50 01    MOV   A,0x1
-    15D0: 08       PUSH  A
-    15D1: 50 AB    MOV   A,0xAB
-    15D3: 5C       MOV   X,A
-    15D4: 18       POP   A
-    15D5: 7C 05 16 LCALL 0x0516
-    15D8: 20       POP   X
+    15DA: 10       PUSH  X
+    15DB: 50 01    MOV   A,0x1
+    15DD: 08       PUSH  A
+    15DE: 50 AB    MOV   A,0xAB
+    15E0: 5C       MOV   X,A
+    15E1: 18       POP   A
+    15E2: 7C 05 16 LCALL 0x0516
+    15E5: 20       POP   X
 (0195) 	itoa(str, GF[GainIndx[0][0]][1], 10);
-    15D9: 50 00    MOV   A,0x0
-    15DB: 08       PUSH  A
-    15DC: 50 0A    MOV   A,0xA
-    15DE: 08       PUSH  A
-    15DF: 62 D0 00 MOV   REG[0xD0],0x0
-    15E2: 51 6B    MOV   A,[GainIndx]
-    15E4: 62 D0 00 MOV   REG[0xD0],0x0
-    15E7: 53 54    MOV   [__r1],A
-    15E9: 55 55 00 MOV   [__r0],0x0
-    15EC: 65 54    ASL   [__r1]
-    15EE: 6B 55    RLC   [__r0]
-    15F0: 06 54 57 ADD   [__r1],0x57
-    15F3: 0E 55 00 ADC   [__r0],0x0
-    15F6: 51 55    MOV   A,[__r0]
-    15F8: 60 D4    MOV   REG[0xD4],A
-    15FA: 3E 54    MVI   A,[__r1]
-    15FC: 53 54    MOV   [__r1],A
-    15FE: 50 00    MOV   A,0x0
-    1600: 08       PUSH  A
-    1601: 51 54    MOV   A,[__r1]
-    1603: 08       PUSH  A
-    1604: 50 00    MOV   A,0x0
-    1606: 08       PUSH  A
-    1607: 50 64    MOV   A,0x64
-    1609: 08       PUSH  A
-    160A: 7C 1E E0 LCALL _itoa
-    160D: 38 FA    ADD   SP,0xFA
+    15E6: 50 00    MOV   A,0x0
+    15E8: 08       PUSH  A
+    15E9: 50 0A    MOV   A,0xA
+    15EB: 08       PUSH  A
+    15EC: 62 D0 00 MOV   REG[0xD0],0x0
+    15EF: 51 6B    MOV   A,[GainIndx]
+    15F1: 62 D0 00 MOV   REG[0xD0],0x0
+    15F4: 53 54    MOV   [__r1],A
+    15F6: 55 55 00 MOV   [__r0],0x0
+    15F9: 65 54    ASL   [__r1]
+    15FB: 6B 55    RLC   [__r0]
+    15FD: 06 54 57 ADD   [__r1],0x57
+    1600: 0E 55 00 ADC   [__r0],0x0
+    1603: 51 55    MOV   A,[__r0]
+    1605: 60 D4    MOV   REG[0xD4],A
+    1607: 3E 54    MVI   A,[__r1]
+    1609: 53 54    MOV   [__r1],A
+    160B: 50 00    MOV   A,0x0
+    160D: 08       PUSH  A
+    160E: 51 54    MOV   A,[__r1]
+    1610: 08       PUSH  A
+    1611: 50 00    MOV   A,0x0
+    1613: 08       PUSH  A
+    1614: 50 64    MOV   A,0x64
+    1616: 08       PUSH  A
+    1617: 7C 1E F0 LCALL _itoa
+    161A: 38 FA    ADD   SP,0xFA
 (0196) 	TX8_PutString(str);
-    160F: 10       PUSH  X
-    1610: 50 00    MOV   A,0x0
-    1612: 08       PUSH  A
-    1613: 50 64    MOV   A,0x64
-    1615: 5C       MOV   X,A
-    1616: 18       POP   A
-    1617: 7C 04 B4 LCALL 0x04B4
-    161A: 20       POP   X
+    161C: 10       PUSH  X
+    161D: 50 00    MOV   A,0x0
+    161F: 08       PUSH  A
+    1620: 50 64    MOV   A,0x64
+    1622: 5C       MOV   X,A
+    1623: 18       POP   A
+    1624: 7C 04 B4 LCALL 0x04B4
+    1627: 20       POP   X
 (0197) 	TX8_CPutString("  -  2 = ");
-    161B: 10       PUSH  X
-    161C: 50 01    MOV   A,0x1
-    161E: 08       PUSH  A
-    161F: 50 C0    MOV   A,0xC0
-    1621: 5C       MOV   X,A
-    1622: 18       POP   A
-    1623: 7C 05 16 LCALL 0x0516
-    1626: 20       POP   X
+    1628: 10       PUSH  X
+    1629: 50 01    MOV   A,0x1
+    162B: 08       PUSH  A
+    162C: 50 C0    MOV   A,0xC0
+    162E: 5C       MOV   X,A
+    162F: 18       POP   A
+    1630: 7C 05 16 LCALL 0x0516
+    1633: 20       POP   X
 (0198) 	itoa(str, GF[GainIndx[1][0]][1], 10);
-    1627: 50 00    MOV   A,0x0
-    1629: 08       PUSH  A
-    162A: 50 0A    MOV   A,0xA
-    162C: 08       PUSH  A
-    162D: 62 D0 00 MOV   REG[0xD0],0x0
-    1630: 51 6D    MOV   A,[GainIndx+2]
-    1632: 62 D0 00 MOV   REG[0xD0],0x0
-    1635: 53 54    MOV   [__r1],A
-    1637: 55 55 00 MOV   [__r0],0x0
-    163A: 65 54    ASL   [__r1]
-    163C: 6B 55    RLC   [__r0]
-    163E: 06 54 57 ADD   [__r1],0x57
-    1641: 0E 55 00 ADC   [__r0],0x0
-    1644: 51 55    MOV   A,[__r0]
-    1646: 60 D4    MOV   REG[0xD4],A
-    1648: 3E 54    MVI   A,[__r1]
-    164A: 53 54    MOV   [__r1],A
-    164C: 50 00    MOV   A,0x0
-    164E: 08       PUSH  A
-    164F: 51 54    MOV   A,[__r1]
-    1651: 08       PUSH  A
-    1652: 50 00    MOV   A,0x0
-    1654: 08       PUSH  A
-    1655: 50 64    MOV   A,0x64
-    1657: 08       PUSH  A
-    1658: 7C 1E E0 LCALL _itoa
-    165B: 38 FA    ADD   SP,0xFA
+    1634: 50 00    MOV   A,0x0
+    1636: 08       PUSH  A
+    1637: 50 0A    MOV   A,0xA
+    1639: 08       PUSH  A
+    163A: 62 D0 00 MOV   REG[0xD0],0x0
+    163D: 51 6D    MOV   A,[GainIndx+2]
+    163F: 62 D0 00 MOV   REG[0xD0],0x0
+    1642: 53 54    MOV   [__r1],A
+    1644: 55 55 00 MOV   [__r0],0x0
+    1647: 65 54    ASL   [__r1]
+    1649: 6B 55    RLC   [__r0]
+    164B: 06 54 57 ADD   [__r1],0x57
+    164E: 0E 55 00 ADC   [__r0],0x0
+    1651: 51 55    MOV   A,[__r0]
+    1653: 60 D4    MOV   REG[0xD4],A
+    1655: 3E 54    MVI   A,[__r1]
+    1657: 53 54    MOV   [__r1],A
+    1659: 50 00    MOV   A,0x0
+    165B: 08       PUSH  A
+    165C: 51 54    MOV   A,[__r1]
+    165E: 08       PUSH  A
+    165F: 50 00    MOV   A,0x0
+    1661: 08       PUSH  A
+    1662: 50 64    MOV   A,0x64
+    1664: 08       PUSH  A
+    1665: 7C 1E F0 LCALL _itoa
+    1668: 38 FA    ADD   SP,0xFA
 (0199) 	TX8_PutString(str);	
-    165D: 10       PUSH  X
-    165E: 50 00    MOV   A,0x0
-    1660: 08       PUSH  A
-    1661: 50 64    MOV   A,0x64
-    1663: 5C       MOV   X,A
-    1664: 18       POP   A
-    1665: 7C 04 B4 LCALL 0x04B4
-    1668: 20       POP   X
+    166A: 10       PUSH  X
+    166B: 50 00    MOV   A,0x0
+    166D: 08       PUSH  A
+    166E: 50 64    MOV   A,0x64
+    1670: 5C       MOV   X,A
+    1671: 18       POP   A
+    1672: 7C 04 B4 LCALL 0x04B4
+    1675: 20       POP   X
 (0200) 	TX8_CPutString("  -  3 = ");
-    1669: 10       PUSH  X
-    166A: 50 01    MOV   A,0x1
-    166C: 08       PUSH  A
-    166D: 50 B6    MOV   A,0xB6
-    166F: 5C       MOV   X,A
-    1670: 18       POP   A
-    1671: 7C 05 16 LCALL 0x0516
-    1674: 20       POP   X
+    1676: 10       PUSH  X
+    1677: 50 01    MOV   A,0x1
+    1679: 08       PUSH  A
+    167A: 50 B6    MOV   A,0xB6
+    167C: 5C       MOV   X,A
+    167D: 18       POP   A
+    167E: 7C 05 16 LCALL 0x0516
+    1681: 20       POP   X
 (0201) 	itoa(str, GF[GainIndx[2][0]][1], 10);
-    1675: 50 00    MOV   A,0x0
-    1677: 08       PUSH  A
-    1678: 50 0A    MOV   A,0xA
-    167A: 08       PUSH  A
-    167B: 62 D0 00 MOV   REG[0xD0],0x0
-    167E: 51 6F    MOV   A,[GainIndx+4]
-    1680: 62 D0 00 MOV   REG[0xD0],0x0
-    1683: 53 54    MOV   [__r1],A
-    1685: 55 55 00 MOV   [__r0],0x0
-    1688: 65 54    ASL   [__r1]
-    168A: 6B 55    RLC   [__r0]
-    168C: 06 54 57 ADD   [__r1],0x57
-    168F: 0E 55 00 ADC   [__r0],0x0
-    1692: 51 55    MOV   A,[__r0]
-    1694: 60 D4    MOV   REG[0xD4],A
-    1696: 3E 54    MVI   A,[__r1]
-    1698: 53 54    MOV   [__r1],A
-    169A: 50 00    MOV   A,0x0
-    169C: 08       PUSH  A
-    169D: 51 54    MOV   A,[__r1]
-    169F: 08       PUSH  A
-    16A0: 50 00    MOV   A,0x0
-    16A2: 08       PUSH  A
-    16A3: 50 64    MOV   A,0x64
-    16A5: 08       PUSH  A
-    16A6: 7C 1E E0 LCALL _itoa
-    16A9: 38 FA    ADD   SP,0xFA
+    1682: 50 00    MOV   A,0x0
+    1684: 08       PUSH  A
+    1685: 50 0A    MOV   A,0xA
+    1687: 08       PUSH  A
+    1688: 62 D0 00 MOV   REG[0xD0],0x0
+    168B: 51 6F    MOV   A,[GainIndx+4]
+    168D: 62 D0 00 MOV   REG[0xD0],0x0
+    1690: 53 54    MOV   [__r1],A
+    1692: 55 55 00 MOV   [__r0],0x0
+    1695: 65 54    ASL   [__r1]
+    1697: 6B 55    RLC   [__r0]
+    1699: 06 54 57 ADD   [__r1],0x57
+    169C: 0E 55 00 ADC   [__r0],0x0
+    169F: 51 55    MOV   A,[__r0]
+    16A1: 60 D4    MOV   REG[0xD4],A
+    16A3: 3E 54    MVI   A,[__r1]
+    16A5: 53 54    MOV   [__r1],A
+    16A7: 50 00    MOV   A,0x0
+    16A9: 08       PUSH  A
+    16AA: 51 54    MOV   A,[__r1]
+    16AC: 08       PUSH  A
+    16AD: 50 00    MOV   A,0x0
+    16AF: 08       PUSH  A
+    16B0: 50 64    MOV   A,0x64
+    16B2: 08       PUSH  A
+    16B3: 7C 1E F0 LCALL _itoa
+    16B6: 38 FA    ADD   SP,0xFA
 (0202) 	TX8_PutString(str);	
-    16AB: 10       PUSH  X
-    16AC: 50 00    MOV   A,0x0
-    16AE: 08       PUSH  A
-    16AF: 50 64    MOV   A,0x64
-    16B1: 5C       MOV   X,A
-    16B2: 18       POP   A
-    16B3: 7C 04 B4 LCALL 0x04B4
-    16B6: 20       POP   X
+    16B8: 10       PUSH  X
+    16B9: 50 00    MOV   A,0x0
+    16BB: 08       PUSH  A
+    16BC: 50 64    MOV   A,0x64
+    16BE: 5C       MOV   X,A
+    16BF: 18       POP   A
+    16C0: 7C 04 B4 LCALL 0x04B4
+    16C3: 20       POP   X
 (0203) 	TX8_CPutString(" Out: 1 = ");
-    16B7: 10       PUSH  X
-    16B8: 50 01    MOV   A,0x1
-    16BA: 08       PUSH  A
-    16BB: 50 A0    MOV   A,0xA0
-    16BD: 5C       MOV   X,A
-    16BE: 18       POP   A
-    16BF: 7C 05 16 LCALL 0x0516
-    16C2: 20       POP   X
+    16C4: 10       PUSH  X
+    16C5: 50 01    MOV   A,0x1
+    16C7: 08       PUSH  A
+    16C8: 50 A0    MOV   A,0xA0
+    16CA: 5C       MOV   X,A
+    16CB: 18       POP   A
+    16CC: 7C 05 16 LCALL 0x0516
+    16CF: 20       POP   X
 (0204) 	itoa(str, GF[GainIndx[0][1]][1], 10);
-    16C3: 50 00    MOV   A,0x0
-    16C5: 08       PUSH  A
-    16C6: 50 0A    MOV   A,0xA
-    16C8: 08       PUSH  A
-    16C9: 62 D0 00 MOV   REG[0xD0],0x0
-    16CC: 51 6C    MOV   A,[GainIndx+1]
-    16CE: 62 D0 00 MOV   REG[0xD0],0x0
-    16D1: 53 54    MOV   [__r1],A
-    16D3: 55 55 00 MOV   [__r0],0x0
-    16D6: 65 54    ASL   [__r1]
-    16D8: 6B 55    RLC   [__r0]
-    16DA: 06 54 57 ADD   [__r1],0x57
-    16DD: 0E 55 00 ADC   [__r0],0x0
-    16E0: 51 55    MOV   A,[__r0]
-    16E2: 60 D4    MOV   REG[0xD4],A
-    16E4: 3E 54    MVI   A,[__r1]
-    16E6: 53 54    MOV   [__r1],A
-    16E8: 50 00    MOV   A,0x0
-    16EA: 08       PUSH  A
-    16EB: 51 54    MOV   A,[__r1]
-    16ED: 08       PUSH  A
-    16EE: 50 00    MOV   A,0x0
-    16F0: 08       PUSH  A
-    16F1: 50 64    MOV   A,0x64
-    16F3: 08       PUSH  A
-    16F4: 7C 1E E0 LCALL _itoa
-    16F7: 38 FA    ADD   SP,0xFA
+    16D0: 50 00    MOV   A,0x0
+    16D2: 08       PUSH  A
+    16D3: 50 0A    MOV   A,0xA
+    16D5: 08       PUSH  A
+    16D6: 62 D0 00 MOV   REG[0xD0],0x0
+    16D9: 51 6C    MOV   A,[GainIndx+1]
+    16DB: 62 D0 00 MOV   REG[0xD0],0x0
+    16DE: 53 54    MOV   [__r1],A
+    16E0: 55 55 00 MOV   [__r0],0x0
+    16E3: 65 54    ASL   [__r1]
+    16E5: 6B 55    RLC   [__r0]
+    16E7: 06 54 57 ADD   [__r1],0x57
+    16EA: 0E 55 00 ADC   [__r0],0x0
+    16ED: 51 55    MOV   A,[__r0]
+    16EF: 60 D4    MOV   REG[0xD4],A
+    16F1: 3E 54    MVI   A,[__r1]
+    16F3: 53 54    MOV   [__r1],A
+    16F5: 50 00    MOV   A,0x0
+    16F7: 08       PUSH  A
+    16F8: 51 54    MOV   A,[__r1]
+    16FA: 08       PUSH  A
+    16FB: 50 00    MOV   A,0x0
+    16FD: 08       PUSH  A
+    16FE: 50 64    MOV   A,0x64
+    1700: 08       PUSH  A
+    1701: 7C 1E F0 LCALL _itoa
+    1704: 38 FA    ADD   SP,0xFA
 (0205) 	TX8_PutString(str);
-    16F9: 10       PUSH  X
-    16FA: 50 00    MOV   A,0x0
-    16FC: 08       PUSH  A
-    16FD: 50 64    MOV   A,0x64
-    16FF: 5C       MOV   X,A
-    1700: 18       POP   A
-    1701: 7C 04 B4 LCALL 0x04B4
-    1704: 20       POP   X
+    1706: 10       PUSH  X
+    1707: 50 00    MOV   A,0x0
+    1709: 08       PUSH  A
+    170A: 50 64    MOV   A,0x64
+    170C: 5C       MOV   X,A
+    170D: 18       POP   A
+    170E: 7C 04 B4 LCALL 0x04B4
+    1711: 20       POP   X
 (0206) 	TX8_CPutString("  -  2 = ");
-    1705: 10       PUSH  X
-    1706: 50 01    MOV   A,0x1
-    1708: 08       PUSH  A
-    1709: 50 C0    MOV   A,0xC0
-    170B: 5C       MOV   X,A
-    170C: 18       POP   A
-    170D: 7C 05 16 LCALL 0x0516
-    1710: 20       POP   X
+    1712: 10       PUSH  X
+    1713: 50 01    MOV   A,0x1
+    1715: 08       PUSH  A
+    1716: 50 C0    MOV   A,0xC0
+    1718: 5C       MOV   X,A
+    1719: 18       POP   A
+    171A: 7C 05 16 LCALL 0x0516
+    171D: 20       POP   X
 (0207) 	itoa(str, GF[GainIndx[1][1]][1], 10);
-    1711: 50 00    MOV   A,0x0
-    1713: 08       PUSH  A
-    1714: 50 0A    MOV   A,0xA
-    1716: 08       PUSH  A
-    1717: 62 D0 00 MOV   REG[0xD0],0x0
-    171A: 51 6E    MOV   A,[GainIndx+3]
-    171C: 62 D0 00 MOV   REG[0xD0],0x0
-    171F: 53 54    MOV   [__r1],A
-    1721: 55 55 00 MOV   [__r0],0x0
-    1724: 65 54    ASL   [__r1]
-    1726: 6B 55    RLC   [__r0]
-    1728: 06 54 57 ADD   [__r1],0x57
-    172B: 0E 55 00 ADC   [__r0],0x0
-    172E: 51 55    MOV   A,[__r0]
-    1730: 60 D4    MOV   REG[0xD4],A
-    1732: 3E 54    MVI   A,[__r1]
-    1734: 53 54    MOV   [__r1],A
-    1736: 50 00    MOV   A,0x0
-    1738: 08       PUSH  A
-    1739: 51 54    MOV   A,[__r1]
-    173B: 08       PUSH  A
-    173C: 50 00    MOV   A,0x0
-    173E: 08       PUSH  A
-    173F: 50 64    MOV   A,0x64
-    1741: 08       PUSH  A
-    1742: 7C 1E E0 LCALL _itoa
-    1745: 38 FA    ADD   SP,0xFA
+    171E: 50 00    MOV   A,0x0
+    1720: 08       PUSH  A
+    1721: 50 0A    MOV   A,0xA
+    1723: 08       PUSH  A
+    1724: 62 D0 00 MOV   REG[0xD0],0x0
+    1727: 51 6E    MOV   A,[GainIndx+3]
+    1729: 62 D0 00 MOV   REG[0xD0],0x0
+    172C: 53 54    MOV   [__r1],A
+    172E: 55 55 00 MOV   [__r0],0x0
+    1731: 65 54    ASL   [__r1]
+    1733: 6B 55    RLC   [__r0]
+    1735: 06 54 57 ADD   [__r1],0x57
+    1738: 0E 55 00 ADC   [__r0],0x0
+    173B: 51 55    MOV   A,[__r0]
+    173D: 60 D4    MOV   REG[0xD4],A
+    173F: 3E 54    MVI   A,[__r1]
+    1741: 53 54    MOV   [__r1],A
+    1743: 50 00    MOV   A,0x0
+    1745: 08       PUSH  A
+    1746: 51 54    MOV   A,[__r1]
+    1748: 08       PUSH  A
+    1749: 50 00    MOV   A,0x0
+    174B: 08       PUSH  A
+    174C: 50 64    MOV   A,0x64
+    174E: 08       PUSH  A
+    174F: 7C 1E F0 LCALL _itoa
+    1752: 38 FA    ADD   SP,0xFA
 (0208) 	TX8_PutString(str);	
-    1747: 10       PUSH  X
-    1748: 50 00    MOV   A,0x0
-    174A: 08       PUSH  A
-    174B: 50 64    MOV   A,0x64
-    174D: 5C       MOV   X,A
-    174E: 18       POP   A
-    174F: 7C 04 B4 LCALL 0x04B4
-    1752: 20       POP   X
+    1754: 10       PUSH  X
+    1755: 50 00    MOV   A,0x0
+    1757: 08       PUSH  A
+    1758: 50 64    MOV   A,0x64
+    175A: 5C       MOV   X,A
+    175B: 18       POP   A
+    175C: 7C 04 B4 LCALL 0x04B4
+    175F: 20       POP   X
 (0209) 	TX8_CPutString("  -  3 = ");
-    1753: 10       PUSH  X
-    1754: 50 01    MOV   A,0x1
-    1756: 08       PUSH  A
-    1757: 50 B6    MOV   A,0xB6
-    1759: 5C       MOV   X,A
-    175A: 18       POP   A
-    175B: 7C 05 16 LCALL 0x0516
-    175E: 20       POP   X
+    1760: 10       PUSH  X
+    1761: 50 01    MOV   A,0x1
+    1763: 08       PUSH  A
+    1764: 50 B6    MOV   A,0xB6
+    1766: 5C       MOV   X,A
+    1767: 18       POP   A
+    1768: 7C 05 16 LCALL 0x0516
+    176B: 20       POP   X
 (0210) 	itoa(str, GF[GainIndx[2][1]][1], 10);
-    175F: 50 00    MOV   A,0x0
-    1761: 08       PUSH  A
-    1762: 50 0A    MOV   A,0xA
-    1764: 08       PUSH  A
-    1765: 62 D0 00 MOV   REG[0xD0],0x0
-    1768: 51 70    MOV   A,[GainIndx+5]
-    176A: 62 D0 00 MOV   REG[0xD0],0x0
-    176D: 53 54    MOV   [__r1],A
-    176F: 55 55 00 MOV   [__r0],0x0
-    1772: 65 54    ASL   [__r1]
-    1774: 6B 55    RLC   [__r0]
-    1776: 06 54 57 ADD   [__r1],0x57
-    1779: 0E 55 00 ADC   [__r0],0x0
-    177C: 51 55    MOV   A,[__r0]
-    177E: 60 D4    MOV   REG[0xD4],A
-    1780: 3E 54    MVI   A,[__r1]
-    1782: 53 54    MOV   [__r1],A
-    1784: 50 00    MOV   A,0x0
-    1786: 08       PUSH  A
-    1787: 51 54    MOV   A,[__r1]
-    1789: 08       PUSH  A
-    178A: 50 00    MOV   A,0x0
-    178C: 08       PUSH  A
-    178D: 50 64    MOV   A,0x64
-    178F: 08       PUSH  A
-    1790: 7C 1E E0 LCALL _itoa
-    1793: 38 FA    ADD   SP,0xFA
+    176C: 50 00    MOV   A,0x0
+    176E: 08       PUSH  A
+    176F: 50 0A    MOV   A,0xA
+    1771: 08       PUSH  A
+    1772: 62 D0 00 MOV   REG[0xD0],0x0
+    1775: 51 70    MOV   A,[GainIndx+5]
+    1777: 62 D0 00 MOV   REG[0xD0],0x0
+    177A: 53 54    MOV   [__r1],A
+    177C: 55 55 00 MOV   [__r0],0x0
+    177F: 65 54    ASL   [__r1]
+    1781: 6B 55    RLC   [__r0]
+    1783: 06 54 57 ADD   [__r1],0x57
+    1786: 0E 55 00 ADC   [__r0],0x0
+    1789: 51 55    MOV   A,[__r0]
+    178B: 60 D4    MOV   REG[0xD4],A
+    178D: 3E 54    MVI   A,[__r1]
+    178F: 53 54    MOV   [__r1],A
+    1791: 50 00    MOV   A,0x0
+    1793: 08       PUSH  A
+    1794: 51 54    MOV   A,[__r1]
+    1796: 08       PUSH  A
+    1797: 50 00    MOV   A,0x0
+    1799: 08       PUSH  A
+    179A: 50 64    MOV   A,0x64
+    179C: 08       PUSH  A
+    179D: 7C 1E F0 LCALL _itoa
+    17A0: 38 FA    ADD   SP,0xFA
 (0211) 	TX8_PutString(str);	
-    1795: 10       PUSH  X
-    1796: 50 00    MOV   A,0x0
-    1798: 08       PUSH  A
-    1799: 50 64    MOV   A,0x64
-    179B: 5C       MOV   X,A
-    179C: 18       POP   A
-    179D: 7C 04 B4 LCALL 0x04B4
-    17A0: 20       POP   X
-    17A1: 7F       RET   
+    17A2: 10       PUSH  X
+    17A3: 50 00    MOV   A,0x0
+    17A5: 08       PUSH  A
+    17A6: 50 64    MOV   A,0x64
+    17A8: 5C       MOV   X,A
+    17A9: 18       POP   A
+    17AA: 7C 04 B4 LCALL 0x04B4
+    17AD: 20       POP   X
+    17AE: 7F       RET   
 (0212) 				
 (0213) /*
 (0214) 	TX8_CPutString("  --Pre = ");
@@ -8987,151 +8992,151 @@ _UartTxValues:
 (0233) {// Analog and digital blocks inizialization
 (0234) 	ADCINCVR_pot_Start(ADCINCVR_pot_HIGHPOWER);	
 _BlocksInit:
-    17A2: 10       PUSH  X
-    17A3: 50 03    MOV   A,0x3
-    17A5: 7C 09 F1 LCALL 0x09F1
-    17A8: 20       POP   X
+    17AF: 10       PUSH  X
+    17B0: 50 03    MOV   A,0x3
+    17B2: 7C 09 F1 LCALL 0x09F1
+    17B5: 20       POP   X
 (0235) 	ADCINCVR_mes_Start(ADCINCVR_mes_HIGHPOWER);
-    17A9: 10       PUSH  X
-    17AA: 50 03    MOV   A,0x3
-    17AC: 7C 0B 36 LCALL 0x0B36
+    17B6: 10       PUSH  X
+    17B7: 50 03    MOV   A,0x3
+    17B9: 7C 0B 36 LCALL 0x0B36
 (0236) 	AMUX4_mic_Start();
-    17AF: 7C 09 68 LCALL 0x0968
-    17B2: 20       POP   X
+    17BC: 7C 09 68 LCALL 0x0968
+    17BF: 20       POP   X
 (0237) 	BPF4_4KHz_Start(BPF4_4KHz_HIGHPOWER);
-    17B3: 10       PUSH  X
-    17B4: 50 03    MOV   A,0x3
-    17B6: 7C 08 86 LCALL 0x0886
-    17B9: 20       POP   X
+    17C0: 10       PUSH  X
+    17C1: 50 03    MOV   A,0x3
+    17C3: 7C 08 86 LCALL 0x0886
+    17C6: 20       POP   X
 (0238) 	
 (0239) 	 // Set up I2C RAM buffer  
 (0240)    	EzI2Cs_1_SetRamBuffer(sizeof(I2C_Regs), 13, (BYTE *) &I2C_Regs);
-    17BA: 10       PUSH  X
-    17BB: 50 00    MOV   A,0x0
-    17BD: 08       PUSH  A
-    17BE: 50 37    MOV   A,0x37
-    17C0: 08       PUSH  A
-    17C1: 50 0D    MOV   A,0xD
-    17C3: 08       PUSH  A
-    17C4: 50 10    MOV   A,0x10
-    17C6: 08       PUSH  A
-    17C7: 7C 08 30 LCALL 0x0830
-    17CA: 38 FC    ADD   SP,0xFC
+    17C7: 10       PUSH  X
+    17C8: 50 00    MOV   A,0x0
+    17CA: 08       PUSH  A
+    17CB: 50 37    MOV   A,0x37
+    17CD: 08       PUSH  A
+    17CE: 50 0D    MOV   A,0xD
+    17D0: 08       PUSH  A
+    17D1: 50 10    MOV   A,0x10
+    17D3: 08       PUSH  A
+    17D4: 7C 08 30 LCALL 0x0830
+    17D7: 38 FC    ADD   SP,0xFC
 (0241) 	EzI2Cs_1_Start(); // Turn on EzI2C 
-    17CC: 7C 07 F2 LCALL 0x07F2
-    17CF: 20       POP   X
+    17D9: 7C 07 F2 LCALL 0x07F2
+    17DC: 20       POP   X
 (0242) 	
 (0243) 	PGA_out_Start(PGA_out_HIGHPOWER);
-    17D0: 10       PUSH  X
-    17D1: 50 03    MOV   A,0x3
-    17D3: 7C 05 B1 LCALL 0x05B1
-    17D6: 20       POP   X
+    17DD: 10       PUSH  X
+    17DE: 50 03    MOV   A,0x3
+    17E0: 7C 05 B1 LCALL 0x05B1
+    17E3: 20       POP   X
 (0244) 	PGA_pre_Start(PGA_pre_HIGHPOWER); 
-    17D7: 10       PUSH  X
-    17D8: 50 03    MOV   A,0x3
-    17DA: 7C 05 71 LCALL 0x0571
-    17DD: 20       POP   X
+    17E4: 10       PUSH  X
+    17E5: 50 03    MOV   A,0x3
+    17E7: 7C 05 71 LCALL 0x0571
+    17EA: 20       POP   X
 (0245) 	RefMux_1_Start(RefMux_1_HIGHPOWER);
-    17DE: 10       PUSH  X
-    17DF: 50 03    MOV   A,0x3
-    17E1: 7C 05 49 LCALL 0x0549
-    17E4: 20       POP   X
+    17EB: 10       PUSH  X
+    17EC: 50 03    MOV   A,0x3
+    17EE: 7C 05 49 LCALL 0x0549
+    17F1: 20       POP   X
 (0246)     SCBLOCK_inbuff_Start(SCBLOCK_inbuff_HIGHPOWER);
-    17E5: 10       PUSH  X
-    17E6: 50 03    MOV   A,0x3
-    17E8: 7C 05 31 LCALL 0x0531
+    17F2: 10       PUSH  X
+    17F3: 50 03    MOV   A,0x3
+    17F5: 7C 05 31 LCALL 0x0531
 (0247) 	LED_1_Start();
-    17EB: 7C 06 6F LCALL 0x066F
+    17F8: 7C 06 6F LCALL 0x066F
 (0248) 	LED_2_Start();
-    17EE: 7C 06 32 LCALL 0x0632
+    17FB: 7C 06 32 LCALL 0x0632
 (0249) 	LED_3_Start();
-    17F1: 7C 05 F5 LCALL 0x05F5
+    17FE: 7C 05 F5 LCALL 0x05F5
 (0250) 	DIGITAL_OUT_Start();  
-    17F4: 7C 08 4D LCALL 0x084D
+    1801: 7C 08 4D LCALL 0x084D
 (0251) 	
 (0252) 	TX8_EnableInt();
-    17F7: 7C 04 59 LCALL 0x0459
-    17FA: 20       POP   X
+    1804: 7C 04 59 LCALL 0x0459
+    1807: 20       POP   X
 (0253) 	TX8_Start(TX8_PARITY_NONE);
-    17FB: 10       PUSH  X
-    17FC: 50 00    MOV   A,0x0
-    17FE: 7C 04 73 LCALL 0x0473
-    1801: 20       POP   X
+    1808: 10       PUSH  X
+    1809: 50 00    MOV   A,0x0
+    180B: 7C 04 73 LCALL 0x0473
+    180E: 20       POP   X
 (0254) 	
 (0255) 	AMUX4_mic_InputSelect(AMUX4_mic_PORT0_1);
-    1802: 10       PUSH  X
-    1803: 50 00    MOV   A,0x0
-    1805: 7C 09 4D LCALL 0x094D
-    1808: 20       POP   X
+    180F: 10       PUSH  X
+    1810: 50 00    MOV   A,0x0
+    1812: 7C 09 4D LCALL 0x094D
+    1815: 20       POP   X
 (0256) 
 (0257) 	PGA_pre_SetGain(GF[GainIndx[0][0]][0]);
-    1809: 62 D0 00 MOV   REG[0xD0],0x0
-    180C: 51 6B    MOV   A,[GainIndx]
-    180E: 62 D0 00 MOV   REG[0xD0],0x0
-    1811: 53 54    MOV   [__r1],A
-    1813: 55 55 00 MOV   [__r0],0x0
-    1816: 65 54    ASL   [__r1]
-    1818: 6B 55    RLC   [__r0]
-    181A: 06 54 56 ADD   [__r1],0x56
-    181D: 0E 55 00 ADC   [__r0],0x0
-    1820: 51 55    MOV   A,[__r0]
-    1822: 60 D4    MOV   REG[0xD4],A
-    1824: 3E 54    MVI   A,[__r1]
-    1826: 10       PUSH  X
-    1827: 7C 05 83 LCALL 0x0583
-    182A: 20       POP   X
+    1816: 62 D0 00 MOV   REG[0xD0],0x0
+    1819: 51 6B    MOV   A,[GainIndx]
+    181B: 62 D0 00 MOV   REG[0xD0],0x0
+    181E: 53 54    MOV   [__r1],A
+    1820: 55 55 00 MOV   [__r0],0x0
+    1823: 65 54    ASL   [__r1]
+    1825: 6B 55    RLC   [__r0]
+    1827: 06 54 56 ADD   [__r1],0x56
+    182A: 0E 55 00 ADC   [__r0],0x0
+    182D: 51 55    MOV   A,[__r0]
+    182F: 60 D4    MOV   REG[0xD4],A
+    1831: 3E 54    MVI   A,[__r1]
+    1833: 10       PUSH  X
+    1834: 7C 05 83 LCALL 0x0583
+    1837: 20       POP   X
 (0258) 	PGA_out_SetGain(GF[GainIndx[0][1]][0]);
-    182B: 62 D0 00 MOV   REG[0xD0],0x0
-    182E: 51 6C    MOV   A,[GainIndx+1]
-    1830: 62 D0 00 MOV   REG[0xD0],0x0
-    1833: 53 54    MOV   [__r1],A
-    1835: 55 55 00 MOV   [__r0],0x0
-    1838: 65 54    ASL   [__r1]
-    183A: 6B 55    RLC   [__r0]
-    183C: 06 54 56 ADD   [__r1],0x56
-    183F: 0E 55 00 ADC   [__r0],0x0
-    1842: 51 55    MOV   A,[__r0]
-    1844: 60 D4    MOV   REG[0xD4],A
-    1846: 3E 54    MVI   A,[__r1]
-    1848: 10       PUSH  X
-    1849: 7C 05 C3 LCALL 0x05C3
+    1838: 62 D0 00 MOV   REG[0xD0],0x0
+    183B: 51 6C    MOV   A,[GainIndx+1]
+    183D: 62 D0 00 MOV   REG[0xD0],0x0
+    1840: 53 54    MOV   [__r1],A
+    1842: 55 55 00 MOV   [__r0],0x0
+    1845: 65 54    ASL   [__r1]
+    1847: 6B 55    RLC   [__r0]
+    1849: 06 54 56 ADD   [__r1],0x56
+    184C: 0E 55 00 ADC   [__r0],0x0
+    184F: 51 55    MOV   A,[__r0]
+    1851: 60 D4    MOV   REG[0xD4],A
+    1853: 3E 54    MVI   A,[__r1]
+    1855: 10       PUSH  X
+    1856: 7C 05 C3 LCALL 0x05C3
 (0259) 	
 (0260)     HB_Tmr_EnableInt();  
-    184C: 7C 06 AC LCALL 0x06AC
+    1859: 7C 06 AC LCALL 0x06AC
 (0261) 	HB_Tmr_Start();  	
-    184F: 7C 06 B4 LCALL 0x06B4
-    1852: 20       POP   X
-    1853: 7F       RET   
+    185C: 7C 06 B4 LCALL 0x06B4
+    185F: 20       POP   X
+    1860: 7F       RET   
 (0262) }
 (0263) 	
 (0264) void HB_Tmr_ISR_C(void)
 (0265) {// Base clock for all of the timings in the program
 _HB_Tmr_ISR_C:
-    1854: 71 C0    OR    F,0xC0
-    1856: 08       PUSH  A
-    1857: 5D D0    MOV   A,REG[0xD0]
-    1859: 08       PUSH  A
+    1861: 71 C0    OR    F,0xC0
+    1863: 08       PUSH  A
+    1864: 5D D0    MOV   A,REG[0xD0]
+    1866: 08       PUSH  A
 (0266) 	TmrFlag = 1;
-    185A: 62 D0 00 MOV   REG[0xD0],0x0
-    185D: 55 82 01 MOV   [TmrFlag],0x1
+    1867: 62 D0 00 MOV   REG[0xD0],0x0
+    186A: 55 82 01 MOV   [TmrFlag],0x1
 (0267) 	Tmr1++;
-    1860: 62 D0 00 MOV   REG[0xD0],0x0
-    1863: 76 7C    INC   [Tmr1+1]
-    1865: 0E 7B 00 ADC   [Tmr1],0x0
+    186D: 62 D0 00 MOV   REG[0xD0],0x0
+    1870: 76 7C    INC   [Tmr1+1]
+    1872: 0E 7B 00 ADC   [Tmr1],0x0
 (0268) 	Tmr2++;
-    1868: 62 D0 00 MOV   REG[0xD0],0x0
-    186B: 76 7A    INC   [Tmr2+1]
-    186D: 0E 79 00 ADC   [Tmr2],0x0
+    1875: 62 D0 00 MOV   REG[0xD0],0x0
+    1878: 76 7A    INC   [Tmr2+1]
+    187A: 0E 79 00 ADC   [Tmr2],0x0
 (0269) 	Time10ms++;	
-    1870: 62 D0 00 MOV   REG[0xD0],0x0
-    1873: 06 74 01 ADD   [Time10ms+3],0x1
-    1876: 0E 73 00 ADC   [Time10ms+2],0x0
-    1879: 0E 72 00 ADC   [Time10ms+1],0x0
-    187C: 0E 71 00 ADC   [Time10ms],0x0
-    187F: 18       POP   A
-    1880: 60 D0    MOV   REG[0xD0],A
-    1882: 18       POP   A
-    1883: 7E       RETI  
+    187D: 62 D0 00 MOV   REG[0xD0],0x0
+    1880: 06 74 01 ADD   [Time10ms+3],0x1
+    1883: 0E 73 00 ADC   [Time10ms+2],0x0
+    1886: 0E 72 00 ADC   [Time10ms+1],0x0
+    1889: 0E 71 00 ADC   [Time10ms],0x0
+    188C: 18       POP   A
+    188D: 60 D0    MOV   REG[0xD0],A
+    188F: 18       POP   A
+    1890: 7E       RETI  
 (0270) }
 (0271) 
 (0272) void DelayMs(int Ms)
@@ -9139,112 +9144,114 @@ _HB_Tmr_ISR_C:
 _DelayMs:
   i                    --> X+0
   Ms                   --> X-5
-    1884: 10       PUSH  X
-    1885: 4F       MOV   X,SP
-    1886: 38 02    ADD   SP,0x2
+    1891: 10       PUSH  X
+    1892: 4F       MOV   X,SP
+    1893: 38 02    ADD   SP,0x2
 (0274) 	int i;
-(0275) 	for (i=0; i<Ms; i++)
-    1888: 56 01 00 MOV   [X+1],0x0
-    188B: 56 00 00 MOV   [X+0],0x0
-    188E: 80 0D    JMP   0x189C
-(0276) 	{
-(0277) 		Delay50uTimes(20);
-    1890: 10       PUSH  X
-    1891: 50 14    MOV   A,0x14
-    1893: 7C 0B F4 LCALL __text_start|Delay50uTimes|_Delay50uTimes
-    1896: 20       POP   X
-(0278) 	}
-    1897: 77 01    INC   [X+1]
-    1899: 0F 00 00 ADC   [X+0],0x0
-    189C: 52 01    MOV   A,[X+1]
-    189E: 13 FC    SUB   A,[X-4]
-    18A0: 52 FB    MOV   A,[X-5]
-    18A2: 31 80    XOR   A,0x80
-    18A4: 62 D0 00 MOV   REG[0xD0],0x0
-    18A7: 53 49    MOV   [__rX],A
-    18A9: 52 00    MOV   A,[X+0]
-    18AB: 31 80    XOR   A,0x80
-    18AD: 1A 49    SBB   A,[__rX]
-    18AF: CF E0    JC    0x1890
-    18B1: 38 FE    ADD   SP,0xFE
-    18B3: 20       POP   X
-    18B4: 7F       RET   
-(0279) }
-(0280) 
-(0281) void LedTest(void)
-(0282) {
+(0275) 	M8C_ClearWDT; //WDT is every 1/8*3=375ms
+    1895: 62 E3 00 MOV   REG[0xE3],0x0
+(0276) 	for (i=0; i<Ms; i++)
+    1898: 56 01 00 MOV   [X+1],0x0
+    189B: 56 00 00 MOV   [X+0],0x0
+    189E: 80 0D    JMP   0x18AC
+(0277) 	{
+(0278) 		Delay50uTimes(20);
+    18A0: 10       PUSH  X
+    18A1: 50 14    MOV   A,0x14
+    18A3: 7C 0B F4 LCALL __text_start|Delay50uTimes|_Delay50uTimes
+    18A6: 20       POP   X
+(0279) 	}
+    18A7: 77 01    INC   [X+1]
+    18A9: 0F 00 00 ADC   [X+0],0x0
+    18AC: 52 01    MOV   A,[X+1]
+    18AE: 13 FC    SUB   A,[X-4]
+    18B0: 52 FB    MOV   A,[X-5]
+    18B2: 31 80    XOR   A,0x80
+    18B4: 62 D0 00 MOV   REG[0xD0],0x0
+    18B7: 53 49    MOV   [__rX],A
+    18B9: 52 00    MOV   A,[X+0]
+    18BB: 31 80    XOR   A,0x80
+    18BD: 1A 49    SBB   A,[__rX]
+    18BF: CF E0    JC    0x18A0
+    18C1: 38 FE    ADD   SP,0xFE
+    18C3: 20       POP   X
+    18C4: 7F       RET   
+(0280) }
+(0281) 
+(0282) void LedTest(void)
+(0283) {
 _LedTest:
   i                    --> X+0
-    18B5: 10       PUSH  X
-    18B6: 4F       MOV   X,SP
-    18B7: 38 02    ADD   SP,0x2
-(0283) 	int i;
-(0284) 	LED_1_Off();
-    18B9: 10       PUSH  X
-    18BA: 7C 06 6F LCALL 0x066F
-(0285) 	LED_2_Off();
-    18BD: 7C 06 32 LCALL 0x0632
-(0286) 	LED_3_Off();
-    18C0: 7C 05 F5 LCALL 0x05F5
-    18C3: 20       POP   X
-(0287) 	
-(0288) 	for (i=0; i<2; i++)
-    18C4: 56 01 00 MOV   [X+1],0x0
-    18C7: 56 00 00 MOV   [X+0],0x0
-(0289) 	{
-(0290) 		LED_1_On();
-    18CA: 10       PUSH  X
-    18CB: 7C 06 6B LCALL 0x066B
-    18CE: 20       POP   X
-(0291) 		DelayMs(150);
-    18CF: 50 00    MOV   A,0x0
-    18D1: 08       PUSH  A
-    18D2: 50 96    MOV   A,0x96
-    18D4: 08       PUSH  A
-    18D5: 9F AD    CALL  _DelayMs
-    18D7: 38 FE    ADD   SP,0xFE
-(0292) 		LED_1_Off();
-    18D9: 10       PUSH  X
-    18DA: 7C 06 6F LCALL 0x066F
-(0293) 		LED_2_On();
-    18DD: 7C 06 2E LCALL 0x062E
-    18E0: 20       POP   X
-(0294) 		DelayMs(150);
-    18E1: 50 00    MOV   A,0x0
-    18E3: 08       PUSH  A
-    18E4: 50 96    MOV   A,0x96
-    18E6: 08       PUSH  A
-    18E7: 9F 9B    CALL  _DelayMs
-    18E9: 38 FE    ADD   SP,0xFE
-(0295) 		LED_2_Off();
-    18EB: 10       PUSH  X
-    18EC: 7C 06 32 LCALL 0x0632
-(0296) 		LED_3_On();
-    18EF: 7C 05 F1 LCALL 0x05F1
-    18F2: 20       POP   X
-(0297) 		DelayMs(150);
-    18F3: 50 00    MOV   A,0x0
-    18F5: 08       PUSH  A
-    18F6: 50 96    MOV   A,0x96
-    18F8: 08       PUSH  A
-    18F9: 9F 89    CALL  _DelayMs
-    18FB: 38 FE    ADD   SP,0xFE
-(0298) 		LED_3_Off();
-    18FD: 10       PUSH  X
-    18FE: 7C 05 F5 LCALL 0x05F5
-    1901: 20       POP   X
-(0299) 	}
-    1902: 77 01    INC   [X+1]
-    1904: 0F 00 00 ADC   [X+0],0x0
-    1907: 52 01    MOV   A,[X+1]
-    1909: 11 02    SUB   A,0x2
-    190B: 52 00    MOV   A,[X+0]
-    190D: 31 80    XOR   A,0x80
-    190F: 19 80    SBB   A,0x80
-    1911: CF B8    JC    0x18CA
-    1913: 38 FE    ADD   SP,0xFE
-    1915: 20       POP   X
-(0300) }
+    18C5: 10       PUSH  X
+    18C6: 4F       MOV   X,SP
+    18C7: 38 02    ADD   SP,0x2
+(0284) 	int i;
+(0285) 	LED_1_Off();
+    18C9: 10       PUSH  X
+    18CA: 7C 06 6F LCALL 0x066F
+(0286) 	LED_2_Off();
+    18CD: 7C 06 32 LCALL 0x0632
+(0287) 	LED_3_Off();
+    18D0: 7C 05 F5 LCALL 0x05F5
+    18D3: 20       POP   X
+(0288) 	
+(0289) 	for (i=0; i<2; i++)
+    18D4: 56 01 00 MOV   [X+1],0x0
+    18D7: 56 00 00 MOV   [X+0],0x0
+(0290) 	{
+(0291) 		LED_1_On();
+    18DA: 10       PUSH  X
+    18DB: 7C 06 6B LCALL 0x066B
+    18DE: 20       POP   X
+(0292) 		DelayMs(150);
+    18DF: 50 00    MOV   A,0x0
+    18E1: 08       PUSH  A
+    18E2: 50 96    MOV   A,0x96
+    18E4: 08       PUSH  A
+    18E5: 9F AA    CALL  _DelayMs
+    18E7: 38 FE    ADD   SP,0xFE
+(0293) 		LED_1_Off();
+    18E9: 10       PUSH  X
+    18EA: 7C 06 6F LCALL 0x066F
+(0294) 		LED_2_On();
+    18ED: 7C 06 2E LCALL 0x062E
+    18F0: 20       POP   X
+(0295) 		DelayMs(150);
+    18F1: 50 00    MOV   A,0x0
+    18F3: 08       PUSH  A
+    18F4: 50 96    MOV   A,0x96
+    18F6: 08       PUSH  A
+    18F7: 9F 98    CALL  _DelayMs
+    18F9: 38 FE    ADD   SP,0xFE
+(0296) 		LED_2_Off();
+    18FB: 10       PUSH  X
+    18FC: 7C 06 32 LCALL 0x0632
+(0297) 		LED_3_On();
+    18FF: 7C 05 F1 LCALL 0x05F1
+    1902: 20       POP   X
+(0298) 		DelayMs(150);
+    1903: 50 00    MOV   A,0x0
+    1905: 08       PUSH  A
+    1906: 50 96    MOV   A,0x96
+    1908: 08       PUSH  A
+    1909: 9F 86    CALL  _DelayMs
+    190B: 38 FE    ADD   SP,0xFE
+(0299) 		LED_3_Off();
+    190D: 10       PUSH  X
+    190E: 7C 05 F5 LCALL 0x05F5
+    1911: 20       POP   X
+(0300) 	}
+    1912: 77 01    INC   [X+1]
+    1914: 0F 00 00 ADC   [X+0],0x0
+    1917: 52 01    MOV   A,[X+1]
+    1919: 11 02    SUB   A,0x2
+    191B: 52 00    MOV   A,[X+0]
+    191D: 31 80    XOR   A,0x80
+    191F: 19 80    SBB   A,0x80
+    1921: CF B8    JC    0x18DA
+    1923: 38 FE    ADD   SP,0xFE
+    1925: 20       POP   X
+(0301) }
 FILE: <library>
 --------------------------------------------------------------------------------
 
