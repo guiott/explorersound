@@ -1,26 +1,12 @@
 <?xml version="1.0"?>
 <PSOC_WND_PERSIST>
   <APP_EDITOR_SETTINGS>
-<<<<<<< .mine
-<<<<<<< .mine
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\main.c" ACTIVE="true" />
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\definitions.h" />
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\Notes.txt" />
-    <OPEN_FILE PATH="Z:\WinMac\PSOC_projects\explorersound\ExplorerSound\prototypes.h" />
-=======
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\main.c" />
-    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\Notes.txt" />
-=======
->>>>>>> .r51
->>>>>>> .r29
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" />
+    <OPEN_FILE PATH="D:\programmi MIEI\PSoC Projects\ExplorerSound\ExplorerSound.cmx" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />
-    <USERTYPE ID="S210" TYPESPEC="[s S210 I2C_Struct 12   '[3]L 1 I2C_MesValue 12 0 ]" />
+    <USERTYPE ID="S210" TYPESPEC="[s S210 I2C_Struct 16   '[3]L 1 I2C_MesValue 12 0 'c 1 I2cCheck 1 12  '[3]c 1 DbMesValue 3 13 ]" />
     <EVENT NUMBER="0" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
     <EVENT NUMBER="1" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
     <EVENT NUMBER="2" THREAD8="Disabled" THREAD16="Disabled" LOGIC="Disabled" />
