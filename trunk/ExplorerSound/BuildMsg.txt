@@ -45,4 +45,4 @@ LMM info: area 'data' item of 1 bytes allocated in SRAM page 0
   RAM 8% full. 131 bytes used (does not include stack usage).
 idata dump at output/ExplorerSound.idata
  
-ExplorerSound - 0 error(s) 0 warning(s) 22:21:53
+ExplorerSound - 0 error(s) 0 warning(s) 01:28:07
