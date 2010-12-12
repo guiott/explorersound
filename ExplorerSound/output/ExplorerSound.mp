@@ -1,10 +1,10 @@
 Project:      output/ExplorerSound
 Build Number: 0
-Date:         Sun Dec 12 01:28:07 2010
+Date:         Sun Dec 12 23:19:07 2010
 Compiler:     ICCM8C
 Version:      7.02.004
 
-  ROM 29% full. 9495 out of 32768 bytes used (does not include absolute areas).
+  ROM 30% full. 9632 out of 32768 bytes used (does not include absolute areas).
   RAM 8% full. 131 bytes used (does not include stack usage).
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -289,7 +289,7 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0BF4   1AC3 =   6851. bytes (rel,con,rom)
+                            text   0BF4   1B4C =   6988. bytes (rel,con,rom)
 
        Addr  Global Symbol
       -----  --------------------------------
@@ -300,44 +300,45 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0C02  Delay50u
        0C02  _Delay50u
        0C16  _main
-       10E4  _AGC
-       1447  _DigitalOut
-       1519  _UartTxValues
-       17A2  _BlocksInit
-       1854  _HB_Tmr_ISR_C
-       1884  _DelayMs
-       18B5  _LedTest
-       1917  __divmod_32X32_32
-       1954  __divmodu_16X16_16
-       195F  __divmodu_32X32_32
-       196E  __fp2long
-       19C4  __F_analysisEject_util
-       19CF  __F_Round_util
-       19E5  __F_Normal_util
-       19F0  __F_clrReg_util
-       19FB  __F_NaN_Res_util
-       1A07  __F_SaveRes_util
-       1A24  __F_SendToReg_util
-       1A35  __F_sInf_Res_util
-       1A42  __F_sZero_Res_util
-       1A4A  __F_Type_Oprnd_util
-       1A69  __F_Unnormal_util
-       1A7F  __fpadd
-       1B7F  __fpcmp
-       1BDC  __fpdiv
-       1CBF  __fpmul
-       1D88  __fpsub
-       1D91  __i_div16_block_util
-       1DCA  __i_div32_block_util
-       1E2D  __i_div32_not_util
-       1E45  __long2fp
-       1EB0  __mul16
-       1EE0  _itoa
-       20B9  _ltoa
-       2332  _frexpf
-       2408  _logf
-       26B7  __text_end
-       26DF  __xidata_end
+       10E8  _AGC
+       144B  _DigitalOut
+       151D  _UartTxValues
+       17AF  _BlocksInit
+       1861  _HB_Tmr_ISR_C
+       1891  _DelayMs
+       18C5  _LedTest
+       1927  __divmod_32X32_32
+       1964  __divmodu_16X16_16
+       196F  __divmodu_32X32_32
+       197E  __fp2long
+       19D4  __F_analysisEject_util
+       19DF  __F_Round_util
+       19F5  __F_Normal_util
+       1A00  __F_clrReg_util
+       1A0B  __F_NaN_Res_util
+       1A17  __F_SaveRes_util
+       1A34  __F_SendToReg_util
+       1A45  __F_sInf_Res_util
+       1A52  __F_sZero_Res_util
+       1A5A  __F_Type_Oprnd_util
+       1A79  __F_Unnormal_util
+       1A8F  __fpadd
+       1B8F  __fpcmp
+       1BEC  __fpdiv
+       1CCF  __fpmul
+       1D98  __fpsub
+       1DA1  __i_div16_block_util
+       1DDA  __i_div32_block_util
+       1E3D  __i_div32_not_util
+       1E55  __long2fp
+       1EC0  __mul16
+       1EF0  _itoa
+       20C9  _ltoa
+       2342  _frexpf
+       2418  _log10f
+       2491  _logf
+       2740  __text_end
+       2768  __xidata_end
 
 Area                               Start  End    Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -447,7 +448,7 @@ Files Linked      [ module(s) ]
 [ fp_sendtoreg_util.asm, fp_sinf_res_util.asm, fp_szero_res_util.asm, fp_type_oprnd_util.asm ]
 [ fp_unnormal_util.asm, fpadd_util.asm, fpcmp_util.asm, fpdiv_util.asm, fpmul_util.asm, fpsub_util.asm ]
 [ i_div16_block_util.asm, i_div32_block_util.asm, i_div32_not_util.asm, long2fp_util.asm ]
-[ mul16_util.asm, itoa.s, ltoa.s, frexpf.s, logf.s, errno.s ]
+[ mul16_util.asm, itoa.s, ltoa.s, frexpf.s, log10f.s, logf.s, errno.s ]
 
 Area Definitions
 
