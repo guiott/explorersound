@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <PSOC_WND_PERSIST>
   <APP_EDITOR_SETTINGS>
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound\ExplorerSound.soc" ACTIVE="true" />
+    <OPEN_FILE PATH="C:\PSOC_projects\ExplorerSound\ExplorerSound.cmx" />
   </APP_EDITOR_SETTINGS>
   <DEBUGGER_SETTINGS>
     <TRACE_MODE VALUE="PCOnly" />
